@@ -1,8 +1,5 @@
 {
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/synergific-store.html"
-    }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
