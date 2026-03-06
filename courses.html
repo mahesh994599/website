@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synergific Lab Store</title>
+    <!-- Tailwind removed — pure Azure CSS -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap');
+
+        /* ── Azure Fluent Design System ── */
+        :root {
+            --az-blue:        #0078d4;
+            --az-blue-dark:   #106ebe;
+            --az-blue-light:  #deecf9;
+            --az-blue-xlight: #eff6fc;
+            --az-bg:          #f3f2f1;
+            --az-surface:     #ffffff;
+            --az-border:      #edebe9;
+            --az-border-dark: #c8c6c4;
+            --az-text:        #323130;
+            --az-text-sub:    #605e5c;
+            --az-text-muted:  #a19f9d;
+            --az-red:         #d13438;
+            --az-green:       #107c10;
+            --az-green-light: #dff6dd;
+            --az-sidebar:     #faf9f8;
+            --az-hover:       #f3f2f1;
+            --az-selected:    #deecf9;
+            --az-nav-active:  #0078d4;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--az-bg);
+            color: var(--az-text);
+            font-size: 14px;
+            line-height: 1.5;
+            letter-spacing: 0;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar { width: 6px; }
+        .scrollbar-hide::-webkit-scrollbar-track { background: transparent; }
+        .scrollbar-hide::-webkit-scrollbar-thumb { background: var(--az-border-dark); border-radius: 3px; }
+
+        .sidebar-transition { transition: width 0.2s ease; }
+
+        /* ── Lab Cards ── */
+        .lab-card {
+            background: var(--az-surface);
+            border: 1px solid var(--az-border);
+            border-radius: 2px;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+        .lab-card:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            border-color: var(--az-blue);
+        }
+
+        /* ── Price Toggle ── */
+        .price-option {
+            border: 1px solid var(--az-border);
+            background: var(--az-hover);
+            border-radius: 2px;
+            transition: all 0.1s ease;
+            cursor: pointer;
+        }
+        .price-option:hover:not(.active) {
+            background: var(--az-blue-xlight);
+            border-color: var(--az-blue);
+        }
+        .price-option.active {
+            background: var(--az-blue-xlight);
+            border-color: var(--az-blue);
+            box-shadow: inset 0 0 0 1px var(--az-blue);
+        }
+
+        /* ── Buttons ── */
+        .btn-primary {
+            background: var(--az-blue);
+            color: white;
+            border: 1px solid var(--az-blue);
+            border-radius: 2px;
+            padding: 6px 16px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.1s;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-primary:hover { background: var(--az-blue-dark); border-color: var(--az-blue-dark); }
+        .btn-primary:active { background: #005a9e; }
+
+        .btn-secondary {
+            background: var(--az-surface);
+            color: var(--az-text);
+            border: 1px solid var(--az-border-dark);
+            border-radius: 2px;
+            padding: 6px 16px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: background 0.1s, border-color 0.1s;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-secondary:hover { background: var(--az-hover); border-color: var(--az-text-sub); }
+
+        /* ── Checkout Form ── */
+        .checkout-input {
+            width: 100%;
+            background: var(--az-surface);
+            border: 1px solid var(--az-border-dark);
+            border-radius: 2px;
+            padding: 7px 10px;
+            font-size: 14px;
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--az-text);
+            outline: none;
+            transition: border-color 0.1s, box-shadow 0.1s;
+        }
+        .checkout-input:focus {
+            border-color: var(--az-blue);
+            box-shadow: 0 0 0 1px var(--az-blue);
+        }
+        .checkout-input[readonly] {
+            background: var(--az-hover);
+            color: var(--az-text-sub);
+        }
+        .checkout-input::placeholder { color: var(--az-text-muted); }
+
+        .qty-btn {
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 2px;
+            background: var(--az-surface);
+            border: 1px solid var(--az-border-dark);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--az-text);
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+        .qty-btn:hover { background: var(--az-blue); color: white; border-color: var(--az-blue); }
+
+        .pay-btn {
+            background: var(--az-blue);
+            color: white;
+            border: 1px solid var(--az-blue);
+            border-radius: 2px;
+            padding: 10px 0;
+            font-size: 14px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.1s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .pay-btn:hover { background: var(--az-blue-dark); }
+        .pay-btn:active { background: #005a9e; }
+        .pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .form-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--az-text);
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--az-text-sub);
+            padding: 5px 0;
+        }
+        .summary-row.total {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--az-text);
+            border-top: 1px solid var(--az-border);
+            margin-top: 6px;
+            padding-top: 10px;
+        }
+
+        select.checkout-input {
+            appearance: auto;
+            background-image: none;
+        }
+
+        .badge-razorpay {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 11px; color: var(--az-text-sub);
+            background: var(--az-hover); border: 1px solid var(--az-border);
+            border-radius: 2px; padding: 3px 8px;
+        }
+
+        /* ── Modal ── */
+        .modal-enter { animation: modalFadeIn 0.15s ease-out forwards; }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Azure nav item ── */
+        .az-nav-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 0;
+            border: none;
+            background: transparent;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            color: var(--az-text);
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.1s;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .az-nav-item:hover { background: var(--az-hover); }
+        .az-nav-item.active {
+            background: var(--az-selected);
+            color: var(--az-blue);
+            font-weight: 600;
+            border-left: 3px solid var(--az-blue);
+            padding-left: 9px;
+        }
+        .az-nav-item .nav-icon {
+            width: 20px; min-width: 20px;
+            text-align: center;
+            font-size: 13px;
+            margin-right: 10px;
+            color: var(--az-blue);
+        }
+        .az-nav-item.active .nav-icon { color: var(--az-blue); }
+
+        /* ── Azure top bar ── */
+        .az-topbar {
+            height: 48px;
+            background: #0078d4;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 12px;
+            position: sticky; top: 0; z-index: 50;
+        }
+
+        /* ── Breadcrumb ── */
+        .az-breadcrumb {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 12px; color: var(--az-text-muted);
+        }
+        .az-breadcrumb .sep { color: var(--az-border-dark); }
+        .az-breadcrumb .active { color: var(--az-text); font-weight: 600; }
+
+        /* ── Section header ── */
+        .az-section-header {
+            padding: 16px 24px 0;
+            border-bottom: 1px solid var(--az-border);
+            margin-bottom: 0;
+        }
+
+        /* ── Tag/badge ── */
+        .az-tag {
+            display: inline-flex; align-items: center;
+            font-size: 11px; font-weight: 600;
+            padding: 2px 8px; border-radius: 2px;
+            background: var(--az-blue-xlight);
+            color: var(--az-blue);
+            border: 1px solid var(--az-blue-light);
+        }
+        .az-tag-green {
+            background: var(--az-green-light);
+            color: var(--az-green);
+            border-color: #9fd89f;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Azure Top Bar -->
+    <div class="az-topbar">
+        <img src="D:\new/logo.png" alt="Synergific" style="height:32px;object-fit:contain;">
+        <div style="flex:1;"></div>
+        <!-- Search -->
+        <div style="position:relative;width:280px;">
+            <i class="fas fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.7);font-size:12px;"></i>
+            <input id="search-input" type="text" placeholder="Search labs, IDs..."
+                oninput="handleSearch(this.value)"
+                style="width:100%;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:2px;padding:6px 10px 6px 30px;font-size:13px;color:white;outline:none;font-family:Segoe UI,sans-serif;"
+                onfocus="this.style.background='rgba(255,255,255,0.25)'"
+                onblur="this.style.background='rgba(255,255,255,0.15)'">
+        </div>
+        <div style="width:1px;height:24px;background:rgba(255,255,255,0.3);margin:0 8px;"></div>
+        <button onclick="toggleLearnMore()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:5px 14px;font-size:13px;border-radius:2px;cursor:pointer;font-family:Segoe UI,sans-serif;">
+            <i class="fas fa-info-circle" style="margin-right:5px;"></i>Learn More
+        </button>
+        <button onclick="togglePolicyModal()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:5px 14px;font-size:13px;border-radius:2px;cursor:pointer;font-family:Segoe UI,sans-serif;">
+            <i class="fas fa-shield-alt" style="margin-right:5px;"></i>Governance
+        </button>
+    </div>
+
+    <div style="display:flex;height:calc(100vh - 48px);overflow:hidden;">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="sidebar-transition" style="width:220px;background:var(--az-sidebar);border-right:1px solid var(--az-border);display:flex;flex-direction:column;z-index:20;overflow:hidden;">
+            <!-- Sidebar header -->
+            <div style="padding:12px 16px 8px;border-bottom:1px solid var(--az-border);">
+                <div style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.08em;">Navigation</div>
+            </div>
+            <nav id="nav-menu" style="flex:1;overflow-y:auto;padding:4px 0;" class="scrollbar-hide"></nav>
+            <div style="border-top:1px solid var(--az-border);padding:8px;">
+                <button onclick="toggleSidebar()" style="width:100%;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--az-border);border-radius:2px;cursor:pointer;color:var(--az-text-sub);transition:background .1s;" onmouseover="this.style.background='var(--az-hover)'" onmouseout="this.style.background='transparent'">
+                    <i id="toggle-icon" class="fas fa-chevron-left" style="font-size:11px;"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main style="flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--az-bg);">
+
+            <!-- Section header with breadcrumb -->
+            <div style="background:var(--az-surface);border-bottom:1px solid var(--az-border);padding:12px 24px;">
+                <div class="az-breadcrumb">
+                    <span>Synergific Infrastructure</span>
+                    <span class="sep">›</span>
+                    <span id="breadcrumb-active" class="active">SSL Labs</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
+                    <h2 id="category-title" style="font-size:20px;font-weight:600;color:var(--az-text);">SSL Labs Store</h2>
+                    <p style="font-size:12px;color:var(--az-text-muted);">Deploy verified, isolated sandbox environments</p>
+                </div>
+            </div>
+
+            <!-- Labs Grid -->
+            <div style="flex:1;overflow-y:auto;padding:20px 24px;" class="scrollbar-hide">
+                <div id="labs-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;"></div>
+                <div id="empty-state" style="display:none;flex-direction:column;align-items:center;justify-content:center;padding:80px 0;text-align:center;">
+                    <i class="fas fa-search" style="font-size:32px;color:var(--az-text-muted);margin-bottom:16px;"></i>
+                    <div style="font-size:16px;font-weight:600;color:var(--az-text);margin-bottom:6px;">No environments found</div>
+                    <div style="font-size:13px;color:var(--az-text-muted);">Adjust your search to find the right stack.</div>
+                    <button onclick="clearSearch()" class="btn-primary" style="margin-top:16px;">Clear Search</button>
+                </div>
+            </div>
+
+            <!-- Cart Toast -->
+            <div id="cart-toast" style="display:none;position:fixed;bottom:24px;right:24px;background:var(--az-text);color:white;padding:12px 16px;border-radius:2px;box-shadow:0 4px 16px rgba(0,0,0,0.2);display:none;align-items:center;gap:16px;z-index:50;">
+                <div>
+                    <div style="font-size:11px;color:#a19f9d;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;">Queue status</div>
+                    <div id="toast-text" style="font-size:14px;font-weight:600;">0 Labs Added</div>
+                </div>
+                <button class="btn-primary" style="font-size:12px;padding:5px 12px;">Checkout Now</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div id="checkout-modal" style="display:none;position:fixed;inset:0;z-index:110;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.5);">
+        <div class="modal-enter" style="background:var(--az-surface);width:100%;max-width:520px;border-radius:0;box-shadow:0 8px 32px rgba(0,0,0,0.2);overflow:hidden;border:1px solid var(--az-border);">
+
+            <!-- Modal Header — Azure panel header style -->
+            <div style="background:var(--az-surface);padding:16px 20px;border-bottom:1px solid var(--az-border);display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                    <div style="font-size:11px;color:var(--az-blue);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;">Secure Checkout</div>
+                    <div style="font-size:18px;font-weight:600;color:var(--az-text);" id="modal-title">Confirm Your Order</div>
+                </div>
+                <button onclick="closeCheckoutModal()" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;color:var(--az-text-muted);font-size:16px;" onmouseover="this.style.background='var(--az-hover)'" onmouseout="this.style.background='transparent'">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div style="padding:16px 20px;display:flex;flex-direction:column;gap:12px;max-height:72vh;overflow-y:auto;" class="scrollbar-hide">
+
+                <!-- Lab info row -->
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                    <div>
+                        <label class="form-label">Lab Name</label>
+                        <input id="form-lab-name" type="text" class="checkout-input" readonly>
+                    </div>
+                    <div>
+                        <label class="form-label">Lab ID</label>
+                        <input id="form-lab-id" type="text" class="checkout-input" readonly>
+                    </div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                    <div>
+                        <label class="form-label">Selected Plan</label>
+                        <!-- Text input shown for non-baremetal labs -->
+                        <input id="form-plan" type="text" class="checkout-input" readonly style="display:block;">
+                        <!-- Dropdown shown for baremetal -->
+                        <select id="form-plan-select" class="checkout-input" style="display:none;cursor:pointer;" onchange="onBaremetalPlanChange(this.value)">
+                            <option value="8hr">8 Hours</option>
+                            <option value="monthly" selected>Monthly</option>
+                            <option value="m6">6 Months (10% off)</option>
+                            <option value="m12">12 Months (20% off)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Quantity / Seats</label>
+                        <div style="display:flex;align-items:center;gap:6px;">
+                            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                            <input id="form-qty" type="number" min="1" value="1" class="checkout-input" style="width:60px;text-align:center;" oninput="syncQty()" readonly>
+                            <button class="qty-btn" onclick="changeQty(1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height:1px;background:var(--az-border);"></div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                    <div>
+                        <label class="form-label">Full Name <span style="color:var(--az-red);">*</span></label>
+                        <input id="form-name" type="text" class="checkout-input" placeholder="John Smith" oninput="updateSummary()">
+                    </div>
+                    <div>
+                        <label class="form-label">Email Address <span style="color:var(--az-red);">*</span></label>
+                        <input id="form-email" type="email" class="checkout-input" placeholder="you@company.com" oninput="updateSummary()">
+                    </div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                    <div>
+                        <label class="form-label">Phone Number <span style="color:var(--az-red);">*</span></label>
+                        <input id="form-phone" type="tel" class="checkout-input" placeholder="+91 98765 43210">
+                    </div>
+                    <div>
+                        <label class="form-label">Company <span style="color:var(--az-text-muted);font-weight:400;">(optional)</span></label>
+                        <input id="form-company" type="text" class="checkout-input" placeholder="Acme Corp">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="form-label">Coupon Code <span style="color:var(--az-text-muted);font-weight:400;">(optional)</span></label>
+                    <div style="display:flex;gap:8px;">
+                        <input id="form-coupon" type="text" class="checkout-input" placeholder="SYNLAB10">
+                        <button onclick="applyCoupon()" class="btn-secondary" style="white-space:nowrap;font-size:13px;">Apply</button>
+                    </div>
+                    <p id="coupon-msg" style="font-size:12px;margin-top:4px;display:none;"></p>
+                </div>
+
+                <!-- Order Summary — Azure info box style -->
+                <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:12px 16px;">
+                    <div style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">Order Summary</div>
+                    <div class="summary-row"><span id="summary-lab" style="color:var(--az-text);">—</span><span id="summary-unit-price">₹0.00</span></div>
+                    <div class="summary-row"><span>Quantity</span><span id="summary-qty">×1</span></div>
+                    <div class="summary-row" id="discount-row" style="display:none;"><span style="color:var(--az-green);">Discount</span><span style="color:var(--az-green);" id="summary-discount">-₹0.00</span></div>
+                    <div class="summary-row"><span>GST (18%)</span><span id="summary-gst">₹0.00</span></div>
+                    <div class="summary-row total"><span>Total (incl. GST)</span><span style="color:var(--az-blue);" id="summary-total">₹0.00</span></div>
+                </div>
+
+                <button id="pay-btn" class="pay-btn" onclick="proceedToPayment()">
+                    <i class="fas fa-lock"></i> Pay Securely with Razorpay
+                </button>
+
+                <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
+                    <span class="badge-razorpay"><i class="fas fa-shield-alt" style="color:var(--az-blue);"></i> Secured by Razorpay</span>
+                    <span class="badge-razorpay"><i class="fas fa-credit-card"></i> UPI · Cards · NetBanking</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Governance Modal -->
+    <div id="policy-modal" style="display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,0.4);">
+        <div class="modal-enter" style="background:var(--az-surface);width:100%;max-width:560px;border:1px solid var(--az-border);box-shadow:0 8px 32px rgba(0,0,0,0.2);">
+            <div style="padding:16px 20px;border-bottom:1px solid var(--az-border);display:flex;justify-content:space-between;align-items:center;">
+                <div style="font-size:18px;font-weight:600;color:var(--az-text);">Governance & Policies</div>
+                <button onclick="togglePolicyModal()" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;color:var(--az-text-muted);" onmouseover="this.style.background='var(--az-hover)'" onmouseout="this.style.background='transparent'"><i class="fas fa-times"></i></button>
+            </div>
+            <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                <div>
+                    <div style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Contact Channels</div>
+                    <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:14px;">
+                        <div style="font-size:14px;font-weight:600;color:var(--az-text);margin-bottom:4px;">L3 Engineering Support</div>
+                        <div style="font-size:12px;color:var(--az-text-sub);">Direct support available 24/7 via call and priority ticketing.</div>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Compliance Docs</div>
+                    <div style="display:flex;flex-direction:column;gap:2px;">
+                        <button style="text-align:left;padding:8px 10px;background:transparent;border:none;cursor:pointer;font-size:13px;color:var(--az-text);font-family:Segoe UI,sans-serif;" onmouseover="this.style.color='var(--az-blue)';this.style.background='var(--az-hover)'" onmouseout="this.style.color='var(--az-text)';this.style.background='transparent'">Terms of Service</button>
+                        <button style="text-align:left;padding:8px 10px;background:transparent;border:none;cursor:pointer;font-size:13px;color:var(--az-text);font-family:Segoe UI,sans-serif;" onmouseover="this.style.color='var(--az-blue)';this.style.background='var(--az-hover)'" onmouseout="this.style.color='var(--az-text)';this.style.background='transparent'">Privacy Governance</button>
+                        <button style="text-align:left;padding:8px 10px;background:transparent;border:none;cursor:pointer;font-size:13px;color:var(--az-blue);font-family:Segoe UI,sans-serif;" onmouseover="this.style.background='var(--az-hover)'" onmouseout="this.style.background='transparent'">SOC2 Attestation Reports</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learn More Modal -->
+    <div id="learn-more-modal" style="display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,0.5);">
+        <div class="modal-enter" style="background:var(--az-surface);width:100%;max-width:760px;border:1px solid var(--az-border);box-shadow:0 8px 32px rgba(0,0,0,0.2);max-height:90vh;display:flex;flex-direction:column;">
+            <div style="padding:16px 20px;border-bottom:1px solid var(--az-border);display:flex;justify-content:space-between;align-items:center;background:var(--az-surface);">
+                <div>
+                    <div style="font-size:18px;font-weight:600;color:var(--az-text);">Why Choose Synergific</div>
+                    <div style="font-size:12px;color:var(--az-text-muted);margin-top:2px;">Unmatched enterprise standards for laboratory environments.</div>
+                </div>
+                <button onclick="toggleLearnMore()" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;color:var(--az-text-muted);" onmouseover="this.style.background='var(--az-hover)'" onmouseout="this.style.background='transparent'"><i class="fas fa-times"></i></button>
+            </div>
+            <div style="flex:1;overflow-y:auto;padding:20px;" class="scrollbar-hide">
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;">
+                    ${[
+                        {icon:'fa-server',     title:'Tier 4/5 DCs',         desc:'Infrastructure in Tier-4 & Tier-5 centers for unmatched uptime.'},
+                        {icon:'fa-certificate',title:'SOC 1 & 2',            desc:'Full audit compliance for global financial and tech standards.'},
+                        {icon:'fa-sync',       title:'Zero Disruption',      desc:'Free migration support ensuring 100% workflow continuity.'},
+                        {icon:'fa-shield-alt', title:'Custom Security',      desc:'Granular security group configurations for complex stacks.'},
+                        {icon:'fa-bolt',       title:'Risk-Free PoC',        desc:'Complimentary 7-day test environment, no commitment.'},
+                        {icon:'fa-infinity',   title:'No Bandwidth Fees',    desc:'Unlimited data transfer with absolute price transparency.'},
+                    ].map(f => `
+                        <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:14px;">
+                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                                <div style="width:28px;height:28px;background:var(--az-blue);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:2px;flex-shrink:0;"><i class="fas ${f.icon}"></i></div>
+                                <div style="font-size:13px;font-weight:600;color:var(--az-text);">${f.title}</div>
+                            </div>
+                            <div style="font-size:12px;color:var(--az-text-sub);line-height:1.5;">${f.desc}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div style="background:var(--az-blue);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;">
+                    <div>
+                        <div style="font-size:15px;font-weight:600;color:white;">Expert-led Infrastructure Design</div>
+                        <div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:3px;">Need a custom security architecture? Our engineers are ready.</div>
+                    </div>
+                    <button style="background:white;color:var(--az-blue);border:none;padding:8px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:Segoe UI,sans-serif;border-radius:2px;" onmouseover="this.style.background='#deecf9'" onmouseout="this.style.background='white'">Consult an Expert</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ─── CONFIG ──────────────────────────────────────────────────
+    const _k = (a) => atob(a.join(''));
+    const _c = {
+        rzp:  ['cnpwX3Rl','c3RfU01s','MWJHUEx4','aHltYUw='],
+        esid: ['c2Vydmlj','ZV9xMGFz','YW44'],
+        etid: ['dGVtcGxh','dGVfb3R1','ZThxOA=='],
+        epk:  ['X2JycjVC','c3ZFUzVI','bXkwQW4='],
+    };
+    let RAZORPAY_KEY_ID = null;
+
+    // ─── STATE ───────────────────────────────────────────────────
+    let activeCategory = 'SSL Labs';
+    let searchQuery    = '';
+    let cart           = [];
+    let isSidebarOpen  = true;
+
+    // Current checkout context
+    let checkoutLab   = null;   // full lab object
+    let checkoutPlan  = 'daily'; // 'daily' | 'weekly'
+    let checkoutPrices = {};
+    let couponDiscount = 0;     // 0–1 fraction
+
+    // Valid coupons (demo)
+    const COUPONS = { 'SYNLAB10': 0.10, 'INFRA20': 0.20 };
+
+    // ─── DATA ────────────────────────────────────────────────────
+    const labData = {
+        'SSL Labs': [
+            { id: 'DD-01', name: 'Datadog Observability Mastery',         infra: '₹180.00' },
+            { id: 'AI-01', name: 'Agentic AI: Multi-Agent Systems',        infra: '₹320.00' },
+            { id: 'CA-01', name: 'Claude Agentic (Windows)',                infra: '₹280.00' },
+            { id: 'CA-02', name: 'Claude Agentic (Unix) with Claude Code',  infra: '₹300.00' },
+            { id: 'LG-01', name: 'Labs Generative',                         infra: '₹250.00' },
+            { id: 'AN-01', name: 'Ansible AAP',                             infra: '₹220.00' },
+            { id: 'DF-01', name: 'Data Fabrics DP 700',                     infra: '₹350.00' },
+            { id: 'VA-01', name: 'Vertex AI GCP',                           infra: '₹400.00' },
+            { id: 'GA-01', name: 'GCP APIGEE',                              infra: '₹380.00' },
+            { id: 'VS-01', name: 'Veeam Software Appliance',                infra: '₹200.00' },
+            { id: 'VO-01', name: 'Veeam ONE',                               infra: '₹190.00' },
+            { id: 'VR-01', name: 'Veeam Recovery Orchestrator',             infra: '₹210.00' },
+            { id: 'SP-01', name: 'Sharepoint Administrator',                infra: '₹170.00' },
+            { id: 'SL-01', name: 'Suse Labs',                               infra: '₹160.00' }
+        ],
+        'Skillable Labs': [], 'Xtremelabs': [], 'Godeploy': [],
+        'Baremetal Servers': 'BAREMETAL',
+        'Cloud Portal Subscription': []
+    };
+
+    // ─── BAREMETAL DATA ──────────────────────────────────────────
+    const BAREMETAL_LINUX = [
+        { vcpu:1,  ram:4,   hourly:'₹2.46',   monthly:'₹1,439',  m6:'₹7,768',   m12:'₹13,810' },
+        { vcpu:2,  ram:8,   hourly:'₹4.92',   monthly:'₹2,872',  m6:'₹15,511',  m12:'₹27,574' },
+        { vcpu:4,  ram:16,  hourly:'₹9.84',   monthly:'₹5,745',  m6:'₹31,021',  m12:'₹55,149' },
+        { vcpu:8,  ram:32,  hourly:'₹19.68',  monthly:'₹11,493', m6:'₹62,065',  m12:'₹110,337' },
+        { vcpu:16, ram:64,  hourly:'₹39.36',  monthly:'₹22,987', m6:'₹124,129', m12:'₹220,674' },
+        { vcpu:32, ram:128, hourly:'₹78.71',  monthly:'₹45,969', m6:'₹248,233', m12:'₹441,303' },
+        { vcpu:48, ram:192, hourly:'₹93.01',  monthly:'₹54,315', m6:'₹293,302', m12:'₹521,425' },
+        { vcpu:56, ram:224, hourly:'₹108.46', monthly:'₹63,341', m6:'₹342,040', m12:'₹608,072' },
+    ];
+    const BAREMETAL_WINDOWS = [
+        { vcpu:1,  ram:4,   hourly:'₹2.75',   monthly:'₹1,609',  m6:'₹8,788',   m12:'₹15,850' },
+        { vcpu:2,  ram:8,   hourly:'₹5.50',   monthly:'₹3,212',  m6:'₹17,551',  m12:'₹31,654' },
+        { vcpu:4,  ram:16,  hourly:'₹11.00',  monthly:'₹6,425',  m6:'₹35,101',  m12:'₹63,309' },
+        { vcpu:8,  ram:32,  hourly:'₹22.01',  monthly:'₹12,853', m6:'₹70,225',  m12:'₹126,657' },
+        { vcpu:16, ram:64,  hourly:'₹44.02',  monthly:'₹25,707', m6:'₹140,449', m12:'₹253,314' },
+        { vcpu:32, ram:128, hourly:'₹88.03',  monthly:'₹51,409', m6:'₹280,873', m12:'₹506,583' },
+        { vcpu:48, ram:192, hourly:'₹106.98', monthly:'₹62,475', m6:'₹342,262', m12:'₹619,345' },
+        { vcpu:56, ram:224, hourly:'₹124.76', monthly:'₹72,861', m6:'₹399,160', m12:'₹722,312' },
+    ];
+    let bmOS = 'linux'; // active OS tab
+
+    // ─── CSV CONFIG ──────────────────────────────────────────────
+    // CSV file must be in the same folder as this HTML file on the server
+    // CSV-based categories — loaded via fetch at runtime
+    const CSV_CATEGORIES = ['Skillable Labs', 'Xtremelabs', 'Godeploy'];
+
+    // Map CSV category field value → store category name
+    const CSV_CAT_MAP = {
+        'skillable': 'Skillable Labs',
+        'xtremelabs': 'Xtremelabs',
+        'xtreme': 'Xtremelabs',
+        'godeploy': 'Godeploy'
+    };
+
+    const features = [
+        { icon: 'fa-box-open',    text: "Isolated Lab Environment" },
+        { icon: 'fa-headset',     text: "24/7 human support" },
+        { icon: 'fa-certificate', text: "SOC 1 & SOC 2 compliant" }
+    ];
+
+    const menuItems = [
+        { name: 'SSL Labs',                  icon: 'fa-shield-halved' },
+        { name: 'Skillable Labs',            icon: 'fa-server' },
+        { name: 'Xtremelabs',               icon: 'fa-microchip' },
+        { name: 'Godeploy',                  icon: 'fa-globe' },
+        { name: 'Baremetal Servers',         icon: 'fa-cloud' },
+        { name: 'Cloud Portal Subscription', icon: 'fa-credit-card' },
+    ];
+
+    // ─── PRICE HELPERS ───────────────────────────────────────────
+    function rawPrice(val) {
+        if (typeof val === 'number') return val;
+        return parseFloat(String(val).replace(/[₹$,]/g, '')) || 0;
+    }
+
+    function calculatePrices(val) {
+        const daily  = rawPrice(val);
+        const weekly = daily * 7 * 0.9;
+        return {
+            daily:      daily,
+            weekly:     weekly,
+            dailyFmt:   fmtINR(daily),
+            weeklyFmt:  fmtINR(weekly)
+        };
+    }
+
+    function fmtINR(n) {
+        return n.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
+    }
+
+    // ─── INIT ─────────────────────────────────────────────────────
+    async function init() {
+        // Decode credentials at runtime
+        RAZORPAY_KEY_ID = _k(_c.rzp);
+        emailjs.init(_k(_c.epk));
+        renderMenu();
+        renderLabs();
+        await loadCSVFromServer();
+    }
+
+    async function loadCSVFromServer() {
+        try {
+            const res = await fetch('labs-data.csv');
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const text = await res.text();
+            parseCSVIntoLabData(text);
+            if (CSV_CATEGORIES.includes(activeCategory)) renderLabs();
+        } catch(e) {
+            console.warn('labs-data.csv fetch failed:', e.message);
+            if (CSV_CATEGORIES.includes(activeCategory)) renderLabs();
+        }
+    }
+
+    function parseCSVIntoLabData(text) {
+        // Clear existing CSV labs first
+        CSV_CATEGORIES.forEach(cat => {
+            labData[cat] = labData[cat].filter(l => !l.isCSV);
+        });
+
+        const rows    = text.trim().split(/\r?\n/);
+        const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
+
+        rows.slice(1).forEach(row => {
+            if (!row.trim()) return;
+            // Parse CSV handling quoted fields with commas inside
+            const cols = [];
+            let cur = '', inQ = false;
+            for (const ch of row) {
+                if (ch === '"') { inQ = !inQ; }
+                else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+                else cur += ch;
+            }
+            cols.push(cur.trim());
+
+            const obj = {};
+            headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, '').trim());
+
+            const catKey   = (obj.category || '').toLowerCase().trim();
+            const storeCat = CSV_CAT_MAP[catKey];
+            if (!storeCat) return;
+
+            labData[storeCat].push({
+                id:       obj.code,
+                name:     obj.name,
+                infra:    parseFloat(obj.price) || 0,
+                category: obj.category,
+                isCSV:    true
+            });
+        });
+    }
+
+    function setCategory(cat) {
+        activeCategory = cat;
+        document.getElementById('breadcrumb-active').innerText = cat;
+        document.getElementById('category-title').innerText = cat === 'SSL Labs' ? 'SSL Labs Store' : cat;
+        renderMenu(); renderLabs();
+    }
+
+    function handleSearch(val) { searchQuery = val.toLowerCase(); renderLabs(); }
+    function clearSearch() {
+        searchQuery = '';
+        const inp = document.getElementById('search-input');
+        if (inp) inp.value = '';
+        renderLabs();
+    }
+
+    function toggleSidebar() {
+        isSidebarOpen = !isSidebarOpen;
+        document.getElementById('sidebar').style.width = isSidebarOpen ? '16rem' : '4.5rem';
+        document.getElementById('toggle-icon').className = isSidebarOpen ? 'fas fa-chevron-left text-sm' : 'fas fa-chevron-right text-sm';
+        renderMenu();
+    }
+
+    function previewLogo(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('logo-img-preview').src = e.target.result;
+                document.getElementById('logo-img-preview').classList.remove('hidden');
+                document.getElementById('logo-placeholder-content').classList.add('hidden');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function togglePolicyModal() {
+        const m = document.getElementById('policy-modal');
+        m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+    }
+    function toggleLearnMore() {
+        const m = document.getElementById('learn-more-modal');
+        m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // ─── RENDER ──────────────────────────────────────────────────
+    function renderMenu() {
+        document.getElementById('nav-menu').innerHTML = menuItems.map(item => `
+            <button onclick="setCategory('${item.name}')"
+                class="az-nav-item ${activeCategory === item.name ? 'active' : ''}">
+                <i class="fas ${item.icon} nav-icon"></i>
+                ${isSidebarOpen ? `<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.name}</span>` : ''}
+            </button>
+        `).join('');
+    }
+
+    function renderLabs() {
+        const grid  = document.getElementById('labs-grid');
+        const empty = document.getElementById('empty-state');
+
+        if (activeCategory === 'Baremetal Servers') {
+            grid.style.display = 'block'; empty.style.display = 'none';
+            grid.style.gridTemplateColumns = '';
+            grid.innerHTML = renderBaremetal();
+            return;
+        }
+
+        grid.style.gridTemplateColumns = 'repeat(auto-fill,minmax(300px,1fr))';
+        const list     = labData[activeCategory] || [];
+        const filtered = list.filter(lab =>
+            lab.name.toLowerCase().includes(searchQuery) ||
+            lab.id.toLowerCase().includes(searchQuery) ||
+            (lab.category && lab.category.toLowerCase().includes(searchQuery))
+        );
+        if (filtered.length === 0) {
+            grid.style.display = 'none'; empty.style.display = 'flex'; return;
+        }
+        grid.style.display = 'grid'; empty.style.display = 'none';
+        grid.innerHTML = filtered.map(lab => renderCard(lab)).join('');
+    }
+
+    function renderBaremetal() {
+        const rows = bmOS === 'linux' ? BAREMETAL_LINUX : BAREMETAL_WINDOWS;
+        const osLabel = bmOS === 'linux' ? 'Linux' : 'Windows';
+
+        const tableRows = rows.map((r, i) => `
+            <tr style="border-bottom:1px solid var(--az-border);${i % 2 === 0 ? 'background:var(--az-bg);' : 'background:white;'}">
+                <td style="padding:10px 16px;font-weight:600;color:var(--az-blue);">${r.vcpu} vCPU</td>
+                <td style="padding:10px 16px;color:var(--az-text-sub);">${r.ram} GB</td>
+                <td style="padding:10px 16px;font-weight:600;color:var(--az-text);">${r.hourly}</td>
+                <td style="padding:10px 16px;color:var(--az-text);">${r.monthly}</td>
+                <td style="padding:10px 16px;">
+                    <span style="color:var(--az-text);">${r.m6}</span>
+                    <span style="display:inline-block;margin-left:6px;background:var(--az-green-light);color:var(--az-green);font-size:10px;font-weight:600;padding:1px 6px;border-radius:2px;">10% OFF</span>
+                </td>
+                <td style="padding:10px 16px;">
+                    <span style="color:var(--az-text);">${r.m12}</span>
+                    <span style="display:inline-block;margin-left:6px;background:var(--az-blue-xlight);color:var(--az-blue);font-size:10px;font-weight:600;padding:1px 6px;border-radius:2px;">20% OFF</span>
+                </td>
+                <td style="padding:10px 16px;">
+                    <button onclick="openBaremetalCheckout(${i}, '${bmOS}')"
+                        class="btn-primary" style="font-size:12px;padding:5px 14px;white-space:nowrap;">
+                        <i class="fas fa-bolt" style="font-size:10px;"></i> Buy Now
+                    </button>
+                </td>
+            </tr>`).join('');
+
+        return `
+        <div style="background:var(--az-surface);border:1px solid var(--az-border);">
+            <!-- OS Tabs -->
+            <div style="display:flex;border-bottom:1px solid var(--az-border);padding:0 16px;gap:0;">
+                <button onclick="setBmOS('linux')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${bmOS==='linux'?'2px solid var(--az-blue)':'2px solid transparent'};color:${bmOS==='linux'?'var(--az-blue)':'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
+                    <i class="fab fa-linux" style="margin-right:6px;"></i>Linux
+                </button>
+                <button onclick="setBmOS('windows')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${bmOS==='windows'?'2px solid var(--az-blue)':'2px solid transparent'};color:${bmOS==='windows'?'var(--az-blue)':'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
+                    <i class="fab fa-windows" style="margin-right:6px;"></i>Windows
+                </button>
+            </div>
+            <!-- Pricing info bar -->
+            <div style="padding:8px 16px;background:var(--az-blue-xlight);border-bottom:1px solid var(--az-blue-light);font-size:12px;color:var(--az-blue);display:flex;align-items:center;gap:8px;">
+                <i class="fas fa-info-circle"></i>
+                Prices shown for <strong>${osLabel}</strong> instances. 6-month billing saves 10%, 12-month saves 20%.
+            </div>
+            <!-- Table -->
+            <div style="overflow-x:auto;">
+                <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                    <thead>
+                        <tr style="background:var(--az-surface);border-bottom:2px solid var(--az-border);">
+                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">vCPUs</th>
+                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">RAM</th>
+                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Hourly</th>
+                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Monthly</th>
+                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">6 Monthly</th>
+                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">12 Monthly</th>
+                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>${tableRows}</tbody>
+                </table>
+            </div>
+        </div>`;
+    }
+
+    function setBmOS(os) {
+        bmOS = os;
+        renderLabs();
+    }
+
+    function onBaremetalPlanChange(val) {
+        if (!checkoutLab || !checkoutLab.isBaremetal) return;
+        const r = checkoutLab.bmData;
+        checkoutPlan = val;
+
+        // Update price label in select
+        const labelMap = {
+            '8hr':     '8 Hours — ' + r.hourly + '/hr',
+            'monthly': 'Monthly — ' + r.monthly,
+            'm6':      '6 Months — ' + r.m6 + ' (10% off)',
+            'm12':     '12 Months — ' + r.m12 + ' (20% off)'
+        };
+
+        // Update checkoutPrices based on selection
+        checkoutPrices.selectedAmt =
+            val === '8hr'     ? parseFloat(r.hourly.replace(/[₹,]/g,'')) * 8
+          : val === 'monthly' ? parseFloat(r.monthly.replace(/[₹,]/g,''))
+          : val === 'm6'      ? parseFloat(r.m6.replace(/[₹,]/g,''))
+          :                     parseFloat(r.m12.replace(/[₹,]/g,''));
+
+        updateSummary();
+    }
+
+    function openBaremetalCheckout(idx, os) {
+        const rows = os === 'linux' ? BAREMETAL_LINUX : BAREMETAL_WINDOWS;
+        const r    = rows[idx];
+        const osLabel = os === 'linux' ? 'Linux' : 'Windows';
+        // Reuse the same checkout modal — pre-fill with baremetal details
+        checkoutLab    = {
+            id:   r.vcpu + 'vCPU-' + r.ram + 'GB',
+            name: osLabel + ' Baremetal · ' + r.vcpu + ' vCPU · ' + r.ram + ' GB RAM',
+            infra: parseFloat(r.monthly.replace(/[₹,]/g, '')),
+            isBaremetal: true,
+            bmData: r
+        };
+        checkoutPlan   = 'monthly';
+        checkoutPrices = {
+            daily:     parseFloat(r.hourly.replace(/[₹,]/g, '')),
+            monthly:   parseFloat(r.monthly.replace(/[₹,]/g, '')),
+            m6:        parseFloat(r.m6.replace(/[₹,]/g, '')),
+            m12:       parseFloat(r.m12.replace(/[₹,]/g, '')),
+            dailyFmt:  r.hourly + '/hr',
+            weeklyFmt: r.monthly + '/mo'
+        };
+        couponDiscount = 0;
+
+        document.getElementById('form-lab-name').value = checkoutLab.name;
+        document.getElementById('form-lab-id').value   = r.vcpu + ' vCPU · ' + r.ram + ' GB RAM';
+        document.getElementById('form-plan').style.display        = 'none';
+        document.getElementById('form-plan-select').style.display = 'block';
+        document.getElementById('form-plan-select').value         = 'monthly';
+        checkoutPrices.selectedAmt = parseFloat(r.monthly.replace(/[₹,]/g,''));
+        document.getElementById('form-qty').value      = 1;
+        document.getElementById('form-name').value     = '';
+        document.getElementById('form-email').value    = '';
+        document.getElementById('form-phone').value    = '';
+        document.getElementById('form-company').value  = '';
+        document.getElementById('form-coupon').value   = '';
+        document.getElementById('coupon-msg').style.display = 'none';
+        document.getElementById('discount-row').style.display = 'none';
+
+        updateSummary();
+        document.getElementById('checkout-modal').style.display = 'flex';
+    }
+
+    function renderCard(lab) {
+        const prices      = calculatePrices(lab.infra);
+        const isCSV       = !!lab.isCSV;
+
+        const featureHtml = features.map(f => `
+            <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--az-text-muted);">
+                <i class="fas ${f.icon}" style="color:var(--az-blue);width:14px;text-align:center;font-size:11px;"></i>
+                <span>${f.text}</span>
+            </div>`).join('');
+
+        const priceSection = isCSV ? `
+            <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:10px 12px;margin-bottom:12px;">
+                <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Lab Price</div>
+                <div style="font-size:20px;font-weight:600;color:var(--az-blue);">${prices.dailyFmt}</div>
+                <div style="font-size:11px;color:var(--az-text-muted);margin-top:2px;">Per participant · incl. platform access</div>
+            </div>` : `
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:12px;padding:4px;background:var(--az-bg);border:1px solid var(--az-border);" id="price-toggle-${lab.id}">
+                <div class="price-option active" style="padding:8px 10px;" onclick="selectPrice(this, '${lab.id}', 'daily')">
+                    <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">Daily</div>
+                    <div style="font-size:14px;font-weight:600;color:var(--az-text);">${prices.dailyFmt}</div>
+                </div>
+                <div class="price-option" style="padding:8px 10px;" onclick="selectPrice(this, '${lab.id}', 'weekly')">
+                    <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">Weekly −10%</div>
+                    <div style="font-size:14px;font-weight:600;color:var(--az-text);">${prices.weeklyFmt}</div>
+                </div>
+            </div>`;
+
+        return `
+        <div class="lab-card" style="padding:16px;" id="card-${lab.id}">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <span class="az-tag">${lab.id}</span>
+                ${isCSV ? `<span class="az-tag-green">${lab.category}</span>` : ''}
+            </div>
+            <div style="font-size:15px;font-weight:600;color:var(--az-text);margin-bottom:10px;min-height:44px;line-height:1.4;">${lab.name}</div>
+            <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:12px;">${featureHtml}</div>
+            ${priceSection}
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto;">
+                <button onclick="addToCart('${lab.id}')" class="btn-secondary" style="font-size:12px;padding:6px 10px;justify-content:center;">
+                    <i class="fas fa-cart-plus" style="font-size:11px;"></i> Add to Cart
+                </button>
+                <button onclick="openCheckout('${lab.id}')" class="btn-primary" style="font-size:12px;padding:6px 10px;justify-content:center;">
+                    <i class="fas fa-bolt" style="font-size:11px;"></i> Buy Now
+                </button>
+            </div>
+        </div>`;
+    }
+
+
+    // Track selected plan per card
+    const cardPlan = {};
+
+    function selectPrice(el, labId, plan) {
+        const siblings = el.parentElement.querySelectorAll('.price-option');
+        siblings.forEach(s => s.classList.remove('active'));
+        el.classList.add('active');
+        cardPlan[labId] = plan;
+    }
+
+    // ─── CART ────────────────────────────────────────────────────
+    function addToCart(id) {
+        const lab = (labData[activeCategory] || []).find(l => l.id === id);
+        if (lab) { cart.push(lab); updateCartUI(); }
+    }
+
+    function updateCartUI() {
+        const count = document.getElementById('cart-count');
+        const toast = document.getElementById('cart-toast');
+        if (cart.length > 0) {
+            if (count) { count.innerText = cart.length; count.classList.remove('hidden'); }
+            toast.style.display = 'flex';
+            document.getElementById('toast-text').innerText =
+                `${cart.length} Environment${cart.length > 1 ? 's' : ''} Ready`;
+        }
+    }
+
+    // ─── CHECKOUT MODAL ──────────────────────────────────────────
+    function openCheckout(labId) {
+        const list = labData[activeCategory] || [];
+        const lab  = list.find(l => l.id === labId);
+        if (!lab) return;
+
+        checkoutLab    = lab;
+        checkoutPlan   = lab.isCSV ? 'fixed' : (cardPlan[labId] || 'daily');
+        checkoutPrices = calculatePrices(lab.infra);
+        couponDiscount = 0;
+
+        // Pre-fill read-only fields
+        document.getElementById('form-lab-name').value = lab.name;
+        document.getElementById('form-lab-id').value   = lab.id;
+        document.getElementById('form-plan').style.display        = 'block';
+        document.getElementById('form-plan-select').style.display = 'none';
+        document.getElementById('form-plan').value =
+            checkoutPlan === 'fixed'  ? `Fixed — ${checkoutPrices.dailyFmt}` :
+            checkoutPlan === 'daily'  ? `Daily — ${checkoutPrices.dailyFmt}` :
+                                        `Weekly (-10%) — ${checkoutPrices.weeklyFmt}`;
+
+        // Reset editable fields
+        document.getElementById('form-qty').value     = 1;
+        document.getElementById('form-name').value    = '';
+        document.getElementById('form-email').value   = '';
+        document.getElementById('form-phone').value   = '';
+        document.getElementById('form-company').value = '';
+        document.getElementById('form-coupon').value  = '';
+        document.getElementById('coupon-msg').style.display = 'none';
+        document.getElementById('discount-row').style.display = 'none';
+
+        updateSummary();
+        document.getElementById('checkout-modal').style.display = 'flex';
+    }
+
+    function closeCheckoutModal() {
+        document.getElementById('checkout-modal').style.display = 'none';
+    }
+
+    // Close on backdrop click
+    document.getElementById('checkout-modal').addEventListener('click', function(e) {
+        if (e.target === this) closeCheckoutModal();
+    });
+    // Ensure modal starts hidden
+    document.getElementById('checkout-modal').style.display = 'none';
+
+    function changeQty(delta) {
+        const inp = document.getElementById('form-qty');
+        let val   = parseInt(inp.value) + delta;
+        val       = Math.max(1, Math.min(50, val));
+        inp.value = val;
+        updateSummary();
+    }
+
+    function syncQty() { updateSummary(); }
+
+    function applyCoupon() {
+        const code = document.getElementById('form-coupon').value.trim().toUpperCase();
+        const msg  = document.getElementById('coupon-msg');
+        msg.style.display = 'block';
+        if (COUPONS[code]) {
+            couponDiscount = COUPONS[code];
+            msg.textContent = `✓ Coupon applied! ${couponDiscount * 100}% off`;
+            msg.style.color = '#16a34a';
+            document.getElementById('discount-row').style.display = 'flex';
+        } else {
+            couponDiscount = 0;
+            msg.textContent = '✗ Invalid coupon code.';
+            msg.style.color = '#dc2626';
+            document.getElementById('discount-row').style.display = 'none';
+        }
+        updateSummary();
+    }
+
+    const GST_RATE = 0.18;
+
+    function updateSummary() {
+        if (!checkoutLab) return;
+        const qty        = parseInt(document.getElementById('form-qty').value) || 1;
+        const unitAmt    = checkoutLab && checkoutLab.isBaremetal
+                         ? (checkoutPrices.selectedAmt || checkoutPrices.monthly || 0)
+                         : checkoutPlan === 'fixed'   ? checkoutPrices.daily
+                         : checkoutPlan === 'daily'   ? checkoutPrices.daily
+                         : checkoutPrices.weekly;
+        const subtotal   = unitAmt * qty;
+        const discount   = subtotal * couponDiscount;
+        const afterDisc  = subtotal - discount;
+        const gst        = afterDisc * GST_RATE;
+        const total      = afterDisc + gst;
+
+        document.getElementById('summary-lab').textContent        = checkoutLab.name;
+        document.getElementById('summary-unit-price').textContent = fmtINR(unitAmt);
+        document.getElementById('summary-qty').textContent        = `×${qty}`;
+        document.getElementById('summary-discount').textContent   = `-${fmtINR(discount)}`;
+        document.getElementById('summary-gst').textContent        = fmtINR(gst);
+        document.getElementById('summary-total').textContent      = fmtINR(total);
+    }
+
+    // ─── RAZORPAY PAYMENT ────────────────────────────────────────
+    function proceedToPayment() {
+        const name    = document.getElementById('form-name').value.trim();
+        const email   = document.getElementById('form-email').value.trim();
+        const phone   = document.getElementById('form-phone').value.trim();
+        const qty     = parseInt(document.getElementById('form-qty').value) || 1;
+
+        // Basic validation
+        if (!name)  { alert('Please enter your full name.');     return; }
+        if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+        if (!phone) { alert('Please enter your phone number.');  return; }
+
+        const unitAmt  = checkoutLab && checkoutLab.isBaremetal ? (checkoutPrices.selectedAmt || checkoutPrices.monthly || 0) : checkoutPlan === 'fixed' ? checkoutPrices.daily : checkoutPlan === 'daily' ? checkoutPrices.daily : checkoutPrices.weekly;
+        const subtotal = unitAmt * qty;
+        const discount = subtotal * couponDiscount;
+        const afterDisc = subtotal - discount;
+        const gst      = afterDisc * GST_RATE;
+        const total    = afterDisc + gst;
+
+        const orderDetails = {
+            labName:      checkoutLab.name,
+            labId:        checkoutLab.id,
+            plan:         checkoutLab && checkoutLab.isBaremetal
+                            ? { '8hr': '8 Hours', 'monthly': 'Monthly', 'm6': '6 Months (10% off)', 'm12': '12 Months (20% off)' }[checkoutPlan] || 'Monthly'
+                            : checkoutPlan === 'daily' ? 'Daily' : checkoutPlan === 'fixed' ? 'Fixed' : 'Weekly (-10%)',
+            qty:          qty,
+            name:         name,
+            email:        email,
+            phone:        phone,
+            company:      document.getElementById('form-company').value.trim(),
+            subtotalFmt:  fmtINR(subtotal),
+            discountFmt:  couponDiscount > 0 ? `-${fmtINR(discount)}` : '—',
+            gstFmt:       fmtINR(gst),
+            totalFmt:     fmtINR(total),
+        };
+
+        const amountPaise = Math.round(total * 100);
+
+        const options = {
+            key:         RAZORPAY_KEY_ID,
+            amount:      amountPaise,
+            currency:    'INR',
+            name:        'Synergific Lab Store',
+            description: `${checkoutLab.name} [${checkoutLab.id}] — ${orderDetails.plan} × ${qty}`,
+            image:       '',
+            prefill: {
+                name:    name,
+                email:   email,
+                contact: phone
+            },
+            notes: {
+                lab_id:   checkoutLab.id,
+                lab_name: checkoutLab.name,
+                plan:     checkoutPlan,
+                qty:      qty,
+                company:  orderDetails.company
+            },
+            theme: { color: '#22c55e' },
+            handler: function(response) {
+                showPaymentSuccess(response, orderDetails);
+            },
+            modal: {
+                ondismiss: function() {
+                    console.log('Razorpay modal dismissed by user.');
+                }
+            }
+        };
+
+        try {
+            const rzp = new Razorpay(options);
+            rzp.on('payment.failed', function(resp) {
+                alert(`Payment failed: ${resp.error.description}`);
+            });
+            rzp.open();
+        } catch (e) {
+            alert('Payment gateway unavailable. Please contact support.');
+        }
+    }
+
+
+
+
+    function sendOrderEmails(response, orderDetails) {
+        const orderDate    = new Date().toLocaleString('en-IN', { dateStyle: 'long', timeStyle: 'short' });
+        const paymentId    = response.razorpay_payment_id || 'N/A';
+        const orderId      = response.razorpay_order_id   || 'N/A';
+        const RECIPIENTS   = ['itops@synergificsoftware.com', 'vinay.chandra@synergificsoftware.com', orderDetails.email];
+
+        // Send flat variables — the HTML template lives in EmailJS dashboard
+        // Template must use {{payment_id}}, {{lab_name}}, {{customer_name}} etc.
+        const sends = RECIPIENTS.map(toEmail =>
+            emailjs.send(_k(_c.esid), _k(_c.etid), {
+                to_email:       toEmail,
+                from_name:      'Synergific Lab Store',
+                reply_to:       orderDetails.email,
+                subject:        'New Lab Order: ' + orderDetails.labName + ' [' + orderDetails.labId + '] — ' + orderDetails.totalFmt,
+                order_date:     orderDate,
+                payment_id:     paymentId,
+                order_id:       orderId,
+                lab_name:       orderDetails.labName,
+                lab_id:         orderDetails.labId,
+                plan:           orderDetails.plan,
+                qty:            String(orderDetails.qty),
+                customer_name:  orderDetails.name,
+                customer_email: orderDetails.email,
+                customer_phone: orderDetails.phone,
+                company:        orderDetails.company || '—',
+                subtotal:       orderDetails.subtotalFmt,
+                discount:       orderDetails.discountFmt,
+                gst:            orderDetails.gstFmt,
+                total:          orderDetails.totalFmt
+            })
+        );
+        return Promise.all(sends);
+    }
+
+    function showPaymentSuccess(response, orderDetails) {
+        // Always show the banner immediately — don't block on email
+        closeCheckoutModal();
+        showSuccessBanner(response.razorpay_payment_id, orderDetails.totalFmt, orderDetails.email, null);
+
+        // Send emails in background
+        sendOrderEmails(response, orderDetails)
+            .then(() => {
+                // Update banner to show email sent
+                const msg = document.getElementById('email-status-msg');
+                if (msg) msg.innerHTML = '✅ Order confirmation sent to <strong>' + orderDetails.email + '</strong> and the Synergific ops team.';
+            })
+            .catch((err) => {
+                console.error('Email error:', err);
+                const msg = document.getElementById('email-status-msg');
+                if (msg) msg.innerHTML = '⚠️ Payment captured. Please contact <strong>itops@synergificsoftware.com</strong> with Payment ID <strong>' + response.razorpay_payment_id + '</strong>.';
+            });
+    }
+
+    function showSuccessBanner(paymentId, totalFmt, email, _emailSent) {
+        const old = document.getElementById('success-banner');
+        if (old) old.remove();
+
+        const banner = document.createElement('div');
+        banner.id = 'success-banner';
+        banner.style.cssText = `
+            position:fixed; inset:0; z-index:200;
+            display:flex; align-items:center; justify-content:center;
+            background:rgba(15,23,42,0.7); backdrop-filter:blur(8px);
+        `;
+        banner.innerHTML = `
+            <div style="background:white;border:1px solid #edebe9;padding:32px 40px;max-width:460px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.2);animation:modalFadeIn 0.15s ease-out;">
+                <div style="width:56px;height:56px;background:#dff6dd;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border-radius:2px;">
+                    <i class="fas fa-check" style="font-size:22px;color:#107c10;"></i>
+                </div>
+                <div style="font-size:11px;font-weight:600;color:#107c10;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">Payment Successful</div>
+                <div style="font-size:20px;font-weight:600;color:#323130;margin-bottom:12px;">Your Lab is Being Provisioned</div>
+                <div style="font-size:13px;color:#605e5c;margin-bottom:24px;line-height:1.6;background:#f3f2f1;border:1px solid #edebe9;padding:12px 16px;text-align:left;">
+                    <div style="margin-bottom:4px;"><span style="color:#a19f9d;">Payment ID:</span> <strong style="color:#323130;">${paymentId}</strong></div>
+                    <div><span style="color:#a19f9d;">Amount Paid:</span> <strong style="color:#0078d4;">${totalFmt}</strong></div>
+                </div>
+                <div id="email-status-msg" style="font-size:12px;color:#605e5c;margin-bottom:20px;">⏳ Sending order confirmation...</div>
+                <button onclick="document.getElementById('success-banner').remove()"
+                    style="background:#0078d4;color:white;border:none;padding:8px 24px;font-size:14px;font-weight:600;cursor:pointer;font-family:Segoe UI,sans-serif;border-radius:2px;"
+                    onmouseover="this.style.background='#106ebe'" onmouseout="this.style.background='#0078d4'">
+                    Back to Store
+                </button>
+            </div>
+        `;
+        document.body.appendChild(banner);
+    }
+
+    window.onload = init;
+    </script>
+</body>
+</html>
