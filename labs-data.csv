@@ -155,3 +155,213 @@ skillable,PL-900T00-A,Microsoft Power Platform Fundamentals,1986.075
 skillable,55286A,SharePoint 2019 Power User,3852.03
 skillable,MB-310T00-A,Manage Financial Operations with Dynamics 365 Finance,2951.8125
 skillable,MS-700T00-A,Manage collaboration and communication with Microsoft Teams,1353.3975
+xtremelabs,AZ-104T00,Microsoft Azure Administrator Lab,2140.047
+xtremelabs,AZ-900T00,Introduction to Cloud Infrastructure Lab,1006.551
+xtremelabs,PL-300T00,Design and Manage Analytics Solutions Using Power BI Lab,3158.064
+xtremelabs,MS-102T00,Microsoft 365 Administrator Lab,3383.289
+xtremelabs,MD-102T00,Microsoft 365 Endpoint Administrator Lab,6367.725
+xtremelabs,AZ-800T00,Administer Windows Server Hybrid Core Infrastructure Lab,4022.928
+xtremelabs,SC-200T00,Defend Against Cyberthreats with Microsoft's Security Operations Platform Lab w/ CEP,2824.731
+xtremelabs,AZ-400T00,Design and Implement Microsoft DevOps solutions Lab w/ CEP,4761.666
+xtremelabs,AI-900T00,Introduction to AI in Azure Lab,1434.069
+xtremelabs,AZ-500T00,Secure Cloud Resources with Microsoft Security Technologies Lab,1968.876
+xtremelabs,AZ-204T00,Developing solutions for Microsoft Azure Lab,2396.394
+xtremelabs,AZ-801T00,Configure Windows Server Hybrid Advanced Services Lab,4022.928
+xtremelabs,PL-900T00,Introduction to Microsoft Power Platform,2635.542
+xtremelabs,AI-102T00,Develop AI solutions in Azure Lab,3297.294
+xtremelabs,SC-900T00,"Introduction to Microsoft Security, Compliance, and Identity Lab",1435.707
+xtremelabs,AZ-305T00,Designing Microsoft Azure Infrastructure Solutions Lab,6135.948
+xtremelabs,DP-900T00,Introduction to Microsoft Azure Data Lab,3015.558
+xtremelabs,DP-300T00,Implement scalable database solutions using Azure SQL Lab,2517.606
+xtremelabs,SC-300T00,Microsoft Identity and Access Administrator Lab,3694.509
+xtremelabs,SC-100T00,Microsoft Cybersecurity Architect Lab,6641.271
+xtremelabs,PL-200T00,Microsoft Power Platform Functional Consultant Lab,2518.425
+xtremelabs,MS-700T00,Manage collaboration and communication with Microsoft Teams Lab,1878.786
+xtremelabs,PL-600T00,Power Platform Solution Architect Lab,2959.866
+xtremelabs,AZ-040T00,Automate Administration with PowerShell Labs,3158.064
+xtremelabs,,WS011WV (55367): Windows Server Administration Lab,5589.675
+xtremelabs,DP-600T00,Microsoft Fabric Analytics Engineer Lab,4559.373
+xtremelabs,PL-100T00,Microsoft Power Platform App Maker Lab,2635.542
+xtremelabs,MS-4004,Empower Your Workforce with Microsoft 365 Copilot Use Cases Including Cloud Express Pass – For Copilot,4847.661
+xtremelabs,55238,SharePoint Online for Administrators Lab,3276
+xtremelabs,AZ-700T00,Design and Implement Microsoft Azure Network Solutions Lab,5987.709
+xtremelabs,,VMware Advanced Deploy vSphere 7.x (3V0-22.21),12694.5
+xtremelabs,DP-080T00,Query and modify data with Transact-SQL Lab,3167.892
+xtremelabs,MS-4005,Craft effective prompts for Microsoft Copilot for Microsoft 365 Lab Including Cloud Express Pass – For Copilot,4847.661
+xtremelabs,PL-7008,Create Agents in Microsoft Copilot Studio Lab,1547.91
+xtremelabs,,AZ-104 Lab (Wiley/Sybex Edition),3749.382
+xtremelabs,55316,Administering a SQL Database Lab,3603.6
+xtremelabs,DP-100T01,Designing and Implementing a Data Science Solution on Azure Lab,4126.941
+xtremelabs,WS-011XL,Windows Server Administration Lab,4389.021
+xtremelabs,PL-500T00,Microsoft Power Automate RPA Developer Lab,3187.548
+xtremelabs,MB-800T00,Manage business solutions with Microsoft Dynamics 365 Business Central Lab,3158.064
+xtremelabs,DP-700T00,Implement Data Engineering Solutions Using Microsoft Fabric Lab,1637.181
+xtremelabs,,10982XL (55342): Supporting and Troubleshooting Windows 11 Lab,4991.805
+xtremelabs,,AWS Certified Solutions Architect,5323.5
+xtremelabs,,AZ-900 Lab (Wiley/Sybex Edition),1841.112
+xtremelabs,MB-920T00,Introduction to Microsoft Dynamics 365 (ERP) Lab,2518.425
+xtremelabs,55318,Advanced Automated Administration with Windows PowerShell Lab,4217.031
+xtremelabs,55215,SharePoint Online Power User Lab,4242.42
+xtremelabs,20764XL,Administering a SQL Database Infrastructure Lab,4991.805
+xtremelabs,PL-400T00,Microsoft Power Platform Developer Lab w/ CEP,2162.979
+xtremelabs,PL-7002,Create and Manage Automated Processes by using Power Automate Lab,2072.889
+xtremelabs,,CompTIA A+ Lab (1201),4340.7
+xtremelabs,SC-401T00,Protect sensitive information with Microsoft Purview in the AI Lab,2945.124
+xtremelabs,MS-4006,Copilot for Microsoft 365 for Administrators Lab,1968.876
+xtremelabs,MB-500T00,Develop Finance and Operations Apps with Dynamics 365 Lab,6135.948
+xtremelabs,AZ-140T00,Configure and Operate Microsoft Azure Virtual Desktop Labs w/ CEP,6367.725
+xtremelabs,MB-820T00,Develop solutions with Dynamics 365 Business Central Lab,3158.064
+xtremelabs,PL-7001,Create and Manage Canvas Apps with Power Apps Lab,2072.889
+xtremelabs,MS-4018,"Draft, Analyze, and Present with Microsoft 365 Copilot Cloud Express Pass for Copilot lab",4847.661
+xtremelabs,MB-220T00,Microsoft Dynamics 365 Marketing Lab,2518.425
+xtremelabs,,AWS Certified Cloud Practitioner,5323.5
+xtremelabs,MB-300T00,Microsoft Dynamics 365: Core Finance and Operations Lab,2419.326
+xtremelabs,MS-721T00,"Plan, configure, and manage collaboration communications systems with Microsoft Teams Lab",6135.948
+xtremelabs,MB-310T00,Manage Financial Operations with Dynamics 365 Finance Lab,3158.064
+xtremelabs,55324,"Installation, Storage, and Compute with Windows Server 2016 Lab",6911.541
+xtremelabs,MS-4004,Empower Your Workforce with Microsoft 365 Copilot Use Cases Lab,1547.91
+xtremelabs,AI-050T00,Develop Generative AI Solutions with Azure OpenAI Service Lab,6394.752
+xtremelabs,,MS030XL Administering Office 365 Lab,5722.353
+xtremelabs,,CompTIA Security+ Lab,4340.7
+xtremelabs,AZ-1008,Administer Active Directory Domain Services Lab,2203.11
+xtremelabs,55366,Querying Microsoft SQL Server with Transact-SQL Lab,4991.805
+xtremelabs,SC-5004,Defend against cyberthreats with Microsoft Defender XDR Lab,1968.876
+xtremelabs,,DP-900 Lab (Wiley/Sybex Edition),5341.518
+xtremelabs,20742XL,Identity with Windows Server Lab,4991.805
+xtremelabs,,20742WV (55351): Identity with Windows Server Lab,5589.675
+xtremelabs,GH-300,GitHub Copilot Lab,4577.391
+xtremelabs,,CompTIA Network+ Lab,4340.7
+xtremelabs,AI-3016,Develop generative AI apps in Azure Lab,2824.731
+xtremelabs,PL-7003,Create and Manage Model-Driven Apps with Power Apps and Dataverse Lab,2072.889
+xtremelabs,20486XL,Developing ASP.NET Core Web Applications Lab,4991.805
+xtremelabs,MB-330T00,Conceptualize Supply Chain Management in Microsoft Dynamics 365 Lab,3158.064
+xtremelabs,55315,Introduction to SQL Databases Lab,3603.6
+xtremelabs,PL-7004,Implement AI models with Microsoft Power Platform AI Builder Lab,2072.889
+xtremelabs,MS-4010,Build Plugins and Connectors for Microsoft Copilot for Microsoft 365 Lab Including Cloud Express Pass – For Copilot,4847.661
+xtremelabs,AZ-2008,DevOps Foundations: The Core Principles and Practices Lab,1968.876
+xtremelabs,55400,Microsoft Power BI For End Users Lab,6911.541
+xtremelabs,,20741WV (55349): Networking with Windows Server Lab,5589.675
+xtremelabs,MS-4005,Craft effective prompts for Microsoft Copilot for Microsoft 365 Lab,1547.91
+xtremelabs,,55485 - Microsoft 365 Copilot Super User Lab Including Cloud Express Pass – For Copilot,5323.5
+xtremelabs,AZ-1001,Deploy and Manage Containers with Azure kubernetes Service Lab,2140.047
+xtremelabs,,"20740WV (55382): Installation, Storage, and Compute with Windows Server Lab",5589.675
+xtremelabs,,MS-4023 - Transform Ideas into Action with Copilot Chat including Cloud Express Pass – For Copilot,4847.661
+xtremelabs,55300,Microsoft Teams for End Users Lab,2047.5
+xtremelabs,55321,SQL Server Integration Services Lab,6911.541
+xtremelabs,,Python Basics,4013.1
+xtremelabs,,CompTIA A+ Lab (1202),4340.7
+xtremelabs,,GH-900-GitHub Foundations Lab,4577.391
+xtremelabs,AZ-2007,Accelerate App Development by using GitHub Copilot Lab,2914.821
+xtremelabs,20697XL,Implementing and Managing Windows 11 Lab,4991.805
+xtremelabs,55283,Microsoft Office 365 Power User Lab,4811.625
+xtremelabs,55265,Microsoft Power Apps for End Users Lab,2047.5
+xtremelabs,MB-230T01,Implement Customer Service Solutions Using Microsoft Dynamics 365 Customer Service Lab,2203.11
+xtremelabs,MS-4018,"Draft, Analyze, and Present with Microsoft 365 Copilot Lab",1547.91
+xtremelabs,,MS-4022-Extend Microsoft 365 Copilot in Copilot Studio including Cloud Express Pass for Copilot,4847.661
+xtremelabs,,CompTIA Server+ Lab,4340.7
+xtremelabs,MS-4014,Build a Foundation to Build AI Agents and Extend Microsoft 365 Copilot Lab,1051.596
+xtremelabs,MB-280T01,Configure Dynamics 365 customer experience model-driven apps Lab,3158.064
+xtremelabs,AZ-2002,Develop an ASP.NET Core web app that consumes an API Lab,1968.876
+xtremelabs,55133,PowerShell for Endpoint Configuration Manager Administrators Lab,4217.031
+xtremelabs,,Cloud Operations on AWS,5323.5
+xtremelabs,DP-420T00,Design and implement cloud-native applications with Microsoft Azure Cosmos DB Lab,6135.948
+xtremelabs,,WS011WV-2025 - Windows Server 2025 Administration Lab,5589.675
+xtremelabs,SC-5006,Enhance Security Operations by Using Microsoft Security Copilot Including Cloud Express Pass – For Copilot,4847.661
+xtremelabs,AI-3018,Copilot Foundations,3158.064
+xtremelabs,MS203WV,Managing Microsoft 365 Messaging Lab,5589.675
+xtremelabs,SC-5003,Implement information protection and data loss prevention by using Microsoft Purview Lab,1968.876
+xtremelabs,DP-602T00,Implement a Data Warehouse with Microsoft Fabric Lab,2058.966
+xtremelabs,DP-3007,Train and deploy a machine learning model with Azure Machine Learning Lab,3694.509
+xtremelabs,AI-3004,Develop computer vision solutions in Azure Lab,2824.731
+xtremelabs,AI-3003,Develop natural language solutions in Azure Lab,2140.047
+xtremelabs,SC-5001,Configure SIEM security operations using Microsoft Sentinel Lab,2203.11
+xtremelabs,DP-605T00,Prepare and Visualize Data with Microsoft Power BI Lab,1968.876
+xtremelabs,,CompTIA Linux+ Lab,4340.7
+xtremelabs,,MS-4019 Transform your everyday Business Processes with Agents Lab,1547.91
+xtremelabs,DP-3028,Implement Generative AI engineering with Azure Databricks Lab,3694.509
+xtremelabs,GH-200,Automate Your Workflow with GitHub Actions Lab,1051.596
+xtremelabs,,CompTIA PenTest+ Lab,4340.7
+xtremelabs,,GH-500-GitHub Advanced Security Lab,4577.391
+xtremelabs,,CompTIA CySA+ Lab,4340.7
+xtremelabs,,CompTIA Tech+ Lab,4340.7
+xtremelabs,MS-4015,Build custom engine agents with the Microsoft 365 Agents SDK Lab,1968.876
+xtremelabs,MS-4002,Prepare security and compliance to support Microsoft 365 Copilot Lab,1968.876
+xtremelabs,MB-280T03,Design and deliver powerful customer experiences with Dynamics 365 Customer Insights Lab,3158.064
+xtremelabs,MB-280T02,Empower Sellers with Dynamics 365 Sales Lab,3158.064
+xtremelabs,SC-5007,Implement retention eDiscovery and Communication compliance in Microsoft Purview Lab,2824.731
+xtremelabs,AZ-104T00-FR,Microsoft Azure Administrator Lab (French Version),2140.047
+xtremelabs,DP-603T00,Implementing Real Time Analytics with Microsoft Fabric Lab,1434.069
+xtremelabs,AZ-2001,Implement security through a pipeline using Azure DevOps Lab,1479.114
+xtremelabs,DP-3001,Migrate SQL Server workload to Azure SQL Lab,2140.047
+xtremelabs,AI-3002,Develop AI information extraction solutions in Azure Lab,1434.069
+xtremelabs,AZ-1004,Deploy Configure Azure Monitor Lab,1123.668
+xtremelabs,DP-3011,Implement a Data Analytics Solution with Azure Databricks Lab,2518.425
+xtremelabs,,WS001WV - Windows Server Essentials Lab,5589.675
+xtremelabs,MB-335T00-A,Augment advance level Supply Chain Management solutions with Microsoft Dynamics 365 Lab,2945.124
+xtremelabs,DP-601T00-A,Implement a Lakehouse with Microsoft Fabric Lab,2355.444
+xtremelabs,10985XL,Introduction to SQL Databases Lab,4559.373
+xtremelabs,20740XL,"Installation, Storage, and Compute with Windows Server Lab",4991.805
+xtremelabs,55268,Microsoft Power Automate for End Users Lab,2047.5
+xtremelabs,MS-600T00,Building applications and solutions with Microsoft 365 core services Lab,3694.509
+xtremelabs,,10985WV (55356): Introduction to SQL databases Lab,5589.675
+xtremelabs,55355,SharePoint 2016 Administration Lab,6911.541
+xtremelabs,AB-6002,Introduction to Finance in Dynamics 365 Lab,3158.064
+xtremelabs,,GH-100T00-GitHub Fundamentals – Administration Basics and Product Features Lab,4577.391
+xtremelabs,,AI-3026- Develop AI agents on Azure,3158.064
+xtremelabs,AZ-2010,Design and Implement Platform Engineering Lab,2824.731
+xtremelabs,,MS-4022-Extend Microsoft 365 Copilot in Copilot Studio Lab,1547.91
+xtremelabs,,MS-4023 - Transform Ideas into Action with Copilot Chat Lab,1547.91
+xtremelabs,MB-280T04,Configure a Dynamics 365 Customer Experience Solution Lab,1968.876
+xtremelabs,DP-3020,Develop Data-Driven Applications with Azure SQL Database Lab,4217.031
+xtremelabs,AI-3025,Work smarter with AI Lab,1006.551
+xtremelabs,AI-3025,Work smarter with AI Lab Including Cloud Express Pass – For Copilot,4847.661
+xtremelabs,SC-5006,Enhance Security Operations by Using Microsoft Security Copilot Lab,1547.91
+xtremelabs,MS-4012,Microsoft Copilot Web Based Interactive Experience for Executives Lab Including Cloud Express Pass – For Copilot,4847.661
+xtremelabs,MS-080T00-A,Employee Experience Platform Specialist Lab,2824.731
+xtremelabs,AI-3019,Build AI Apps with Azure Database for PostgreSQL Lab,3297.294
+xtremelabs,AZ-1010,Deploy and manage Azure Arc-enabled Servers Lab,2824.731
+xtremelabs,AZ-1007,Deploy and administer Linux virtual machines on Azure Lab,1968.876
+xtremelabs,SC-5008,Configure and govern entitlement with Microsoft Entra ID Lab,1435.707
+xtremelabs,AZ-104T00-CN,Microsoft Azure Administrator Lab (Chinese Version),2140.047
+xtremelabs,,AZ-1006 Migrate and Modernize SAP in the Microsoft Cloud Lab,2645.37
+xtremelabs,55234,SharePoint 2016 Site Collections And Site Owner Administration,6911.541
+xtremelabs,20741XL,Networking with Windows Server Lab,4991.805
+xtremelabs,55304,Microsoft Dataverse for Teams Lab,4991.805
+xtremelabs,55281,SharePoint Online Branding Lab,2047.5
+xtremelabs,AB-6004,Introduction to service in Dynamics 365 Lab,2518.425
+xtremelabs,DP-3029,Work smarter with Copilot in Microsoft Fabric,3694.509
+xtremelabs,,MS-4019 Transform your everyday Business Processes with Agents Lab including Cloud Express Pass for Copilot,4847.661
+xtremelabs,,MS-4021-Copilot Immersion Experience Lab including Cloud Express Pass – For Copilot,4847.661
+xtremelabs,,MS-4021-Copilot Immersion Experience Lab,1547.91
+xtremelabs,,CompTIA Cloud+ Lab,4340.7
+xtremelabs,,AI-3024 - Design a dream destination with AI including Cloud Express Pass - For Copilot,4847.661
+xtremelabs,AI-3024,Design a dream destination with AI Lab,1006.551
+xtremelabs,AZ-2009,Build distributed apps with .NET Aspire Lab,2203.11
+xtremelabs,MB-7005,Create and manage journeys with Dynamics 365 Customer Insights Lab,1339.884
+xtremelabs,MB-7006,Create and manage segments in Dynamics 365 Customer Insights – Data Lab,1339.884
+xtremelabs,AZ-2006,Automate Azure Load Testing by using GitHub Lab,5722.353
+xtremelabs,MS-4010,Build Plugins and Connectors for Microsoft Copilot for Microsoft 365 Lab,1547.91
+xtremelabs,AI-3022,Implement Knowledge Mining with Azure AI Search Lab,2914.821
+xtremelabs,DP-3021,Configure and migrate to Azure Database for PostgreSQL Lab,4217.031
+xtremelabs,MS-4012,Microsoft Copilot Web Based Interactive Experience for Executives Lab,1547.91
+xtremelabs,AZ-2005,Develop Generative AI solutions using Azure OpenAI and the Semantic Kernel SDK  Lab,2824.731
+xtremelabs,AZ-104T00-JP,Microsoft Azure Administrator Lab (Japanese Version),2140.047
+xtremelabs,DP-604T00,Implement a data science and machine learning solution for AI with Microsoft Fabric Lab,2518.425
+xtremelabs,DP-3015,Get Started with Azure Cosmos DB NoSQL Development Lab,4217.031
+xtremelabs,SC-5002,Secure Azure Services and Workloads with Microsoft Defender for Cloud Regulatory Compliance Controls Lab,2518.425
+xtremelabs,AZ-2003,Deploy cloud-native apps using Azure Container Apps Lab,2824.731
+xtremelabs,AZ-1002,Configure Secure Access to Your Workloads Using Networking with Azure Virtual Network Lab,2645.37
+xtremelabs,AZ-1003,Secure Storage for Azure Files and Azure Blob Storage Lab,1123.668
+xtremelabs,AZ-1005,Configuring Azure Virtual Desktop for the Enterprise Lab,1434.069
+xtremelabs,DP-3014,Build machine learning solutions using Azure Databricks Lab,3212.937
+xtremelabs,M365001WV,Microsoft 365 Administration Lab,5589.675
+xtremelabs,20483XL,Programming in C# Lab,4991.805
+xtremelabs,AZ-720T00,Azure Support Engineer Troubleshooting Azure Connectivity Lab,4991.805
+xtremelabs,55302,Microsoft Lists for End Users Lab,2047.5
+xtremelabs,,Python Advanced,4013.1
+xtremelabs,,AWS Certified Data Analytics,5323.5
+xtremelabs,MB-260T00,Microsoft Customer Data Platform Specialty Lab,3158.064
+xtremelabs,MB-240T00,Implement Field Service Solutions Using Microsoft Dynamics 365 Field Service Lab,2518.425
+xtremelabs,DP-500T00,Designing and Implementing Enterprise-Scale Analytics Solutions Using Microsoft Azure and Microsoft Power BI Lab,5987.709
+xtremelabs,DP-090T00XL,Azure Databricks Machine Learning Solution Lab,5830.461
+xtremelabs,AZ-120T00,Planning and Deploying SAP on Azure Lab,2140.047
