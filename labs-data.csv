@@ -1,8 +1,157 @@
 category,code,name,price
-skillable,MS-102T00-A,Microsoft 365 Administrator Essentials,39.68
-skillable,M55630A,Managing Windows Environments with Group Policy,55.65
-skillable,20742WV-2025,Identity with Windows Server,68.25
-skillable,M55631A,Mastering Windows 11 Deployment with MDT,45.15
-skillable,AB-6002,Introduction to finance in Dynamics 365,25
-skillable,DP-3029,Work smarter with Copilot in Microsoft Fabric [Cloud Slice Provided],45
-skillable,DP-3028,Implement Generative AI Engineering with Azure Databricks [Cloud Slice Provided],46
+skillable,MS-102T00-A,Microsoft 365 Administrator Essentials,2708.16
+skillable,M55630A,Managing Windows Environments with Group Policy,3798.1125
+skillable,20742WV-2025,Identity with Windows Server,4658.0625
+skillable,M55631A,Mastering Windows 11 Deployment with MDT,3081.4875
+skillable,AB-6002,Introduction to finance in Dynamics 365,1706.25
+skillable,DP-3029,Work smarter with Copilot in Microsoft Fabric [Cloud Slice Provided],3071.25
+skillable,DP-3028, Implement Generative AI Engineering with Azure Databricks [Cloud Slice Provided],3139.5
+skillable,M55601-1A,Implementing and Managing Microsoft Virtualization Platforms,3798.1125
+skillable,WS011WV-2025,Windows Server 2025 Administration,4658.0625
+skillable,DP-700T00-A,Implement data engineering solutions using Microsoft Fabric [Cloud Slice Provided],12284.3175
+skillable,AZ-2007, Accelerate app development by using GitHub Copilot,1706.25
+skillable,AI-3026, Develop AI agents on Azure [Cloud Slice Provided],2730
+skillable,SC-401T00-A,Protect sensitive information with Microsoft Purview in the AI era,2798.25
+skillable,MS-4023, Transform Ideas into Action with Copilot Chat,1365
+skillable,MS-4010, Extend Microsoft 365 Copilot with declarative agents by using Visual Studio Code,1365
+skillable,M55624A,Windows 11 Advanced Administration,3798.1125
+skillable,AZ-2001,A Implement security through a pipeline using Azure DevOps [Cloud Slice Provided],1433.25
+skillable,M55625A,Whats new in Microsoft Server 2025,1023.75
+skillable,M55604A,Using AI and Copilot in the Microsoft Power Platform,2436.525
+skillable,SC-200T00-A,Defend Against Cyberthreats with Microsoft's Security Operations Platform [Cloud Slice Provided],3940.755
+skillable,DP-3020, Develop data-driven applications with Azure SQL Database [Cloud Slice Provided],3439.8
+skillable,SC-5004, Defend against cyberthreats with Microsoft Defender XDR,1433.25
+skillable,MB-7005, Create and manage journeys with Dynamics 365 Customer Insights,1433.25
+skillable,MB-7006, Create and manage segments in Dynamics 365 Customer Insights – Data,1433.25
+skillable,MB-280T01,MB280T03 Dynamics 365 Customer Experience Analyst,4299.75
+skillable,AI-3025,Work Smarter with AI,716.625
+skillable,AZ-400T00-A,Design and Implement Microsoft DevOps solutions [Cloud Slice Provided],6825
+skillable,AZ-2008, DevOps Foundations The Core Principles and Practices [Cloud Slice Provided],2149.875
+skillable,MS-4002, Prepare security and compliance to support Microsoft 365 Copilot,1433.25
+skillable,SC-300T00-A,Microsoft Identity and Access Administrator [Cloud Slice Provided],2865.8175
+skillable,AI-3022, Implement AI Skills in Azure AI Search [Cloud Slice Provided],2221.5375
+skillable,AZ-2006, Automate Azure Load Testing by using GitHub Actions [Cloud Slice Provided],4299.75
+skillable,MB-280T04,Configure a Dynamics 365 customer experience solution,1719.9
+skillable,MB-280T03,Design and deliver powerful customer experiences with Dynamics 365 Customer Insights,1719.9
+skillable,MB-280T02,Empower sellers with Dynamics 365 Sales and Microsoft 365 Copilot for Sales,1719.9
+skillable,MB-280T01, Configure Dynamics 365 customer experience model-driven apps,1719.9
+skillable,SC-100T00-A,Microsoft Cybersecurity Architect [Cloud Slice Provided],1934.8875
+skillable,AZ-140T00-A,Configuring and Operating Microsoft Azure Virtual Desktop [Cloud Slice Provided],5015.6925
+skillable,DP-3021, Migrate to and configure Azure Database for PostgreSQL [Cloud Slice Provided],2865.8175
+skillable,AZ-1010, Deploy and manage Azure Arc-enabled Servers [Cloud Slice Provided],2149.1925
+skillable,AI-3019, Develop AI-powered solutions with Azure Database for PostgreSQL [Cloud Slice Provided],2508.1875
+skillable,PL-400T00-A,Microsoft Power Platform Developer [Cloud Slice Provided],2865.8175
+skillable,AZ-1007, Deploy and administer Linux virtual machines on Azure [Cloud Slice Provided],1433.25
+skillable,M55345C,Implementing and Managing Windows 11,3224.8125
+skillable,M55618A,Microsoft Copilot for Microsoft 365 for End Users,859.95
+skillable,M55343B,Networking with Windows Server,3224.8125
+skillable,AZ-1008, Administer Active Directory Domain Services,1719.9
+skillable,SC-5007," Implement retention, eDiscovery, and Communication compliance in Microsoft Purview",1719.9
+skillable,M55613A,Advanced Web Development,3224.8125
+skillable,AI-3016, Develop generative AI apps in Azure AI Foundry portal [Cloud Slice Provided],2167.62
+skillable,M55610A,Planning and implementing Microsoft Sentinel (SIEM & SOAR) [Cloud Slice Provided],1791.5625
+skillable,M55372A,Microsoft Azure Advanced Administration,3224.8125
+skillable,AZ-2005, Develop AI agents using Azure OpenAI and the Semantic Kernel SDK [Cloud Slice Provided],1576.575
+skillable,SC-5008,Configure and manage entitlement with Microsoft Entra ID,1074.9375
+skillable,M55615A,Deploying and Managing Windows 11 with Microsoft Configuration Manager and Intune (Workshop),5016.375
+skillable,L,inux Fundamentals Version 1.0,2507.505
+skillable,MB-820T00-A,Develop solutions with Dynamics 365 Business Central,2364.8625
+skillable,M55344B,Identity with Windows Server,3224.8125
+skillable,M55371C,Administering Windows Server,3224.8125
+skillable,M55348B,Administering Microsoft Configuration Manager,4801.3875
+skillable,M55341B,"Installation, Storage, and Compute with Windows Server",3224.8125
+skillable,M55626A,Advanced Administration and Automation with PowerShell,2436.525
+skillable,M55353A,Administering a SQL Database Infrastructure,3224.8125
+skillable,M55399B,Implementing and Managing Microsoft Intune,3224.8125
+skillable,M55354B,Administering Office 365,3798.1125
+skillable,M55370A,SharePoint Online Management and Administration,3224.8125
+skillable,SC-5003,Information Protection and Data Loss Prevention,1433.25
+skillable,M55342C,Supporting and Troubleshooting Windows 11,3081.4875
+skillable,MS203WV,Managing Microsoft 365 Messaging,4658.0625
+skillable,DP-603,Implement Real-Time Intelligence with Microsoft Fabric [Cloud Slice Provided],3122.4375
+skillable,M55352A,Introduction to SQL Databases,3224.8125
+skillable,M55340A,Developing ASP.NET Core Web Applications,3798.1125
+skillable,M55339A,Programming in C#,3224.8125
+skillable,M55337A,Introduction to Programming,2436.525
+skillable,DP-604T00-A,Implement a data science and machine learning solution for AI with Microsoft Fabric [Cloud Slice Provided],3839.0625
+skillable,DP-602T00-A,Implement a Data Warehouse with Microsoft Fabric [Cloud Slice Provided],3480.75
+skillable,DP-3015,Get started with Azure Cosmos DB NoSQL development [Cloud Slice Provided],3224.8125
+skillable,DP-3001, Migrate SQL Server workload to Azure SQL [Cloud Slice Provided],1576.575
+skillable,PL-7003, Create and Manage Model-Driven Apps with Power Apps and Dataverse,1074.9375
+skillable,AI-3002, Create document intelligence solutions with Azure AI Document Intelligence [Cloud Slice Provided],1146.6
+skillable,M55606A,Microsoft 365 Security Administration,2436.525
+skillable,AI-3004,Build an Azure AI Vision solution with Azure AI services [Cloud Slice Provided],2149.1925
+skillable,AI-3003, Build a natural language processing solution with Azure AI Services [Cloud Slice Provided],1576.575
+skillable,PL-7002, Create and Manage Automated Processes by using Power Automate,1074.9375
+skillable,PL-7001, Create and Manage Canvas Apps with Power Apps,1074.9375
+skillable,SC-5002, Secure Azure services and workloads with Microsoft Defender for Cloud regulatory compliance controls [Cloud Slice Provided],1863.225
+skillable,AZ-2003, Deploy cloud-native apps to Azure Container Apps ILT [Cloud Slice Provided],2149.875
+skillable,SC-5001, Configure SIEM security operations using Microsoft Sentinel [Cloud Slice Provided],1648.2375
+skillable,AZ-2002, Develop an ASP.NET Core web app that consumes an API ILT [Cloud Slice Provided],1433.25
+skillable,AZ-1004,Deploy and configure Azure Monitor [Cloud Slice Provided],859.95
+skillable,AZ-1003,Secure storage for Azure Files and Azure Blob Storage [Cloud Slice Provided],794.43
+skillable,AZ-1002,Configure secure access to your workloads using Azure networking [Cloud Slice Provided],2113.02
+skillable,DP-600T00-A,Implementing Analytics Solutions Using Microsoft Fabric [Cloud Slice Provided],9554.3175
+skillable,DP-605,Prepare and visualize data with Microsoft Power BI [Cloud Slice Provided],1433.25
+skillable,DP-3014,Build machine learning solutions using Azure Databricks [Cloud Slice Provided],2399.67
+skillable,DP-3011,Implementing a Data Analytics Solution with Azure Databricks [Cloud Slice Provided],1899.3975
+skillable,P,owerShell for Windows and Linux Administrator,1790.88
+skillable,M365001WV,Microsoft 365 Administration,4658.0625
+skillable,WS011WV,Windows Server Administration,4658.0625
+skillable,10985WV,Introduction to SQL Databases,4658.0625
+skillable,WS001WV,Windows Server Essentials,4658.0625
+skillable,20742WV,Identity with Windows Server,4658.0625
+skillable,20740WV,"Installation, Storage, and Compute with Windows Server",4658.0625
+skillable,20741WV,Networking with Windows Server,4658.0625
+skillable,MB-335T00-A,Augment advance level Supply Chain Management solutions with Microsoft Dynamics 365,2804.3925
+skillable,MB-330T00-A,Microsoft Dynamics 365 Supply Chain Management,2951.8125
+skillable,DP-601T00-A,Implement a Lakehouse with Microsoft Fabric [Cloud Slice Provided],3839.0625
+skillable,MD-102T00-A,Microsoft 365 Endpoint Administrator,5165.8425
+skillable,DP-420T00-A,Design and implement cloud-native applications with Microsoft Azure Cosmos DB [Cloud Slice Provided],5904.3075
+skillable,DP-080T00-A,Query and modify data with Transact-SQL,2582.58
+skillable,DP-900T00-A,Introduction to Microsoft Azure Data [Cloud Slice Provided],2383.9725
+skillable,MS-721T00-A,"Plan, configure, and manage collaboration communications systems with Microsoft Teams [Cloud Slice Provided]",5165.8425
+skillable,55400A,Microsoft Power BI for End Users,1541.085
+skillable,MS-102T00-A,Microsoft 365 Administrator Essentials,2708.16
+skillable,DP-100T01-A,Designing and Implementing a Data Science Solution on Azure [Cloud Slice Provided],7381.2375
+skillable,PL-300T00-A,Design and manage analytics solutions using Power BI [Cloud Slice Provided] JAPANESE,2745.6975
+skillable,DP-300T00-A,Implement scalable database solutions using Azure SQL [Cloud Slice Provided] JAPANESE,1986.7575
+skillable,AZ-104T00-A,Microsoft Azure Administrator [Cloud Slice Provided] JAPANESE,1654.38
+skillable,55384A,Microsoft Power Platform for Developers,2157.3825
+skillable,55242C,Microsoft Dynamics 365 Customization and Configuration for Power Platform,2157.3825
+skillable,55250B,Introduction to Microsoft Dynamics 365,2157.3825
+skillable,DP-900T00-A,Introduction to Microsoft Azure Data [Cloud Slice Provided] JAPANESE,2383.9725
+skillable,55255A,SharePoint for Office 365 End User Training,1926.015
+skillable,PL-500T00-A,Microsoft Power Automate RPA Developer,2928.6075
+skillable,55133D,PowerShell for System Center Configuration Manager Administrators,1541.085
+skillable,55321A,SQL Server Integration Services,5006.1375
+skillable,55355A,SharePoint 2016 Administrator,4622.5725
+skillable,AZ-801T00-A,Configuring Windows Server Hybrid Advanced Services [Cloud Slice Provided],3235.05
+skillable,AZ-800T00-A,Administering Windows Server Hybrid Core Infrastructure [Cloud Slice Provided],3235.05
+skillable,PL-300T00-A,Design and Manage Analytics Solutions Using Power BI [Cloud Slice Provided],2745.6975
+skillable,55311A,SharePoint Server SE for Power Users,3851.3475
+skillable,AZ-040T00-A,Automate Administration with PowerShell [Cloud Slice Provided],2582.58
+skillable,AZ-700T00-A,Design and Implement Microsoft Azure Networking Solutions [Cloud Slice Provided],4890.1125
+skillable,SC-900T00-A,"Introduction to Microsoft Security, Compliance, and Identity [Cloud Slice Provided]",1328.145
+skillable,MB-700T00-A,Microsoft Dynamics 365 Finance and Operations Apps Solution Architect,414.2775
+skillable,55301A,Mastering Microsoft Project 2019,2696.5575
+skillable,55283A,Microsoft Office 365 Power User,1926.015
+skillable,AI-102T00-A,Design and Implement a Microsoft Azure AI Solution [Cloud Slice Provided],2633.085
+skillable,MB-500T00-A,Develop Finance and Operations Apps with Dynamics 365,5313.945
+skillable,MB-800T00-A,Microsoft Dynamics 365 Business Central Functional Consultant,2922.465
+skillable,55300A,Microsoft Teams for End Users,385.6125
+skillable,PL-200T00-A,Microsoft Power Platform Functional Consultant,2213.3475
+skillable,MB-240T00-A,Microsoft Dynamics 365 Field Service,2361.45
+skillable,DP-300T00-A,Implement scalable database solutions using Azure SQL [Cloud Slice Provided],1986.7575
+skillable,AI-900T00-A,Microsoft Azure AI Fundamentals [Cloud Slice Provided],1128.1725
+skillable,55298A,Introduction to SharePoint 2019,1541.085
+skillable,55299A,SharePoint 2019 Site Owner Training,2310.945
+skillable,55294A,SharePoint Power User 2019,2310.945
+skillable,55293A,SharePoint 2019 End User Training,3081.4875
+skillable,AZ-500T00-A,Microsoft Azure Security Technologies [Cloud Slice Provided],1504.23
+skillable,AZ-104T00-A,Microsoft Azure Administrator [Cloud Slice Provided],1654.38
+skillable,AZ-204T00-A,Developing Solutions for Microsoft Azure [Cloud Slice Provided],1880.2875
+skillable,PL-900T00-A,Microsoft Power Platform Fundamentals,1986.075
+skillable,55286A,SharePoint 2019 Power User,3852.03
+skillable,MB-310T00-A,Manage Financial Operations with Dynamics 365 Finance,2951.8125
+skillable,MS-700T00-A,Manage collaboration and communication with Microsoft Teams,1353.3975
