@@ -804,8 +804,7 @@
             {
                 id: 'AZ-SB',
                 name: 'Azure Sandbox',
-                icon: 'fa-microsoft',
-                iconColor: '#0078d4',
+                logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg',
                 desc: 'Full Azure environment for hands-on cloud training and development.',
                 monthly: 2500,
                 halfMonthly: 1500,
@@ -813,8 +812,7 @@
             {
                 id: 'AZ-AI',
                 name: 'Azure AI Sandbox',
-                icon: 'fa-brain',
-                iconColor: '#5c2d91',
+                logo: 'https://upload.wikimedia.org/wikipedia/commons/6/66/OpenAI_logo_2025_%28symbol%29.svg',
                 desc: 'Pre-configured Azure environment with AI/ML services and tools.',
                 monthly: 3000,
                 halfMonthly: 2200,
@@ -822,8 +820,7 @@
             {
                 id: 'AZ-DB',
                 name: 'Azure Databricks',
-                icon: 'fa-database',
-                iconColor: '#e8702a',
+                logo: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Databricks-c40eaf44.png',
                 desc: 'Managed Databricks workspace on Azure for big data and analytics.',
                 monthly: 4500,
                 halfMonthly: 3000,
@@ -831,8 +828,7 @@
             {
                 id: 'GCP-SB',
                 name: 'GCP Sandbox',
-                icon: 'fa-google',
-                iconColor: '#4285f4',
+                logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg',
                 desc: 'Isolated Google Cloud environment for learning and development.',
                 monthly: 3000,
                 halfMonthly: 2200,
@@ -1108,8 +1104,8 @@
         <div class="lab-card" style="padding:16px;" id="card-${plan.id}">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
                 <span class="az-tag">${plan.id}</span>
-                <div style="width:32px;height:32px;border-radius:2px;background:${plan.iconColor}18;border:1px solid ${plan.iconColor}33;display:flex;align-items:center;justify-content:center;">
-                    <i class="fab ${plan.icon}" style="color:${plan.iconColor};font-size:15px;"></i>
+                <div style="width:40px;height:40px;border-radius:2px;background:white;border:1px solid var(--az-border);display:flex;align-items:center;justify-content:center;padding:4px;">
+                    <img src="${plan.logo}" alt="${plan.name}" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'">
                 </div>
             </div>
             <div style="font-size:15px;font-weight:600;color:var(--az-text);margin-bottom:6px;line-height:1.4;">${plan.name}</div>
