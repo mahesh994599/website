@@ -365,3 +365,159 @@ xtremelabs,MB-240T00,Implement Field Service Solutions Using Microsoft Dynamics 
 xtremelabs,DP-500T00,Designing and Implementing Enterprise-Scale Analytics Solutions Using Microsoft Azure and Microsoft Power BI Lab,5987.709
 xtremelabs,DP-090T00XL,Azure Databricks Machine Learning Solution Lab,5830.461
 xtremelabs,AZ-120T00,Planning and Deploying SAP on Azure Lab,2140.047
+godeploy,10985WV,Introduction to SQL Database,6573.62
+godeploy,20740WV,"Installation, Storage, and Compute with Windows Server",6573.62
+godeploy,20741WV,Networking with Windows Server,6573.62
+godeploy,20742WV,Identity with Windows Server,6573.62
+godeploy,AI-102T00,Develop AI solutions in Azure (Cloud Share),5915.52
+godeploy,AI-3002,Develop solutions with Azure AI Document Intelligence (Cloud Share),3943.68
+godeploy,AI-3003,Build a natural language processing solution with Azure AI Services (Cloud Share),3943.68
+godeploy,AI-3004,Build an Azure AI Vision solution with Azure AI services (Cloud Share),3943.68
+godeploy,AI-3016,Develop generative AI apps in Azure AI Foundry portal  (Cloud Share),3943.68
+godeploy,AI-3019,Build AI Apps with Azure Database for PostgreSQL (Cloud Share),3943.68
+godeploy,AI-3022,Implement knowledge mining with Azure AI Search (Cloud Share),2464.8
+godeploy,AI-3025,Work smarter with AI,1232.4
+godeploy,AI-3026,Develop AI Agents on Azure (Cloud Share),3204.24
+godeploy,AI-900T00,Microsoft Azure AI の基礎 (CS) (JP),3943.68
+godeploy,AI-900T00,Microsoft Azure AI Fundamentals (Cloud Share),3943.68
+godeploy,AI-900T00,Microsoft Azure AI Fundamentals (Cloud Share) (French),3943.68
+godeploy,AI-900T00,Microsoft Azure AI Fundamentals (Cloud Share) (Spanish),3943.68
+godeploy,AWS-Arch-Assoc,AWS Certified Solutions Architect Associate (2025),10105.68
+godeploy,AWS-Arch-Pro,AWS Certified Solutions Architect Professional (2025),7702.5
+godeploy,AWS-Cloud-Prac,AWS Certified Cloud Practitioner (2025),4683.12
+godeploy,AWS-DataEngineer,AWS Certified Data Engineer - Associate (2025),5422.56
+godeploy,AWS-Developer,AWS Certified Developer Associate (2025),4683.12
+godeploy,AWS-DevOps,AWS Certified DevOps Engineer Professional (2025),5915.52
+godeploy,AWS-Machine-Learning,AWS Certified Machine Learning Specialty (2025),4683.12
+godeploy,AWS-Networking,AWS Certified Advanced Networking - Specialty (2025),7702.5
+godeploy,AWS-Security,AWS Certified Security - Specialty (2025),4683.12
+godeploy,AWS-SysOps,AWS Certified SysOps Administrator Associate (2025),7086.3
+godeploy,AWS-TechEss,AWS Technical Essentials (2025),2957.76
+godeploy,AZ-040T00,PowerShell を使用した管理の自動化 (CS) (JP),2957.76
+godeploy,AZ-040T00,Automate Administration with PowerShell (Cloud Share),2957.76
+godeploy,AZ-1002,Configure secure access to workloads with Azure virtual networking services (Cloud Share),4683.12
+godeploy,AZ-1003,Secure storage for Azure Files and Azure Blob Storage (Cloud Share),1478.88
+godeploy,AZ-1004,Deploy and configure Azure Monitor (Cloud Share),1478.88
+godeploy,AZ-1007,Deploy and administer Linux virtual machines on Azure (Cloud Share),1971.84
+godeploy,AZ-1008,Administer Active Directory Domain Services,2834.52
+godeploy,AZ-104T00,Azure管理者アソシエイト (Cloud Share) (JP),5915.52
+godeploy,AZ-104T00,Microsoft Azure Administrator - (Cloud Share),5915.52
+godeploy,AZ-120T00,Planning and Deploying SAP on Azure (Cloud Share),5915.52
+godeploy,AZ-140T00,Configure and Operate Microsoft Azure Virtual Desktop (Cloud Share),6408.48
+godeploy,AZ-2001,Implement security through a pipeline using Azure DevOps (Cloud Share),1478.88
+godeploy,AZ-2003,Deploy cloud-native apps using Azure Container Apps (Cloud Share),3943.68
+godeploy,AZ-2005,Develop Generative AI solutions using Azure OpenAI and the Semantic Kernel SDK (Cloud Share),1848.6
+godeploy,AZ-2006,Automate Azure Load Testing using GitHub Actions (Cloud Share),4683.12
+godeploy,AZ-2007,Get started with AI-assisted development,2464.8
+godeploy,AZ-2008,DevOps Foundations: The Core Principles and Practices (Cloud Share),2218.32
+godeploy,AZ-204T00,Microsoft Azure 向けソリューション開発 (Cloud Share) (JP),5915.52
+godeploy,AZ-204T00,Developing Solutions for Microsoft Azure (Cloud Share),5915.52
+godeploy,AZ-305T00,Design Microsoft Azure Infrastructure Solutions (2024)  (Cloud Share),5915.52
+godeploy,AZ-400T00,Design and Implement Microsoft DevOps solutions (Cloud Share),5915.52
+godeploy,AZ-500T00,Secure Cloud Resources with Microsoft Security Technologies - 2025 (Cloud Share),5915.52
+godeploy,AZ-700T00,Design and Implement Microsoft Azure Networking Solutions (Cloud Share),5915.52
+godeploy,AZ-800T00,Administer Windows Server Hybrid Core Infrastructure (Cloud Share),5915.52
+godeploy,AZ-801T00,Configuring Windows Server Hybrid Advanced Services (Cloud Share),5915.52
+godeploy,AZ-900T00,Introduction to Cloud Infrastructure - (Cloud Share),2341.56
+godeploy,DP-080T00,Query and modify data with Transact-SQL,3450.72
+godeploy,DP-100T01,Designing and Implementing a Data Science Solution (Cloud Share),5915.52
+godeploy,,Implement scalable database solutions using Azure SQL (Cloud Share) (DP-300 (CS)),5915.52
+godeploy,DP-3001,Migrate SQL Server workload to Azure SQL (Cloud Share),2957.76
+godeploy,DP-3011,Implement a Data Analytics Solution with Azure Databricks (Cloud Share),3943.68
+godeploy,DP-3014,Build machine learning solutions using Azure Databricks (Cloud Share),3943.68
+godeploy,DP-3015,Get started with Azure Cosmos DB NoSQL development (Cloud Share),4683.12
+godeploy,DP-3020,Develop data-driven applications with Azure SQL Database,4436.64
+godeploy,DP-3021,Configure and migrate to Azure Database for PostgreSQL (Cloud Share),4313.4
+godeploy,DP-3028,Implement Generative AI engineering with Azure Databricks (Cloud Share),3943.68
+godeploy,,Work smarter with Copilot in Microsoft Fabric (Cloud Share) (DP-3029 (CS)),3943.68
+godeploy,DP-420T00,Design and implement cloud-native applications with Microsoft Azure Cosmos DB (Cloud Share),5915.52
+godeploy,DP-600T00,Microsoft Fabric Analytics Engineer (Cloud Share),3943.68
+godeploy,DP-601T00,Implement a Lakehouse with Microsoft Fabric (Cloud Share),2341.56
+godeploy,,Implement a Data Warehouse with Microsoft Fabric (Cloud Share) (DP-602 (CS)),2341.56
+godeploy,DP-603T00,Implement Real-Time Intelligence with Microsoft Fabric (Cloud Share),2341.56
+godeploy,DP-604T00,Implement a data science and machine learning solution for AI with Microsoft Fabric (Cloud Share),2341.56
+godeploy,DP-605T00,Prepare and visualize data with Microsoft Power BI,2341.56
+godeploy,DP-700T00,Microsoft Fabric Data Engineer (Cloud Share),2957.76
+godeploy,DP-900T00,Introduction to Microsoft Azure Data (Cloud Share),2341.56
+godeploy,,Microsoft Azure のデータの基礎 (CS) (DP-900T00 (JP)),2341.56
+godeploy,GH-100T00,GitHub fundamentals - Administration basics and product features,1232.4
+godeploy,GH-200T00,Automate your workflow with GitHub Actions,1232.4
+godeploy,GH-300T00,GitHub Copilot,1232.4
+godeploy,GH-500T00,GitHub Advanced Security,1232.4
+godeploy,GH-900T00,GitHub Foundations,1232.4
+godeploy,M365001WV,Microsoft 365 Administration (M365 TRIAL REQUIRED),6573.62
+godeploy,M50255E,Managing Windows Environments with Group Policy,3943.68
+godeploy,M55021A,Configuring and Administering Hyper-V in Windows Server 2012,3943.68
+godeploy,M55039B,Windows PowerShell Scripting and Toolmaking,5176.08
+godeploy,M55123A,Writing Reports with Report Builder and SSRS Level 1,5176.08
+godeploy,M55128A,Writing Reports with Report Builder and SSRS Level 2,5176.08
+godeploy,M55144B,SQL Server 2014 Performance Tuning and Optimization,3943.68
+godeploy,M55187D,Linux System Administration,2341.56
+godeploy,M55197A,Microsoft SharePoint Server 2016 for the Site Owner/Power User,4683.12
+godeploy,M55202A,PowerShell 5.0 and Desired State Configuration,2341.56
+godeploy,M55204A,Writing Reports with Report Designer and SSRS Level 1,2341.56
+godeploy,M55205A,Mastering Microsoft Project 2016,4683.12
+godeploy,M55215B,SharePoint Online Power User (M365 TRIAL REQUIRED),4683.12
+godeploy,M55224-1A,Microsoft Azure Big Data Analytics Solutions,2341.56
+godeploy,M55224-2A,Operationalize Cloud Analytics Solutions with Microsoft Azure,2341.56
+godeploy,M55232A,Writing Analytical Queries for Business Intelligence,4436.64
+godeploy,M55234A,SharePoint 2016 Site Collections and Site Owner Administration,8010.6
+godeploy,M55238B,SharePoint Online for Administrators (M365 TRIAL REQUIRED),3943.68
+godeploy,M55242A,Microsoft Dynamics 365 Customization and Configuration,3697.2
+godeploy,M55246A,SQL 2016 Always On High Availability,4683.12
+godeploy,M55247A,Designing and Implementing Cloud Data Platform Solutions,4683.12
+godeploy,M55250A,Introduction to Microsoft Dynamics 365 (D365 Trial Required),1355.64
+godeploy,M55258A,Microsoft Dynamics 365 for Customer Service,1355.64
+godeploy,M55260A,Microsoft Dynamics 365 for Sales,1355.64
+godeploy,M55265A,Microsoft Power Apps for End Users (M365 TRIAL REQUIRED),2341.56
+godeploy,M55268A,Microsoft Power Automate for End Users (M365 TRIAL REQUIRED),2341.56
+godeploy,M55281A,SharePoint Online Branding (M365 TRIAL REQUIRED),2341.56
+godeploy,M55286A,SharePoint 2019 Power User,3943.68
+godeploy,M55300A,Microsoft Teams for End Users (M365 TRIAL REQUIRED),2341.56
+godeploy,M55302A,Microsoft Lists for End Users,2341.56
+godeploy,M55315A,Introduction to SQL Databases,3943.68
+godeploy,M55316A,Administering a SQL Database Infrastructure,3943.68
+godeploy,M55337A,Introduction to Programming,2957.76
+godeploy,M55339A,Programming in C#,3943.68
+godeploy,M55340A,Developing ASP.NET Core Web Applications,4683.12
+godeploy,M55341A,"Installation, Storage, and Compute with Windows Server",3943.68
+godeploy,M55342B,Supporting and Troubleshooting Windows 11,3943.68
+godeploy,M55343A,Networking with Windows Server,3943.68
+godeploy,M55344B,Identity with Windows Server,3943.68
+godeploy,M55345A,Implementing and Managing Windows 11,3943.68
+godeploy,M55348A,Administering Microsoft Endpoint Configuration Manager,5915.52
+godeploy,M55352A,Introduction to SQL Databases,3943.68
+godeploy,M55353A,Administering a SQL Database Infrastructure,3943.68
+godeploy,M55354A,Administering Office 365 (M365 TRIAL REQUIRED),4683.12
+godeploy,M55366A,Querying Microsoft SQL Server with Transact-SQL,3943.68
+godeploy,M55370A,Administering SharePoint Online (M365 TRIAL REQUIRED),3943.68
+godeploy,M55371A,Windows Server Administration,3943.68
+godeploy,M55376A,"Installation, Storage, and Compute with Windows Server",3943.68
+godeploy,M55377A,Introduction to SQL Databases,3943.68
+godeploy,M55379A,Administering Office 365,4683.12
+godeploy,M55399B,Implementing and Managing Microsoft Intune (M365 TRIAL REQUIRED),3943.68
+godeploy,M55408A,Office 365 Administration and Troubleshooting,3943.68
+godeploy,M55610A,Planning and implementing Microsoft Sentinel (SIEM & SOAR),2341.56
+godeploy,MB-230T01,Implement customer service solutions using Microsoft Dynamics 365 Customer Service,2341.56
+godeploy,MB-240T00,Implement field service solutions using Microsoft Dynamics 365 Field Service,2341.56
+godeploy,MB-280T01,Configure Dynamics 365 customer experience model-driven apps,1971.84
+godeploy,MB-280T02,Empower sellers with Dynamics 365 Sales,1971.84
+godeploy,MB-280T03,Design and deliver powerful customer experiences with Dynamics 365 Customer Insights,1971.84
+godeploy,MB-280T04,Configure a Dynamics 365 customer experience solution,1971.84
+godeploy,MB-280T0X - Packaged Set,MB-280T0X - Packaged Set,5915.52
+godeploy,MB-300T00,Microsoft Dynamics 365: Core Finance and Operations (M365 TRIAL REQUIRED),2957.76
+godeploy,MB-340T00,Microsoft Dynamics 365 Commerce Functional Consultant (M365 TRIAL REQUIRED),2957.76
+godeploy,MB-400T00,Microsoft PowerApps Dynamics 365 (M365 TRIAL REQUIRED),2341.56
+godeploy,MB-800T00,Manage business solutions with Microsoft Dynamics 365 Business Central,2957.76
+godeploy,MD-102T00,Microsoft 365 Endpoint Administrator,6778.2
+godeploy,MS-102T00,Microsoft 365 Administrator,3943.68
+godeploy,MS203WV,Microsoft 365 Messaging,6573.62
+godeploy,MS-4002,Prepare security and compliance to support Microsoft 365 Copilot,2711.28
+godeploy,MS-4004,Empower your workforce with Microsoft 365 Copilot Use Cases,1232.4
+godeploy,MS-4010,Build plugins and connectors for Microsoft 365 Copilot,2957.76
+godeploy,MS-4014,Build a foundation to build AI agents and extend Microsoft 365 Copilot,1232.4
+godeploy,MS-4018,"Draft, analyze, and present with Microsoft 365 Copilot",1232.4
+godeploy,MS-4022,Extend Microsoft 365 Copilot in Copilot Studio,1232.4
+godeploy,MS-700T00,Manage Microsoft Teams,2957.76
+godeploy,MS-721T00,Collaboration Communications Systems Engineer,5915.52
+godeploy,MS-900T01,Introduction to Microsoft 365,2341.56
