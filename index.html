@@ -1699,23 +1699,32 @@
                     <span style="font-size:12px;">Contact <strong>itops@synergificsoftware.com</strong> for pricing.</span>
                 </div>`;
             } else {
-                cardsHtml = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;padding:16px;">' +
+                cardsHtml = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:16px;">' +
                     pageExams.map((e, i) => {
                         const realIdx = safePage * EXAM_PAGE_SIZE + i;
                         const hasDiscount = e.originalPrice && e.originalPrice > e.price;
                         const savePct = hasDiscount ? Math.round((1 - e.price / e.originalPrice) * 100) : 0;
-                        return `<div style="background:white;border:1px solid var(--az-border);border-radius:4px;padding:16px;display:flex;flex-direction:column;gap:10px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 2px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
-                            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+                        return `<div style="background:white;border:1px solid var(--az-border);border-radius:4px;padding:16px;display:flex;flex-direction:column;gap:0;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.10)'" onmouseout="this.style.boxShadow='none'">
+                            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px;">
                                 <span class="az-tag" style="background:${vendor.color}12;color:${vendor.color};border-color:${vendor.color}33;flex-shrink:0;">${e.code}</span>
-                                ${hasDiscount ? `<span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;flex-shrink:0;">${savePct}% OFF</span>` : ''}
+                                ${hasDiscount ? `<span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;flex-shrink:0;white-space:nowrap;">${savePct}% OFF</span>` : ''}
                             </div>
-                            <div style="font-size:13px;font-weight:600;color:var(--az-text);line-height:1.4;flex:1;">${e.name}</div>
-                            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-                                ${hasDiscount ? `<span style="font-size:12px;color:var(--az-text-muted);text-decoration:line-through;">&#8377;${e.originalPrice.toLocaleString('en-IN')}</span>` : ''}
-                                <span style="font-size:16px;font-weight:700;color:var(--az-blue);">&#8377;${e.price.toLocaleString('en-IN')}</span>
+                            <div style="font-size:13px;font-weight:700;color:var(--az-text);line-height:1.45;flex:1;margin-bottom:14px;">${e.name}</div>
+                            <div style="border-top:1px solid var(--az-border);padding-top:12px;margin-bottom:12px;display:flex;flex-direction:column;gap:6px;">
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.04em;">Original Price</span>
+                                    <span style="font-size:13px;color:var(--az-text-muted);${hasDiscount ? 'text-decoration:line-through;' : ''}">
+                                        ${hasDiscount ? `&#8377;${e.originalPrice.toLocaleString('en-IN')}` : '—'}
+                                    </span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.04em;">Discount Price</span>
+                                    <span style="font-size:16px;font-weight:700;color:var(--az-blue);">&#8377;${e.price.toLocaleString('en-IN')}</span>
+                                </div>
+                                ${hasDiscount ? `<div style="display:flex;justify-content:flex-end;"><span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:600;padding:2px 8px;border-radius:2px;">You save &#8377;${(e.originalPrice - e.price).toLocaleString('en-IN')}</span></div>` : ''}
                             </div>
                             <button onclick="openExamCheckout('${vendor.key}', ${realIdx})"
-                                class="btn-primary" style="font-size:12px;padding:7px 14px;justify-content:center;width:100%;">
+                                class="btn-primary" style="font-size:12px;padding:8px 14px;justify-content:center;width:100%;margin-top:auto;">
                                 <i class="fas fa-ticket-alt" style="font-size:10px;"></i> Buy Voucher
                             </button>
                         </div>`;
