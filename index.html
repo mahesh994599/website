@@ -1410,8 +1410,9 @@
 
         function parseCSVIntoLabData(text) {
             CSV_CATEGORIES.forEach(cat => { labData[cat] = labData[cat].filter(l => !l.isCSV); });
-            const rows = text.trim().split(/\r?\n/);
-            const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
+            const cleaned = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/^\uFEFF/, '');
+            const rows = cleaned.trim().split('\n');
+            const headers = rows[0].split(',').map(h => h.trim().toLowerCase().replace(/\r/g, ''));
             rows.slice(1).forEach(row => {
                 if (!row.trim()) return;
                 const cols = [];
@@ -1433,29 +1434,34 @@
 
         function parseCSVIntoExamData(text) {
             EXAM_VENDORS.forEach(v => { v.exams = v.exams.filter(e => !e.isCSV); });
-            const rows = text.trim().split(/\r?\n/);
-            const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
+            // Normalize all line endings and strip BOM
+            const cleaned = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/^\uFEFF/, '');
+            const rows = cleaned.trim().split('\n');
+            const headers = rows[0].split(',').map(h => h.trim().toLowerCase().replace(/\r/g, ''));
+            console.log('[CSV Exam] headers:', headers);
             rows.slice(1).forEach(row => {
                 if (!row.trim()) return;
                 const cols = [];
                 let cur = '', inQ = false;
                 for (const ch of row) {
                     if (ch === '"') { inQ = !inQ; }
-                    else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+                    else if (ch === ',' && !inQ) { cols.push(cur.trim().replace(/\r/g, '')); cur = ''; }
                     else cur += ch;
                 }
-                cols.push(cur.trim());
+                cols.push(cur.trim().replace(/\r/g, ''));
                 const obj = {};
                 headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, '').trim());
-                const catKey = (obj.category || '').toLowerCase().trim();
+                const catKey = (obj['category'] || '').toLowerCase().trim();
                 const vendorKey = EXAM_CSV_CAT_MAP[catKey];
-                if (!vendorKey) return;
+                if (!vendorKey) { console.warn('[CSV Exam] unknown category:', catKey); return; }
                 const vendor = EXAM_VENDORS.find(v => v.key === vendorKey);
                 if (!vendor) return;
-                const discountPrice = parseFloat(obj['discount price'] || obj['discount_price'] || obj['discountprice'] || obj['price'] || '') || 0;
-                const originalPrice = parseFloat(obj['original price'] || obj['original_price'] || obj['originalprice'] || '') || 0;
-                vendor.exams.push({ code: obj.code, name: obj.name, price: discountPrice, originalPrice: originalPrice || 0, isCSV: true });
+                const discountPrice = parseFloat(obj['discount price'] || obj['discount_price'] || obj['discountprice'] || obj['price'] || '0') || 0;
+                const originalPrice = parseFloat(obj['original price'] || obj['original_price'] || obj['originalprice'] || '0') || 0;
+                if (!obj.code || !obj.name) return;
+                vendor.exams.push({ code: obj.code, name: obj.name, price: discountPrice, originalPrice: originalPrice, isCSV: true });
             });
+            console.log('[CSV Exam] loaded vendors:', EXAM_VENDORS.map(v => v.key + ':' + v.exams.length).join(', '));
         }
 
         function setCategory(cat) {
