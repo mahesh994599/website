@@ -1671,7 +1671,7 @@
         function renderExamVouchers() {
             const vendor = EXAM_VENDORS.find(v => v.key === activeVendor);
             const tableRows = vendor.exams.length === 0
-                ? `<tr><td colspan="4" style="padding:40px 16px;text-align:center;color:var(--az-text-muted);font-size:13px;">
+                ? `<tr><td colspan="5" style="padding:40px 16px;text-align:center;color:var(--az-text-muted);font-size:13px;">
                         <i class="fas fa-ticket-alt" style="font-size:24px;display:block;margin-bottom:10px;color:var(--az-border-dark);"></i>
                         No vouchers listed yet for ${vendor.name}.<br>
                         <span style="font-size:12px;">Contact <strong>itops@synergificsoftware.com</strong> for pricing.</span>
@@ -1682,13 +1682,15 @@
                         <span class="az-tag" style="background:${vendor.color}12;color:${vendor.color};border-color:${vendor.color}33;">${e.code}</span>
                     </td>
                     <td style="padding:10px 16px;font-weight:600;color:var(--az-text);">${e.name}</td>
-                    <td style="padding:10px 16px;width:180px;">
+                    <td style="padding:10px 16px;width:150px;text-align:right;">
                         ${e.originalPrice && e.originalPrice > e.price
-                        ? `<div style="font-size:11px;color:var(--az-text-muted);text-decoration:line-through;line-height:1.4;">&#8377;${e.originalPrice.toLocaleString('en-IN')}</div>`
-                        : ''}
-                        <div style="font-size:14px;font-weight:700;color:var(--az-blue);line-height:1.4;">&#8377;${e.price.toLocaleString('en-IN')}</div>
+                        ? `<span style="font-size:13px;color:var(--az-text-muted);text-decoration:line-through;">&#8377;${e.originalPrice.toLocaleString('en-IN')}</span>`
+                        : `<span style="font-size:13px;color:var(--az-text-muted);">—</span>`}
+                    </td>
+                    <td style="padding:10px 16px;width:150px;text-align:right;">
+                        <span style="font-size:14px;font-weight:700;color:var(--az-blue);">&#8377;${e.price.toLocaleString('en-IN')}</span>
                         ${e.originalPrice && e.originalPrice > e.price
-                        ? `<div style="font-size:10px;font-weight:600;color:var(--az-green);background:var(--az-green-light);display:inline-block;padding:1px 6px;border-radius:2px;margin-top:2px;">Save &#8377;${(e.originalPrice - e.price).toLocaleString('en-IN')}</div>`
+                        ? `<div style="font-size:10px;font-weight:600;color:var(--az-green);">Save &#8377;${(e.originalPrice - e.price).toLocaleString('en-IN')}</div>`
                         : ''}
                     </td>
                     <td style="padding:10px 16px;width:150px;text-align:right;">
@@ -1720,7 +1722,8 @@
                             <tr style="background:var(--az-surface);border-bottom:2px solid var(--az-border);">
                                 <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:130px;">Code</th>
                                 <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Exam Name</th>
-                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:180px;">Price (INR)</th>
+                                <th style="padding:10px 16px;text-align:right;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:150px;">Original Price</th>
+                                <th style="padding:10px 16px;text-align:right;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:150px;">Discount Price</th>
                                 <th style="padding:10px 16px;text-align:right;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:150px;"></th>
                             </tr>
                         </thead>
