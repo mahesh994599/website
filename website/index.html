@@ -684,8 +684,33 @@
                     onmouseout="this.style.background='transparent'"><i class="fas fa-times"></i></button>
             </div>
             <div style="flex:1;overflow-y:auto;padding:20px;" class="scrollbar-hide">
-                <div id="learn-more-features"
-                    style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;"></div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;">
+                    ${[
+                    {icon:'fa-server', title:'Tier 4/5 DCs', desc:'Infrastructure in Tier-4 & Tier-5 centers for
+                    unmatched uptime.'},
+                    {icon:'fa-certificate',title:'SOC 1 & 2', desc:'Full audit compliance for global financial and tech
+                    standards.'},
+                    {icon:'fa-sync', title:'Zero Disruption', desc:'Free migration support ensuring 100% workflow
+                    continuity.'},
+                    {icon:'fa-shield-alt', title:'Custom Security', desc:'Granular security group configurations for
+                    complex stacks.'},
+                    {icon:'fa-bolt', title:'Risk-Free PoC', desc:'Complimentary 7-day test environment, no
+                    commitment.'},
+                    {icon:'fa-infinity', title:'No Bandwidth Fees', desc:'Unlimited data transfer with absolute price
+                    transparency.'},
+                    ].map(f => `
+                    <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:14px;">
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                            <div
+                                style="width:28px;height:28px;background:var(--az-blue);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:2px;flex-shrink:0;">
+                                <i class="fas ${f.icon}"></i>
+                            </div>
+                            <div style="font-size:13px;font-weight:600;color:var(--az-text);">${f.title}</div>
+                        </div>
+                        <div style="font-size:12px;color:var(--az-text-sub);line-height:1.5;">${f.desc}</div>
+                    </div>
+                    `).join('')}
+                </div>
                 <div
                     style="background:var(--az-blue);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;">
                     <div>
@@ -748,8 +773,7 @@
             ],
             'Skillable Labs': [], 'Xtremelabs': [], 'Godeploy': [],
             'Baremetal Servers': 'BAREMETAL',
-            'Cloud Portal Subscription': 'CLOUD_PORTAL',
-            'Exam Vouchers': 'EXAM_VOUCHERS'
+            'Cloud Portal Subscription': 'CLOUD_PORTAL'
         };
 
         // ─── BAREMETAL DATA ──────────────────────────────────────────
@@ -811,75 +835,6 @@
             },
         ];
 
-        // ─── EXAM VOUCHER DATA ───────────────────────────────────────
-        const EXAM_VENDORS = [
-            {
-                key: 'comptia',
-                name: 'CompTIA',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f4/CompTIA_Logo.svg',
-                color: '#c8202f',
-                exams: [
-                    { code: 'CTA+', name: 'CompTIA A+', price: 14000 },
-                    { code: 'CTN+', name: 'CompTIA Network+', price: 15500 },
-                    { code: 'CTS+', name: 'CompTIA Security+', price: 16000 },
-                    { code: 'CTCY', name: 'CompTIA CySA+', price: 17500 },
-                    { code: 'CTPE', name: 'CompTIA PenTest+', price: 17500 },
-                    { code: 'CTCL', name: 'CompTIA Cloud+', price: 16500 },
-                    { code: 'CTL+', name: 'CompTIA Linux+', price: 15000 },
-                    { code: 'CTCA', name: 'CompTIA CASP+', price: 19000 },
-                ],
-            },
-            {
-                key: 'lf',
-                name: 'Linux Foundation',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Linux_Foundation_logo_2013.svg',
-                color: '#003366',
-                exams: [
-                    { code: 'LFCA', name: 'Linux Foundation Certified Associate (LFCA)', price: 12000 },
-                    { code: 'LFCS', name: 'Linux Foundation Certified SysAdmin (LFCS)', price: 16000 },
-                    { code: 'CKA', name: 'Certified Kubernetes Administrator (CKA)', price: 19500 },
-                    { code: 'CKAD', name: 'Certified Kubernetes App Developer (CKAD)', price: 19500 },
-                    { code: 'CKS', name: 'Certified Kubernetes Security Specialist (CKS)', price: 19500 },
-                    { code: 'PCA', name: 'Prometheus Certified Associate (PCA)', price: 14000 },
-                    { code: 'CGOA', name: 'Certified GitOps Associate (CGOA)', price: 14000 },
-                    { code: 'THWCK', name: 'Kubernetes and Cloud Native Associate (KCNA)', price: 13000 },
-                ],
-            },
-            {
-                key: 'redhat',
-                name: 'Red Hat',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg',
-                color: '#cc0000',
-                exams: [
-                    { code: 'EX200', name: 'RHCSA – Red Hat Certified System Administrator', price: 22000 },
-                    { code: 'EX294', name: 'RHCE – Red Hat Certified Engineer (Ansible)', price: 24000 },
-                    { code: 'EX280', name: 'Red Hat OpenShift Administrator (EX280)', price: 25000 },
-                    { code: 'EX180', name: 'Red Hat Certified Specialist in Containers', price: 23000 },
-                    { code: 'EX288', name: 'Red Hat Certified Specialist in OpenShift Dev', price: 23000 },
-                    { code: 'EX403', name: 'Red Hat Satellite 6 Administration', price: 24000 },
-                    { code: 'EX415', name: 'Red Hat Certified Security Specialist', price: 24000 },
-                    { code: 'EX447', name: 'Advanced Automation: Ansible Best Practices', price: 25000 },
-                ],
-            },
-            {
-                key: 'cisco',
-                name: 'Cisco',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg',
-                color: '#1ba0d7',
-                exams: [
-                    { code: 'CCNA', name: 'Cisco Certified Network Associate (CCNA)', price: 28000 },
-                    { code: 'CCNPE', name: 'CCNP Enterprise Core (ENCOR 350-401)', price: 35000 },
-                    { code: 'CCNPS', name: 'CCNP Security Core (SCOR 350-701)', price: 35000 },
-                    { code: 'DEVAE', name: 'DevNet Associate', price: 24000 },
-                    { code: 'DEVPE', name: 'DevNet Professional', price: 34000 },
-                    { code: 'CCIE', name: 'CCIE Enterprise Infrastructure (Written)', price: 45000 },
-                    { code: 'CLCOR', name: 'Cisco Collaboration Core (CLCOR 350-801)', price: 35000 },
-                    { code: 'CCNPD', name: 'CCNP Data Center Core (DCCOR 350-601)', price: 35000 },
-                ],
-            },
-        ];
-        let activeVendor = 'comptia'; // selected vendor tab
-
         // ─── CSV CONFIG ──────────────────────────────────────────────
         // CSV file must be in the same folder as this HTML file on the server
         // CSV-based categories — loaded via fetch at runtime
@@ -891,19 +846,6 @@
             'xtremelabs': 'Xtremelabs',
             'xtreme': 'Xtremelabs',
             'godeploy': 'Godeploy'
-        };
-
-        // Maps exams-data.csv category → EXAM_VENDORS key
-        const EXAM_CSV_CAT_MAP = {
-            'comptia': 'comptia',
-            'linux foundation': 'lf',
-            'linuxfoundation': 'lf',
-            'linux_foundation': 'lf',
-            'lf': 'lf',
-            'redhat': 'redhat',
-            'red hat': 'redhat',
-            'red_hat': 'redhat',
-            'cisco': 'cisco',
         };
 
         const features = [
@@ -919,7 +861,6 @@
             { name: 'Godeploy', icon: 'fa-globe' },
             { name: 'Baremetal Servers', icon: 'fa-cloud' },
             { name: 'Cloud Portal Subscription', icon: 'fa-credit-card' },
-            { name: 'Exam Vouchers', icon: 'fa-certificate' },
         ];
 
         // ─── PRICE HELPERS ───────────────────────────────────────────
@@ -944,47 +885,16 @@
         }
 
         // ─── INIT ─────────────────────────────────────────────────────
-        const LEARN_MORE_FEATURES = [
-            { icon: 'fa-server', title: 'Tier 4/5 DCs', desc: 'Infrastructure in Tier-4 & Tier-5 centers for unmatched uptime.' },
-            { icon: 'fa-certificate', title: 'SOC 1 & 2', desc: 'Full audit compliance for global financial and tech standards.' },
-            { icon: 'fa-sync', title: 'Zero Disruption', desc: 'Free migration support ensuring 100% workflow continuity.' },
-            { icon: 'fa-shield-alt', title: 'Custom Security', desc: 'Granular security group configurations for complex stacks.' },
-            { icon: 'fa-bolt', title: 'Risk-Free PoC', desc: 'Complimentary 7-day test environment, no commitment.' },
-            { icon: 'fa-infinity', title: 'No Bandwidth Fees', desc: 'Unlimited data transfer with absolute price transparency.' },
-        ];
-
         async function init() {
             // Decode credentials at runtime
             RAZORPAY_KEY_ID = _k(_c.rzp);
             emailjs.init(_k(_c.epk));
             renderMenu();
             renderLabs();
-            renderLearnMoreFeatures();
             await loadCSVFromServer();
         }
 
-        function renderLearnMoreFeatures() {
-            const container = document.getElementById('learn-more-features');
-            if (!container) return;
-            container.innerHTML = LEARN_MORE_FEATURES.map(f =>
-                '<div style="background:var(--az-bg);border:1px solid var(--az-border);padding:14px;">' +
-                '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
-                '<div style="width:28px;height:28px;background:var(--az-blue);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:2px;flex-shrink:0;"><i class="fas ' + f.icon + '"></i></div>' +
-                '<div style="font-size:13px;font-weight:600;color:var(--az-text);">' + f.title + '</div>' +
-                '</div>' +
-                '<div style="font-size:12px;color:var(--az-text-sub);line-height:1.5;">' + f.desc + '</div>' +
-                '</div>'
-            ).join('');
-        }
-
         async function loadCSVFromServer() {
-            await Promise.all([
-                fetchLabsCSV(),
-                fetchExamsCSV(),
-            ]);
-        }
-
-        async function fetchLabsCSV() {
             try {
                 const res = await fetch('labs-data.csv');
                 if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -994,19 +904,6 @@
             } catch (e) {
                 console.warn('labs-data.csv fetch failed:', e.message);
                 if (CSV_CATEGORIES.includes(activeCategory)) renderLabs();
-            }
-        }
-
-        async function fetchExamsCSV() {
-            try {
-                const res = await fetch('exams-data.csv');
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                const text = await res.text();
-                parseCSVIntoExamData(text);
-                if (activeCategory === 'Exam Vouchers') renderLabs();
-            } catch (e) {
-                console.warn('exams-data.csv fetch failed:', e.message);
-                if (activeCategory === 'Exam Vouchers') renderLabs();
             }
         }
 
@@ -1044,46 +941,6 @@
                     infra: parseFloat(obj.price) || 0,
                     category: obj.category,
                     isCSV: true
-                });
-            });
-        }
-
-        function parseCSVIntoExamData(text) {
-            // Clear all CSV-sourced exams from every vendor first
-            EXAM_VENDORS.forEach(v => {
-                v.exams = v.exams.filter(e => !e.isCSV);
-            });
-
-            const rows = text.trim().split(/\r?\n/);
-            const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
-
-            rows.slice(1).forEach(row => {
-                if (!row.trim()) return;
-                // Parse CSV handling quoted fields with commas inside
-                const cols = [];
-                let cur = '', inQ = false;
-                for (const ch of row) {
-                    if (ch === '"') { inQ = !inQ; }
-                    else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
-                    else cur += ch;
-                }
-                cols.push(cur.trim());
-
-                const obj = {};
-                headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, '').trim());
-
-                const catKey = (obj.category || '').toLowerCase().trim();
-                const vendorKey = EXAM_CSV_CAT_MAP[catKey];
-                if (!vendorKey) return;
-
-                const vendor = EXAM_VENDORS.find(v => v.key === vendorKey);
-                if (!vendor) return;
-
-                vendor.exams.push({
-                    code: obj.code,
-                    name: obj.name,
-                    price: parseFloat(obj.price) || 0,
-                    isCSV: true,
                 });
             });
         }
@@ -1158,14 +1015,6 @@
                 grid.style.gridTemplateColumns = 'repeat(auto-fill,minmax(300px,1fr))';
                 empty.style.display = 'none';
                 grid.innerHTML = CLOUD_PORTAL_PLANS.map(renderCloudCard).join('');
-                return;
-            }
-
-            if (activeCategory === 'Exam Vouchers') {
-                grid.style.display = 'block';
-                grid.style.gridTemplateColumns = '';
-                empty.style.display = 'none';
-                grid.innerHTML = renderExamVouchers();
                 return;
             }
 
@@ -1283,101 +1132,6 @@
                 </button>
             </div>
         </div>`;
-        }
-
-        function renderExamVouchers() {
-            const vendor = EXAM_VENDORS.find(v => v.key === activeVendor);
-            const tableRows = vendor.exams.map((e, i) => `
-            <tr style="border-bottom:1px solid var(--az-border);${i % 2 === 0 ? 'background:var(--az-bg);' : 'background:white;'}">
-                <td style="padding:10px 16px;">
-                    <span class="az-tag" style="background:${vendor.color}12;color:${vendor.color};border-color:${vendor.color}33;">${e.code}</span>
-                </td>
-                <td style="padding:10px 16px;font-weight:600;color:var(--az-text);">${e.name}</td>
-                <td style="padding:10px 16px;font-size:15px;font-weight:700;color:var(--az-blue);">₹${e.price.toLocaleString('en-IN')}</td>
-                <td style="padding:10px 16px;">
-                    <button onclick="openExamCheckout('${vendor.key}', ${i})"
-                        class="btn-primary" style="font-size:12px;padding:5px 14px;white-space:nowrap;">
-                        <i class="fas fa-ticket-alt" style="font-size:10px;"></i> Buy Voucher
-                    </button>
-                </td>
-            </tr>`).join('');
-
-            const vendorTabs = EXAM_VENDORS.map(v => `
-            <button onclick="setExamVendor('${v.key}')" style="display:flex;align-items:center;gap:8px;padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${activeVendor === v.key ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${activeVendor === v.key ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
-                <img src="${v.logo}" alt="${v.name}" style="height:18px;object-fit:contain;" onerror="this.style.display='none'">
-                ${v.name}
-            </button>`).join('');
-
-            return `
-        <div style="background:var(--az-surface);border:1px solid var(--az-border);">
-            <!-- Vendor Tabs -->
-            <div style="display:flex;border-bottom:1px solid var(--az-border);padding:0 16px;gap:0;overflow-x:auto;">
-                ${vendorTabs}
-            </div>
-            <!-- Info bar -->
-            <div style="padding:8px 16px;background:var(--az-blue-xlight);border-bottom:1px solid var(--az-blue-light);font-size:12px;color:var(--az-blue);display:flex;align-items:center;gap:8px;">
-                <i class="fas fa-info-circle"></i>
-                Voucher prices are per candidate · Delivered digitally within 24 hours of payment confirmation.
-            </div>
-            <!-- Table -->
-            <div style="overflow-x:auto;">
-                <table style="width:100%;border-collapse:collapse;font-size:13px;">
-                    <thead>
-                        <tr style="background:var(--az-surface);border-bottom:2px solid var(--az-border);">
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:120px;">Code</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Exam Name</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:140px;">Price (INR)</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:140px;"></th>
-                        </tr>
-                    </thead>
-                    <tbody>${tableRows}</tbody>
-                </table>
-            </div>
-        </div>`;
-        }
-
-        function setExamVendor(key) {
-            activeVendor = key;
-            renderLabs();
-        }
-
-        function openExamCheckout(vendorKey, examIdx) {
-            const vendor = EXAM_VENDORS.find(v => v.key === vendorKey);
-            const exam = vendor.exams[examIdx];
-
-            checkoutLab = {
-                id: exam.code,
-                name: exam.name,
-                infra: exam.price,
-                isExam: true,
-            };
-            checkoutPlan = 'fixed';
-            checkoutPrices = {
-                daily: exam.price,
-                weekly: exam.price,
-                dailyFmt: '₹' + exam.price.toLocaleString('en-IN'),
-                weeklyFmt: '₹' + exam.price.toLocaleString('en-IN'),
-                selectedAmt: exam.price,
-            };
-            couponDiscount = 0;
-
-            document.getElementById('form-lab-name').value = exam.name;
-            document.getElementById('form-lab-id').value = exam.code + ' · ' + vendor.name;
-            document.getElementById('form-plan').style.display = 'block';
-            document.getElementById('form-plan-select').style.display = 'none';
-            document.getElementById('form-plan').value = 'Exam Voucher — ₹' + exam.price.toLocaleString('en-IN');
-
-            document.getElementById('form-qty').value = 1;
-            document.getElementById('form-name').value = '';
-            document.getElementById('form-email').value = '';
-            document.getElementById('form-phone').value = '';
-            document.getElementById('form-company').value = '';
-            document.getElementById('form-coupon').value = '';
-            document.getElementById('coupon-msg').style.display = 'none';
-            document.getElementById('discount-row').style.display = 'none';
-
-            updateSummary();
-            document.getElementById('checkout-modal').style.display = 'flex';
         }
 
         const cloudPlanSelection = {}; // tracks selected tier per card
@@ -1673,8 +1427,8 @@
         function updateSummary() {
             if (!checkoutLab) return;
             const qty = parseInt(document.getElementById('form-qty').value) || 1;
-            const unitAmt = (checkoutLab && (checkoutLab.isBaremetal || checkoutLab.isCloudPortal || checkoutLab.isExam))
-                ? (checkoutPrices.selectedAmt || checkoutPrices.daily || 0)
+            const unitAmt = (checkoutLab && (checkoutLab.isBaremetal || checkoutLab.isCloudPortal))
+                ? (checkoutPrices.selectedAmt || checkoutPrices.monthly || 0)
                 : checkoutPlan === 'fixed' ? checkoutPrices.daily
                     : checkoutPlan === 'daily' ? checkoutPrices.daily
                         : checkoutPrices.weekly;
@@ -1704,7 +1458,7 @@
             if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
             if (!phone) { alert('Please enter your phone number.'); return; }
 
-            const unitAmt = (checkoutLab && (checkoutLab.isBaremetal || checkoutLab.isCloudPortal || checkoutLab.isExam)) ? (checkoutPrices.selectedAmt || checkoutPrices.daily || 0) : checkoutPlan === 'fixed' ? checkoutPrices.daily : checkoutPlan === 'daily' ? checkoutPrices.daily : checkoutPrices.weekly;
+            const unitAmt = (checkoutLab && (checkoutLab.isBaremetal || checkoutLab.isCloudPortal)) ? (checkoutPrices.selectedAmt || checkoutPrices.monthly || 0) : checkoutPlan === 'fixed' ? checkoutPrices.daily : checkoutPlan === 'daily' ? checkoutPrices.daily : checkoutPrices.weekly;
             const subtotal = unitAmt * qty;
             const discount = subtotal * couponDiscount;
             const afterDisc = subtotal - discount;
@@ -1718,9 +1472,7 @@
                     ? { '8hr': '8 Hours', 'monthly': 'Monthly', 'm6': '6 Months (10% off)', 'm12': '12 Months (20% off)' }[checkoutPlan] || 'Monthly'
                     : checkoutLab && checkoutLab.isCloudPortal
                         ? (checkoutPlan === 'halfmonthly' ? '15 Days' : 'Monthly')
-                        : checkoutLab && checkoutLab.isExam
-                            ? 'Exam Voucher'
-                            : checkoutPlan === 'daily' ? 'Daily' : checkoutPlan === 'fixed' ? 'Fixed' : 'Weekly (-10%)',
+                        : checkoutPlan === 'daily' ? 'Daily' : checkoutPlan === 'fixed' ? 'Fixed' : 'Weekly (-10%)',
                 qty: qty,
                 name: name,
                 email: email,

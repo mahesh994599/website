@@ -1,0 +1,33 @@
+category,code,name,price
+CompTIA,CTA+,CompTIA A+,14000
+CompTIA,CTN+,CompTIA Network+,15500
+CompTIA,CTS+,CompTIA Security+,16000
+CompTIA,CTCY,CompTIA CySA+,17500
+CompTIA,CTPE,CompTIA PenTest+,17500
+CompTIA,CTCL,CompTIA Cloud+,16500
+CompTIA,CTL+,CompTIA Linux+,15000
+CompTIA,CTCA,CompTIA CASP+,19000
+Linux Foundation,LFCA,Linux Foundation Certified Associate (LFCA),12000
+Linux Foundation,LFCS,Linux Foundation Certified SysAdmin (LFCS),16000
+Linux Foundation,CKA,Certified Kubernetes Administrator (CKA),19500
+Linux Foundation,CKAD,Certified Kubernetes App Developer (CKAD),19500
+Linux Foundation,CKS,Certified Kubernetes Security Specialist (CKS),19500
+Linux Foundation,PCA,Prometheus Certified Associate (PCA),14000
+Linux Foundation,CGOA,Certified GitOps Associate (CGOA),14000
+Linux Foundation,KCNA,Kubernetes and Cloud Native Associate (KCNA),13000
+RedHat,EX200,RHCSA – Red Hat Certified System Administrator,22000
+RedHat,EX294,RHCE – Red Hat Certified Engineer (Ansible),24000
+RedHat,EX280,Red Hat OpenShift Administrator (EX280),25000
+RedHat,EX180,Red Hat Certified Specialist in Containers,23000
+RedHat,EX288,Red Hat Certified Specialist in OpenShift Dev,23000
+RedHat,EX403,Red Hat Satellite 6 Administration,24000
+RedHat,EX415,Red Hat Certified Security Specialist,24000
+RedHat,EX447,Advanced Automation: Ansible Best Practices,25000
+Cisco,CCNA,Cisco Certified Network Associate (CCNA),28000
+Cisco,CCNPE,CCNP Enterprise Core (ENCOR 350-401),35000
+Cisco,CCNPS,CCNP Security Core (SCOR 350-701),35000
+Cisco,DEVAE,DevNet Associate,24000
+Cisco,DEVPE,DevNet Professional,34000
+Cisco,CCIE,CCIE Enterprise Infrastructure (Written),45000
+Cisco,CLCOR,Cisco Collaboration Core (CLCOR 350-801),35000
+Cisco,CCNPD,CCNP Data Center Core (DCCOR 350-601),35000
