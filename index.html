@@ -1333,9 +1333,9 @@
             </tr>`).join('');
 
             const vendorTabs = EXAM_VENDORS.map(v => `
-            <button onclick="setExamVendor('${v.key}')" style="display:flex;align-items:center;gap:8px;padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${activeVendor === v.key ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${activeVendor === v.key ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
-                <img src="${v.logo}" alt="${v.name}" style="height:18px;object-fit:contain;" onerror="this.style.display='none'">
-                ${v.name}
+            <button onclick="setExamVendor('${v.key}')" title="${v.name}" style="display:flex;align-items:center;gap:6px;padding:10px 14px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${activeVendor === v.key ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${activeVendor === v.key ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
+                <img src="${v.logo}" alt="${v.name}" style="height:20px;object-fit:contain;max-width:80px;" onerror="this.style.display='none'">
+                ${v.key === 'microsoft' ? '<span>' + v.name + '</span>' : ''}
             </button>`).join('');
 
             return `
