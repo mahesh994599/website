@@ -388,6 +388,75 @@
             color: var(--az-green);
             border-color: #9fd89f;
         }
+
+        /* ── Help & Support Styles ── */
+        .support-channel-card {
+            background: var(--az-surface);
+            border: 1px solid var(--az-border);
+            border-radius: 2px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: box-shadow 0.15s, border-color 0.15s;
+            cursor: default;
+        }
+
+        .support-channel-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+            border-color: var(--az-blue);
+        }
+
+        .support-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #107c10;
+            display: inline-block;
+            box-shadow: 0 0 0 2px #dff6dd;
+            flex-shrink: 0;
+        }
+
+        .support-faq-item {
+            border: 1px solid var(--az-border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .support-faq-trigger {
+            width: 100%;
+            background: var(--az-surface);
+            border: none;
+            padding: 12px 16px;
+            text-align: left;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--az-text);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.1s;
+        }
+
+        .support-faq-trigger:hover {
+            background: var(--az-hover);
+        }
+
+        .support-faq-body {
+            display: none;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: var(--az-text-sub);
+            background: var(--az-bg);
+            border-top: 1px solid var(--az-border);
+            line-height: 1.6;
+        }
+
+        .support-faq-body.open {
+            display: block;
+        }
     </style>
 </head>
 
@@ -488,7 +557,7 @@
 
             <!-- Cart Toast -->
             <div id="cart-toast"
-                style="display:none;position:fixed;bottom:24px;right:24px;background:var(--az-text);color:white;padding:12px 16px;border-radius:2px;box-shadow:0 4px 16px rgba(0,0,0,0.2);display:none;align-items:center;gap:16px;z-index:50;">
+                style="display:none;position:fixed;bottom:24px;right:24px;background:var(--az-text);color:white;padding:12px 16px;border-radius:2px;box-shadow:0 4px 16px rgba(0,0,0,0.2);align-items:center;gap:16px;z-index:50;">
                 <div>
                     <div
                         style="font-size:11px;color:#a19f9d;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;">
@@ -563,7 +632,7 @@
 
     <!-- CHECKOUT MODAL -->
     <div id="checkout-modal"
-        style="display:none;position:fixed;inset:0;z-index:110;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.5);">
+        style="display:none;position:fixed;inset:0;z-index:110;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.5);">
         <div class="modal-enter"
             style="background:var(--az-surface);width:100%;max-width:520px;border-radius:0;box-shadow:0 8px 32px rgba(0,0,0,0.2);overflow:hidden;border:1px solid var(--az-border);">
 
@@ -792,1192 +861,6 @@
         </div>
     </div>
 
-    <script>
-        // ─── CONFIG ──────────────────────────────────────────────────
-        const _k = (a) => atob(a.join(''));
-        const _c = {
-            rzp: ['cnpwX3Rl', 'c3RfU01s', 'MWJHUEx4', 'aHltYUw='],
-            esid: ['c2Vydmlj', 'ZV9xMGFz', 'YW44'],
-            etid: ['dGVtcGxh', 'dGVfb3R1', 'ZThxOA=='],
-            epk: ['X2JycjVC', 'c3ZFUzVI', 'bXkwQW4='],
-        };
-        let RAZORPAY_KEY_ID = null;
-
-        // ─── STATE ───────────────────────────────────────────────────
-        let activeCategory = 'SSL Labs';
-        let searchQuery = '';
-        let cart = [];
-        let isSidebarOpen = true;
-
-        // Current checkout context
-        let checkoutLab = null;   // full lab object
-        let checkoutPlan = 'daily'; // 'daily' | 'weekly'
-        let checkoutPrices = {};
-        let couponDiscount = 0;     // 0–1 fraction
-
-        // Valid coupons (demo)
-        const COUPONS = { 'SYNLAB10': 0.10, 'INFRA20': 0.20 };
-
-        // ─── DATA ────────────────────────────────────────────────────
-        const labData = {
-            'SSL Labs': [
-                { id: 'DD-01', name: 'Datadog Observability Mastery', infra: '₹180.00' },
-                { id: 'AI-01', name: 'Agentic AI: Multi-Agent Systems', infra: '₹320.00' },
-                { id: 'CA-01', name: 'Claude Agentic (Windows)', infra: '₹280.00' },
-                { id: 'CA-02', name: 'Claude Agentic (Unix) with Claude Code', infra: '₹300.00' },
-                { id: 'LG-01', name: 'Labs Generative', infra: '₹250.00' },
-                { id: 'AN-01', name: 'Ansible AAP', infra: '₹220.00' },
-                { id: 'DF-01', name: 'Data Fabrics DP 700', infra: '₹350.00' },
-                { id: 'VA-01', name: 'Vertex AI GCP', infra: '₹400.00' },
-                { id: 'GA-01', name: 'GCP APIGEE', infra: '₹380.00' },
-                { id: 'VS-01', name: 'Veeam Software Appliance', infra: '₹200.00' },
-                { id: 'VO-01', name: 'Veeam ONE', infra: '₹190.00' },
-                { id: 'VR-01', name: 'Veeam Recovery Orchestrator', infra: '₹210.00' },
-                { id: 'SP-01', name: 'Sharepoint Administrator', infra: '₹170.00' },
-                { id: 'SL-01', name: 'Suse Labs', infra: '₹160.00' }
-            ],
-            'Skillable Labs': [], 'Xtremelabs': [], 'Godeploy': [],
-            'Baremetal Servers': 'BAREMETAL',
-            'Cloud Portal Subscription': 'CLOUD_PORTAL',
-            'Exam Vouchers': 'EXAM_VOUCHERS'
-        };
-
-        // ─── BAREMETAL DATA ──────────────────────────────────────────
-        const BAREMETAL_LINUX = [
-            { vcpu: 1, ram: 4, hourly: '₹2.46', monthly: '₹1,439', m6: '₹7,768', m12: '₹13,810' },
-            { vcpu: 2, ram: 8, hourly: '₹4.92', monthly: '₹2,872', m6: '₹15,511', m12: '₹27,574' },
-            { vcpu: 4, ram: 16, hourly: '₹9.84', monthly: '₹5,745', m6: '₹31,021', m12: '₹55,149' },
-            { vcpu: 8, ram: 32, hourly: '₹19.68', monthly: '₹11,493', m6: '₹62,065', m12: '₹110,337' },
-            { vcpu: 16, ram: 64, hourly: '₹39.36', monthly: '₹22,987', m6: '₹124,129', m12: '₹220,674' },
-            { vcpu: 32, ram: 128, hourly: '₹78.71', monthly: '₹45,969', m6: '₹248,233', m12: '₹441,303' },
-            { vcpu: 48, ram: 192, hourly: '₹93.01', monthly: '₹54,315', m6: '₹293,302', m12: '₹521,425' },
-            { vcpu: 56, ram: 224, hourly: '₹108.46', monthly: '₹63,341', m6: '₹342,040', m12: '₹608,072' },
-        ];
-        const BAREMETAL_WINDOWS = [
-            { vcpu: 1, ram: 4, hourly: '₹2.75', monthly: '₹1,609', m6: '₹8,788', m12: '₹15,850' },
-            { vcpu: 2, ram: 8, hourly: '₹5.50', monthly: '₹3,212', m6: '₹17,551', m12: '₹31,654' },
-            { vcpu: 4, ram: 16, hourly: '₹11.00', monthly: '₹6,425', m6: '₹35,101', m12: '₹63,309' },
-            { vcpu: 8, ram: 32, hourly: '₹22.01', monthly: '₹12,853', m6: '₹70,225', m12: '₹126,657' },
-            { vcpu: 16, ram: 64, hourly: '₹44.02', monthly: '₹25,707', m6: '₹140,449', m12: '₹253,314' },
-            { vcpu: 32, ram: 128, hourly: '₹88.03', monthly: '₹51,409', m6: '₹280,873', m12: '₹506,583' },
-            { vcpu: 48, ram: 192, hourly: '₹106.98', monthly: '₹62,475', m6: '₹342,262', m12: '₹619,345' },
-            { vcpu: 56, ram: 224, hourly: '₹124.76', monthly: '₹72,861', m6: '₹399,160', m12: '₹722,312' },
-        ];
-        let bmOS = 'linux'; // active OS tab
-
-        // ─── CLOUD PORTAL SUBSCRIPTION DATA ─────────────────────────
-        const CLOUD_PORTAL_PLANS = [
-            {
-                id: 'AZ-SB',
-                name: 'Azure Sandbox',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg',
-                desc: 'Full Azure environment for hands-on cloud training and development.',
-                monthly: 2500,
-                halfMonthly: 1500,
-            },
-            {
-                id: 'AZ-AI',
-                name: 'Azure AI Sandbox',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/6/66/OpenAI_logo_2025_%28symbol%29.svg',
-                desc: 'Pre-configured Azure environment with AI/ML services and tools.',
-                monthly: 3000,
-                halfMonthly: 2200,
-            },
-            {
-                id: 'AZ-DB',
-                name: 'Azure Databricks',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Databricks-c40eaf44.png',
-                desc: 'Managed Databricks workspace on Azure for big data and analytics.',
-                monthly: 4500,
-                halfMonthly: 3000,
-            },
-            {
-                id: 'GCP-SB',
-                name: 'GCP Sandbox',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg',
-                desc: 'Isolated Google Cloud environment for learning and development.',
-                monthly: 3000,
-                halfMonthly: 2200,
-            },
-        ];
-
-        // ─── EXAM VOUCHER DATA ───────────────────────────────────────
-        const EXAM_VENDORS = [
-            {
-                key: 'comptia',
-                name: 'CompTIA',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/6/62/Comptia-logo.svg',
-                color: '#c8202f',
-                exams: [],
-            },
-            {
-                key: 'lf',
-                name: 'Linux Foundation',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fd/Linux_Foundation_logo_2013.svg',
-                color: '#003366',
-                exams: [],
-            },
-            {
-                key: 'aws',
-                name: 'AWS',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg',
-                color: '#ff9900',
-                exams: [],
-            },
-            {
-                key: 'microsoft',
-                name: 'Microsoft',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
-                color: '#0078d4',
-                exams: [],
-            },
-            {
-                key: 'google',
-                name: 'Google',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg',
-                color: '#4285f4',
-                exams: [],
-            },
-            {
-                key: 'redhat',
-                name: 'Red Hat',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg',
-                color: '#cc0000',
-                exams: [],
-            },
-            {
-                key: 'cisco',
-                name: 'Cisco',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg',
-                color: '#1ba0d7',
-                exams: [],
-            },
-            {
-                key: 'oracle',
-                name: 'Oracle',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg',
-                color: '#f80000',
-                exams: [],
-            },
-            {
-                key: 'paloalto',
-                name: 'Palo Alto',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Palo_Alto_Networks_logo.svg',
-                color: '#fa5820',
-                exams: [],
-            },
-            {
-                key: 'salesforce',
-                name: 'Salesforce',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg',
-                color: '#00a1e0',
-                exams: [],
-            },
-            {
-                key: 'citrix',
-                name: 'Citrix',
-                logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Citrix-logo.svg',
-                color: '#452170',
-                exams: [],
-            },
-        ];
-        let activeVendor = 'comptia'; // selected vendor tab
-
-        // ─── CSV CONFIG ──────────────────────────────────────────────
-        // CSV file must be in the same folder as this HTML file on the server
-        // CSV-based categories — loaded via fetch at runtime
-        const CSV_CATEGORIES = ['Skillable Labs', 'Xtremelabs', 'Godeploy'];
-
-        // Map CSV category field value → store category name
-        const CSV_CAT_MAP = {
-            'skillable': 'Skillable Labs',
-            'xtremelabs': 'Xtremelabs',
-            'xtreme': 'Xtremelabs',
-            'godeploy': 'Godeploy'
-        };
-
-        // Maps exams-data.csv category → EXAM_VENDORS key
-        const EXAM_CSV_CAT_MAP = {
-            'comptia': 'comptia',
-            'linux foundation': 'lf',
-            'linuxfoundation': 'lf',
-            'linux_foundation': 'lf',
-            'lf': 'lf',
-            'aws': 'aws',
-            'microsoft': 'microsoft',
-            'google': 'google',
-            'redhat': 'redhat',
-            'red hat': 'redhat',
-            'red_hat': 'redhat',
-            'cisco': 'cisco',
-            'oracle': 'oracle',
-            'palo alto': 'paloalto',
-            'paloalto': 'paloalto',
-            'salesforce': 'salesforce',
-            'citrix': 'citrix',
-        };
-
-        const features = [
-            { icon: 'fa-box-open', text: "Isolated Lab Environment" },
-            { icon: 'fa-headset', text: "24/7 human support" },
-            { icon: 'fa-certificate', text: "SOC 1 & SOC 2 compliant" }
-        ];
-
-        const menuItems = [
-            { name: 'SSL Labs', icon: 'fa-shield-halved' },
-            { name: 'Skillable Labs', icon: 'fa-server' },
-            { name: 'Xtremelabs', icon: 'fa-microchip' },
-            { name: 'Godeploy', icon: 'fa-globe' },
-            { name: 'Baremetal Servers', icon: 'fa-cloud' },
-            { name: 'Cloud Portal Subscription', icon: 'fa-credit-card' },
-            { name: 'Exam Vouchers', icon: 'fa-certificate' },
-        ];
-
-        // ─── PRICE HELPERS ───────────────────────────────────────────
-        function rawPrice(val) {
-            if (typeof val === 'number') return val;
-            return parseFloat(String(val).replace(/[₹$,]/g, '')) || 0;
-        }
-
-        function calculatePrices(val) {
-            const daily = rawPrice(val);
-            const weekly = daily * 7 * 0.9;
-            return {
-                daily: daily,
-                weekly: weekly,
-                dailyFmt: fmtINR(daily),
-                weeklyFmt: fmtINR(weekly)
-            };
-        }
-
-        function fmtINR(n) {
-            return n.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
-        }
-
-        // ─── INIT ─────────────────────────────────────────────────────
-        const LEARN_MORE_FEATURES = [
-            { icon: 'fa-server', title: 'Tier 4/5 DCs', desc: 'Infrastructure in Tier-4 & Tier-5 centers for unmatched uptime.' },
-            { icon: 'fa-certificate', title: 'SOC 1 & 2', desc: 'Full audit compliance for global financial and tech standards.' },
-            { icon: 'fa-sync', title: 'Zero Disruption', desc: 'Free migration support ensuring 100% workflow continuity.' },
-            { icon: 'fa-shield-alt', title: 'Custom Security', desc: 'Granular security group configurations for complex stacks.' },
-            { icon: 'fa-bolt', title: 'Risk-Free PoC', desc: 'Complimentary 7-day test environment, no commitment.' },
-            { icon: 'fa-infinity', title: 'No Bandwidth Fees', desc: 'Unlimited data transfer with absolute price transparency.' },
-        ];
-
-        async function init() {
-            // Decode credentials at runtime
-            RAZORPAY_KEY_ID = _k(_c.rzp);
-            emailjs.init(_k(_c.epk));
-            renderMenu();
-            renderLabs();
-            renderLearnMoreFeatures();
-            await loadCSVFromServer();
-        }
-
-        function renderLearnMoreFeatures() {
-            const container = document.getElementById('learn-more-features');
-            if (!container) return;
-            container.innerHTML = LEARN_MORE_FEATURES.map(f =>
-                '<div style="background:var(--az-bg);border:1px solid var(--az-border);padding:14px;">' +
-                '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
-                '<div style="width:28px;height:28px;background:var(--az-blue);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:2px;flex-shrink:0;"><i class="fas ' + f.icon + '"></i></div>' +
-                '<div style="font-size:13px;font-weight:600;color:var(--az-text);">' + f.title + '</div>' +
-                '</div>' +
-                '<div style="font-size:12px;color:var(--az-text-sub);line-height:1.5;">' + f.desc + '</div>' +
-                '</div>'
-            ).join('');
-        }
-
-        async function loadCSVFromServer() {
-            await Promise.all([
-                fetchLabsCSV(),
-                fetchExamsCSV(),
-            ]);
-        }
-
-        async function fetchLabsCSV() {
-            try {
-                const res = await fetch('labs-data.csv');
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                const text = await res.text();
-                parseCSVIntoLabData(text);
-                if (CSV_CATEGORIES.includes(activeCategory)) renderLabs();
-            } catch (e) {
-                console.warn('labs-data.csv fetch failed:', e.message);
-                if (CSV_CATEGORIES.includes(activeCategory)) renderLabs();
-            }
-        }
-
-        async function fetchExamsCSV() {
-            try {
-                const res = await fetch('exams-data.csv');
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                const text = await res.text();
-                parseCSVIntoExamData(text);
-                if (activeCategory === 'Exam Vouchers') renderLabs();
-            } catch (e) {
-                console.warn('exams-data.csv fetch failed:', e.message);
-                if (activeCategory === 'Exam Vouchers') renderLabs();
-            }
-        }
-
-        function parseCSVIntoLabData(text) {
-            // Clear existing CSV labs first
-            CSV_CATEGORIES.forEach(cat => {
-                labData[cat] = labData[cat].filter(l => !l.isCSV);
-            });
-
-            const rows = text.trim().split(/\r?\n/);
-            const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
-
-            rows.slice(1).forEach(row => {
-                if (!row.trim()) return;
-                // Parse CSV handling quoted fields with commas inside
-                const cols = [];
-                let cur = '', inQ = false;
-                for (const ch of row) {
-                    if (ch === '"') { inQ = !inQ; }
-                    else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
-                    else cur += ch;
-                }
-                cols.push(cur.trim());
-
-                const obj = {};
-                headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, '').trim());
-
-                const catKey = (obj.category || '').toLowerCase().trim();
-                const storeCat = CSV_CAT_MAP[catKey];
-                if (!storeCat) return;
-
-                labData[storeCat].push({
-                    id: obj.code,
-                    name: obj.name,
-                    infra: parseFloat(obj.price) || 0,
-                    category: obj.category,
-                    isCSV: true
-                });
-            });
-        }
-
-        function parseCSVIntoExamData(text) {
-            // Clear all CSV-sourced exams from every vendor first
-            EXAM_VENDORS.forEach(v => {
-                v.exams = v.exams.filter(e => !e.isCSV);
-            });
-
-            const rows = text.trim().split(/\r?\n/);
-            const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
-
-            rows.slice(1).forEach(row => {
-                if (!row.trim()) return;
-                // Parse CSV handling quoted fields with commas inside
-                const cols = [];
-                let cur = '', inQ = false;
-                for (const ch of row) {
-                    if (ch === '"') { inQ = !inQ; }
-                    else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
-                    else cur += ch;
-                }
-                cols.push(cur.trim());
-
-                const obj = {};
-                headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, '').trim());
-
-                const catKey = (obj.category || '').toLowerCase().trim();
-                const vendorKey = EXAM_CSV_CAT_MAP[catKey];
-                if (!vendorKey) return;
-
-                const vendor = EXAM_VENDORS.find(v => v.key === vendorKey);
-                if (!vendor) return;
-
-                vendor.exams.push({
-                    code: obj.code,
-                    name: obj.name,
-                    price: parseFloat(obj.price) || 0,
-                    isCSV: true,
-                });
-            });
-        }
-
-        function setCategory(cat) {
-            activeCategory = cat;
-            document.getElementById('breadcrumb-active').innerText = cat;
-            document.getElementById('category-title').innerText = cat === 'SSL Labs' ? 'SSL Labs Store' : cat;
-            renderMenu(); renderLabs();
-        }
-
-        function handleSearch(val) { searchQuery = val.toLowerCase(); renderLabs(); }
-        function clearSearch() {
-            searchQuery = '';
-            const inp = document.getElementById('search-input');
-            if (inp) inp.value = '';
-            renderLabs();
-        }
-
-        function toggleSidebar() {
-            isSidebarOpen = !isSidebarOpen;
-            document.getElementById('sidebar').style.width = isSidebarOpen ? '16rem' : '4.5rem';
-            document.getElementById('toggle-icon').className = isSidebarOpen ? 'fas fa-chevron-left text-sm' : 'fas fa-chevron-right text-sm';
-            renderMenu();
-        }
-
-        function previewLogo(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = e => {
-                    document.getElementById('logo-img-preview').src = e.target.result;
-                    document.getElementById('logo-img-preview').classList.remove('hidden');
-                    document.getElementById('logo-placeholder-content').classList.add('hidden');
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function togglePolicyModal() {
-            const m = document.getElementById('policy-modal');
-            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
-        }
-        function toggleLearnMore() {
-            const m = document.getElementById('learn-more-modal');
-            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        // ─── RENDER ──────────────────────────────────────────────────
-        function renderMenu() {
-            document.getElementById('nav-menu').innerHTML = menuItems.map(item => `
-            <button onclick="setCategory('${item.name}')"
-                class="az-nav-item ${activeCategory === item.name ? 'active' : ''}">
-                <i class="fas ${item.icon} nav-icon"></i>
-                ${isSidebarOpen ? `<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.name}</span>` : ''}
-            </button>
-        `).join('');
-        }
-
-        function renderLabs() {
-            const grid = document.getElementById('labs-grid');
-            const empty = document.getElementById('empty-state');
-
-            if (activeCategory === 'Baremetal Servers') {
-                grid.style.display = 'block'; empty.style.display = 'none';
-                grid.style.gridTemplateColumns = '';
-                grid.innerHTML = renderBaremetal();
-                return;
-            }
-
-            if (activeCategory === 'Cloud Portal Subscription') {
-                grid.style.display = 'grid';
-                grid.style.gridTemplateColumns = 'repeat(auto-fill,minmax(300px,1fr))';
-                empty.style.display = 'none';
-                grid.innerHTML = CLOUD_PORTAL_PLANS.map(renderCloudCard).join('');
-                return;
-            }
-
-            if (activeCategory === 'Exam Vouchers') {
-                grid.style.display = 'block';
-                grid.style.gridTemplateColumns = '';
-                empty.style.display = 'none';
-                grid.innerHTML = renderExamVouchers();
-                return;
-            }
-
-            grid.style.gridTemplateColumns = 'repeat(auto-fill,minmax(300px,1fr))';
-            const list = labData[activeCategory] || [];
-            const filtered = list.filter(lab =>
-                lab.name.toLowerCase().includes(searchQuery) ||
-                lab.id.toLowerCase().includes(searchQuery) ||
-                (lab.category && lab.category.toLowerCase().includes(searchQuery))
-            );
-            if (filtered.length === 0) {
-                grid.style.display = 'none'; empty.style.display = 'flex'; return;
-            }
-            grid.style.display = 'grid'; empty.style.display = 'none';
-            grid.innerHTML = filtered.map(lab => renderCard(lab)).join('');
-        }
-
-        function renderBaremetal() {
-            const rows = bmOS === 'linux' ? BAREMETAL_LINUX : BAREMETAL_WINDOWS;
-            const osLabel = bmOS === 'linux' ? 'Linux' : 'Windows';
-
-            const tableRows = rows.map((r, i) => `
-            <tr style="border-bottom:1px solid var(--az-border);${i % 2 === 0 ? 'background:var(--az-bg);' : 'background:white;'}">
-                <td style="padding:10px 16px;font-weight:600;color:var(--az-blue);">${r.vcpu} vCPU</td>
-                <td style="padding:10px 16px;color:var(--az-text-sub);">${r.ram} GB</td>
-                <td style="padding:10px 16px;font-weight:600;color:var(--az-text);">${r.hourly}</td>
-                <td style="padding:10px 16px;color:var(--az-text);">${r.monthly}</td>
-                <td style="padding:10px 16px;">
-                    <span style="color:var(--az-text);">${r.m6}</span>
-                    <span style="display:inline-block;margin-left:6px;background:var(--az-green-light);color:var(--az-green);font-size:10px;font-weight:600;padding:1px 6px;border-radius:2px;">10% OFF</span>
-                </td>
-                <td style="padding:10px 16px;">
-                    <span style="color:var(--az-text);">${r.m12}</span>
-                    <span style="display:inline-block;margin-left:6px;background:var(--az-blue-xlight);color:var(--az-blue);font-size:10px;font-weight:600;padding:1px 6px;border-radius:2px;">20% OFF</span>
-                </td>
-                <td style="padding:10px 16px;">
-                    <button onclick="openBaremetalCheckout(${i}, '${bmOS}')"
-                        class="btn-primary" style="font-size:12px;padding:5px 14px;white-space:nowrap;">
-                        <i class="fas fa-bolt" style="font-size:10px;"></i> Buy Now
-                    </button>
-                </td>
-            </tr>`).join('');
-
-            return `
-        <div style="background:var(--az-surface);border:1px solid var(--az-border);">
-            <!-- OS Tabs -->
-            <div style="display:flex;border-bottom:1px solid var(--az-border);padding:0 16px;gap:0;">
-                <button onclick="setBmOS('linux')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${bmOS === 'linux' ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${bmOS === 'linux' ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
-                    <i class="fab fa-linux" style="margin-right:6px;"></i>Linux
-                </button>
-                <button onclick="setBmOS('windows')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${bmOS === 'windows' ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${bmOS === 'windows' ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
-                    <i class="fab fa-windows" style="margin-right:6px;"></i>Windows
-                </button>
-            </div>
-            <!-- Pricing info bar -->
-            <div style="padding:8px 16px;background:var(--az-blue-xlight);border-bottom:1px solid var(--az-blue-light);font-size:12px;color:var(--az-blue);display:flex;align-items:center;gap:8px;">
-                <i class="fas fa-info-circle"></i>
-                Prices shown for <strong>${osLabel}</strong> instances. 6-month billing saves 10%, 12-month saves 20%.
-            </div>
-            <!-- Table -->
-            <div style="overflow-x:auto;">
-                <table style="width:100%;border-collapse:collapse;font-size:13px;">
-                    <thead>
-                        <tr style="background:var(--az-surface);border-bottom:2px solid var(--az-border);">
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">vCPUs</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">RAM</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Hourly</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Monthly</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">6 Monthly</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">12 Monthly</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;"></th>
-                        </tr>
-                    </thead>
-                    <tbody>${tableRows}</tbody>
-                </table>
-            </div>
-        </div>`;
-        }
-
-        function setBmOS(os) {
-            bmOS = os;
-            renderLabs();
-        }
-
-        function renderCloudCard(plan) {
-            return `
-        <div class="lab-card" style="padding:16px;" id="card-${plan.id}">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
-                <span class="az-tag">${plan.id}</span>
-                <div style="width:40px;height:40px;border-radius:2px;background:white;border:1px solid var(--az-border);display:flex;align-items:center;justify-content:center;padding:4px;">
-                    <img src="${plan.logo}" alt="${plan.name}" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'">
-                </div>
-            </div>
-            <div style="font-size:15px;font-weight:600;color:var(--az-text);margin-bottom:6px;line-height:1.4;">${plan.name}</div>
-            <div style="font-size:12px;color:var(--az-text-muted);margin-bottom:14px;line-height:1.5;">${plan.desc}</div>
-
-            <!-- Pricing -->
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:14px;padding:4px;background:var(--az-bg);border:1px solid var(--az-border);" id="cp-toggle-${plan.id}">
-                <div class="price-option active" style="padding:8px 10px;" onclick="selectCloudPlan(this, '${plan.id}', 'monthly')">
-                    <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">Monthly</div>
-                    <div style="font-size:14px;font-weight:600;color:var(--az-text);">₹${plan.monthly.toLocaleString('en-IN')}</div>
-                </div>
-                <div class="price-option" style="padding:8px 10px;" onclick="selectCloudPlan(this, '${plan.id}', 'halfmonthly')">
-                    <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">15 Days</div>
-                    <div style="font-size:14px;font-weight:600;color:var(--az-text);">₹${plan.halfMonthly.toLocaleString('en-IN')}</div>
-                </div>
-            </div>
-
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto;">
-                <button onclick="addCloudToCart('${plan.id}')" class="btn-secondary" style="font-size:12px;padding:6px 10px;justify-content:center;">
-                    <i class="fas fa-cart-plus" style="font-size:11px;"></i> Add to Cart
-                </button>
-                <button onclick="openCloudCheckout('${plan.id}')" class="btn-primary" style="font-size:12px;padding:6px 10px;justify-content:center;">
-                    <i class="fas fa-bolt" style="font-size:11px;"></i> Buy Now
-                </button>
-            </div>
-        </div>`;
-        }
-
-        function renderExamVouchers() {
-            const vendor = EXAM_VENDORS.find(v => v.key === activeVendor);
-            const tableRows = vendor.exams.map((e, i) => `
-            <tr style="border-bottom:1px solid var(--az-border);${i % 2 === 0 ? 'background:var(--az-bg);' : 'background:white;'}">
-                <td style="padding:10px 16px;">
-                    <span class="az-tag" style="background:${vendor.color}12;color:${vendor.color};border-color:${vendor.color}33;">${e.code}</span>
-                </td>
-                <td style="padding:10px 16px;font-weight:600;color:var(--az-text);">${e.name}</td>
-                <td style="padding:10px 16px;font-size:15px;font-weight:700;color:var(--az-blue);">₹${e.price.toLocaleString('en-IN')}</td>
-                <td style="padding:10px 16px;">
-                    <button onclick="openExamCheckout('${vendor.key}', ${i})"
-                        class="btn-primary" style="font-size:12px;padding:5px 14px;white-space:nowrap;">
-                        <i class="fas fa-ticket-alt" style="font-size:10px;"></i> Buy Voucher
-                    </button>
-                </td>
-            </tr>`).join('');
-
-            const vendorTabs = EXAM_VENDORS.map(v => `
-            <button onclick="setExamVendor('${v.key}')" title="${v.name}" style="display:flex;align-items:center;gap:6px;padding:10px 14px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${activeVendor === v.key ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${activeVendor === v.key ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
-                <img src="${v.logo}" alt="${v.name}" style="height:20px;object-fit:contain;max-width:80px;" onerror="this.style.display='none'">
-                ${v.key === 'microsoft' || v.key === 'paloalto' ? '<span>' + v.name + '</span>' : ''}
-            </button>`).join('');
-
-            return `
-        <div style="background:var(--az-surface);border:1px solid var(--az-border);">
-            <!-- Vendor Tabs -->
-            <div style="display:flex;border-bottom:1px solid var(--az-border);padding:0 16px;gap:0;overflow-x:auto;">
-                ${vendorTabs}
-            </div>
-            <!-- Info bar -->
-            <div style="padding:8px 16px;background:var(--az-blue-xlight);border-bottom:1px solid var(--az-blue-light);font-size:12px;color:var(--az-blue);display:flex;align-items:center;gap:8px;">
-                <i class="fas fa-info-circle"></i>
-                Voucher prices are per candidate · Delivered digitally within 24 hours of payment confirmation.
-            </div>
-            <!-- Table -->
-            <div style="overflow-x:auto;">
-                <table style="width:100%;border-collapse:collapse;font-size:13px;">
-                    <thead>
-                        <tr style="background:var(--az-surface);border-bottom:2px solid var(--az-border);">
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:120px;">Code</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Exam Name</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:140px;">Price (INR)</th>
-                            <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:140px;"></th>
-                        </tr>
-                    </thead>
-                    <tbody>${tableRows}</tbody>
-                </table>
-            </div>
-        </div>`;
-        }
-
-        function setExamVendor(key) {
-            activeVendor = key;
-            renderLabs();
-        }
-
-        function openExamCheckout(vendorKey, examIdx) {
-            const vendor = EXAM_VENDORS.find(v => v.key === vendorKey);
-            const exam = vendor.exams[examIdx];
-
-            checkoutLab = {
-                id: exam.code,
-                name: exam.name,
-                infra: exam.price,
-                isExam: true,
-            };
-            checkoutPlan = 'fixed';
-            checkoutPrices = {
-                daily: exam.price,
-                weekly: exam.price,
-                dailyFmt: '₹' + exam.price.toLocaleString('en-IN'),
-                weeklyFmt: '₹' + exam.price.toLocaleString('en-IN'),
-                selectedAmt: exam.price,
-            };
-            couponDiscount = 0;
-
-            document.getElementById('form-lab-name').value = exam.name;
-            document.getElementById('form-lab-id').value = exam.code + ' · ' + vendor.name;
-            document.getElementById('form-plan').style.display = 'block';
-            document.getElementById('form-plan-select').style.display = 'none';
-            document.getElementById('form-plan').value = 'Exam Voucher — ₹' + exam.price.toLocaleString('en-IN');
-
-            document.getElementById('form-qty').value = 1;
-            document.getElementById('form-name').value = '';
-            document.getElementById('form-email').value = '';
-            document.getElementById('form-phone').value = '';
-            document.getElementById('form-company').value = '';
-            document.getElementById('form-coupon').value = '';
-            document.getElementById('coupon-msg').style.display = 'none';
-            document.getElementById('discount-row').style.display = 'none';
-
-            updateSummary();
-            document.getElementById('checkout-modal').style.display = 'flex';
-        }
-
-        const cloudPlanSelection = {}; // tracks selected tier per card
-
-        function selectCloudPlan(el, planId, tier) {
-            const siblings = el.parentElement.querySelectorAll('.price-option');
-            siblings.forEach(s => s.classList.remove('active'));
-            el.classList.add('active');
-            cloudPlanSelection[planId] = tier;
-        }
-
-        function addCloudToCart(planId) {
-            const plan = CLOUD_PORTAL_PLANS.find(p => p.id === planId);
-            if (plan) { cart.push(plan); updateCartUI(); }
-        }
-
-        function openCloudCheckout(planId) {
-            const plan = CLOUD_PORTAL_PLANS.find(p => p.id === planId);
-            if (!plan) return;
-
-            const tier = cloudPlanSelection[planId] || 'monthly';
-            const price = tier === 'monthly' ? plan.monthly : plan.halfMonthly;
-            const tierLabel = tier === 'monthly' ? 'Monthly' : '15 Days';
-
-            checkoutLab = {
-                id: plan.id,
-                name: plan.name,
-                infra: price,
-                isCloudPortal: true,
-            };
-            checkoutPlan = tier;
-            checkoutPrices = {
-                daily: price,
-                weekly: price,
-                monthly: plan.monthly,
-                halfmonthly: plan.halfMonthly,
-                dailyFmt: '₹' + price.toLocaleString('en-IN'),
-                weeklyFmt: '₹' + price.toLocaleString('en-IN'),
-                selectedAmt: price,
-            };
-            couponDiscount = 0;
-
-            document.getElementById('form-lab-name').value = plan.name;
-            document.getElementById('form-lab-id').value = plan.id;
-            document.getElementById('form-plan').style.display = 'none';
-            document.getElementById('form-plan-select').style.display = 'block';
-
-            // Update select options for cloud portal
-            const sel = document.getElementById('form-plan-select');
-            sel.innerHTML = `
-            <option value="monthly"     ${tier === 'monthly' ? 'selected' : ''}>Monthly — ₹${plan.monthly.toLocaleString('en-IN')}</option>
-            <option value="halfmonthly" ${tier === 'halfmonthly' ? 'selected' : ''}>15 Days — ₹${plan.halfMonthly.toLocaleString('en-IN')}</option>
-        `;
-            sel.onchange = function () { onCloudPlanChange(this.value, plan); };
-
-            document.getElementById('form-qty').value = 1;
-            document.getElementById('form-name').value = '';
-            document.getElementById('form-email').value = '';
-            document.getElementById('form-phone').value = '';
-            document.getElementById('form-company').value = '';
-            document.getElementById('form-coupon').value = '';
-            document.getElementById('coupon-msg').style.display = 'none';
-            document.getElementById('discount-row').style.display = 'none';
-
-            updateSummary();
-            document.getElementById('checkout-modal').style.display = 'flex';
-        }
-
-        function onCloudPlanChange(val, plan) {
-            checkoutPlan = val;
-            const price = val === 'monthly' ? plan.monthly : plan.halfMonthly;
-            checkoutPrices.selectedAmt = price;
-            checkoutLab.infra = price;
-            updateSummary();
-        }
-
-        function onBaremetalPlanChange(val) {
-            if (!checkoutLab || !checkoutLab.isBaremetal) return;
-            const r = checkoutLab.bmData;
-            checkoutPlan = val;
-
-            // Update price label in select
-            const labelMap = {
-                '8hr': '8 Hours — ' + r.hourly + '/hr',
-                'monthly': 'Monthly — ' + r.monthly,
-                'm6': '6 Months — ' + r.m6 + ' (10% off)',
-                'm12': '12 Months — ' + r.m12 + ' (20% off)'
-            };
-
-            // Update checkoutPrices based on selection
-            checkoutPrices.selectedAmt =
-                val === '8hr' ? parseFloat(r.hourly.replace(/[₹,]/g, '')) * 8
-                    : val === 'monthly' ? parseFloat(r.monthly.replace(/[₹,]/g, ''))
-                        : val === 'm6' ? parseFloat(r.m6.replace(/[₹,]/g, ''))
-                            : parseFloat(r.m12.replace(/[₹,]/g, ''));
-
-            updateSummary();
-        }
-
-        function openBaremetalCheckout(idx, os) {
-            const rows = os === 'linux' ? BAREMETAL_LINUX : BAREMETAL_WINDOWS;
-            const r = rows[idx];
-            const osLabel = os === 'linux' ? 'Linux' : 'Windows';
-            // Reuse the same checkout modal — pre-fill with baremetal details
-            checkoutLab = {
-                id: r.vcpu + 'vCPU-' + r.ram + 'GB',
-                name: osLabel + ' Baremetal · ' + r.vcpu + ' vCPU · ' + r.ram + ' GB RAM',
-                infra: parseFloat(r.monthly.replace(/[₹,]/g, '')),
-                isBaremetal: true,
-                bmData: r
-            };
-            checkoutPlan = 'monthly';
-            checkoutPrices = {
-                daily: parseFloat(r.hourly.replace(/[₹,]/g, '')),
-                monthly: parseFloat(r.monthly.replace(/[₹,]/g, '')),
-                m6: parseFloat(r.m6.replace(/[₹,]/g, '')),
-                m12: parseFloat(r.m12.replace(/[₹,]/g, '')),
-                dailyFmt: r.hourly + '/hr',
-                weeklyFmt: r.monthly + '/mo'
-            };
-            couponDiscount = 0;
-
-            document.getElementById('form-lab-name').value = checkoutLab.name;
-            document.getElementById('form-lab-id').value = r.vcpu + ' vCPU · ' + r.ram + ' GB RAM';
-            document.getElementById('form-plan').style.display = 'none';
-            document.getElementById('form-plan-select').style.display = 'block';
-            document.getElementById('form-plan-select').value = 'monthly';
-            checkoutPrices.selectedAmt = parseFloat(r.monthly.replace(/[₹,]/g, ''));
-            document.getElementById('form-qty').value = 1;
-            document.getElementById('form-name').value = '';
-            document.getElementById('form-email').value = '';
-            document.getElementById('form-phone').value = '';
-            document.getElementById('form-company').value = '';
-            document.getElementById('form-coupon').value = '';
-            document.getElementById('coupon-msg').style.display = 'none';
-            document.getElementById('discount-row').style.display = 'none';
-
-            updateSummary();
-            document.getElementById('checkout-modal').style.display = 'flex';
-        }
-
-        function renderCard(lab) {
-            const prices = calculatePrices(lab.infra);
-            const isCSV = !!lab.isCSV;
-
-            const featureHtml = features.map(f => `
-            <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--az-text-muted);">
-                <i class="fas ${f.icon}" style="color:var(--az-blue);width:14px;text-align:center;font-size:11px;"></i>
-                <span>${f.text}</span>
-            </div>`).join('');
-
-            const priceSection = isCSV ? `
-            <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:10px 12px;margin-bottom:12px;">
-                <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Lab Price</div>
-                <div style="font-size:20px;font-weight:600;color:var(--az-blue);">${prices.dailyFmt}</div>
-                <div style="font-size:11px;color:var(--az-text-muted);margin-top:2px;">Per participant · incl. platform access</div>
-            </div>` : `
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:12px;padding:4px;background:var(--az-bg);border:1px solid var(--az-border);" id="price-toggle-${lab.id}">
-                <div class="price-option active" style="padding:8px 10px;" onclick="selectPrice(this, '${lab.id}', 'daily')">
-                    <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">Daily</div>
-                    <div style="font-size:14px;font-weight:600;color:var(--az-text);">${prices.dailyFmt}</div>
-                </div>
-                <div class="price-option" style="padding:8px 10px;" onclick="selectPrice(this, '${lab.id}', 'weekly')">
-                    <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">Weekly −10%</div>
-                    <div style="font-size:14px;font-weight:600;color:var(--az-text);">${prices.weeklyFmt}</div>
-                </div>
-            </div>`;
-
-            return `
-        <div class="lab-card" style="padding:16px;" id="card-${lab.id}">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-                <span class="az-tag">${lab.id}</span>
-                ${isCSV ? `<span class="az-tag-green">${lab.category}</span>` : ''}
-            </div>
-            <div style="font-size:15px;font-weight:600;color:var(--az-text);margin-bottom:10px;min-height:44px;line-height:1.4;">${lab.name}</div>
-            <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:12px;">${featureHtml}</div>
-            ${priceSection}
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto;">
-                <button onclick="addToCart('${lab.id}')" class="btn-secondary" style="font-size:12px;padding:6px 10px;justify-content:center;">
-                    <i class="fas fa-cart-plus" style="font-size:11px;"></i> Add to Cart
-                </button>
-                <button onclick="openCheckout('${lab.id}')" class="btn-primary" style="font-size:12px;padding:6px 10px;justify-content:center;">
-                    <i class="fas fa-bolt" style="font-size:11px;"></i> Buy Now
-                </button>
-            </div>
-        </div>`;
-        }
-
-
-        // Track selected plan per card
-        const cardPlan = {};
-
-        function selectPrice(el, labId, plan) {
-            const siblings = el.parentElement.querySelectorAll('.price-option');
-            siblings.forEach(s => s.classList.remove('active'));
-            el.classList.add('active');
-            cardPlan[labId] = plan;
-        }
-
-        // ─── CART ────────────────────────────────────────────────────
-        function addToCart(id) {
-            const lab = (labData[activeCategory] || []).find(l => l.id === id);
-            if (lab) { cart.push(lab); updateCartUI(); }
-        }
-
-        function updateCartUI() {
-            const count = document.getElementById('cart-count');
-            const toast = document.getElementById('cart-toast');
-            if (cart.length > 0) {
-                if (count) { count.innerText = cart.length; count.classList.remove('hidden'); }
-                toast.style.display = 'flex';
-                document.getElementById('toast-text').innerText =
-                    `${cart.length} Environment${cart.length > 1 ? 's' : ''} Ready`;
-            }
-        }
-
-        // ─── CHECKOUT MODAL ──────────────────────────────────────────
-        function openCheckout(labId) {
-            const list = labData[activeCategory] || [];
-            const lab = list.find(l => l.id === labId);
-            if (!lab) return;
-
-            checkoutLab = lab;
-            checkoutPlan = lab.isCSV ? 'fixed' : (cardPlan[labId] || 'daily');
-            checkoutPrices = calculatePrices(lab.infra);
-            couponDiscount = 0;
-
-            // Pre-fill read-only fields
-            document.getElementById('form-lab-name').value = lab.name;
-            document.getElementById('form-lab-id').value = lab.id;
-            document.getElementById('form-plan').style.display = 'block';
-            document.getElementById('form-plan-select').style.display = 'none';
-            document.getElementById('form-plan').value =
-                checkoutPlan === 'fixed' ? `Fixed — ${checkoutPrices.dailyFmt}` :
-                    checkoutPlan === 'daily' ? `Daily — ${checkoutPrices.dailyFmt}` :
-                        `Weekly (-10%) — ${checkoutPrices.weeklyFmt}`;
-
-            // Reset editable fields
-            document.getElementById('form-qty').value = 1;
-            document.getElementById('form-name').value = '';
-            document.getElementById('form-email').value = '';
-            document.getElementById('form-phone').value = '';
-            document.getElementById('form-company').value = '';
-            document.getElementById('form-coupon').value = '';
-            document.getElementById('coupon-msg').style.display = 'none';
-            document.getElementById('discount-row').style.display = 'none';
-
-            updateSummary();
-            document.getElementById('checkout-modal').style.display = 'flex';
-        }
-
-        function closeCheckoutModal() {
-            document.getElementById('checkout-modal').style.display = 'none';
-        }
-
-        // Close on backdrop click
-        document.getElementById('checkout-modal').addEventListener('click', function (e) {
-            if (e.target === this) closeCheckoutModal();
-        });
-        // Ensure modal starts hidden
-        document.getElementById('checkout-modal').style.display = 'none';
-
-        function changeQty(delta) {
-            const inp = document.getElementById('form-qty');
-            let val = parseInt(inp.value) + delta;
-            val = Math.max(1, Math.min(50, val));
-            inp.value = val;
-            updateSummary();
-        }
-
-        function syncQty() { updateSummary(); }
-
-        function applyCoupon() {
-            const code = document.getElementById('form-coupon').value.trim().toUpperCase();
-            const msg = document.getElementById('coupon-msg');
-            msg.style.display = 'block';
-            if (COUPONS[code]) {
-                couponDiscount = COUPONS[code];
-                msg.textContent = `✓ Coupon applied! ${couponDiscount * 100}% off`;
-                msg.style.color = '#16a34a';
-                document.getElementById('discount-row').style.display = 'flex';
-            } else {
-                couponDiscount = 0;
-                msg.textContent = '✗ Invalid coupon code.';
-                msg.style.color = '#dc2626';
-                document.getElementById('discount-row').style.display = 'none';
-            }
-            updateSummary();
-        }
-
-        const GST_RATE = 0.18;
-
-        function updateSummary() {
-            if (!checkoutLab) return;
-            const qty = parseInt(document.getElementById('form-qty').value) || 1;
-            const unitAmt = (checkoutLab && (checkoutLab.isBaremetal || checkoutLab.isCloudPortal || checkoutLab.isExam))
-                ? (checkoutPrices.selectedAmt || checkoutPrices.daily || 0)
-                : checkoutPlan === 'fixed' ? checkoutPrices.daily
-                    : checkoutPlan === 'daily' ? checkoutPrices.daily
-                        : checkoutPrices.weekly;
-            const subtotal = unitAmt * qty;
-            const discount = subtotal * couponDiscount;
-            const afterDisc = subtotal - discount;
-            const gst = afterDisc * GST_RATE;
-            const total = afterDisc + gst;
-
-            document.getElementById('summary-lab').textContent = checkoutLab.name;
-            document.getElementById('summary-unit-price').textContent = fmtINR(unitAmt);
-            document.getElementById('summary-qty').textContent = `×${qty}`;
-            document.getElementById('summary-discount').textContent = `-${fmtINR(discount)}`;
-            document.getElementById('summary-gst').textContent = fmtINR(gst);
-            document.getElementById('summary-total').textContent = fmtINR(total);
-        }
-
-        // ─── RAZORPAY PAYMENT ────────────────────────────────────────
-        function proceedToPayment() {
-            const name = document.getElementById('form-name').value.trim();
-            const email = document.getElementById('form-email').value.trim();
-            const phone = document.getElementById('form-phone').value.trim();
-            const qty = parseInt(document.getElementById('form-qty').value) || 1;
-
-            // Basic validation
-            if (!name) { alert('Please enter your full name.'); return; }
-            if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
-            if (!phone) { alert('Please enter your phone number.'); return; }
-
-            const unitAmt = (checkoutLab && (checkoutLab.isBaremetal || checkoutLab.isCloudPortal || checkoutLab.isExam)) ? (checkoutPrices.selectedAmt || checkoutPrices.daily || 0) : checkoutPlan === 'fixed' ? checkoutPrices.daily : checkoutPlan === 'daily' ? checkoutPrices.daily : checkoutPrices.weekly;
-            const subtotal = unitAmt * qty;
-            const discount = subtotal * couponDiscount;
-            const afterDisc = subtotal - discount;
-            const gst = afterDisc * GST_RATE;
-            const total = afterDisc + gst;
-
-            const orderDetails = {
-                labName: checkoutLab.name,
-                labId: checkoutLab.id,
-                plan: checkoutLab && checkoutLab.isBaremetal
-                    ? { '8hr': '8 Hours', 'monthly': 'Monthly', 'm6': '6 Months (10% off)', 'm12': '12 Months (20% off)' }[checkoutPlan] || 'Monthly'
-                    : checkoutLab && checkoutLab.isCloudPortal
-                        ? (checkoutPlan === 'halfmonthly' ? '15 Days' : 'Monthly')
-                        : checkoutLab && checkoutLab.isExam
-                            ? 'Exam Voucher'
-                            : checkoutPlan === 'daily' ? 'Daily' : checkoutPlan === 'fixed' ? 'Fixed' : 'Weekly (-10%)',
-                qty: qty,
-                name: name,
-                email: email,
-                phone: phone,
-                company: document.getElementById('form-company').value.trim(),
-                subtotalFmt: fmtINR(subtotal),
-                discountFmt: couponDiscount > 0 ? `-${fmtINR(discount)}` : '—',
-                gstFmt: fmtINR(gst),
-                totalFmt: fmtINR(total),
-            };
-
-            const amountPaise = Math.round(total * 100);
-
-            const options = {
-                key: RAZORPAY_KEY_ID,
-                amount: amountPaise,
-                currency: 'INR',
-                name: 'Synergific Lab Store',
-                description: `${checkoutLab.name} [${checkoutLab.id}] — ${orderDetails.plan} × ${qty}`,
-                image: '',
-                prefill: {
-                    name: name,
-                    email: email,
-                    contact: phone
-                },
-                notes: {
-                    lab_id: checkoutLab.id,
-                    lab_name: checkoutLab.name,
-                    plan: checkoutPlan,
-                    qty: qty,
-                    company: orderDetails.company
-                },
-                theme: { color: '#22c55e' },
-                handler: function (response) {
-                    showPaymentSuccess(response, orderDetails);
-                },
-                modal: {
-                    ondismiss: function () {
-                        console.log('Razorpay modal dismissed by user.');
-                    }
-                }
-            };
-
-            try {
-                const rzp = new Razorpay(options);
-                rzp.on('payment.failed', function (resp) {
-                    alert(`Payment failed: ${resp.error.description}`);
-                });
-                rzp.open();
-            } catch (e) {
-                alert('Payment gateway unavailable. Please contact support.');
-            }
-        }
-
-
-
-
-        function sendOrderEmails(response, orderDetails) {
-            const orderDate = new Date().toLocaleString('en-IN', { dateStyle: 'long', timeStyle: 'short' });
-            const paymentId = response.razorpay_payment_id || 'N/A';
-            const orderId = response.razorpay_order_id || 'N/A';
-            const RECIPIENTS = ['itops@synergificsoftware.com', 'vinay.chandra@synergificsoftware.com', orderDetails.email];
-
-            // Send flat variables — the HTML template lives in EmailJS dashboard
-            // Template must use {{payment_id}}, {{lab_name}}, {{customer_name}} etc.
-            const sends = RECIPIENTS.map(toEmail =>
-                emailjs.send(_k(_c.esid), _k(_c.etid), {
-                    to_email: toEmail,
-                    from_name: 'Synergific Lab Store',
-                    reply_to: orderDetails.email,
-                    subject: 'New Lab Order: ' + orderDetails.labName + ' [' + orderDetails.labId + '] — ' + orderDetails.totalFmt,
-                    order_date: orderDate,
-                    payment_id: paymentId,
-                    order_id: orderId,
-                    lab_name: orderDetails.labName,
-                    lab_id: orderDetails.labId,
-                    plan: orderDetails.plan,
-                    qty: String(orderDetails.qty),
-                    customer_name: orderDetails.name,
-                    customer_email: orderDetails.email,
-                    customer_phone: orderDetails.phone,
-                    company: orderDetails.company || '—',
-                    subtotal: orderDetails.subtotalFmt,
-                    discount: orderDetails.discountFmt,
-                    gst: orderDetails.gstFmt,
-                    total: orderDetails.totalFmt
-                })
-            );
-            return Promise.all(sends);
-        }
-
-        function showPaymentSuccess(response, orderDetails) {
-            // Always show the banner immediately — don't block on email
-            closeCheckoutModal();
-            showSuccessBanner(response.razorpay_payment_id, orderDetails.totalFmt, orderDetails.email, null);
-
-            // Send emails in background
-            sendOrderEmails(response, orderDetails)
-                .then(() => {
-                    // Update banner to show email sent
-                    const msg = document.getElementById('email-status-msg');
-                    if (msg) msg.innerHTML = '✅ Order confirmation sent to <strong>' + orderDetails.email + '</strong> and the Synergific ops team.';
-                })
-                .catch((err) => {
-                    console.error('Email error:', err);
-                    const msg = document.getElementById('email-status-msg');
-                    if (msg) msg.innerHTML = '⚠️ Payment captured. Please contact <strong>itops@synergificsoftware.com</strong> with Payment ID <strong>' + response.razorpay_payment_id + '</strong>.';
-                });
-        }
-
-        function showSuccessBanner(paymentId, totalFmt, email, _emailSent) {
-            const old = document.getElementById('success-banner');
-            if (old) old.remove();
-
-            const banner = document.createElement('div');
-            banner.id = 'success-banner';
-            banner.style.cssText = `
-            position:fixed; inset:0; z-index:200;
-            display:flex; align-items:center; justify-content:center;
-            background:rgba(15,23,42,0.7); backdrop-filter:blur(8px);
-        `;
-            banner.innerHTML = `
-            <div style="background:white;border:1px solid #edebe9;padding:32px 40px;max-width:460px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.2);animation:modalFadeIn 0.15s ease-out;">
-                <div style="width:56px;height:56px;background:#dff6dd;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border-radius:2px;">
-                    <i class="fas fa-check" style="font-size:22px;color:#107c10;"></i>
-                </div>
-                <div style="font-size:11px;font-weight:600;color:#107c10;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">Payment Successful</div>
-                <div style="font-size:20px;font-weight:600;color:#323130;margin-bottom:12px;">Your Lab is Being Provisioned</div>
-                <div style="font-size:13px;color:#605e5c;margin-bottom:24px;line-height:1.6;background:#f3f2f1;border:1px solid #edebe9;padding:12px 16px;text-align:left;">
-                    <div style="margin-bottom:4px;"><span style="color:#a19f9d;">Payment ID:</span> <strong style="color:#323130;">${paymentId}</strong></div>
-                    <div><span style="color:#a19f9d;">Amount Paid:</span> <strong style="color:#0078d4;">${totalFmt}</strong></div>
-                </div>
-                <div id="email-status-msg" style="font-size:12px;color:#605e5c;margin-bottom:20px;">⏳ Sending order confirmation...</div>
-                <button onclick="document.getElementById('success-banner').remove()"
-                    style="background:#0078d4;color:white;border:none;padding:8px 24px;font-size:14px;font-weight:600;cursor:pointer;font-family:Segoe UI,sans-serif;border-radius:2px;"
-                    onmouseover="this.style.background='#106ebe'" onmouseout="this.style.background='#0078d4'">
-                    Back to Store
-                </button>
-            </div>
-        `;
-            document.body.appendChild(banner);
-        }
-
-        window.onload = init;
-    </script>
-
     <!-- ISO 27001 Info Modal -->
     <div id="iso-modal"
         style="display:none;position:fixed;inset:0;z-index:150;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,0.5);">
@@ -2067,6 +950,1194 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // ─── CONFIG ──────────────────────────────────────────────────
+        const _k = (a) => atob(a.join(''));
+        const _c = {
+            rzp: ['cnpwX3Rl', 'c3RfU01s', 'MWJHUEx4', 'aHltYUw='],
+            esid: ['c2Vydmlj', 'ZV9xMGFz', 'YW44'],
+            etid: ['dGVtcGxh', 'dGVfb3R1', 'ZThxOA=='],
+            epk: ['X2JycjVC', 'c3ZFUzVI', 'bXkwQW4='],
+        };
+        let RAZORPAY_KEY_ID = null;
+
+        // ─── STATE ───────────────────────────────────────────────────
+        let activeCategory = 'SSL Labs';
+        let searchQuery = '';
+        let cart = [];
+        let isSidebarOpen = true;
+
+        // Current checkout context
+        let checkoutLab = null;
+        let checkoutPlan = 'daily';
+        let checkoutPrices = {};
+        let couponDiscount = 0;
+
+        // Valid coupons (demo)
+        const COUPONS = { 'SYNLAB10': 0.10, 'INFRA20': 0.20 };
+
+        // ─── DATA ────────────────────────────────────────────────────
+        const labData = {
+            'SSL Labs': [
+                { id: 'DD-01', name: 'Datadog Observability Mastery', infra: '₹180.00' },
+                { id: 'AI-01', name: 'Agentic AI: Multi-Agent Systems', infra: '₹320.00' },
+                { id: 'CA-01', name: 'Claude Agentic (Windows)', infra: '₹280.00' },
+                { id: 'CA-02', name: 'Claude Agentic (Unix) with Claude Code', infra: '₹300.00' },
+                { id: 'LG-01', name: 'Labs Generative', infra: '₹250.00' },
+                { id: 'AN-01', name: 'Ansible AAP', infra: '₹220.00' },
+                { id: 'DF-01', name: 'Data Fabrics DP 700', infra: '₹350.00' },
+                { id: 'VA-01', name: 'Vertex AI GCP', infra: '₹400.00' },
+                { id: 'GA-01', name: 'GCP APIGEE', infra: '₹380.00' },
+                { id: 'VS-01', name: 'Veeam Software Appliance', infra: '₹200.00' },
+                { id: 'VO-01', name: 'Veeam ONE', infra: '₹190.00' },
+                { id: 'VR-01', name: 'Veeam Recovery Orchestrator', infra: '₹210.00' },
+                { id: 'SP-01', name: 'Sharepoint Administrator', infra: '₹170.00' },
+                { id: 'SL-01', name: 'Suse Labs', infra: '₹160.00' }
+            ],
+            'Skillable Labs': [], 'Xtremelabs': [], 'Godeploy': [],
+            'Baremetal Servers': 'BAREMETAL',
+            'Cloud Portal Subscription': 'CLOUD_PORTAL',
+            'Exam Vouchers': 'EXAM_VOUCHERS',
+            'Help & Support': 'HELP_SUPPORT'
+        };
+
+        // ─── BAREMETAL DATA ──────────────────────────────────────────
+        const BAREMETAL_LINUX = [
+            { vcpu: 1, ram: 4, hourly: '₹2.46', monthly: '₹1,439', m6: '₹7,768', m12: '₹13,810' },
+            { vcpu: 2, ram: 8, hourly: '₹4.92', monthly: '₹2,872', m6: '₹15,511', m12: '₹27,574' },
+            { vcpu: 4, ram: 16, hourly: '₹9.84', monthly: '₹5,745', m6: '₹31,021', m12: '₹55,149' },
+            { vcpu: 8, ram: 32, hourly: '₹19.68', monthly: '₹11,493', m6: '₹62,065', m12: '₹110,337' },
+            { vcpu: 16, ram: 64, hourly: '₹39.36', monthly: '₹22,987', m6: '₹124,129', m12: '₹220,674' },
+            { vcpu: 32, ram: 128, hourly: '₹78.71', monthly: '₹45,969', m6: '₹248,233', m12: '₹441,303' },
+            { vcpu: 48, ram: 192, hourly: '₹93.01', monthly: '₹54,315', m6: '₹293,302', m12: '₹521,425' },
+            { vcpu: 56, ram: 224, hourly: '₹108.46', monthly: '₹63,341', m6: '₹342,040', m12: '₹608,072' },
+        ];
+        const BAREMETAL_WINDOWS = [
+            { vcpu: 1, ram: 4, hourly: '₹2.75', monthly: '₹1,609', m6: '₹8,788', m12: '₹15,850' },
+            { vcpu: 2, ram: 8, hourly: '₹5.50', monthly: '₹3,212', m6: '₹17,551', m12: '₹31,654' },
+            { vcpu: 4, ram: 16, hourly: '₹11.00', monthly: '₹6,425', m6: '₹35,101', m12: '₹63,309' },
+            { vcpu: 8, ram: 32, hourly: '₹22.01', monthly: '₹12,853', m6: '₹70,225', m12: '₹126,657' },
+            { vcpu: 16, ram: 64, hourly: '₹44.02', monthly: '₹25,707', m6: '₹140,449', m12: '₹253,314' },
+            { vcpu: 32, ram: 128, hourly: '₹88.03', monthly: '₹51,409', m6: '₹280,873', m12: '₹506,583' },
+            { vcpu: 48, ram: 192, hourly: '₹106.98', monthly: '₹62,475', m6: '₹342,262', m12: '₹619,345' },
+            { vcpu: 56, ram: 224, hourly: '₹124.76', monthly: '₹72,861', m6: '₹399,160', m12: '₹722,312' },
+        ];
+        let bmOS = 'linux';
+
+        // ─── CLOUD PORTAL SUBSCRIPTION DATA ─────────────────────────
+        const CLOUD_PORTAL_PLANS = [
+            {
+                id: 'AZ-SB',
+                name: 'Azure Sandbox',
+                logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg',
+                desc: 'Full Azure environment for hands-on cloud training and development.',
+                monthly: 2500,
+                halfMonthly: 1500,
+            },
+            {
+                id: 'AZ-AI',
+                name: 'Azure AI Sandbox',
+                logo: 'https://upload.wikimedia.org/wikipedia/commons/6/66/OpenAI_logo_2025_%28symbol%29.svg',
+                desc: 'Pre-configured Azure environment with AI/ML services and tools.',
+                monthly: 3000,
+                halfMonthly: 2200,
+            },
+            {
+                id: 'AZ-DB',
+                name: 'Azure Databricks',
+                logo: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Databricks-c40eaf44.png',
+                desc: 'Managed Databricks workspace on Azure for big data and analytics.',
+                monthly: 4500,
+                halfMonthly: 3000,
+            },
+            {
+                id: 'GCP-SB',
+                name: 'GCP Sandbox',
+                logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg',
+                desc: 'Isolated Google Cloud environment for learning and development.',
+                monthly: 3000,
+                halfMonthly: 2200,
+            },
+        ];
+
+        // ─── EXAM VOUCHER DATA ───────────────────────────────────────
+        const EXAM_VENDORS = [
+            { key: 'comptia', name: 'CompTIA', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/62/Comptia-logo.svg', color: '#c8202f', exams: [] },
+            { key: 'lf', name: 'Linux Foundation', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fd/Linux_Foundation_logo_2013.svg', color: '#003366', exams: [] },
+            { key: 'aws', name: 'AWS', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg', color: '#ff9900', exams: [] },
+            { key: 'microsoft', name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg', color: '#0078d4', exams: [] },
+            { key: 'google', name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg', color: '#4285f4', exams: [] },
+            { key: 'redhat', name: 'Red Hat', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg', color: '#cc0000', exams: [] },
+            { key: 'cisco', name: 'Cisco', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg', color: '#1ba0d7', exams: [] },
+            { key: 'oracle', name: 'Oracle', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg', color: '#f80000', exams: [] },
+            { key: 'paloalto', name: 'Palo Alto', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Palo_Alto_Networks_logo.svg', color: '#fa5820', exams: [] },
+            { key: 'salesforce', name: 'Salesforce', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg', color: '#00a1e0', exams: [] },
+            { key: 'citrix', name: 'Citrix', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Citrix-logo.svg', color: '#452170', exams: [] },
+        ];
+        let activeVendor = 'comptia';
+
+        // ─── CSV CONFIG ──────────────────────────────────────────────
+        const CSV_CATEGORIES = ['Skillable Labs', 'Xtremelabs', 'Godeploy'];
+        const CSV_CAT_MAP = {
+            'skillable': 'Skillable Labs',
+            'xtremelabs': 'Xtremelabs',
+            'xtreme': 'Xtremelabs',
+            'godeploy': 'Godeploy'
+        };
+        const EXAM_CSV_CAT_MAP = {
+            'comptia': 'comptia', 'linux foundation': 'lf', 'linuxfoundation': 'lf',
+            'linux_foundation': 'lf', 'lf': 'lf', 'aws': 'aws', 'microsoft': 'microsoft',
+            'google': 'google', 'redhat': 'redhat', 'red hat': 'redhat', 'red_hat': 'redhat',
+            'cisco': 'cisco', 'oracle': 'oracle', 'palo alto': 'paloalto', 'paloalto': 'paloalto',
+            'salesforce': 'salesforce', 'citrix': 'citrix',
+        };
+
+        const features = [
+            { icon: 'fa-box-open', text: "Isolated Lab Environment" },
+            { icon: 'fa-headset', text: "24/7 human support" },
+            { icon: 'fa-certificate', text: "SOC 1 & SOC 2 compliant" }
+        ];
+
+        const menuItems = [
+            { name: 'SSL Labs', icon: 'fa-shield-halved' },
+            { name: 'Skillable Labs', icon: 'fa-server' },
+            { name: 'Xtremelabs', icon: 'fa-microchip' },
+            { name: 'Godeploy', icon: 'fa-globe' },
+            { name: 'Baremetal Servers', icon: 'fa-cloud' },
+            { name: 'Cloud Portal Subscription', icon: 'fa-credit-card' },
+            { name: 'Exam Vouchers', icon: 'fa-certificate' },
+            { name: 'Help & Support', icon: 'fa-circle-question' },
+        ];
+
+        // ─── PRICE HELPERS ───────────────────────────────────────────
+        function rawPrice(val) {
+            if (typeof val === 'number') return val;
+            return parseFloat(String(val).replace(/[₹$,]/g, '')) || 0;
+        }
+
+        function calculatePrices(val) {
+            const daily = rawPrice(val);
+            const weekly = daily * 7 * 0.9;
+            return { daily, weekly, dailyFmt: fmtINR(daily), weeklyFmt: fmtINR(weekly) };
+        }
+
+        function fmtINR(n) {
+            return n.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
+        }
+
+        // ─── FAQ TOGGLE ──────────────────────────────────────────────
+        function toggleFaq(id) {
+            const body = document.getElementById('faq-body-' + id);
+            const icon = document.getElementById('faq-icon-' + id);
+            if (!body) return;
+            const isOpen = body.classList.contains('open');
+            document.querySelectorAll('.support-faq-body').forEach(el => el.classList.remove('open'));
+            document.querySelectorAll('.faq-chevron').forEach(el => el.style.transform = 'rotate(0deg)');
+            if (!isOpen) {
+                body.classList.add('open');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // ─── RENDER HELP & SUPPORT ───────────────────────────────────
+        function renderHelpSupport() {
+            const faqs = [
+                { id: 1, q: 'How long does lab provisioning take after payment?', a: 'Most lab environments are provisioned within 15–30 minutes of payment confirmation. For Baremetal servers, provisioning may take up to 2 business hours. You will receive an email with access credentials once the environment is ready.' },
+                { id: 2, q: 'What payment methods are supported?', a: 'We accept all major UPI apps (GPay, PhonePe, Paytm), credit/debit cards (Visa, Mastercard, RuPay), net banking from 50+ banks, and EMI options via Razorpay. All transactions are secured with 256-bit TLS encryption.' },
+                { id: 3, q: 'Can I extend my lab subscription after purchase?', a: 'Yes. You can raise a renewal request via email or WhatsApp before your lab expiry. Our ops team will send you a renewal invoice. Labs are typically extended within 1 business hour of payment confirmation.' },
+                { id: 4, q: 'What is the refund / cancellation policy?', a: 'Refunds are available within 24 hours of purchase if the lab has not been accessed. Post-access, prorated refunds may be considered on a case-by-case basis. Exam vouchers are non-refundable once delivered. Contact itops@synergificsoftware.com for refund requests.' },
+                { id: 5, q: 'Are the lab environments accessible from anywhere?', a: 'Yes. Labs are browser-accessible via RDP/SSH tunneled through our secure gateway. No VPN is required. Compatible with Chrome, Edge, and Firefox on any OS. Mobile access is supported but desktop is recommended for an optimal experience.' },
+                { id: 6, q: 'How do I get my exam voucher after payment?', a: 'Exam vouchers are delivered digitally to your registered email address within 24 hours of payment confirmation. For bulk orders (5+), please allow up to 48 hours. Contact support if you haven\'t received your voucher within the stated timeline.' },
+                { id: 7, q: 'Is my data secure in Synergific lab environments?', a: 'Absolutely. Synergific is ISO/IEC 27001:2022 certified (Cert: TSNUK05009). All lab environments are isolated, SOC 1 & SOC 2 compliant, and hosted in Tier-4/5 data centres. Data at rest and in transit is encrypted. No customer data is shared across tenants.' },
+            ];
+
+            const faqHtml = faqs.map(f => `
+                <div class="support-faq-item">
+                    <button class="support-faq-trigger" onclick="toggleFaq(${f.id})">
+                        <span>${f.q}</span>
+                        <i id="faq-icon-${f.id}" class="fas fa-chevron-down faq-chevron" style="font-size:11px;color:var(--az-text-muted);transition:transform 0.2s;flex-shrink:0;margin-left:12px;"></i>
+                    </button>
+                    <div id="faq-body-${f.id}" class="support-faq-body">${f.a}</div>
+                </div>
+            `).join('');
+
+            return `
+            <div style="max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:20px;">
+                <div style="background:var(--az-blue);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;">
+                    <div>
+                        <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Support Center</div>
+                        <div style="font-size:22px;font-weight:600;color:white;">Help &amp; Support</div>
+                        <div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:4px;">Our L3 engineering team is available 24 × 7 for all your infrastructure needs.</div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);padding:8px 16px;border-radius:2px;">
+                        <span class="support-status-dot"></span>
+                        <span style="font-size:12px;color:white;font-weight:600;">All Systems Operational</span>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Contact Channels</div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;">
+                        <div class="support-channel-card">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div style="width:36px;height:36px;background:var(--az-blue-xlight);border:1px solid var(--az-blue-light);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-envelope" style="color:var(--az-blue);font-size:14px;"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size:13px;font-weight:600;color:var(--az-text);">Email Support</div>
+                                    <div style="font-size:11px;color:var(--az-text-muted);">Response within 2 hrs</div>
+                                </div>
+                            </div>
+                            <div style="font-size:12px;color:var(--az-text-sub);padding:8px 10px;background:var(--az-bg);border:1px solid var(--az-border);">itops@synergificsoftware.com</div>
+                            <a href="mailto:itops@synergificsoftware.com" class="btn-primary" style="font-size:12px;padding:7px 12px;justify-content:center;text-decoration:none;">
+                                <i class="fas fa-paper-plane" style="font-size:11px;"></i> Send Email
+                            </a>
+                        </div>
+                        <div class="support-channel-card">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div style="width:36px;height:36px;background:#dff6dd;border:1px solid #9fd89f;border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fab fa-whatsapp" style="color:#107c10;font-size:16px;"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size:13px;font-weight:600;color:var(--az-text);">WhatsApp</div>
+                                    <div style="font-size:11px;color:var(--az-text-muted);">Instant responses · 24/7</div>
+                                </div>
+                            </div>
+                            <div style="font-size:12px;color:var(--az-text-sub);padding:8px 10px;background:var(--az-bg);border:1px solid var(--az-border);">+91 70044 03223</div>
+                            <a href="https://wa.me/917004403223" target="_blank" style="background:#107c10;color:white;border:1px solid #107c10;border-radius:2px;padding:7px 12px;font-size:12px;font-weight:600;font-family:Segoe UI,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;"
+                                onmouseover="this.style.background='#0b5e0b'" onmouseout="this.style.background='#107c10'">
+                                <i class="fab fa-whatsapp" style="font-size:13px;"></i> Chat on WhatsApp
+                            </a>
+                        </div>
+                        <div class="support-channel-card">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div style="width:36px;height:36px;background:#fdf2f2;border:1px solid #f4b8b8;border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-phone" style="color:var(--az-red);font-size:14px;"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size:13px;font-weight:600;color:var(--az-text);">Phone / Call</div>
+                                    <div style="font-size:11px;color:var(--az-text-muted);">Direct L3 engineers · 24/7</div>
+                                </div>
+                            </div>
+                            <div style="font-size:12px;color:var(--az-text-sub);padding:8px 10px;background:var(--az-bg);border:1px solid var(--az-border);">+91 70044 03223</div>
+                            <a href="tel:+917004403223" class="btn-secondary" style="font-size:12px;padding:7px 12px;justify-content:center;text-decoration:none;">
+                                <i class="fas fa-phone" style="font-size:11px;"></i> Call Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Send Us a Message</div>
+                    <div style="background:var(--az-surface);border:1px solid var(--az-border);padding:20px 24px;">
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                            <div>
+                                <label class="form-label">Full Name <span style="color:var(--az-red);">*</span></label>
+                                <input id="sup-name" type="text" class="checkout-input" placeholder="John Smith">
+                            </div>
+                            <div>
+                                <label class="form-label">Email Address <span style="color:var(--az-red);">*</span></label>
+                                <input id="sup-email" type="email" class="checkout-input" placeholder="you@company.com">
+                            </div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                            <div>
+                                <label class="form-label">Phone Number</label>
+                                <input id="sup-phone" type="tel" class="checkout-input" placeholder="+91 98765 43210">
+                            </div>
+                            <div>
+                                <label class="form-label">Subject <span style="color:var(--az-red);">*</span></label>
+                                <select id="sup-subject" class="checkout-input" style="cursor:pointer;">
+                                    <option value="">— Select a topic —</option>
+                                    <option value="Lab Access / Credential Issue">Lab Access / Credential Issue</option>
+                                    <option value="Payment / Billing Query">Payment / Billing Query</option>
+                                    <option value="Lab Provisioning Delay">Lab Provisioning Delay</option>
+                                    <option value="Exam Voucher Delivery">Exam Voucher Delivery</option>
+                                    <option value="Renewal / Extension Request">Renewal / Extension Request</option>
+                                    <option value="Refund Request">Refund Request</option>
+                                    <option value="Technical / Infrastructure Issue">Technical / Infrastructure Issue</option>
+                                    <option value="General Query">General Query</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-bottom:16px;">
+                            <label class="form-label">Message <span style="color:var(--az-red);">*</span></label>
+                            <textarea id="sup-message" class="checkout-input" rows="4" placeholder="Describe your issue or query in detail..." style="resize:vertical;min-height:96px;"></textarea>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                            <div id="sup-status" style="font-size:12px;color:var(--az-text-sub);display:none;"></div>
+                            <button id="sup-submit-btn" onclick="sendSupportEmail()" class="btn-primary" style="padding:9px 28px;font-size:13px;margin-left:auto;">
+                                <i class="fas fa-paper-plane" style="font-size:11px;"></i> Submit Request
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Response Time SLA</div>
+                    <div style="background:var(--az-surface);border:1px solid var(--az-border);overflow:hidden;">
+                        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                            <thead>
+                                <tr style="background:var(--az-bg);border-bottom:2px solid var(--az-border);">
+                                    <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Issue Type</th>
+                                    <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Channel</th>
+                                    <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">First Response</th>
+                                    <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Resolution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom:1px solid var(--az-border);">
+                                    <td style="padding:10px 16px;font-weight:600;color:var(--az-red);">P1 — Lab Down / Payment Issue</td>
+                                    <td style="padding:10px 16px;color:var(--az-text-sub);">WhatsApp · Phone</td>
+                                    <td style="padding:10px 16px;"><span style="background:var(--az-green-light);color:var(--az-green);font-size:11px;font-weight:600;padding:2px 8px;border-radius:2px;">15 mins</span></td>
+                                    <td style="padding:10px 16px;color:var(--az-text-sub);">2 hours</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid var(--az-border);background:var(--az-bg);">
+                                    <td style="padding:10px 16px;font-weight:600;color:#c87c00;">P2 — Access / Credential Reset</td>
+                                    <td style="padding:10px 16px;color:var(--az-text-sub);">Email · Ticket</td>
+                                    <td style="padding:10px 16px;"><span style="background:var(--az-blue-xlight);color:var(--az-blue);font-size:11px;font-weight:600;padding:2px 8px;border-radius:2px;">1 hour</span></td>
+                                    <td style="padding:10px 16px;color:var(--az-text-sub);">4 hours</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid var(--az-border);">
+                                    <td style="padding:10px 16px;font-weight:600;color:var(--az-text);">P3 — General Queries</td>
+                                    <td style="padding:10px 16px;color:var(--az-text-sub);">Email · Ticket</td>
+                                    <td style="padding:10px 16px;"><span style="background:var(--az-hover);color:var(--az-text-sub);font-size:11px;font-weight:600;padding:2px 8px;border-radius:2px;">2 hours</span></td>
+                                    <td style="padding:10px 16px;color:var(--az-text-sub);">1 business day</td>
+                                </tr>
+                                <tr style="background:var(--az-bg);">
+                                    <td style="padding:10px 16px;font-weight:600;color:var(--az-text);">P4 — Feature Requests</td>
+                                    <td style="padding:10px 16px;color:var(--az-text-sub);">Email</td>
+                                    <td style="padding:10px 16px;"><span style="background:var(--az-hover);color:var(--az-text-sub);font-size:11px;font-weight:600;padding:2px 8px;border-radius:2px;">1 business day</span></td>
+                                    <td style="padding:10px 16px;color:var(--az-text-sub);">Reviewed weekly</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Frequently Asked Questions</div>
+                    <div style="display:flex;flex-direction:column;gap:4px;">${faqHtml}</div>
+                </div>
+                <div style="background:var(--az-surface);border:1px solid var(--az-border);padding:14px 20px;display:flex;align-items:center;gap:16px;">
+                    <div style="width:40px;height:40px;background:var(--az-blue);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <i class="fas fa-certificate" style="color:white;font-size:18px;"></i>
+                    </div>
+                    <div style="flex:1;">
+                        <div style="font-size:13px;font-weight:600;color:var(--az-text);margin-bottom:2px;">ISO/IEC 27001:2022 Certified Infrastructure</div>
+                        <div style="font-size:12px;color:var(--az-text-sub);">Your data and lab environments are protected under our certified Information Security Management System. Cert #TSNUK05009 · Valid until 29 March 2027.</div>
+                    </div>
+                    <button onclick="toggleISOModal()" class="btn-secondary" style="font-size:12px;white-space:nowrap;">
+                        <i class="fas fa-external-link-alt" style="font-size:10px;"></i> View Certificate
+                    </button>
+                </div>
+            </div>`;
+        }
+
+        // ─── INIT ─────────────────────────────────────────────────────
+        const LEARN_MORE_FEATURES = [
+            { icon: 'fa-server', title: 'Tier 4/5 DCs', desc: 'Infrastructure in Tier-4 & Tier-5 centers for unmatched uptime.' },
+            { icon: 'fa-certificate', title: 'SOC 1 & 2', desc: 'Full audit compliance for global financial and tech standards.' },
+            { icon: 'fa-sync', title: 'Zero Disruption', desc: 'Free migration support ensuring 100% workflow continuity.' },
+            { icon: 'fa-shield-alt', title: 'Custom Security', desc: 'Granular security group configurations for complex stacks.' },
+            { icon: 'fa-bolt', title: 'Risk-Free PoC', desc: 'Complimentary 7-day test environment, no commitment.' },
+            { icon: 'fa-infinity', title: 'No Bandwidth Fees', desc: 'Unlimited data transfer with absolute price transparency.' },
+        ];
+
+        async function init() {
+            RAZORPAY_KEY_ID = _k(_c.rzp);
+            emailjs.init(_k(_c.epk));
+            renderMenu();
+            renderLabs();
+            renderLearnMoreFeatures();
+            await loadCSVFromServer();
+        }
+
+        function renderLearnMoreFeatures() {
+            const container = document.getElementById('learn-more-features');
+            if (!container) return;
+            container.innerHTML = LEARN_MORE_FEATURES.map(f =>
+                '<div style="background:var(--az-bg);border:1px solid var(--az-border);padding:14px;">' +
+                '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
+                '<div style="width:28px;height:28px;background:var(--az-blue);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:2px;flex-shrink:0;"><i class="fas ' + f.icon + '"></i></div>' +
+                '<div style="font-size:13px;font-weight:600;color:var(--az-text);">' + f.title + '</div>' +
+                '</div>' +
+                '<div style="font-size:12px;color:var(--az-text-sub);line-height:1.5;">' + f.desc + '</div>' +
+                '</div>'
+            ).join('');
+        }
+
+        async function loadCSVFromServer() {
+            await Promise.all([fetchLabsCSV(), fetchExamsCSV()]);
+        }
+
+        async function fetchLabsCSV() {
+            try {
+                const res = await fetch('labs-data.csv');
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const text = await res.text();
+                parseCSVIntoLabData(text);
+                if (CSV_CATEGORIES.includes(activeCategory)) renderLabs();
+            } catch (e) {
+                console.warn('labs-data.csv fetch failed:', e.message);
+                if (CSV_CATEGORIES.includes(activeCategory)) renderLabs();
+            }
+        }
+
+        async function fetchExamsCSV() {
+            try {
+                const res = await fetch('exams-data.csv');
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const text = await res.text();
+                parseCSVIntoExamData(text);
+                if (activeCategory === 'Exam Vouchers') renderLabs();
+            } catch (e) {
+                console.warn('exams-data.csv fetch failed:', e.message);
+                if (activeCategory === 'Exam Vouchers') renderLabs();
+            }
+        }
+
+        function parseCSVIntoLabData(text) {
+            CSV_CATEGORIES.forEach(cat => { labData[cat] = labData[cat].filter(l => !l.isCSV); });
+            const rows = text.trim().split(/\r?\n/);
+            const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
+            rows.slice(1).forEach(row => {
+                if (!row.trim()) return;
+                const cols = [];
+                let cur = '', inQ = false;
+                for (const ch of row) {
+                    if (ch === '"') { inQ = !inQ; }
+                    else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+                    else cur += ch;
+                }
+                cols.push(cur.trim());
+                const obj = {};
+                headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, '').trim());
+                const catKey = (obj.category || '').toLowerCase().trim();
+                const storeCat = CSV_CAT_MAP[catKey];
+                if (!storeCat) return;
+                labData[storeCat].push({ id: obj.code, name: obj.name, infra: parseFloat(obj.price) || 0, category: obj.category, isCSV: true });
+            });
+        }
+
+        function parseCSVIntoExamData(text) {
+            EXAM_VENDORS.forEach(v => { v.exams = v.exams.filter(e => !e.isCSV); });
+            const rows = text.trim().split(/\r?\n/);
+            const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
+            rows.slice(1).forEach(row => {
+                if (!row.trim()) return;
+                const cols = [];
+                let cur = '', inQ = false;
+                for (const ch of row) {
+                    if (ch === '"') { inQ = !inQ; }
+                    else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+                    else cur += ch;
+                }
+                cols.push(cur.trim());
+                const obj = {};
+                headers.forEach((h, i) => obj[h] = (cols[i] || '').replace(/^"|"$/g, '').trim());
+                const catKey = (obj.category || '').toLowerCase().trim();
+                const vendorKey = EXAM_CSV_CAT_MAP[catKey];
+                if (!vendorKey) return;
+                const vendor = EXAM_VENDORS.find(v => v.key === vendorKey);
+                if (!vendor) return;
+                vendor.exams.push({ code: obj.code, name: obj.name, price: parseFloat(obj.price) || 0, isCSV: true });
+            });
+        }
+
+        function setCategory(cat) {
+            activeCategory = cat;
+            document.getElementById('breadcrumb-active').innerText = cat;
+            document.getElementById('category-title').innerText = cat === 'SSL Labs' ? 'SSL Labs Store' : cat;
+            renderMenu(); renderLabs();
+        }
+
+        function handleSearch(val) { searchQuery = val.toLowerCase(); renderLabs(); }
+        function clearSearch() {
+            searchQuery = '';
+            const inp = document.getElementById('search-input');
+            if (inp) inp.value = '';
+            renderLabs();
+        }
+
+        function toggleSidebar() {
+            isSidebarOpen = !isSidebarOpen;
+            document.getElementById('sidebar').style.width = isSidebarOpen ? '16rem' : '4.5rem';
+            document.getElementById('toggle-icon').className = isSidebarOpen ? 'fas fa-chevron-left text-sm' : 'fas fa-chevron-right text-sm';
+            renderMenu();
+        }
+
+        function togglePolicyModal() {
+            const m = document.getElementById('policy-modal');
+            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+        }
+        function toggleLearnMore() {
+            const m = document.getElementById('learn-more-modal');
+            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+        }
+        function toggleISOModal() {
+            const m = document.getElementById('iso-modal');
+            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // ─── RENDER ──────────────────────────────────────────────────
+        function renderMenu() {
+            document.getElementById('nav-menu').innerHTML = menuItems.map(item => `
+                <button onclick="setCategory('${item.name}')"
+                    class="az-nav-item ${activeCategory === item.name ? 'active' : ''}">
+                    <i class="fas ${item.icon} nav-icon"></i>
+                    ${isSidebarOpen ? `<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.name}</span>` : ''}
+                </button>
+            `).join('');
+        }
+
+        function renderLabs() {
+            const grid = document.getElementById('labs-grid');
+            const empty = document.getElementById('empty-state');
+
+            if (activeCategory === 'Baremetal Servers') {
+                grid.style.display = 'block'; empty.style.display = 'none';
+                grid.style.gridTemplateColumns = '';
+                grid.innerHTML = renderBaremetal();
+                return;
+            }
+            if (activeCategory === 'Cloud Portal Subscription') {
+                grid.style.display = 'grid';
+                grid.style.gridTemplateColumns = 'repeat(auto-fill,minmax(300px,1fr))';
+                empty.style.display = 'none';
+                grid.innerHTML = CLOUD_PORTAL_PLANS.map(renderCloudCard).join('');
+                return;
+            }
+            if (activeCategory === 'Exam Vouchers') {
+                grid.style.display = 'block';
+                grid.style.gridTemplateColumns = '';
+                empty.style.display = 'none';
+                grid.innerHTML = renderExamVouchers();
+                return;
+            }
+            if (activeCategory === 'Help & Support') {
+                grid.style.display = 'block';
+                grid.style.gridTemplateColumns = '';
+                empty.style.display = 'none';
+                grid.innerHTML = renderHelpSupport();
+                return;
+            }
+
+            grid.style.gridTemplateColumns = 'repeat(auto-fill,minmax(300px,1fr))';
+            const list = labData[activeCategory] || [];
+            const filtered = list.filter(lab =>
+                lab.name.toLowerCase().includes(searchQuery) ||
+                lab.id.toLowerCase().includes(searchQuery) ||
+                (lab.category && lab.category.toLowerCase().includes(searchQuery))
+            );
+            if (filtered.length === 0) {
+                grid.style.display = 'none'; empty.style.display = 'flex'; return;
+            }
+            grid.style.display = 'grid'; empty.style.display = 'none';
+            grid.innerHTML = filtered.map(lab => renderCard(lab)).join('');
+        }
+
+        function renderBaremetal() {
+            const rows = bmOS === 'linux' ? BAREMETAL_LINUX : BAREMETAL_WINDOWS;
+            const osLabel = bmOS === 'linux' ? 'Linux' : 'Windows';
+            const tableRows = rows.map((r, i) => `
+                <tr style="border-bottom:1px solid var(--az-border);${i % 2 === 0 ? 'background:var(--az-bg);' : 'background:white;'}">
+                    <td style="padding:10px 16px;font-weight:600;color:var(--az-blue);">${r.vcpu} vCPU</td>
+                    <td style="padding:10px 16px;color:var(--az-text-sub);">${r.ram} GB</td>
+                    <td style="padding:10px 16px;font-weight:600;color:var(--az-text);">${r.hourly}</td>
+                    <td style="padding:10px 16px;color:var(--az-text);">${r.monthly}</td>
+                    <td style="padding:10px 16px;">
+                        <span style="color:var(--az-text);">${r.m6}</span>
+                        <span style="display:inline-block;margin-left:6px;background:var(--az-green-light);color:var(--az-green);font-size:10px;font-weight:600;padding:1px 6px;border-radius:2px;">10% OFF</span>
+                    </td>
+                    <td style="padding:10px 16px;">
+                        <span style="color:var(--az-text);">${r.m12}</span>
+                        <span style="display:inline-block;margin-left:6px;background:var(--az-blue-xlight);color:var(--az-blue);font-size:10px;font-weight:600;padding:1px 6px;border-radius:2px;">20% OFF</span>
+                    </td>
+                    <td style="padding:10px 16px;">
+                        <button onclick="openBaremetalCheckout(${i}, '${bmOS}')"
+                            class="btn-primary" style="font-size:12px;padding:5px 14px;white-space:nowrap;">
+                            <i class="fas fa-bolt" style="font-size:10px;"></i> Buy Now
+                        </button>
+                    </td>
+                </tr>`).join('');
+
+            return `
+            <div style="background:var(--az-surface);border:1px solid var(--az-border);">
+                <div style="display:flex;border-bottom:1px solid var(--az-border);padding:0 16px;gap:0;">
+                    <button onclick="setBmOS('linux')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${bmOS === 'linux' ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${bmOS === 'linux' ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
+                        <i class="fab fa-linux" style="margin-right:6px;"></i>Linux
+                    </button>
+                    <button onclick="setBmOS('windows')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${bmOS === 'windows' ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${bmOS === 'windows' ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
+                        <i class="fab fa-windows" style="margin-right:6px;"></i>Windows
+                    </button>
+                </div>
+                <div style="padding:8px 16px;background:var(--az-blue-xlight);border-bottom:1px solid var(--az-blue-light);font-size:12px;color:var(--az-blue);display:flex;align-items:center;gap:8px;">
+                    <i class="fas fa-info-circle"></i>
+                    Prices shown for <strong>${osLabel}</strong> instances. 6-month billing saves 10%, 12-month saves 20%.
+                </div>
+                <div style="overflow-x:auto;">
+                    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                        <thead>
+                            <tr style="background:var(--az-surface);border-bottom:2px solid var(--az-border);">
+                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">vCPUs</th>
+                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">RAM</th>
+                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Hourly</th>
+                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Monthly</th>
+                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">6 Monthly</th>
+                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">12 Monthly</th>
+                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>${tableRows}</tbody>
+                    </table>
+                </div>
+            </div>`;
+        }
+
+        function setBmOS(os) { bmOS = os; renderLabs(); }
+
+        function renderCloudCard(plan) {
+            return `
+            <div class="lab-card" style="padding:16px;" id="card-${plan.id}">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+                    <span class="az-tag">${plan.id}</span>
+                    <div style="width:40px;height:40px;border-radius:2px;background:white;border:1px solid var(--az-border);display:flex;align-items:center;justify-content:center;padding:4px;">
+                        <img src="${plan.logo}" alt="${plan.name}" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'">
+                    </div>
+                </div>
+                <div style="font-size:15px;font-weight:600;color:var(--az-text);margin-bottom:6px;line-height:1.4;">${plan.name}</div>
+                <div style="font-size:12px;color:var(--az-text-muted);margin-bottom:14px;line-height:1.5;">${plan.desc}</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:14px;padding:4px;background:var(--az-bg);border:1px solid var(--az-border);" id="cp-toggle-${plan.id}">
+                    <div class="price-option active" style="padding:8px 10px;" onclick="selectCloudPlan(this, '${plan.id}', 'monthly')">
+                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">Monthly</div>
+                        <div style="font-size:14px;font-weight:600;color:var(--az-text);">&#8377;${plan.monthly.toLocaleString('en-IN')}</div>
+                    </div>
+                    <div class="price-option" style="padding:8px 10px;" onclick="selectCloudPlan(this, '${plan.id}', 'halfmonthly')">
+                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">15 Days</div>
+                        <div style="font-size:14px;font-weight:600;color:var(--az-text);">&#8377;${plan.halfMonthly.toLocaleString('en-IN')}</div>
+                    </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto;">
+                    <button onclick="addCloudToCart('${plan.id}')" class="btn-secondary" style="font-size:12px;padding:6px 10px;justify-content:center;">
+                        <i class="fas fa-cart-plus" style="font-size:11px;"></i> Add to Cart
+                    </button>
+                    <button onclick="openCloudCheckout('${plan.id}')" class="btn-primary" style="font-size:12px;padding:6px 10px;justify-content:center;">
+                        <i class="fas fa-bolt" style="font-size:11px;"></i> Buy Now
+                    </button>
+                </div>
+            </div>`;
+        }
+
+        function renderExamVouchers() {
+            const vendor = EXAM_VENDORS.find(v => v.key === activeVendor);
+            const tableRows = vendor.exams.map((e, i) => `
+                <tr style="border-bottom:1px solid var(--az-border);${i % 2 === 0 ? 'background:var(--az-bg);' : 'background:white;'}">
+                    <td style="padding:10px 16px;">
+                        <span class="az-tag" style="background:${vendor.color}12;color:${vendor.color};border-color:${vendor.color}33;">${e.code}</span>
+                    </td>
+                    <td style="padding:10px 16px;font-weight:600;color:var(--az-text);">${e.name}</td>
+                    <td style="padding:10px 16px;font-size:15px;font-weight:700;color:var(--az-blue);">&#8377;${e.price.toLocaleString('en-IN')}</td>
+                    <td style="padding:10px 16px;">
+                        <button onclick="openExamCheckout('${vendor.key}', ${i})"
+                            class="btn-primary" style="font-size:12px;padding:5px 14px;white-space:nowrap;">
+                            <i class="fas fa-ticket-alt" style="font-size:10px;"></i> Buy Voucher
+                        </button>
+                    </td>
+                </tr>`).join('');
+
+            const vendorTabs = EXAM_VENDORS.map(v => `
+                <button onclick="setExamVendor('${v.key}')" title="${v.name}" style="display:flex;align-items:center;gap:6px;padding:10px 14px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${activeVendor === v.key ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${activeVendor === v.key ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
+                    <img src="${v.logo}" alt="${v.name}" style="height:20px;object-fit:contain;max-width:80px;" onerror="this.style.display='none'">
+                    ${v.key === 'microsoft' || v.key === 'paloalto' ? '<span>' + v.name + '</span>' : ''}
+                </button>`).join('');
+
+            return `
+            <div style="background:var(--az-surface);border:1px solid var(--az-border);">
+                <div style="display:flex;border-bottom:1px solid var(--az-border);padding:0 16px;gap:0;overflow-x:auto;">${vendorTabs}</div>
+                <div style="padding:8px 16px;background:var(--az-blue-xlight);border-bottom:1px solid var(--az-blue-light);font-size:12px;color:var(--az-blue);display:flex;align-items:center;gap:8px;">
+                    <i class="fas fa-info-circle"></i>
+                    Voucher prices are per candidate · Delivered digitally within 24 hours of payment confirmation.
+                </div>
+                <div style="overflow-x:auto;">
+                    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                        <thead>
+                            <tr style="background:var(--az-surface);border-bottom:2px solid var(--az-border);">
+                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:120px;">Code</th>
+                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Exam Name</th>
+                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:140px;">Price (INR)</th>
+                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:140px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>${tableRows}</tbody>
+                    </table>
+                </div>
+            </div>`;
+        }
+
+        function setExamVendor(key) { activeVendor = key; renderLabs(); }
+
+        function openExamCheckout(vendorKey, examIdx) {
+            const vendor = EXAM_VENDORS.find(v => v.key === vendorKey);
+            const exam = vendor.exams[examIdx];
+            checkoutLab = { id: exam.code, name: exam.name, infra: exam.price, isExam: true };
+            checkoutPlan = 'fixed';
+            checkoutPrices = { daily: exam.price, weekly: exam.price, dailyFmt: '&#8377;' + exam.price.toLocaleString('en-IN'), weeklyFmt: '&#8377;' + exam.price.toLocaleString('en-IN'), selectedAmt: exam.price };
+            couponDiscount = 0;
+            document.getElementById('form-lab-name').value = exam.name;
+            document.getElementById('form-lab-id').value = exam.code + ' · ' + vendor.name;
+            document.getElementById('form-plan').style.display = 'block';
+            document.getElementById('form-plan-select').style.display = 'none';
+            document.getElementById('form-plan').value = 'Exam Voucher — &#8377;' + exam.price.toLocaleString('en-IN');
+            document.getElementById('form-qty').value = 1;
+            document.getElementById('form-name').value = '';
+            document.getElementById('form-email').value = '';
+            document.getElementById('form-phone').value = '';
+            document.getElementById('form-company').value = '';
+            document.getElementById('form-coupon').value = '';
+            document.getElementById('coupon-msg').style.display = 'none';
+            document.getElementById('discount-row').style.display = 'none';
+            updateSummary();
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+
+        const cloudPlanSelection = {};
+
+        function selectCloudPlan(el, planId, tier) {
+            const siblings = el.parentElement.querySelectorAll('.price-option');
+            siblings.forEach(s => s.classList.remove('active'));
+            el.classList.add('active');
+            cloudPlanSelection[planId] = tier;
+        }
+
+        function addCloudToCart(planId) {
+            const plan = CLOUD_PORTAL_PLANS.find(p => p.id === planId);
+            if (plan) { cart.push(plan); updateCartUI(); }
+        }
+
+        function openCloudCheckout(planId) {
+            const plan = CLOUD_PORTAL_PLANS.find(p => p.id === planId);
+            if (!plan) return;
+            const tier = cloudPlanSelection[planId] || 'monthly';
+            const price = tier === 'monthly' ? plan.monthly : plan.halfMonthly;
+            checkoutLab = { id: plan.id, name: plan.name, infra: price, isCloudPortal: true };
+            checkoutPlan = tier;
+            checkoutPrices = { daily: price, weekly: price, monthly: plan.monthly, halfmonthly: plan.halfMonthly, dailyFmt: '&#8377;' + price.toLocaleString('en-IN'), weeklyFmt: '&#8377;' + price.toLocaleString('en-IN'), selectedAmt: price };
+            couponDiscount = 0;
+            document.getElementById('form-lab-name').value = plan.name;
+            document.getElementById('form-lab-id').value = plan.id;
+            document.getElementById('form-plan').style.display = 'none';
+            document.getElementById('form-plan-select').style.display = 'block';
+            const sel = document.getElementById('form-plan-select');
+            sel.innerHTML = `
+                <option value="monthly" ${tier === 'monthly' ? 'selected' : ''}>Monthly — &#8377;${plan.monthly.toLocaleString('en-IN')}</option>
+                <option value="halfmonthly" ${tier === 'halfmonthly' ? 'selected' : ''}>15 Days — &#8377;${plan.halfMonthly.toLocaleString('en-IN')}</option>
+            `;
+            sel.onchange = function () { onCloudPlanChange(this.value, plan); };
+            document.getElementById('form-qty').value = 1;
+            document.getElementById('form-name').value = '';
+            document.getElementById('form-email').value = '';
+            document.getElementById('form-phone').value = '';
+            document.getElementById('form-company').value = '';
+            document.getElementById('form-coupon').value = '';
+            document.getElementById('coupon-msg').style.display = 'none';
+            document.getElementById('discount-row').style.display = 'none';
+            updateSummary();
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+
+        function onCloudPlanChange(val, plan) {
+            checkoutPlan = val;
+            const price = val === 'monthly' ? plan.monthly : plan.halfMonthly;
+            checkoutPrices.selectedAmt = price;
+            checkoutLab.infra = price;
+            updateSummary();
+        }
+
+        function onBaremetalPlanChange(val) {
+            if (!checkoutLab || !checkoutLab.isBaremetal) return;
+            const r = checkoutLab.bmData;
+            checkoutPlan = val;
+            checkoutPrices.selectedAmt =
+                val === '8hr' ? parseFloat(r.hourly.replace(/[₹,]/g, '')) * 8
+                    : val === 'monthly' ? parseFloat(r.monthly.replace(/[₹,]/g, ''))
+                        : val === 'm6' ? parseFloat(r.m6.replace(/[₹,]/g, ''))
+                            : parseFloat(r.m12.replace(/[₹,]/g, ''));
+            updateSummary();
+        }
+
+        function openBaremetalCheckout(idx, os) {
+            const rows = os === 'linux' ? BAREMETAL_LINUX : BAREMETAL_WINDOWS;
+            const r = rows[idx];
+            const osLabel = os === 'linux' ? 'Linux' : 'Windows';
+            checkoutLab = { id: r.vcpu + 'vCPU-' + r.ram + 'GB', name: osLabel + ' Baremetal · ' + r.vcpu + ' vCPU · ' + r.ram + ' GB RAM', infra: parseFloat(r.monthly.replace(/[₹,]/g, '')), isBaremetal: true, bmData: r };
+            checkoutPlan = 'monthly';
+            checkoutPrices = { daily: parseFloat(r.hourly.replace(/[₹,]/g, '')), monthly: parseFloat(r.monthly.replace(/[₹,]/g, '')), m6: parseFloat(r.m6.replace(/[₹,]/g, '')), m12: parseFloat(r.m12.replace(/[₹,]/g, '')), dailyFmt: r.hourly + '/hr', weeklyFmt: r.monthly + '/mo' };
+            couponDiscount = 0;
+            document.getElementById('form-lab-name').value = checkoutLab.name;
+            document.getElementById('form-lab-id').value = r.vcpu + ' vCPU · ' + r.ram + ' GB RAM';
+            document.getElementById('form-plan').style.display = 'none';
+            document.getElementById('form-plan-select').style.display = 'block';
+            document.getElementById('form-plan-select').value = 'monthly';
+            checkoutPrices.selectedAmt = parseFloat(r.monthly.replace(/[₹,]/g, ''));
+            document.getElementById('form-qty').value = 1;
+            document.getElementById('form-name').value = '';
+            document.getElementById('form-email').value = '';
+            document.getElementById('form-phone').value = '';
+            document.getElementById('form-company').value = '';
+            document.getElementById('form-coupon').value = '';
+            document.getElementById('coupon-msg').style.display = 'none';
+            document.getElementById('discount-row').style.display = 'none';
+            updateSummary();
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+
+        function renderCard(lab) {
+            const prices = calculatePrices(lab.infra);
+            const isCSV = !!lab.isCSV;
+            const featureHtml = features.map(f => `
+                <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--az-text-muted);">
+                    <i class="fas ${f.icon}" style="color:var(--az-blue);width:14px;text-align:center;font-size:11px;"></i>
+                    <span>${f.text}</span>
+                </div>`).join('');
+
+            const priceSection = isCSV ? `
+                <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:10px 12px;margin-bottom:12px;">
+                    <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Lab Price</div>
+                    <div style="font-size:20px;font-weight:600;color:var(--az-blue);">${prices.dailyFmt}</div>
+                    <div style="font-size:11px;color:var(--az-text-muted);margin-top:2px;">Per participant · incl. platform access</div>
+                </div>` : `
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:12px;padding:4px;background:var(--az-bg);border:1px solid var(--az-border);" id="price-toggle-${lab.id}">
+                    <div class="price-option active" style="padding:8px 10px;" onclick="selectPrice(this, '${lab.id}', 'daily')">
+                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">Daily</div>
+                        <div style="font-size:14px;font-weight:600;color:var(--az-text);">${prices.dailyFmt}</div>
+                    </div>
+                    <div class="price-option" style="padding:8px 10px;" onclick="selectPrice(this, '${lab.id}', 'weekly')">
+                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">Weekly −10%</div>
+                        <div style="font-size:14px;font-weight:600;color:var(--az-text);">${prices.weeklyFmt}</div>
+                    </div>
+                </div>`;
+
+            return `
+            <div class="lab-card" style="padding:16px;" id="card-${lab.id}">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                    <span class="az-tag">${lab.id}</span>
+                    ${isCSV ? `<span class="az-tag-green">${lab.category}</span>` : ''}
+                </div>
+                <div style="font-size:15px;font-weight:600;color:var(--az-text);margin-bottom:10px;min-height:44px;line-height:1.4;">${lab.name}</div>
+                <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:12px;">${featureHtml}</div>
+                ${priceSection}
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto;">
+                    <button onclick="addToCart('${lab.id}')" class="btn-secondary" style="font-size:12px;padding:6px 10px;justify-content:center;">
+                        <i class="fas fa-cart-plus" style="font-size:11px;"></i> Add to Cart
+                    </button>
+                    <button onclick="openCheckout('${lab.id}')" class="btn-primary" style="font-size:12px;padding:6px 10px;justify-content:center;">
+                        <i class="fas fa-bolt" style="font-size:11px;"></i> Buy Now
+                    </button>
+                </div>
+            </div>`;
+        }
+
+        const cardPlan = {};
+
+        function selectPrice(el, labId, plan) {
+            const siblings = el.parentElement.querySelectorAll('.price-option');
+            siblings.forEach(s => s.classList.remove('active'));
+            el.classList.add('active');
+            cardPlan[labId] = plan;
+        }
+
+        function addToCart(id) {
+            const lab = (labData[activeCategory] || []).find(l => l.id === id);
+            if (lab) { cart.push(lab); updateCartUI(); }
+        }
+
+        function updateCartUI() {
+            const count = document.getElementById('cart-count');
+            const toast = document.getElementById('cart-toast');
+            if (cart.length > 0) {
+                if (count) { count.innerText = cart.length; count.classList.remove('hidden'); }
+                toast.style.display = 'flex';
+                document.getElementById('toast-text').innerText = cart.length + ' Environment' + (cart.length > 1 ? 's' : '') + ' Ready';
+            }
+        }
+
+        function openCheckout(labId) {
+            const list = labData[activeCategory] || [];
+            const lab = list.find(l => l.id === labId);
+            if (!lab) return;
+            checkoutLab = lab;
+            checkoutPlan = lab.isCSV ? 'fixed' : (cardPlan[labId] || 'daily');
+            checkoutPrices = calculatePrices(lab.infra);
+            couponDiscount = 0;
+            document.getElementById('form-lab-name').value = lab.name;
+            document.getElementById('form-lab-id').value = lab.id;
+            document.getElementById('form-plan').style.display = 'block';
+            document.getElementById('form-plan-select').style.display = 'none';
+            document.getElementById('form-plan').value =
+                checkoutPlan === 'fixed' ? 'Fixed — ' + checkoutPrices.dailyFmt :
+                    checkoutPlan === 'daily' ? 'Daily — ' + checkoutPrices.dailyFmt :
+                        'Weekly (-10%) — ' + checkoutPrices.weeklyFmt;
+            document.getElementById('form-qty').value = 1;
+            document.getElementById('form-name').value = '';
+            document.getElementById('form-email').value = '';
+            document.getElementById('form-phone').value = '';
+            document.getElementById('form-company').value = '';
+            document.getElementById('form-coupon').value = '';
+            document.getElementById('coupon-msg').style.display = 'none';
+            document.getElementById('discount-row').style.display = 'none';
+            updateSummary();
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').style.display = 'none';
+        }
+
+        document.getElementById('checkout-modal').addEventListener('click', function (e) {
+            if (e.target === this) closeCheckoutModal();
+        });
+        document.getElementById('checkout-modal').style.display = 'none';
+
+        function changeQty(delta) {
+            const inp = document.getElementById('form-qty');
+            let val = parseInt(inp.value) + delta;
+            val = Math.max(1, Math.min(50, val));
+            inp.value = val;
+            updateSummary();
+        }
+
+        function syncQty() { updateSummary(); }
+
+        function applyCoupon() {
+            const code = document.getElementById('form-coupon').value.trim().toUpperCase();
+            const msg = document.getElementById('coupon-msg');
+            msg.style.display = 'block';
+            if (COUPONS[code]) {
+                couponDiscount = COUPONS[code];
+                msg.textContent = '✓ Coupon applied! ' + (couponDiscount * 100) + '% off';
+                msg.style.color = '#16a34a';
+                document.getElementById('discount-row').style.display = 'flex';
+            } else {
+                couponDiscount = 0;
+                msg.textContent = '✗ Invalid coupon code.';
+                msg.style.color = '#dc2626';
+                document.getElementById('discount-row').style.display = 'none';
+            }
+            updateSummary();
+        }
+
+        const GST_RATE = 0.18;
+
+        function updateSummary() {
+            if (!checkoutLab) return;
+            const qty = parseInt(document.getElementById('form-qty').value) || 1;
+            const unitAmt = (checkoutLab && (checkoutLab.isBaremetal || checkoutLab.isCloudPortal || checkoutLab.isExam))
+                ? (checkoutPrices.selectedAmt || checkoutPrices.daily || 0)
+                : checkoutPlan === 'fixed' ? checkoutPrices.daily
+                    : checkoutPlan === 'daily' ? checkoutPrices.daily
+                        : checkoutPrices.weekly;
+            const subtotal = unitAmt * qty;
+            const discount = subtotal * couponDiscount;
+            const afterDisc = subtotal - discount;
+            const gst = afterDisc * GST_RATE;
+            const total = afterDisc + gst;
+            document.getElementById('summary-lab').textContent = checkoutLab.name;
+            document.getElementById('summary-unit-price').textContent = fmtINR(unitAmt);
+            document.getElementById('summary-qty').textContent = '×' + qty;
+            document.getElementById('summary-discount').textContent = '-' + fmtINR(discount);
+            document.getElementById('summary-gst').textContent = fmtINR(gst);
+            document.getElementById('summary-total').textContent = fmtINR(total);
+        }
+
+        function proceedToPayment() {
+            const name = document.getElementById('form-name').value.trim();
+            const email = document.getElementById('form-email').value.trim();
+            const phone = document.getElementById('form-phone').value.trim();
+            const qty = parseInt(document.getElementById('form-qty').value) || 1;
+            if (!name) { alert('Please enter your full name.'); return; }
+            if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+            if (!phone) { alert('Please enter your phone number.'); return; }
+            const unitAmt = (checkoutLab && (checkoutLab.isBaremetal || checkoutLab.isCloudPortal || checkoutLab.isExam))
+                ? (checkoutPrices.selectedAmt || checkoutPrices.daily || 0)
+                : checkoutPlan === 'fixed' ? checkoutPrices.daily
+                    : checkoutPlan === 'daily' ? checkoutPrices.daily
+                        : checkoutPrices.weekly;
+            const subtotal = unitAmt * qty;
+            const discount = subtotal * couponDiscount;
+            const afterDisc = subtotal - discount;
+            const gst = afterDisc * GST_RATE;
+            const total = afterDisc + gst;
+            const planLabel = checkoutLab && checkoutLab.isBaremetal
+                ? ({ '8hr': '8 Hours', 'monthly': 'Monthly', 'm6': '6 Months (10% off)', 'm12': '12 Months (20% off)' }[checkoutPlan] || 'Monthly')
+                : checkoutLab && checkoutLab.isCloudPortal ? (checkoutPlan === 'halfmonthly' ? '15 Days' : 'Monthly')
+                    : checkoutLab && checkoutLab.isExam ? 'Exam Voucher'
+                        : checkoutPlan === 'daily' ? 'Daily' : checkoutPlan === 'fixed' ? 'Fixed' : 'Weekly (-10%)';
+            const orderDetails = {
+                labName: checkoutLab.name, labId: checkoutLab.id, plan: planLabel,
+                qty, name, email, phone,
+                company: document.getElementById('form-company').value.trim(),
+                subtotalFmt: fmtINR(subtotal),
+                discountFmt: couponDiscount > 0 ? '-' + fmtINR(discount) : '—',
+                gstFmt: fmtINR(gst), totalFmt: fmtINR(total),
+            };
+            const amountPaise = Math.round(total * 100);
+            const options = {
+                key: RAZORPAY_KEY_ID, amount: amountPaise, currency: 'INR',
+                name: 'Synergific Lab Store',
+                description: checkoutLab.name + ' [' + checkoutLab.id + '] — ' + orderDetails.plan + ' × ' + qty,
+                image: '',
+                prefill: { name, email, contact: phone },
+                notes: { lab_id: checkoutLab.id, lab_name: checkoutLab.name, plan: checkoutPlan, qty, company: orderDetails.company },
+                theme: { color: '#22c55e' },
+                handler: function (response) { showPaymentSuccess(response, orderDetails); },
+                modal: { ondismiss: function () { console.log('Razorpay modal dismissed by user.'); } }
+            };
+            try {
+                const rzp = new Razorpay(options);
+                rzp.on('payment.failed', function (resp) { alert('Payment failed: ' + resp.error.description); });
+                rzp.open();
+            } catch (e) {
+                alert('Payment gateway unavailable. Please contact support.');
+            }
+        }
+
+        function sendOrderEmails(response, orderDetails) {
+            const orderDate = new Date().toLocaleString('en-IN', { dateStyle: 'long', timeStyle: 'short' });
+            const paymentId = response.razorpay_payment_id || 'N/A';
+            const orderId = response.razorpay_order_id || 'N/A';
+            const RECIPIENTS = ['itops@synergificsoftware.com', 'vinay.chandra@synergificsoftware.com', orderDetails.email];
+            const sends = RECIPIENTS.map(toEmail =>
+                emailjs.send(_k(_c.esid), _k(_c.etid), {
+                    to_email: toEmail, from_name: 'Synergific Lab Store', reply_to: orderDetails.email,
+                    subject: 'New Lab Order: ' + orderDetails.labName + ' [' + orderDetails.labId + '] — ' + orderDetails.totalFmt,
+                    order_date: orderDate, payment_id: paymentId, order_id: orderId,
+                    lab_name: orderDetails.labName, lab_id: orderDetails.labId, plan: orderDetails.plan,
+                    qty: String(orderDetails.qty), customer_name: orderDetails.name, customer_email: orderDetails.email,
+                    customer_phone: orderDetails.phone, company: orderDetails.company || '—',
+                    subtotal: orderDetails.subtotalFmt, discount: orderDetails.discountFmt,
+                    gst: orderDetails.gstFmt, total: orderDetails.totalFmt
+                })
+            );
+            return Promise.all(sends);
+        }
+
+        function showPaymentSuccess(response, orderDetails) {
+            closeCheckoutModal();
+            showSuccessBanner(response.razorpay_payment_id, orderDetails.totalFmt, orderDetails.email, null);
+            sendOrderEmails(response, orderDetails)
+                .then(() => {
+                    const msg = document.getElementById('email-status-msg');
+                    if (msg) msg.innerHTML = '✅ Order confirmation sent to <strong>' + orderDetails.email + '</strong> and the Synergific ops team.';
+                })
+                .catch((err) => {
+                    console.error('Email error:', err);
+                    const msg = document.getElementById('email-status-msg');
+                    if (msg) msg.innerHTML = '⚠️ Payment captured. Please contact <strong>itops@synergificsoftware.com</strong> with Payment ID <strong>' + response.razorpay_payment_id + '</strong>.';
+                });
+        }
+
+        function showSuccessBanner(paymentId, totalFmt, email, _emailSent) {
+            const old = document.getElementById('success-banner');
+            if (old) old.remove();
+            const banner = document.createElement('div');
+            banner.id = 'success-banner';
+            banner.style.cssText = 'position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.7);backdrop-filter:blur(8px);';
+            banner.innerHTML =
+                '<div style="background:white;border:1px solid #edebe9;padding:32px 40px;max-width:460px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.2);animation:modalFadeIn 0.15s ease-out;">' +
+                '<div style="width:56px;height:56px;background:#dff6dd;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border-radius:2px;">' +
+                '<i class="fas fa-check" style="font-size:22px;color:#107c10;"></i>' +
+                '</div>' +
+                '<div style="font-size:11px;font-weight:600;color:#107c10;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">Payment Successful</div>' +
+                '<div style="font-size:20px;font-weight:600;color:#323130;margin-bottom:12px;">Your Lab is Being Provisioned</div>' +
+                '<div style="font-size:13px;color:#605e5c;margin-bottom:24px;line-height:1.6;background:#f3f2f1;border:1px solid #edebe9;padding:12px 16px;text-align:left;">' +
+                '<div style="margin-bottom:4px;"><span style="color:#a19f9d;">Payment ID:</span> <strong style="color:#323130;">' + paymentId + '</strong></div>' +
+                '<div><span style="color:#a19f9d;">Amount Paid:</span> <strong style="color:#0078d4;">' + totalFmt + '</strong></div>' +
+                '</div>' +
+                '<div id="email-status-msg" style="font-size:12px;color:#605e5c;margin-bottom:20px;">⏳ Sending order confirmation...</div>' +
+                '<button onclick="document.getElementById(\'success-banner\').remove()" ' +
+                'style="background:#0078d4;color:white;border:none;padding:8px 24px;font-size:14px;font-weight:600;cursor:pointer;font-family:Segoe UI,sans-serif;border-radius:2px;" ' +
+                'onmouseover="this.style.background=\'#106ebe\'" onmouseout="this.style.background=\'#0078d4\'">' +
+                'Back to Store' +
+                '</button>' +
+                '</div>';
+            document.body.appendChild(banner);
+        }
+
+        // ─── SUPPORT FORM EMAIL ─────────────────────────────────────
+        function sendSupportEmail() {
+            const name = (document.getElementById('sup-name') || {}).value ? document.getElementById('sup-name').value.trim() : '';
+            const email = (document.getElementById('sup-email') || {}).value ? document.getElementById('sup-email').value.trim() : '';
+            const phone = (document.getElementById('sup-phone') || {}).value ? document.getElementById('sup-phone').value.trim() : '—';
+            const subject = (document.getElementById('sup-subject') || {}).value ? document.getElementById('sup-subject').value.trim() : '';
+            const message = (document.getElementById('sup-message') || {}).value ? document.getElementById('sup-message').value.trim() : '';
+            const btn = document.getElementById('sup-submit-btn');
+
+            if (!name) { showSupStatus('error', '⚠ Please enter your full name.'); return; }
+            if (!email || !email.includes('@')) { showSupStatus('error', '⚠ Please enter a valid email address.'); return; }
+            if (!subject) { showSupStatus('error', '⚠ Please select a subject.'); return; }
+            if (!message) { showSupStatus('error', '⚠ Please enter your message.'); return; }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size:11px;"></i> Sending...';
+            showSupStatus('info', '⏳ Sending your request...');
+
+            const submittedAt = new Date().toLocaleString('en-IN', { dateStyle: 'long', timeStyle: 'short' });
+            const SUPPORT_RECIPIENTS = ['itops@synergificsoftware.com', 'vinay.chandra@synergificsoftware.com'];
+
+            const sends = SUPPORT_RECIPIENTS.map(toEmail =>
+                emailjs.send(_k(_c.esid), _k(_c.etid), {
+                    to_email: toEmail,
+                    from_name: name,
+                    reply_to: email,
+                    subject: '[Support Request] ' + subject + ' — ' + name,
+                    order_date: submittedAt,
+                    payment_id: '—',
+                    order_id: '—',
+                    lab_name: subject,
+                    lab_id: 'SUPPORT-TICKET',
+                    plan: 'N/A',
+                    qty: '1',
+                    customer_name: name,
+                    customer_email: email,
+                    customer_phone: phone,
+                    company: '—',
+                    subtotal: '—',
+                    discount: '—',
+                    gst: '—',
+                    total: message
+                })
+            );
+
+            Promise.all(sends)
+                .then(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-paper-plane" style="font-size:11px;"></i> Submit Request';
+                    showSupStatus('success', '✅ Your request has been sent! Our team will respond within 2 hours.');
+                    ['sup-name', 'sup-email', 'sup-phone', 'sup-message'].forEach(function (id) {
+                        const el = document.getElementById(id);
+                        if (el) el.value = '';
+                    });
+                    const sel = document.getElementById('sup-subject');
+                    if (sel) sel.value = '';
+                })
+                .catch(function (err) {
+                    console.error('Support email error:', err);
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-paper-plane" style="font-size:11px;"></i> Submit Request';
+                    showSupStatus('error', '⚠ Failed to send. Please email itops@synergificsoftware.com or WhatsApp +91 70044 03223.');
+                });
+        }
+
+        function showSupStatus(type, msg) {
+            const el = document.getElementById('sup-status');
+            if (!el) return;
+            el.style.display = 'block';
+            el.style.color = type === 'success' ? '#107c10' : type === 'error' ? '#d13438' : '#605e5c';
+            el.textContent = msg;
+        }
+
+        window.onload = init;
+    </script>
+
 </body>
 
 </html>
