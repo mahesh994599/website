@@ -1083,6 +1083,8 @@
             { key: 'servicenow', name: 'ServiceNow', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/57/ServiceNow_logo_2024.svg', color: '#62d84e', exams: [] },
         ];
         let activeVendor = 'comptia';
+        let examCSVLoaded = false;
+        let labsCSVLoaded = false;
 
         // ─── CSV CONFIG ──────────────────────────────────────────────
         const CSV_CATEGORIES = ['Skillable Labs', 'Xtremelabs', 'Godeploy'];
@@ -1379,36 +1381,45 @@
         }
 
         async function loadCSVFromServer() {
-            await Promise.all([fetchLabsCSV(), fetchExamsCSV()]);
+            // Run sequentially so labs fetch failure never races with exams render
+            await fetchExamsCSV();
+            await fetchLabsCSV();
         }
 
         async function fetchLabsCSV() {
+            if (labsCSVLoaded) return;
             try {
                 const res = await fetch('labs-data.csv');
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 const text = await res.text();
                 parseCSVIntoLabData(text);
+                labsCSVLoaded = true;
                 if (CSV_CATEGORIES.includes(activeCategory)) renderLabs();
             } catch (e) {
-                console.warn('labs-data.csv fetch failed:', e.message);
-                if (CSV_CATEGORIES.includes(activeCategory)) renderLabs();
+                console.warn('labs-data.csv not found — skipping:', e.message);
+                labsCSVLoaded = true; // mark done so it doesn't retry
+                // Do NOT call renderLabs() here — avoid wiping current view
             }
         }
 
         async function fetchExamsCSV() {
+            if (examCSVLoaded) return;
             try {
                 const res = await fetch('exams-data.csv');
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 const text = await res.text();
                 parseCSVIntoExamData(text);
+                examCSVLoaded = true;
                 if (activeCategory === 'Exam Vouchers') renderLabs();
             } catch (e) {
-                console.warn('exams-data.csv fetch failed:', e.message);
-                if (activeCategory === 'Exam Vouchers') renderLabs();
+                console.warn('exams-data.csv not found — skipping:', e.message);
+                examCSVLoaded = true; // mark done so it doesn't retry
+                // Do NOT call renderLabs() here — avoid wiping current view
             }
         }
 
         function parseCSVIntoLabData(text) {
+            if (labsCSVLoaded) return;
             CSV_CATEGORIES.forEach(cat => { labData[cat] = labData[cat].filter(l => !l.isCSV); });
             const cleaned = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/^\uFEFF/, '');
             const rows = cleaned.trim().split('\n');
@@ -1433,6 +1444,7 @@
         }
 
         function parseCSVIntoExamData(text) {
+            if (examCSVLoaded) return; // already loaded, don't wipe and re-parse
             EXAM_VENDORS.forEach(v => { v.exams = v.exams.filter(e => !e.isCSV); });
             // Normalize all line endings and strip BOM
             const cleaned = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/^\uFEFF/, '');
@@ -1468,7 +1480,11 @@
             activeCategory = cat;
             document.getElementById('breadcrumb-active').innerText = cat;
             document.getElementById('category-title').innerText = cat === 'SSL Labs' ? 'SSL Labs Store' : cat;
-            renderMenu(); renderLabs();
+            renderMenu();
+            renderLabs();
+            // Re-trigger CSV fetch if not yet loaded for this category
+            if (cat === 'Exam Vouchers' && !examCSVLoaded) fetchExamsCSV();
+            if (CSV_CATEGORIES.includes(cat) && !labsCSVLoaded) fetchLabsCSV();
         }
 
         function handleSearch(val) { searchQuery = val.toLowerCase(); renderLabs(); }
