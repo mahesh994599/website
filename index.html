@@ -958,6 +958,7 @@
             rzp: ['cnpwX3Rl', 'c3RfU01s', 'MWJHUEx4', 'aHltYUw='],
             esid: ['c2Vydmlj', 'ZV9xMGFz', 'YW44'],
             etid: ['dGVtcGxh', 'dGVfb3R1', 'ZThxOA=='],
+            stid: ['dGVtcGxhdGVfZ3dxcTgzcw=='],
             epk: ['X2JycjVC', 'c3ZFUzVI', 'bXkwQW4='],
         };
         let RAZORPAY_KEY_ID = null;
@@ -2064,12 +2065,18 @@
 
         // ─── SUPPORT FORM EMAIL ─────────────────────────────────────
         function sendSupportEmail() {
-            const name = (document.getElementById('sup-name') || {}).value ? document.getElementById('sup-name').value.trim() : '';
-            const email = (document.getElementById('sup-email') || {}).value ? document.getElementById('sup-email').value.trim() : '';
-            const phone = (document.getElementById('sup-phone') || {}).value ? document.getElementById('sup-phone').value.trim() : '—';
-            const subject = (document.getElementById('sup-subject') || {}).value ? document.getElementById('sup-subject').value.trim() : '';
-            const message = (document.getElementById('sup-message') || {}).value ? document.getElementById('sup-message').value.trim() : '';
+            const nameEl = document.getElementById('sup-name');
+            const emailEl = document.getElementById('sup-email');
+            const phoneEl = document.getElementById('sup-phone');
+            const subjectEl = document.getElementById('sup-subject');
+            const messageEl = document.getElementById('sup-message');
             const btn = document.getElementById('sup-submit-btn');
+
+            const name = nameEl ? nameEl.value.trim() : '';
+            const email = emailEl ? emailEl.value.trim() : '';
+            const phone = phoneEl ? phoneEl.value.trim() : '—';
+            const subject = subjectEl ? subjectEl.value.trim() : '';
+            const message = messageEl ? messageEl.value.trim() : '';
 
             if (!name) { showSupStatus('error', '⚠ Please enter your full name.'); return; }
             if (!email || !email.includes('@')) { showSupStatus('error', '⚠ Please enter a valid email address.'); return; }
@@ -2081,29 +2088,22 @@
             showSupStatus('info', '⏳ Sending your request...');
 
             const submittedAt = new Date().toLocaleString('en-IN', { dateStyle: 'long', timeStyle: 'short' });
-            const SUPPORT_RECIPIENTS = ['itops@synergificsoftware.com', 'vinay.chandra@synergificsoftware.com'];
+
+            const SUPPORT_RECIPIENTS = [
+                'itops@synergificsoftware.com',
+                email
+            ];
 
             const sends = SUPPORT_RECIPIENTS.map(toEmail =>
-                emailjs.send(_k(_c.esid), _k(_c.etid), {
+                emailjs.send(_k(_c.esid), _k(_c.stid), {
                     to_email: toEmail,
-                    from_name: name,
-                    reply_to: email,
-                    subject: '[Support Request] ' + subject + ' — ' + name,
-                    order_date: submittedAt,
-                    payment_id: '—',
-                    order_id: '—',
-                    lab_name: subject,
-                    lab_id: 'SUPPORT-TICKET',
-                    plan: 'N/A',
-                    qty: '1',
+                    name: name,
                     customer_name: name,
                     customer_email: email,
                     customer_phone: phone,
-                    company: '—',
-                    subtotal: '—',
-                    discount: '—',
-                    gst: '—',
-                    total: message
+                    support_subject: subject,
+                    support_message: message,
+                    submitted_at: submittedAt,
                 })
             );
 
