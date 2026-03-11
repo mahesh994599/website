@@ -1,33 +1,315 @@
 category,code,name,price
-CompTIA,CTA+,CompTIA A+,14000
-CompTIA,CTN+,CompTIA Network+,15500
-CompTIA,CTS+,CompTIA Security+,16000
-CompTIA,CTCY,CompTIA CySA+,17500
-CompTIA,CTPE,CompTIA PenTest+,17500
-CompTIA,CTCL,CompTIA Cloud+,16500
-CompTIA,CTL+,CompTIA Linux+,15000
-CompTIA,CTCA,CompTIA CASP+,19000
-Linux Foundation,LFCA,Linux Foundation Certified Associate (LFCA),12000
-Linux Foundation,LFCS,Linux Foundation Certified SysAdmin (LFCS),16000
-Linux Foundation,CKA,Certified Kubernetes Administrator (CKA),19500
-Linux Foundation,CKAD,Certified Kubernetes App Developer (CKAD),19500
-Linux Foundation,CKS,Certified Kubernetes Security Specialist (CKS),19500
-Linux Foundation,PCA,Prometheus Certified Associate (PCA),14000
-Linux Foundation,CGOA,Certified GitOps Associate (CGOA),14000
-Linux Foundation,KCNA,Kubernetes and Cloud Native Associate (KCNA),13000
-RedHat,EX200,RHCSA – Red Hat Certified System Administrator,22000
-RedHat,EX294,RHCE – Red Hat Certified Engineer (Ansible),24000
-RedHat,EX280,Red Hat OpenShift Administrator (EX280),25000
-RedHat,EX180,Red Hat Certified Specialist in Containers,23000
-RedHat,EX288,Red Hat Certified Specialist in OpenShift Dev,23000
-RedHat,EX403,Red Hat Satellite 6 Administration,24000
-RedHat,EX415,Red Hat Certified Security Specialist,24000
-RedHat,EX447,Advanced Automation: Ansible Best Practices,25000
-Cisco,CCNA,Cisco Certified Network Associate (CCNA),28000
-Cisco,CCNPE,CCNP Enterprise Core (ENCOR 350-401),35000
-Cisco,CCNPS,CCNP Security Core (SCOR 350-701),35000
-Cisco,DEVAE,DevNet Associate,24000
-Cisco,DEVPE,DevNet Professional,34000
-Cisco,CCIE,CCIE Enterprise Infrastructure (Written),45000
-Cisco,CLCOR,Cisco Collaboration Core (CLCOR 350-801),35000
-Cisco,CCNPD,CCNP Data Center Core (DCCOR 350-601),35000
+Linux Foundation,CKA-THRIVE,CKA Exam + THRIVE Subscription Bundle,58200
+Linux Foundation,CKAD-THRIVE,CKAD Exam + THRIVE Subscription Bundle,58200
+Linux Foundation,CKS-THRIVE,CKS Exam + THRIVE Subscription Bundle,58200
+Linux Foundation,CKA-CKS,Certified Kubernetes Administrator (CKA)+ Certified Kubernetes Security Specialist (CKS) Exam Bundle,76800
+Linux Foundation,IT-LFCA-KCNA,Linux Foundation Certified IT Associate (LFCA) + Kubernetes and Cloud Native Associate (KCNA) Exam Bundle,39600
+Linux Foundation,KCNA,Kubernetes and Cloud Native Essentials (LFS250)+ Kubernetes and Cloud Native Associate (KCNA) Exam Bundle,27900
+Linux Foundation,CKA-CKAD-CKS,Certified Kubernetes Administrator (CKA) + Certified Kubernetes Application Developer (CKAD) + Certified Kubernetes Security Specialist (CKS) Exam Bundle,115800
+Linux Foundation,KCNA-CKA,Kubernetes and Cloud Native Associate (KCNA) + Certified Kubernetes Administrator (CKA) Exam Bundle,60000
+Linux Foundation,CAPA,DevOps and Workflow Management with Argo (LFS256) + Certified Argo Project Associate (CAPA) Exam Bundle,27900
+Linux Foundation,KCSA-CKS,Kubernetes and Cloud Native Security Associate (KCSA) + Certified Kubernetes Security Specialist (CKS) Exam Bundle,60000
+Linux Foundation,KCNA-KCSA,Kubernetes and Cloud Native Associate (KCNA) Exam + Kubernetes and Cloud Native Security Associate (KCSA) Exam Bundle,39600
+Linux Foundation,KB,Kubestronaut Bundle,153000
+Linux Foundation,CKA-CKAD,Certified Kubernetes Administrator (CKA) + Certified Kubernetes Application Developer (CKAD) Exam Bundle,76800
+Linux Foundation,ICA,Istio Service Mesh Essentials (LFS245) + Istio Certified Associate (ICA) Exam Bundle,27900
+Linux Foundation,PCA,Monitoring Systems and Services with Prometheus (LFS241) + Prometheus Certified Associate (PCA) Exam Bundle,27900
+Linux Foundation,GKB,Golden Kubestronaut Bundle,393300
+Linux Foundation,KGKUB,Kubestronaut to Golden Kubestronaut Upgrade Bundle,248200
+Linux Foundation,CKA,​CKA to Kubestronaut Upgrade Bundle,114900
+Linux Foundation,CKAD,​CKAD to Kubestronaut Upgrade Bundle,114900
+Linux Foundation,IT-IT-LFCA,Fundamentals of Open Source IT and Cloud Computing (LFS200)+ Linux Foundation Certified IT Associate (LFCA) Exam Bundle,27900
+Linux Foundation,RISC-RISC-RVFA,RISC-V Fundamentals (LFD210) + RISC-V Foundational Associate (RVFA) Exam Bundle,27900
+Linux Foundation,LFCS-THRIVE,LFCS Exam + THRIVE Subscription Bundle,58200
+Linux Foundation,HFCP,"Hyperledger Fabric: Design, Develop, and Deploy (LFS270) + Hyperledger Fabric Certified Practitioner (HFCP) Exam Bundle",27900
+Linux Foundation,CODE,Open Source Essentials for Developers (LFD221) + Certified Open Source Developer for Enterprise (CODE) Exam Bundle,27900
+Linux Foundation,IT,Cloud Engineer IT Professional Program,120900
+Linux Foundation,IT,Advanced Cloud Engineer IT Professional Program,116300
+Linux Foundation,IT,Cloud Native Developer IT Professional Program,93000
+Linux Foundation,IT,DevOps & GitOps IT Professional Program,88400
+Linux Foundation,KF,Kubernetes Fundamentals (LFS258),27900
+Linux Foundation,KD,Kubernetes for Developers (LFD259),27900
+Linux Foundation,SRE,DevOps and SRE Fundamentals: Implementing Continuous Delivery (LFS261),27900
+Linux Foundation,IK,Introduction to Kubernetes (LFS158),0
+Linux Foundation,ISK,Introduction to Serverless on Kubernetes (LFS157),0
+Linux Foundation,KSE,Kubernetes Security Essentials (LFS260),27900
+Linux Foundation,GCDKF,GitOps: Continuous Delivery on Kubernetes with Flux (LFS269),27900
+Linux Foundation,ID,Implementing DevSecOps (LFS262),27900
+Linux Foundation,KCNE,Kubernetes and Cloud Native Essentials (LFS250),9300
+Linux Foundation,II,Introduction to Istio (LFS144),0
+Linux Foundation,IC,Introduction to Cilium (LFS146),0
+Linux Foundation,IOSDL,"Introduction to Open Source Development, Git and Linux (LFD201)",27900
+Linux Foundation,BGOSS,A Beginner’s Guide to Open Source Software Development (LFD102),0
+Linux Foundation,BGLKD,A Beginner’s Guide to Linux Kernel Development (LFD103),0
+Linux Foundation,IL,Introduction to Linux (LFS101),0
+Linux Foundation,SSDRD,"Secure Software Development: Requirements, Design, and Reuse (LFD104x)",0
+Linux Foundation,SSDI,Secure Software Development: Implementation (LFD105x),0
+Linux Foundation,SSDVM,Secure Software Development: Verification and More Specialized Topics (LFD106x),0
+Linux Foundation,IT,Fundamentals of Open Source IT and Cloud Computing (LFS200),9300
+Linux Foundation,OSSDL,Open Source Software Development: Linux for Developers (LFD107x),0
+Linux Foundation,LTSD,Linux Tools for Software Development (LFD108x),0
+Linux Foundation,DSD,Git for Distributed Software Development (LFD109x),0
+Linux Foundation,LF-UPV,Introducción a Linux (LF-UPV-101x),0
+Linux Foundation,DSS,Developing Secure Software (LFD121),0
+Linux Foundation,SYSSC,Securing Your Software Supply Chain with Sigstore (LFS182),0
+Linux Foundation,SEBES,Software Engineering Basics for Embedded Systems (LFD116),0
+Linux Foundation,LSAE,Linux System Administration Essentials (LFS207),27900
+Linux Foundation,LCTE,Linux for Cloud Technicians Essentials (LFS203),27900
+Linux Foundation,OWASP,Understanding the OWASP® Top 10 Security Threats (SKF100),0
+Linux Foundation,MISST,"Mastering Infrastructure Security: Strategies, Tools, and Practices (SKF200)",27900
+Linux Foundation,DE,Grundlagen der Linux System Administration (LFS207-DE),27900
+Linux Foundation,TMET,Threat Modeling: The Essentials Toolkit (SKF201),27900
+Linux Foundation,SSDM,Security for Software Development Managers (LFD125),0
+Linux Foundation,CI-CD,CI/CD with Jenkins X (LFS268),27900
+Linux Foundation,CNLFF,Cloud Native Logging with Fluentd and Fluent Bit (LFS242),27900
+Linux Foundation,CF,Containers Fundamentals (LFS253),27900
+Linux Foundation,MKAH,Managing Kubernetes Applications with Helm (LFS244),27900
+Linux Foundation,MSSP,Monitoring Systems and Services with Prometheus (LFS241),9300
+Linux Foundation,SMF,Service Mesh Fundamentals (LFS243),27900
+Linux Foundation,CDQA,Containers for Developers and Quality Assurance (LFD254),27900
+Linux Foundation,OSLBS,Open Source Licensing Basics for Software Developers (LFC191),0
+Linux Foundation,IDSRE,Introduction to DevOps and Site Reliability Engineering (LFS162),0
+Linux Foundation,ISO,Inclusive Speaker Orientation (LFC101),0
+Linux Foundation,BUUI,Blockchain: Understanding Its Uses and Implications (LFS170),0
+Linux Foundation,JE,Jenkins Essentials (LFS267),27900
+Linux Foundation,IOSCO,Inclusive Open Source Community Orientation (LFC102),0
+Linux Foundation,OSMS,Open Source Management & Strategy,46500
+Linux Foundation,IW,Introduction to WebAssembly (LFD133),0
+Linux Foundation,RISC-CPU,Building a RISC-V CPU Core (LFD111x),0
+Linux Foundation,RISC,Introduction to RISC-V (LFD110),0
+Linux Foundation,WCFCE,WebAssembly Components: From Cloud to Edge (LFD134),0
+Linux Foundation,IG,Introduction to GitOps (LFS169),0
+Linux Foundation,IOSLC,Introduction to Open Source License Compliance Management (LFC193),0
+Linux Foundation,EOSD,Ethics for Open Source Development (LFC104),0
+Linux Foundation,IOSLC,Implementing Open Source License Compliance Management (LFC194),0
+Linux Foundation,IDM,Introduction to DevSecOps for Managers (LFS180),0
+Linux Foundation,FQC,Fundamentals of Quantum Computing (LFQ101),0
+Linux Foundation,PDLDM,PyTorch and Deep Learning for Decision Makers (LFS116),0
+Linux Foundation,IBDPM,Introduction to Backstage: Developer Portals Made Easy (LFS142),0
+Linux Foundation,RISC,Foundations of RISC-V Assembly Programming (LFD117x),0
+Linux Foundation,ALOSS,Antitrust Laws and Open Source Software Project Management and Participation (LFC105),0
+Linux Foundation,IPB,Introduction to Protocol Buffers (LFS145),0
+Linux Foundation,CE,Cybersecurity Essentials (LFC108),0
+Linux Foundation,RISC,RISC-V Fundamentals (LFD210),9300
+Linux Foundation,RISC,Computer Architecture with an Industrial RISC-V Core [RVfpga] (LFD119x),0
+Linux Foundation,AI,Ethical Principles for Conversational AI (LFS118),0
+Linux Foundation,QCESL,Quantum Computing Essentials for Senior Leaders (LFQ102),0
+Linux Foundation,IF,Introduction to FDC3 (LFEL1000),0
+Linux Foundation,CESEF,Creating Edge IoT Solutions with EdgeX Foundry (LFEL1003),0
+Linux Foundation,SSOSP,Security Self-Assessments for Open Source Projects (LFEL1005),0
+Linux Foundation,SPOS,Securing Projects with OpenSSF Scorecard (LFEL1006),0
+Linux Foundation,ASCSS,Automating Supply Chain Security: SBOMs and Signatures (LFEL1007),0
+Linux Foundation,PEAA,PyTorch Essentials: An Applications-First Approach (LFD273),27900
+Linux Foundation,OSCF,Open Source Contribution in Finance (LFD137),0
+Linux Foundation,DSF,Developing Solutions with FDC3 (LFD237),27900
+Linux Foundation,GSR,Getting Started with Rust (LFEL1002),0
+Linux Foundation,IZT,Introduction to Zero Trust (LFS183),0
+Linux Foundation,OSTDE,Open Source Technical Documentation Essentials (LFC111),0
+Linux Foundation,CEDD,Creating Effective Documentation for Developers (LFC112),0
+Linux Foundation,RWS,Remote Work at Scale (LFC114),0
+Linux Foundation,MKSK,Mastering Kubernetes Security with Kyverno (LFS255),27900
+Linux Foundation,KEDA,Mastering Kubernetes Event-Driven Autoscaling with KEDA (LFS257),27900
+Linux Foundation,DWMA,DevOps and Workflow Management with Argo (LFS256),9300
+Linux Foundation,AI-ML,Introduction to AI/ML Toolkits with Kubeflow (LFS147),0
+Linux Foundation,KEDA,Scaling Cloud Native Applications with KEDA (LFEL1014),0
+Linux Foundation,IN,Introduction to Nephio (LFS179),0
+Linux Foundation,LHWGM,Leading High-Performance Working Group Meetings (LFC120),0
+Linux Foundation,ISME,Istio Service Mesh Essentials (LFS245),9300
+Linux Foundation,OF,OpenAPI Fundamentals (LFEL1011),0
+Linux Foundation,OSI,Open Source Introduction (LFC202),7400
+Linux Foundation,OSBS,Open Source Business Strategy (LFC203),7400
+Linux Foundation,EOSPM,Effective Open Source Program Management (LFC204),7400
+Linux Foundation,OSDP,Open Source Development Practices (LFC205),7400
+Linux Foundation,OSCP,Open Source Compliance Programs (LFC206),7400
+Linux Foundation,CEOSP,Collaborating Effectively with Open Source Projects (LFC207),7400
+Linux Foundation,COSP,Creating Open Source Projects (LFC208),7400
+Linux Foundation,XSS,XSS Exploits and Defenses (LFEL1010),0
+Linux Foundation,CDM,Introduction to the Common Domain Model (CDM) (LFEL1016),0
+Linux Foundation,SEAK,Serverless and Event-Driven Applications with Knative (LFS246),27900
+Linux Foundation,GSO,Getting Started with OpenTelemetry (LFS148),0
+Linux Foundation,HFDDD,"Hyperledger Fabric: Design, Develop and Deploy (LFS270)",9300
+Linux Foundation,GSO,Getting Started with OpenTofu (LFEL1009),0
+Linux Foundation,CCMFO,Cloud Cost Monitoring for FinOps with OpenCost (LFS248),27900
+Linux Foundation,AI,Conversational AI: Ensuring Compliance and Mitigating Risks (LFS120),0
+Linux Foundation,IT,IT Specification Basics for New Developers (LFD141),0
+Linux Foundation,RT-RTOS-RISC,Open Source RT-Thread RTOS on RISC-V (LFD123),0
+Linux Foundation,EU-CRA,Understanding the EU Cyber Resilience Act (CRA) (LFEL1001),0
+Linux Foundation,IJS,Introduction to JavaScript Security (LFS184),0
+Linux Foundation,GOSD,GitHub for Open Standards Development (LFD140),0
+Linux Foundation,API,Authentication & Authorization for Web/API (LFEL1004),0
+Linux Foundation,AI-ML,Secure AI/ML-Driven Software Development (LFEL1012),0
+Linux Foundation,OSED,Open Source Essentials for Developers (LFD221),9300
+Linux Foundation,FFO,Feature Flagging with OpenFeature (LFS140),0
+Linux Foundation,I,Introduction to free5GC (LFS114),0
+Linux Foundation,RISC,Porting Software to RISC-V (LFD114),0
+Linux Foundation,CKAD,Certified Kubernetes Application Developer (CKAD),41400
+Linux Foundation,CKA,Certified Kubernetes Administrator (CKA),41400
+Linux Foundation,CKS,Certified Kubernetes Security Specialist (CKS),41400
+Linux Foundation,KCNA,Kubernetes and Cloud Native Associate (KCNA),23300
+Linux Foundation,KCSA,Kubernetes and Cloud Native Security Associate (KCSA),23300
+Linux Foundation,IT-LFCA,Linux Foundation Certified IT Associate (LFCA),23300
+Linux Foundation,LFCS,Linux Foundation Certified System Administrator (LFCS),41400
+Linux Foundation,RISC-RVFA,RISC-V Foundational Associate (RVFA),23300
+Linux Foundation,PCA,Prometheus Certified Associate (PCA),23300
+Linux Foundation,HFCP,Hyperledger Fabric Certified Practitioner (HFCP),23300
+Linux Foundation,CGOA,Certified GitOps Associate (CGOA),23300
+Linux Foundation,FINOS-FCFP,FINOS Certified FDC3 Practitioner (FCFP),23300
+Linux Foundation,ICA,Istio Certified Associate (ICA),23300
+Linux Foundation,FINOS-FSOSD,FINOS Financial Services Certified Open Source Developer (FSOSD),23300
+Linux Foundation,CAPA,Certified Argo Project Associate (CAPA),23300
+Linux Foundation,CCA,Cilium Certified Associate (CCA),23300
+Linux Foundation,BCP,Besu Certified Professional (BCP),23300
+Linux Foundation,CBA,Certified Backstage Associate (CBA),23300
+Linux Foundation,KCA,Kyverno Certified Associate (KCA),23300
+Linux Foundation,OTCA,OpenTelemetry Certified Associate (OTCA),23300
+Linux Foundation,CODE,Certified Open Source Developer for Enterprise (CODE),23300
+Linux Foundation,CNPA,Certified Cloud Native Platform Engineering Associate (CNPA),23300
+Linux Foundation,CNPE,Certified Cloud Native Platform Engineer (CNPE),41400
+Linux Foundation,KD,Kubernetes for App Developers (LFD459),325100
+Linux Foundation,KA,Kubernetes Administration (LFS458),325100
+Linux Foundation,KSF,Kubernetes Security Fundamentals (LFS460),325100
+Linux Foundation,DAL,Developing Applications for Linux (LFD401),325100
+Linux Foundation,LKID,Linux Kernel Internals and Development (LFD420),325100
+Linux Foundation,DLDD,Developing Linux Device Drivers (LFD430),325100
+Linux Foundation,DELDD,Developing Embedded Linux Device Drivers (LFD435),325100
+Linux Foundation,ELD,Embedded Linux Development (LFD450),325100
+Linux Foundation,ELPDY,Embedded Linux Platform Development with Yocto Project (LFD460),325100
+Linux Foundation,GIT,"Introduction to Linux, Open Source Development, and GIT (LFD301)",325100
+Linux Foundation,LSA,Linux System Administration (LFS307),325100
+Linux Foundation,LCT,Linux for Cloud Technicians (LFS303),325100
+Linux Foundation,SLK,Security and the Linux Kernel (LFD441),325100
+Linux Foundation,LKD,Linux Kernel Debugging (LFD445),325100
+Linux Foundation,TE,Text Editing with Vim (SC100),7400
+Linux Foundation,YAML,Open Data Formats: YAML (SC101),7400
+Linux Foundation,SCM,Source Control Management with Git (SC102),7400
+Linux Foundation,SSUB,Shell Scripting Using Bash (SC103),7400
+Linux Foundation,DHC,Developing Helm Charts (SC104),7400
+Linux Foundation,PPAA,PyTorch in Practice: An Applications-First Approach (LFD473),325100
+Linux Foundation,JSON,Open Data Formats: JSON (SC105),7400
+Linux Foundation,PR,Programming in Rust (LFD480),325100
+Linux Foundation,PT,Pipelines with Tekton (SC106),7400
+Linux Foundation,SPIFFE-SPIRE,Zero Trust Security with SPIFFE and SPIRE (LFS482),325100
+Linux Foundation,PMRE,Pattern Matching with Regular Expressions (SC107),7400
+Linux Foundation,SCF,Securing Coding Fundamentals (WSKF601),302300
+Linux Foundation,UVST,Understanding Vulnerabilities and Security Threats (WSKF603),92600
+Linux Foundation,AI,Generative AI Prompt Engineering (RXM401),64700
+Linux Foundation,AI,Machine Learning & AI Introduction (RXM402),64700
+Linux Foundation,RAG,Retrieval Augmented Generation (RAG) Introduction (RXM403),64700
+Linux Foundation,WADDD,"WebAssembly in Action: Develop, Deploy, and Debug (LFD334)",185600
+Linux Foundation,KT,Kubernetes Troubleshooting (LFWS313),92600
+Linux Foundation,CAKSI,Cilium in Action: Kubernetes Security & Insight (LFWS315),92600
+Linux Foundation,RTOS,Zephyr RTOS Programming (AC6401),325500
+Linux Foundation,CSRME,Cybersecurity Strategy & Risk Management for Executives (LFE7010),418500
+Linux Foundation,SASC,SBOMs in Action: Security & Compliance (LFWS302),92600
+Linux Foundation,TMEIM,Threat Modeling Essentials: Identifying and Managing Risk Effectively (SKF401),185600
+Linux Foundation,ESO,eBPF Essentials: Security and Observability (LFWS304),92600
+Linux Foundation,DSMK,Designing Secure Microservices with Keycloak (LFWS305),92600
+Linux Foundation,RMLO,Rust for Machine Learning Operations (LFWS306),92600
+Linux Foundation,RILM,Rust for Interfacing with Language Models (LFWS309),92600
+Linux Foundation,DSLM,Deploying Small Language Models (LFWS307),302300
+Linux Foundation,JP-CKA-JP,Kubernetes Fundamentals (LFS258-JP) + CKA-JP Exam Bundle,60000
+Linux Foundation,JP-CKAD-JP,Kubernetes アプリ開発 (LFD259-JP)+ CKAD-JP,60000
+Linux Foundation,JP,Kubernetes 基礎 (LFS258-JP),27900
+Linux Foundation,JP,Kubernetes アプリ開発 (LFD259-JP),27900
+Linux Foundation,JP,Kubernetes入門 (LFS158-JP),0
+Linux Foundation,JP,Linux入門 (LFS101-JP),0
+Linux Foundation,CKA-JP,認定Kubernetes管理者 (CKA-JP),41400
+Linux Foundation,JP,Yocto Project® Super Practical Online Course (LFD461-JP),255800
+Linux Foundation,IT-IT-LFCA,"Linux Foundation Certified IT Associate…							                                Linux Foundation Certified IT Associate (LFCA)",23300
+Linux Foundation,LFCS,"Linux Foundation Certified System Admini…							                                Linux Foundation Certified System Administrator (LFCS)",41400
+Linux Foundation,CKA,Certified Kubernetes Administrator (CKA),41400
+Linux Foundation,GKB,Golden Kubestronaut Bundle,393300
+Linux Foundation,KGKUK,"Kubestronaut to Golden Kubestronaut Upgr…							                                Kubestronaut to Golden Kubestronaut Upgrade Bundle",248200
+Linux Foundation,KB,Kubestronaut Bundle,153000
+Linux Foundation,CKA-CKA-CKAD,"Certified Kubernetes Administrator (CKA)…							                                Certified Kubernetes Administrator (CKA) + Certified Kubernetes Application Developer (CKAD) + Certified Kubernetes Security Specialist (CKS) Exam Bundle",115800
+Linux Foundation,CKA,​CKA to Kubestronaut Upgrade Bundle,114900
+Linux Foundation,CKAD,​CKAD to Kubestronaut Upgrade Bundle,114900
+Linux Foundation,CKA-CKA-CKAD,"Certified Kubernetes Administrator (CKA)…							                                Certified Kubernetes Administrator (CKA) + Certified Kubernetes Application Developer (CKAD) Exam Bundle",76800
+Linux Foundation,LFCS-THRIVE,LFCS Exam + THRIVE Subscription Bundle,58200
+Linux Foundation,CKA-THRIVE,CKA Exam + THRIVE Subscription Bundle,58200
+Linux Foundation,IT-IT-LFCA,"Linux Foundation Certified IT Associate…							                                Linux Foundation Certified IT Associate (LFCA) + Kubernetes and Cloud Native Associate (KCNA) Exam Bundle",39600
+Linux Foundation,IT-IT-IT,"Fundamentals of Open Source IT and Cloud…							                                Fundamentals of Open Source IT and Cloud Computing (LFS200)+ Linux Foundation Certified IT Associate (LFCA) Exam Bundle",27900
+Linux Foundation,ICA,"Istio Service Mesh Essentials (LFS245) +…							                                Istio Service Mesh Essentials (LFS245) + Istio Certified Associate (ICA) Exam Bundle",27900
+Linux Foundation,ICA,Istio Certified Associate (ICA),23300
+Linux Foundation,PCA,Prometheus Certified Associate (PCA),23300
+Linux Foundation,SSUB,Shell Scripting Using Bash (SC103),7400
+Linux Foundation,SCMSC,"Source Control Management with Git (SC10…							                                Source Control Management with Git (SC102)",7400
+Linux Foundation,YAML,Open Data Formats: YAML (SC101),7400
+Linux Foundation,JSON,Open Data Formats: JSON (SC105),7400
+Linux Foundation,PMREP,"Pattern Matching with Regular Expression…							                                Pattern Matching with Regular Expressions (SC107)",7400
+Linux Foundation,TE,Text Editing with Vim (SC100),7400
+Linux Foundation,CKA,Certified Kubernetes Administrator (CKA),41400
+Linux Foundation,CKAD,"Certified Kubernetes Application Develop…							                                Certified Kubernetes Application Developer (CKAD)",41400
+Linux Foundation,CKS,"Certified Kubernetes Security Specialist…							                                Certified Kubernetes Security Specialist (CKS)",41400
+Linux Foundation,PCA,Prometheus Certified Associate (PCA),23300
+Linux Foundation,GKB,Golden Kubestronaut Bundle,393300
+Linux Foundation,KGKUK,"Kubestronaut to Golden Kubestronaut Upgr…							                                Kubestronaut to Golden Kubestronaut Upgrade Bundle",248200
+Linux Foundation,KB,Kubestronaut Bundle,153000
+Linux Foundation,CKA-CKA-CKAD,"Certified Kubernetes Administrator (CKA)…							                                Certified Kubernetes Administrator (CKA) + Certified Kubernetes Application Developer (CKAD) + Certified Kubernetes Security Specialist (CKS) Exam Bundle",115800
+Linux Foundation,CKAD,​CKAD to Kubestronaut Upgrade Bundle,114900
+Linux Foundation,CKA,​CKA to Kubestronaut Upgrade Bundle,114900
+Linux Foundation,CKA-CKA-CKAD,"Certified Kubernetes Administrator (CKA)…							                                Certified Kubernetes Administrator (CKA) + Certified Kubernetes Application Developer (CKAD) Exam Bundle",76800
+Linux Foundation,KCSA-CKS,"Kubernetes and Cloud Native Security Ass…							                                Kubernetes and Cloud Native Security Associate (KCSA) + Certified Kubernetes Security Specialist (CKS) Exam Bundle",60000
+Linux Foundation,CKA-THRIVE,CKA Exam + THRIVE Subscription Bundle,58200
+Linux Foundation,CKAD-THRIVE,CKAD Exam + THRIVE Subscription Bundle,58200
+Linux Foundation,CKS-THRIVE,CKS Exam + THRIVE Subscription Bundle,58200
+Linux Foundation,CKA-JP,認定Kubernetes管理者 (CKA-JP),41400
+Linux Foundation,CNPE,"Certified Cloud Native Platform Engineer…							                                Certified Cloud Native Platform Engineer (CNPE)",41400
+Linux Foundation,IT-IT-LFCA,"Linux Foundation Certified IT Associate…							                                Linux Foundation Certified IT Associate (LFCA) + Kubernetes and Cloud Native Associate (KCNA) Exam Bundle",39600
+Linux Foundation,KCNA-KCSA,"Kubernetes and Cloud Native Associate (K…							                                Kubernetes and Cloud Native Associate (KCNA) Exam + Kubernetes and Cloud Native Security Associate (KCSA) Exam Bundle",39600
+Linux Foundation,ICA,"Istio Service Mesh Essentials (LFS245) +…							                                Istio Service Mesh Essentials (LFS245) + Istio Certified Associate (ICA) Exam Bundle",27900
+Linux Foundation,KCNA,"Kubernetes and Cloud Native Essentials (…							                                Kubernetes and Cloud Native Essentials (LFS250)+ Kubernetes and Cloud Native Associate (KCNA) Exam Bundle",27900
+Linux Foundation,CAPA,"DevOps and Workflow Management with Argo…							                                DevOps and Workflow Management with Argo (LFS256) + Certified Argo Project Associate (CAPA) Exam Bundle",27900
+Linux Foundation,PCA,"Monitoring Systems and Services with Pro…							                                Monitoring Systems and Services with Prometheus (LFS241) + Prometheus Certified Associate (PCA) Exam Bundle",27900
+Linux Foundation,ICA,Istio Certified Associate (ICA),23300
+Linux Foundation,CBA,Certified Backstage Associate (CBA),23300
+Linux Foundation,CAPA,Certified Argo Project Associate (CAPA),23300
+Linux Foundation,KCA,Kyverno Certified Associate (KCA),23300
+Linux Foundation,CCA,Cilium Certified Associate (CCA),23300
+Linux Foundation,OTCA,OpenTelemetry Certified Associate (OTCA),23300
+Linux Foundation,CODE,"Certified Open Source Developer for Ente…							                                Certified Open Source Developer for Enterprise (CODE)",23300
+Linux Foundation,CNPA,"Certified Cloud Native Platform Engineer…							                                Certified Cloud Native Platform Engineering Associate (CNPA)",23300
+Linux Foundation,KCSA,"Kubernetes and Cloud Native Security Ass…							                                Kubernetes and Cloud Native Security Associate (KCSA)",23300
+Linux Foundation,KCNA,"Kubernetes and Cloud Native Associate (K…							                                Kubernetes and Cloud Native Associate (KCNA)",23300
+Linux Foundation,JSON,Open Data Formats: JSON (SC105),7400
+Linux Foundation,PT,Pipelines with Tekton (SC106),7400
+Linux Foundation,TE,Text Editing with Vim (SC100),7400
+Linux Foundation,SSUB,Shell Scripting Using Bash (SC103),7400
+Linux Foundation,SCMSC,"Source Control Management with Git (SC10…							                                Source Control Management with Git (SC102)",7400
+Linux Foundation,YAML,Open Data Formats: YAML (SC101),7400
+Linux Foundation,DHC,Developing Helm Charts (SC104),7400
+Linux Foundation,SCMSC,"Source Control Management with Git (SC10…							                                Source Control Management with Git (SC102)",7400
+Linux Foundation,YAML,Open Data Formats: YAML (SC101),7400
+Linux Foundation,DHC,Developing Helm Charts (SC104),7400
+Linux Foundation,JSON,Open Data Formats: JSON (SC105),7400
+Linux Foundation,PMREP,"Pattern Matching with Regular Expression…							                                Pattern Matching with Regular Expressions (SC107)",7400
+Linux Foundation,TE,Text Editing with Vim (SC100),7400
+Linux Foundation,SSUB,Shell Scripting Using Bash (SC103),7400
+Linux Foundation,SCMSC,"Source Control Management with Git (SC10…							                                Source Control Management with Git (SC102)",7400
+Linux Foundation,RISC-RISC-RISC,"RISC-V Fundamentals (LFD210) + RISC-V Fo…							                                RISC-V Fundamentals (LFD210) + RISC-V Foundational Associate (RVFA) Exam Bundle",27900
+Linux Foundation,RISC-RVFA,RISC-V Foundational Associate (RVFA),23300
+Linux Foundation,SCMSC,"Source Control Management with Git (SC10…							                                Source Control Management with Git (SC102)",7400
+Linux Foundation,DHC,Developing Helm Charts (SC104),7400
+Linux Foundation,JSON,Open Data Formats: JSON (SC105),7400
+Linux Foundation,PMREP,"Pattern Matching with Regular Expression…							                                Pattern Matching with Regular Expressions (SC107)",7400
+Linux Foundation,FINOS-FCFP,FINOS Certified FDC3 Practitioner (FCFP),23300
+Linux Foundation,TE,Text Editing with Vim (SC100),7400
+Linux Foundation,SCMSC,"Source Control Management with Git (SC10…							                                Source Control Management with Git (SC102)",7400
+Linux Foundation,DHC,Developing Helm Charts (SC104),7400
+Linux Foundation,JSON,Open Data Formats: JSON (SC105),7400
+Linux Foundation,PMREP,"Pattern Matching with Regular Expression…							                                Pattern Matching with Regular Expressions (SC107)",7400
+Linux Foundation,CGOA,Certified GitOps Associate (CGOA),23300
+Linux Foundation,SSUB,Shell Scripting Using Bash (SC103),7400
+Linux Foundation,SCMSC,"Source Control Management with Git (SC10…							                                Source Control Management with Git (SC102)",7400
+Linux Foundation,DHC,Developing Helm Charts (SC104),7400
+Linux Foundation,PT,Pipelines with Tekton (SC106),7400
+Linux Foundation,HFCP,"Hyperledger Fabric: Design, Develop, and…							                                Hyperledger Fabric: Design, Develop, and Deploy (LFS270) + Hyperledger Fabric Certified Practitioner (HFCP) Exam Bundle",27900
+Linux Foundation,HFCP,"Hyperledger Fabric Certified Practitione…							                                Hyperledger Fabric Certified Practitioner (HFCP)",23300
+Linux Foundation,BCP,Besu Certified Professional (BCP),23300
+Linux Foundation,SCMSC,"Source Control Management with Git (SC10…							                                Source Control Management with Git (SC102)",7400
+Linux Foundation,JSON,Open Data Formats: JSON (SC105),7400
+Linux Foundation,CODE,"Open Source Essentials for Developers (L…							                                Open Source Essentials for Developers (LFD221) + Certified Open Source Developer for Enterprise (CODE) Exam Bundle",27900
+Linux Foundation,FINOS-FCFP,FINOS Certified FDC3 Practitioner (FCFP),23300
+Linux Foundation,FINOS-FINOS-FSOSD,"FINOS Financial Services Certified Open…							                                FINOS Financial Services Certified Open Source Developer (FSOSD)",23300
+Linux Foundation,CODE,"Certified Open Source Developer for Ente…							                                Certified Open Source Developer for Enterprise (CODE)",23300
+Linux Foundation,SCMSC,"Source Control Management with Git (SC10…							                                Source Control Management with Git (SC102)",7400
