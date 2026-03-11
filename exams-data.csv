@@ -313,3 +313,201 @@ Linux Foundation,FINOS-FCFP,FINOS Certified FDC3 Practitioner (FCFP),23300
 Linux Foundation,FINOS-FINOS-FSOSD,"FINOS Financial Services Certified Open…							                                FINOS Financial Services Certified Open Source Developer (FSOSD)",23300
 Linux Foundation,CODE,"Certified Open Source Developer for Ente…							                                Certified Open Source Developer for Enterprise (CODE)",23300
 Linux Foundation,SCMSC,"Source Control Management with Git (SC10…							                                Source Control Management with Git (SC102)",7400
+RedHat,RHCSMM,Red Hat Certified Specialist in MultiCluster Management,20000
+RedHat,RHCSCI,Red Hat Certified Specialist in Cloud-native Integration,20000
+RedHat,RHCSOV,Red Hat Certified Specialist in OpenShift Virtualization,20000
+RedHat,RHCSOD,Red Hat Certified Specialist in OpenShift Data Foundation,20000
+RedHat,RHCSOA,Red Hat Certified Specialist in OpenShift Automation and Integration,20000
+RedHat,RHCSBR,Red Hat Certified Specialist in Building Resilient Microservices,20000
+RedHat,RHCSDA,Red Hat Certified Specialist in Developing Automation with Ansible Automation Platform,20000
+RedHat,RHCSAN,Red Hat Certified Specialist in Ansible Network Automation,20000
+RedHat,RHCSCC,Red Hat Certified Specialist in Ceph Cloud Storage,20000
+RedHat,RHCCD,Red Hat Certified Cloud-Native Developer,20000
+RedHat,API,Red Hat Certified Specialist in API management,20000
+RedHat,RHCSSL,Red Hat Certified Specialist in Security: Linux,20000
+RedHat,RHCSIM,Red Hat Certified Specialist in Identity Management,20000
+RedHat,RHCSLD,Red Hat Certified Specialist in Linux Diagnostics and Troubleshooting,20000
+RedHat,RHCSLP,Red Hat Certified Specialist in Linux Performance Tuning,20000
+RedHat,RHCOAD,Red Hat Certified OpenShift Application Developer,20000
+RedHat,RHCOA,Red Hat Certified OpenShift Administrator,20000
+RedHat,RHCSHA,Red Hat Certified Specialist in High Availability Clustering,20000
+RedHat,RHCSDS,Red Hat Certified Specialist in Deployment and Systems Management,20000
+RedHat,RHCSEA,Red Hat Certified Specialist in Enterprise Application Server Administration,20000
+RedHat,RHCSV,Red Hat Certified Specialist in Virtualization,20000
+RedHat,RHCEAD,Red Hat Certified Enterprise Application Developer,20000
+RedHat,RHCE,Red Hat Certified Engineer (RHCE),20000
+RedHat,RHCSA,Red Hat Certified System Administrator (RHCSA),20000
+RedHat,RHCSSM,Red Hat Certified Specialist in Services Management and Automation,20000
+RedHat,RHCSED,Red Hat Certified Specialist in Event-Driven Development with Kafka,38250
+RedHat,HPE-ATP,HPE ATP - Hybrid Cloud,17000
+RedHat,HPE-ASE,HPE ASE - Storage Solutions,21250
+RedHat,HPE-ASE,HPE Master ASE - Storage Solutions,21250
+RedHat,HPE,HPE Product Certified - OneView,17000
+RedHat,HPE-HPE,HPE Product Certified - HPE OpsRamp,2550
+RedHat,HPE-HPE,HPE Product Certified - HPE Ezmeral Data Fabric,2550
+RedHat,HPE,HPE Product Certified - Containers,17000
+RedHat,ACSA,Aruba Certified Switching Associate (ACSA),10625
+RedHat,ACA,ACA - Campus Access,5865
+RedHat,HPE,HPE Aruba Certified Network Architect - Data Center,34000
+RedHat,HPE,HPE Aruba Certified Network Architect - Campus Access,14025
+RedHat,ACSP,Aruba Certified Switching Professional (ACSP),19550
+RedHat,ACP,ACP - Network Security,17000
+RedHat,ACP,ACP - Data Center,16575
+RedHat,ACP,ACP - Campus Access,5950
+RedHat,ACSX,Aruba Certified Switching Expert (ACSX),65025
+RedHat,ACX,ACX - Network Security,12665
+RedHat,ACX,ACX - Campus Access Switching,4675
+RedHat,ACX,ACX - Campus Access Mobility,29750
+RedHat,HPE,HPE Solution Certified - Virtual Desktop Infrastructure,17000
+RedHat,HPE,HPE Solution Certified - VMware,17000
+RedHat,HPE-SAP-HANA,HPE Solution Certified - SAP HANA,22100
+RedHat,HPE,HPE Solution Certified - Microsoft,17000
+RedHat,HPE,HPE Solution Certified - Data Protection,17000
+RedHat,HPE,HPE Solution Certified - Containers,17000
+RedHat,HPE-ASE,HPE ASE - Edge-to-Cloud Architect,17000
+RedHat,HPE-ASE,HPE Master ASE - Edge-to-Cloud Architect,17000
+RedHat,HPE-AI,HPE Product Certified - AI and Machine Learning,12325
+RedHat,HPE-HPE,HPE Solution Certified - HPE GreenLake,17000
+RedHat,HPE-ATP-HPE,HPE ATP - HPE GreenLake Administrator Foundations,17000
+RedHat,HPE-ASE-HPE,HPE ASE - HPE GreenLake Administrator,17000
+RedHat,HPE-ASE,HPE ASE - Compute Solutions,17000
+RedHat,HPE-ASE,HPE Master ASE - Compute Solutions,17000
+RedHat,HPE,HPE Sales Certified - Solution Foundations [2024],11050
+RedHat,HPE,HPE Sales Certified - Hybrid by Design [2024],11050
+RedHat,HPE,HPE Sales Certified - Aruba Networking Solutions,11050
+RedHat,CSA,Intel® Certified Pro: Cloud Solutions Architect (CSA),16915
+RedHat,ICPCBP,Intel® Certified Pro: Cloud Business Professional,16915
+RedHat,ICPCTP,Intel® Certified Pro: Cloud Technical Professional,16915
+RedHat,ICPCF,Intel® Certified Pro: Cloud Fundamentals,8415
+RedHat,ACP,ACP Cloud Security Professional,10200
+RedHat,ACA,ACA Cloud Security Associate,10200
+RedHat,ACE,ACE Big Data Expert,14280
+RedHat,ACP,ACP Big Data Professional,10200
+RedHat,ACA,ACA Big Data Associate,10200
+RedHat,ACE,ACE Cloud Computing Expert,14280
+RedHat,ACP,ACP Cloud Computing Professional,10200
+RedHat,ACA,ACA Cloud Computing Associate,10200
+RedHat,UNIX,Administration of Veritas InfoScale Availability 7.3 for UNIX/Linux,19125
+RedHat,UNIX,Administration of Veritas InfoScale Storage 7.3 for UNIX/Linux,19125
+RedHat,AVBE,Administration of Veritas Backup Exec 20.1,19125
+RedHat,AVBE,Administration of Veritas Backup Exec 21,17000
+RedHat,VNA,Veritas NetBackup 10.x Administrator,17000
+RedHat,VNNAA,Veritas NetBackup 10.x and NetBackup Appliance 5.x Administrator,17000
+RedHat,AVPA,Administration of Veritas eDiscovery Platform 8.2 for Administrators,19125
+RedHat,AVEV,Administration of Veritas Enterprise Vault 12.3,19125
+RedHat,HCM,HCM Core Certification,29500
+RedHat,SAN,NetApp Certified Implementation Engineer - SAN Specialist E-Series,5596
+RedHat,ONTAP,NetApp Certified Storage Installation Engineer ONTAP,5596
+RedHat,CNCFIA,Cisco and NetApp Certified FlexPod Implementation and Administration Specialist,11192
+RedHat,CNCFDS,Cisco and NetApp Certified FlexPod Design Specialist,11192
+RedHat,ONTAP,NetApp Certified Support Engineer ONTAP Specialist,5596
+RedHat,ONTAP,NetApp Certified Support Engineer ONTAP Professional,5596
+RedHat,NCIEDP,NetApp Certified Implementation Engineer Data Protection Specialist,5596
+RedHat,SAN-ONTAP,NetApp Certified Implementation Engineer—SAN Specialist ONTAP,5596
+RedHat,NCHCA,NetApp Certified Hybrid Cloud Architect,5596
+RedHat,NCHCIE,NetApp Certified Hybrid Cloud Implementation Engineer,5596
+RedHat,NCHCA,NetApp Certified Hybrid Cloud Administrator,5596
+RedHat,ONTAP,NetApp Certified Data Administrator ONTAP,5596
+RedHat,NCTSP,NetApp Certified Technology Solutions Professional,5596
+RedHat,VTMCS,VMware Tanzu Mission Control Specialist,21250
+RedHat,SCP,Spring Certified Professional 2024,21250
+RedHat,VCP-TKO,VMware Certified Professional - Tanzu for Kubernetes Operations 2024 (VCP-TKO 2024) certification,21250
+RedHat,VCTA-AM,VMware Certified Technical Associate - Application Modernization 2024 (VCTA-AM 2024),10625
+RedHat,VCBCES,VMware Carbon Black Cloud Endpoint Standard Skills 2024,21250
+RedHat,EDR,VMware Carbon Black Cloud Enterprise EDR Skills 2024,21250
+RedHat,VCBCAR,VMware Carbon Black Cloud Audit and Remediation Skills 2024,21250
+RedHat,VCP-EWS,VMware Certified Professional - Endpoint and Workload Security 2024 (VCP-EWS 2024),21250
+RedHat,VCTA-SEC,VMware Certified Technical Associate - Security 2024 (VCTA-SEC 2024),10625
+RedHat,ONE,VMware Workspace ONE for macOS Skills 2024,21250
+RedHat,ONE-UEM,VMware Certified Specialist - Workspace ONE 21.X UEM Troubleshooting 2024,21250
+RedHat,ONE,VMware Workspace ONE 21.X Advanced Integration Specialist,21250
+RedHat,VCP-DW,VMware Certified Professional - Digital Workspace 2024 (VCP-DW 2024),21250
+RedHat,VCDX-EUC,VMware Certified Design Expert - End-User Computing 2024 (VCDX-EUC 2024),38250
+RedHat,VCAP-DTM,VMware Certified Advanced Professional - Desktop Management Deploy 2024 (VCAP-DTM Deploy 2024),38250
+RedHat,VCAP-EUC,VMware Certified Advanced Professional – End-User Computing Design 2024 (VCAP-EUC Design 2024),38250
+RedHat,VCAP-DTM,VMware Certified Advanced Professional - Desktop Management Design 2024 (VCAP-DTM 2024),38250
+RedHat,VCP-DTM,VMware Certified Professional - Desktop Management 2024 (VCP-DTM 2024),21250
+RedHat,VCTA-EUC,VMware Certified Technical Associate - End-User Computing 2024 (VCTA-EUC 2024),10625
+RedHat,VACCPS,VMware Aria Cost powered by CloudHealth Platform (Azure) Skills 2024,21250
+RedHat,VTCPSS,VMware Telco Cloud Platform Specialist Skills 2024,21250
+RedHat,VTCAS,VMware Telco Cloud Automation Skills 2024,21250
+RedHat,NFV,VMware Telco Cloud NFV Skills 2024,21250
+RedHat,VCP-TKO,VMware Certified Professional - Tanzu for Kubernetes Operations 2024 (VCP-TKO 2024),21250
+RedHat,VCDX-CMA,VMware Certified Design Expert - Cloud Management and Automation 2024 (VCDX-CMA 2024),38250
+RedHat,VCAP-CMA,VMware Certified Advanced Professional - Cloud Management and Automation Design 2024 (VCAP-CMA Design 2024),38250
+RedHat,VCAP-CMA,VMware Certified Advanced Professional - Cloud Management and Automation Deployment 2024 (VCAP-CMA Deploy 2024),38250
+RedHat,VCP-CO,VMware Certified Professional - Cloud Operations 2024 (VCP-CO 2024),21250
+RedHat,VCP-VMC,VMware Certified Professional - VMware Cloud 2024 (VCP-VMC 2024),21250
+RedHat,VCP-CMA,VMware Certified Professional - Cloud Management and Automation 2024 (VCP-CMA 2024),21250
+RedHat,VCTA-CMA,VMware Certified Technical Associate - Cloud Management and Automation 2024 (VCTA-CMA 2024),10625
+RedHat,SD-WAN,VMware SD-WAN Troubleshoot Skills 2024,21250
+RedHat,NSX,VMware NSX Advanced Load Balancer(Avi) for Operators Skills 2024,21250
+RedHat,SD-WAN,VMware SD-WAN Foundations Skills 2024,10625
+RedHat,SD-WAN,VMware SD-WAN Design and Deploy Skills 2024,21250
+RedHat,VCAP-NV,VMware Certified Advanced Professional - Network Virtualization Deploy 2024 (VCAP-NV Deploy 2024),38250
+RedHat,VCP-NV,VMware Certified Professional - Network Virtualization 2024 (VCP-NV 2024),21250
+RedHat,VCTA-NV,VMware Certified Technical Associate - Network Virtualization 2024 (VCTA-NV 2024),10625
+RedHat,VCAP-DCV,VMware Certified Advanced Professional - Data Center Virtualization Deploy 2024 (VCAP-DCV Deploy 2024),38250
+RedHat,VCAP-DCV,VMware Certified Advanced Professional - Data Center Virtualization Design 2024 (VCAP-DCV Design 2024),38250
+RedHat,VCP-DCV,VMware Certified Professional - Data Center Virtualization 2024 (VCP-DCV 2024),21250
+RedHat,VCTA-DCV,VMware Certified Technical Associate - Data Center Virtualization 2024 (VCTA-DCV 2024),10625
+RedHat,HCI,VMware Certified Master Specialist – HCI 2024,21250
+RedHat,VCST,VMware Certified Specialist - vSphere with Tanzu 2024,21250
+RedHat,VCSO,VMware Certified Specialist - vRealize Operations 2024,21250
+RedHat,AWS,VMware Certified Master Specialist - VMware Cloud on AWS 2024,21250
+RedHat,VOCMA,VMware vRealize Operations - Cloud Management Automation 2024,21250
+RedHat,VCS,VMware Certified Specialist - vSAN 2024,21250
+RedHat,VCSCP,VMware Certified Specialist - Cloud Provider 2024,21250
+Cisco,CCNP-ENSDWI,CCNP Enterprise 300-415 ENSDWI,25500
+Cisco,CCST,Cisco Certified Support Technician (CCST) Cybersecurity,10625
+Cisco,CCDE,Cisco Certified DevNet Expert,34000
+Cisco,CCDE,CCDE,38250
+Cisco,CCIE,CCIE Service Provider,34000
+Cisco,CCIE,CCIE Security,34000
+Cisco,CCIE,CCIE Data Center,34000
+Cisco,CCIE,CCIE Collaboration,34000
+Cisco,CCIE,CCIE Enterprise Wireless,34000
+Cisco,CCIE,CCIE Enterprise Infrastructure,34000
+Cisco,SPAUTO,Cisco Certified DevNet Professional 300-535 SPAUTO,25500
+Cisco,SAUTO,Cisco Certified DevNet Professional 300-735 SAUTO,25500
+Cisco,DCAUTO,Cisco Certified DevNet Professional 300-635 DCAUTO,25500
+Cisco,CLAUTO,Cisco Certified DevNet Professional 300-835 CLAUTO,25500
+Cisco,ENAUTO,Cisco Certified DevNet Professional 300-435 ENAUTO,25500
+Cisco,DEVOPS,Cisco Certified DevNet Professional 300-910 DEVOPS,25500
+Cisco,DEVCOR,Cisco Certified DevNet Professional 350-901 DEVCOR,34000
+Cisco,CBRTHD,Cisco Certified CyberOps Professional 300-220 CBRTHD,25500
+Cisco,CBRFIR,Cisco Certified CyberOps Professional 300-215 CBRFIR,25500
+Cisco,CBRCOR,Cisco Certified CyberOps Professional 350-201 CBRCOR,34000
+Cisco,CCNP-CLAUTO,CCNP Collaboration 300-835 CLAUTO,25500
+Cisco,CCNP-CLCEI,CCNP Collaboration 300-820 CLCEI,25500
+Cisco,CCNP-CLACCM,CCNP Collaboration 300-815 CLACCM,25500
+Cisco,CCNP-CLICA,CCNP Collaboration 300-810 CLICA,25500
+Cisco,CCNP-CLCOR,CCNP Collaboration 350-801 CLCOR,34000
+Cisco,CCNP-SPCNI,CCNP Service Provider 300-540 SPCNI,25500
+Cisco,CCNP-SPAUTO,CCNP Service Provider 300-535 SPAUTO,25500
+Cisco,CCNP-SPVI,CCNP Service Provider 300-515 SPVI,25500
+Cisco,CCNP-SPRI,CCNP Service Provider 300-510 SPRI,25500
+Cisco,CCNP-SPCOR,CCNP Service Provider 350-501 SPCOR,34000
+Cisco,CCNP-SCAZT,CCNP Security 300-740 SCAZT,25500
+Cisco,CCNP-SAUTO,CCNP Security 300-735 SAUTO,25500
+Cisco,CCNP-SVPN,CCNP Security 300-730 SVPN,25500
+Cisco,CCNP-SWSA,CCNP Security 300-725 SWSA,25500
+Cisco,CCNP-SESA,CCNP Security 300-720 SESA,25500
+Cisco,CCNP-SISE,CCNP Security 300-715 SISE,25500
+Cisco,CCNP-SNCF,CCNP Security 300-710 SNCF,25500
+Cisco,CCNP-SCOR,CCNP Security 350-701 SCOR,34000
+Cisco,CCNP-DCAUTO,CCNP Data Center 300-635 DCAUTO,25500
+Cisco,CCNP-DCACI,CCNP Data Center 300-620 DCACI,25500
+Cisco,CCNP-DCIT,CCNP Data Center 300-615 DCIT,25500
+Cisco,CCNP-DCID,CCNP Data Center 300-610 DCID,25500
+Cisco,CCNP-DCCOR,CCNP Data Center 350-601 DCCOR,34000
+Cisco,CCNP-ENAUTO,CCNP Enterprise 300-435 ENAUTO,25500
+Cisco,CCNP-ENWLSI,CCNP Enterprise 300-430 ENWLSI,25500
+Cisco,CCNP-ENWLSD,CCNP Enterprise 300-425 ENWLSD,25500
+Cisco,CCNP-ENSLD,CCNP Enterprise 300-420 ENSLD,25500
+Cisco,CCNP-ENARSI,CCNP Enterprise 300-410 ENARSI,25500
+Cisco,CCNP-ENCOR,CCNP Enterprise 350-401 ENCOR,34000
+Cisco,CCCA,Cisco Certified CyberOps Associate,25500
+Cisco,CCDA,Cisco Certified DevNet Associate,25500
+Cisco,CCNA,Cisco Certified Network Associate (CCNA),25500
+Cisco,CCST,Cisco Certified Support Technician (CCST) Networking,10625
