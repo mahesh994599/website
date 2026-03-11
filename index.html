@@ -2005,19 +2005,34 @@
             const orderDate = new Date().toLocaleString('en-IN', { dateStyle: 'long', timeStyle: 'short' });
             const paymentId = response.razorpay_payment_id || 'N/A';
             const orderId = response.razorpay_order_id || 'N/A';
-            const RECIPIENTS = ['itops@synergificsoftware.com', 'vinay.chandra@synergificsoftware.com', orderDetails.email];
-            const sends = RECIPIENTS.map(toEmail =>
-                emailjs.send(_k(_c.esid), _k(_c.etid), {
-                    to_email: toEmail, from_name: 'Synergific Lab Store', reply_to: orderDetails.email,
-                    subject: 'New Lab Order: ' + orderDetails.labName + ' [' + orderDetails.labId + '] — ' + orderDetails.totalFmt,
-                    order_date: orderDate, payment_id: paymentId, order_id: orderId,
-                    lab_name: orderDetails.labName, lab_id: orderDetails.labId, plan: orderDetails.plan,
-                    qty: String(orderDetails.qty), customer_name: orderDetails.name, customer_email: orderDetails.email,
-                    customer_phone: orderDetails.phone, company: orderDetails.company || '—',
-                    subtotal: orderDetails.subtotalFmt, discount: orderDetails.discountFmt,
-                    gst: orderDetails.gstFmt, total: orderDetails.totalFmt
-                })
-            );
+
+            const payload = {
+                from_name: 'Synergific Lab Store',
+                reply_to: orderDetails.email,
+                subject: 'New Lab Order: ' + orderDetails.labName + ' [' + orderDetails.labId + '] — ' + orderDetails.totalFmt,
+                order_date: orderDate,
+                payment_id: paymentId,
+                order_id: orderId,
+                lab_name: orderDetails.labName,
+                lab_id: orderDetails.labId,
+                plan: orderDetails.plan,
+                qty: String(orderDetails.qty),
+                customer_name: orderDetails.name,
+                customer_email: orderDetails.email,
+                customer_phone: orderDetails.phone,
+                company: orderDetails.company || '—',
+                subtotal: orderDetails.subtotalFmt,
+                discount: orderDetails.discountFmt,
+                gst: orderDetails.gstFmt,
+                total: orderDetails.totalFmt,
+            };
+
+            // 1 email to ops (itops) — vinay gets CC via EmailJS template CC field
+            // 1 email to customer as confirmation
+            const sends = [
+                emailjs.send(_k(_c.esid), _k(_c.etid), { ...payload, to_email: 'itops@synergificsoftware.com' }),
+                emailjs.send(_k(_c.esid), _k(_c.etid), { ...payload, to_email: orderDetails.email }),
+            ];
             return Promise.all(sends);
         }
 
@@ -2089,23 +2104,25 @@
 
             const submittedAt = new Date().toLocaleString('en-IN', { dateStyle: 'long', timeStyle: 'short' });
 
-            const SUPPORT_RECIPIENTS = [
-                'itops@synergificsoftware.com',
-                email
-            ];
+            const payload = {
+                to_email: 'itops@synergificsoftware.com',
+                from_name: name,
+                reply_to: email,
+                subject: '[Support Request] ' + subject + ' — ' + name,
+                name: name,
+                customer_name: name,
+                customer_email: email,
+                customer_phone: phone,
+                support_subject: subject,
+                support_message: message,
+                submitted_at: submittedAt,
+            };
 
-            const sends = SUPPORT_RECIPIENTS.map(toEmail =>
-                emailjs.send(_k(_c.esid), _k(_c.stid), {
-                    to_email: toEmail,
-                    name: name,
-                    customer_name: name,
-                    customer_email: email,
-                    customer_phone: phone,
-                    support_subject: subject,
-                    support_message: message,
-                    submitted_at: submittedAt,
-                })
-            );
+            // 1 email to ops, 1 confirmation copy to customer
+            const sends = [
+                emailjs.send(_k(_c.esid), _k(_c.stid), payload),
+                emailjs.send(_k(_c.esid), _k(_c.stid), { ...payload, to_email: email })
+            ];
 
             Promise.all(sends)
                 .then(() => {
