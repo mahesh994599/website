@@ -1668,38 +1668,13 @@
             </div>`;
         }
 
+        let examPage = 0;
+        const EXAM_PAGE_SIZE = 10;
+
+        function setExamPage(p) { examPage = p; renderLabs(); }
+
         function renderExamVouchers() {
             const vendor = EXAM_VENDORS.find(v => v.key === activeVendor);
-            const tableRows = vendor.exams.length === 0
-                ? `<tr><td colspan="5" style="padding:40px 16px;text-align:center;color:var(--az-text-muted);font-size:13px;">
-                        <i class="fas fa-ticket-alt" style="font-size:24px;display:block;margin-bottom:10px;color:var(--az-border-dark);"></i>
-                        No vouchers listed yet for ${vendor.name}.<br>
-                        <span style="font-size:12px;">Contact <strong>itops@synergificsoftware.com</strong> for pricing.</span>
-                    </td></tr>`
-                : vendor.exams.map((e, i) => `
-                <tr style="border-bottom:1px solid var(--az-border);${i % 2 === 0 ? 'background:var(--az-bg);' : 'background:white;'}">
-                    <td style="padding:10px 16px;width:130px;">
-                        <span class="az-tag" style="background:${vendor.color}12;color:${vendor.color};border-color:${vendor.color}33;">${e.code}</span>
-                    </td>
-                    <td style="padding:10px 16px;font-weight:600;color:var(--az-text);">${e.name}</td>
-                    <td style="padding:10px 16px;width:150px;text-align:right;">
-                        ${e.originalPrice && e.originalPrice > e.price
-                        ? `<span style="font-size:13px;color:var(--az-text-muted);text-decoration:line-through;">&#8377;${e.originalPrice.toLocaleString('en-IN')}</span>`
-                        : `<span style="font-size:13px;color:var(--az-text-muted);">—</span>`}
-                    </td>
-                    <td style="padding:10px 16px;width:150px;text-align:right;">
-                        <span style="font-size:14px;font-weight:700;color:var(--az-blue);">&#8377;${e.price.toLocaleString('en-IN')}</span>
-                        ${e.originalPrice && e.originalPrice > e.price
-                        ? `<div style="font-size:10px;font-weight:600;color:var(--az-green);">Save &#8377;${(e.originalPrice - e.price).toLocaleString('en-IN')}</div>`
-                        : ''}
-                    </td>
-                    <td style="padding:10px 16px;width:150px;text-align:right;">
-                        <button onclick="openExamCheckout('${vendor.key}', ${i})"
-                            class="btn-primary" style="font-size:12px;padding:5px 14px;white-space:nowrap;">
-                            <i class="fas fa-ticket-alt" style="font-size:10px;"></i> Buy Voucher
-                        </button>
-                    </td>
-                </tr>`).join('');
 
             const TEXT_ONLY_VENDORS = ['itil'];
             const SHOW_NAME_VENDORS = ['microsoft', 'paloalto', 'hashicorp', 'suse', 'netsuite', 'vmware', 'itil', 'servicenow'];
@@ -1709,31 +1684,72 @@
                     ${SHOW_NAME_VENDORS.includes(v.key) ? '<span>' + v.name + '</span>' : ''}
                 </button>`).join('');
 
+            // Pagination
+            const totalExams = vendor.exams.length;
+            const totalPages = Math.ceil(totalExams / EXAM_PAGE_SIZE);
+            const safePage = Math.min(examPage, Math.max(0, totalPages - 1));
+            const pageExams = vendor.exams.slice(safePage * EXAM_PAGE_SIZE, (safePage + 1) * EXAM_PAGE_SIZE);
+
+            // Cards
+            let cardsHtml = '';
+            if (totalExams === 0) {
+                cardsHtml = `<div style="padding:48px 24px;text-align:center;color:var(--az-text-muted);">
+                    <i class="fas fa-ticket-alt" style="font-size:28px;display:block;margin-bottom:12px;color:var(--az-border-dark);"></i>
+                    No vouchers listed yet for <strong>${vendor.name}</strong>.<br>
+                    <span style="font-size:12px;">Contact <strong>itops@synergificsoftware.com</strong> for pricing.</span>
+                </div>`;
+            } else {
+                cardsHtml = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;padding:16px;">' +
+                    pageExams.map((e, i) => {
+                        const realIdx = safePage * EXAM_PAGE_SIZE + i;
+                        const hasDiscount = e.originalPrice && e.originalPrice > e.price;
+                        const savePct = hasDiscount ? Math.round((1 - e.price / e.originalPrice) * 100) : 0;
+                        return `<div style="background:white;border:1px solid var(--az-border);border-radius:4px;padding:16px;display:flex;flex-direction:column;gap:10px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 2px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+                            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+                                <span class="az-tag" style="background:${vendor.color}12;color:${vendor.color};border-color:${vendor.color}33;flex-shrink:0;">${e.code}</span>
+                                ${hasDiscount ? `<span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;flex-shrink:0;">${savePct}% OFF</span>` : ''}
+                            </div>
+                            <div style="font-size:13px;font-weight:600;color:var(--az-text);line-height:1.4;flex:1;">${e.name}</div>
+                            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                                ${hasDiscount ? `<span style="font-size:12px;color:var(--az-text-muted);text-decoration:line-through;">&#8377;${e.originalPrice.toLocaleString('en-IN')}</span>` : ''}
+                                <span style="font-size:16px;font-weight:700;color:var(--az-blue);">&#8377;${e.price.toLocaleString('en-IN')}</span>
+                            </div>
+                            <button onclick="openExamCheckout('${vendor.key}', ${realIdx})"
+                                class="btn-primary" style="font-size:12px;padding:7px 14px;justify-content:center;width:100%;">
+                                <i class="fas fa-ticket-alt" style="font-size:10px;"></i> Buy Voucher
+                            </button>
+                        </div>`;
+                    }).join('') + '</div>';
+            }
+
+            // Pagination controls
+            let paginationHtml = '';
+            if (totalPages > 1) {
+                const pages = Array.from({ length: totalPages }, (_, i) => i);
+                paginationHtml = `<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--az-border);background:var(--az-surface);">
+                    <span style="font-size:12px;color:var(--az-text-muted);">Showing ${safePage * EXAM_PAGE_SIZE + 1}–${Math.min((safePage + 1) * EXAM_PAGE_SIZE, totalExams)} of ${totalExams} vouchers</span>
+                    <div style="display:flex;gap:4px;align-items:center;">
+                        <button onclick="setExamPage(${safePage - 1})" ${safePage === 0 ? 'disabled' : ''} style="padding:4px 10px;border:1px solid var(--az-border);background:white;cursor:pointer;border-radius:2px;font-size:12px;color:var(--az-text-sub);${safePage === 0 ? 'opacity:.4;cursor:default;' : ''}">&#8249;</button>
+                        ${pages.map(p => `<button onclick="setExamPage(${p})" style="padding:4px 10px;border:1px solid ${p === safePage ? 'var(--az-blue)' : 'var(--az-border)'};background:${p === safePage ? 'var(--az-blue)' : 'white'};color:${p === safePage ? 'white' : 'var(--az-text-sub)'};cursor:pointer;border-radius:2px;font-size:12px;font-weight:${p === safePage ? '700' : '400'};">${p + 1}</button>`).join('')}
+                        <button onclick="setExamPage(${safePage + 1})" ${safePage === totalPages - 1 ? 'disabled' : ''} style="padding:4px 10px;border:1px solid var(--az-border);background:white;cursor:pointer;border-radius:2px;font-size:12px;color:var(--az-text-sub);${safePage === totalPages - 1 ? 'opacity:.4;cursor:default;' : ''}">&#8250;</button>
+                    </div>
+                </div>`;
+            }
+
             return `
             <div style="background:var(--az-surface);border:1px solid var(--az-border);">
                 <div style="display:flex;border-bottom:1px solid var(--az-border);padding:0 16px;gap:0;overflow-x:auto;">${vendorTabs}</div>
                 <div style="padding:8px 16px;background:var(--az-blue-xlight);border-bottom:1px solid var(--az-blue-light);font-size:12px;color:var(--az-blue);display:flex;align-items:center;gap:8px;">
                     <i class="fas fa-info-circle"></i>
                     Voucher prices are per candidate · Delivered digitally within 24 hours of payment confirmation.
+                    ${totalExams > 0 ? `<span style="margin-left:auto;font-weight:600;">${totalExams} vouchers available</span>` : ''}
                 </div>
-                <div style="overflow-x:auto;">
-                    <table style="width:100%;border-collapse:collapse;font-size:13px;">
-                        <thead>
-                            <tr style="background:var(--az-surface);border-bottom:2px solid var(--az-border);">
-                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:130px;">Code</th>
-                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Exam Name</th>
-                                <th style="padding:10px 16px;text-align:right;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:150px;">Original Price</th>
-                                <th style="padding:10px 16px;text-align:right;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:150px;">Discount Price</th>
-                                <th style="padding:10px 16px;text-align:right;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;width:150px;"></th>
-                            </tr>
-                        </thead>
-                        <tbody>${tableRows}</tbody>
-                    </table>
-                </div>
+                ${cardsHtml}
+                ${paginationHtml}
             </div>`;
         }
 
-        function setExamVendor(key) { activeVendor = key; renderLabs(); }
+        function setExamVendor(key) { activeVendor = key; examPage = 0; renderLabs(); }
 
         function openExamCheckout(vendorKey, examIdx) {
             const vendor = EXAM_VENDORS.find(v => v.key === vendorKey);
