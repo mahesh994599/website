@@ -1084,7 +1084,9 @@
         ];
         let activeVendor = 'comptia';
         let examCSVLoaded = false;
+        let examCSVFetching = false;
         let labsCSVLoaded = false;
+        let labsCSVFetching = false;
 
         // ─── CSV CONFIG ──────────────────────────────────────────────
         const CSV_CATEGORIES = ['Skillable Labs', 'Xtremelabs', 'Godeploy'];
@@ -1387,7 +1389,8 @@
         }
 
         async function fetchLabsCSV() {
-            if (labsCSVLoaded) return;
+            if (labsCSVLoaded || labsCSVFetching) return; // prevent double-fetch
+            labsCSVFetching = true;
             try {
                 const res = await fetch('labs-data.csv');
                 if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -1397,13 +1400,15 @@
                 if (CSV_CATEGORIES.includes(activeCategory)) renderLabs();
             } catch (e) {
                 console.warn('labs-data.csv not found — skipping:', e.message);
-                labsCSVLoaded = true; // mark done so it doesn't retry
-                // Do NOT call renderLabs() here — avoid wiping current view
+                labsCSVLoaded = true;
+            } finally {
+                labsCSVFetching = false;
             }
         }
 
         async function fetchExamsCSV() {
-            if (examCSVLoaded) return;
+            if (examCSVLoaded || examCSVFetching) return; // prevent double-fetch
+            examCSVFetching = true;
             try {
                 const res = await fetch('exams-data.csv');
                 if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -1413,13 +1418,13 @@
                 if (activeCategory === 'Exam Vouchers') renderLabs();
             } catch (e) {
                 console.warn('exams-data.csv not found — skipping:', e.message);
-                examCSVLoaded = true; // mark done so it doesn't retry
-                // Do NOT call renderLabs() here — avoid wiping current view
+                examCSVLoaded = true;
+            } finally {
+                examCSVFetching = false;
             }
         }
 
         function parseCSVIntoLabData(text) {
-            if (labsCSVLoaded) return;
             CSV_CATEGORIES.forEach(cat => { labData[cat] = labData[cat].filter(l => !l.isCSV); });
             const cleaned = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/^\uFEFF/, '');
             const rows = cleaned.trim().split('\n');
@@ -1444,7 +1449,6 @@
         }
 
         function parseCSVIntoExamData(text) {
-            if (examCSVLoaded) return; // already loaded, don't wipe and re-parse
             EXAM_VENDORS.forEach(v => { v.exams = v.exams.filter(e => !e.isCSV); });
             // Normalize all line endings and strip BOM
             const cleaned = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/^\uFEFF/, '');
@@ -1482,9 +1486,9 @@
             document.getElementById('category-title').innerText = cat === 'SSL Labs' ? 'SSL Labs Store' : cat;
             renderMenu();
             renderLabs();
-            // Re-trigger CSV fetch if not yet loaded for this category
-            if (cat === 'Exam Vouchers' && !examCSVLoaded) fetchExamsCSV();
-            if (CSV_CATEGORIES.includes(cat) && !labsCSVLoaded) fetchLabsCSV();
+            // Re-trigger CSV fetch only if not already loaded or fetching
+            if (cat === 'Exam Vouchers' && !examCSVLoaded && !examCSVFetching) fetchExamsCSV();
+            if (CSV_CATEGORIES.includes(cat) && !labsCSVLoaded && !labsCSVFetching) fetchLabsCSV();
         }
 
         function handleSearch(val) { searchQuery = val.toLowerCase(); renderLabs(); }
