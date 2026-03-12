@@ -1676,13 +1676,18 @@
         function renderExamVouchers() {
             const vendor = EXAM_VENDORS.find(v => v.key === activeVendor);
 
-            const TEXT_ONLY_VENDORS = ['itil'];
-            const SHOW_NAME_VENDORS = ['microsoft', 'paloalto', 'itil'];
-            const vendorTabs = EXAM_VENDORS.map(v => `
-                <button onclick="setExamVendor('${v.key}')" title="${v.name}" style="display:flex;align-items:center;gap:6px;padding:10px 14px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${activeVendor === v.key ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${activeVendor === v.key ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;white-space:nowrap;">
-                    ${!TEXT_ONLY_VENDORS.includes(v.key) && v.logo ? `<img src="${v.logo}" alt="${v.name}" style="height:20px;object-fit:contain;max-width:80px;" onerror="this.style.display='none'">` : ''}
-                    ${SHOW_NAME_VENDORS.includes(v.key) ? '<span>' + v.name + '</span>' : ''}
-                </button>`).join('');
+            const vendorDropdown = `
+                <div style="padding:12px 16px;border-bottom:1px solid var(--az-border);background:var(--az-surface);display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                    <label style="font-size:12px;font-weight:600;color:var(--az-text-sub);white-space:nowrap;text-transform:uppercase;letter-spacing:.06em;">Select Vendor</label>
+                    <div style="position:relative;flex:1;min-width:220px;max-width:360px;">
+                        <select onchange="setExamVendor(this.value)"
+                            style="width:100%;padding:8px 36px 8px 12px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:1px solid var(--az-border);background:white;color:var(--az-text);cursor:pointer;appearance:none;-webkit-appearance:none;outline:none;border-radius:2px;">
+                            ${EXAM_VENDORS.map(v => `<option value="${v.key}" ${v.key === activeVendor ? 'selected' : ''}>${v.name}</option>`).join('')}
+                        </select>
+                        <i class="fas fa-chevron-down" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--az-text-muted);pointer-events:none;"></i>
+                    </div>
+                    ${vendor.logo ? `<img src="${vendor.logo}" alt="${vendor.name}" style="height:28px;object-fit:contain;max-width:110px;" onerror="this.style.display='none'">` : ''}
+                </div>`;
 
             // Pagination
             const totalExams = vendor.exams.length;
@@ -1748,7 +1753,7 @@
 
             return `
             <div style="background:var(--az-surface);border:1px solid var(--az-border);">
-                <div style="display:flex;border-bottom:1px solid var(--az-border);padding:0 16px;gap:0;overflow-x:auto;">${vendorTabs}</div>
+                ${vendorDropdown}
                 <div style="padding:8px 16px;background:var(--az-blue-xlight);border-bottom:1px solid var(--az-blue-light);font-size:12px;color:var(--az-blue);display:flex;align-items:center;gap:8px;">
                     <i class="fas fa-info-circle"></i>
                     Voucher prices are per candidate · Delivered digitally within 24 hours of payment confirmation.
