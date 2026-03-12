@@ -1699,12 +1699,12 @@
                     <span style="font-size:12px;">Contact <strong>itops@synergificsoftware.com</strong> for pricing.</span>
                 </div>`;
             } else {
-                cardsHtml = '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:16px;">' +
+                cardsHtml = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;padding:16px;">' +
                     pageExams.map((e, i) => {
                         const realIdx = safePage * EXAM_PAGE_SIZE + i;
                         const hasDiscount = e.originalPrice && e.originalPrice > e.price;
                         const savePct = hasDiscount ? Math.round((1 - e.price / e.originalPrice) * 100) : 0;
-                        return `<div style="background:white;border:1px solid var(--az-border);border-radius:4px;padding:16px;display:flex;flex-direction:column;gap:0;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.10)'" onmouseout="this.style.boxShadow='none'">
+                        return `<div class="lab-card" style="padding:16px;display:flex;flex-direction:column;">
                             <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px;">
                                 <span class="az-tag" style="background:${vendor.color}12;color:${vendor.color};border-color:${vendor.color}33;flex-shrink:0;">${e.code}</span>
                                 ${hasDiscount ? `<span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;flex-shrink:0;white-space:nowrap;">${savePct}% OFF</span>` : ''}
