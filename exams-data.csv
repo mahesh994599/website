@@ -406,20 +406,6 @@ ITIL,ITIL-025,ITIL 4 Practitioner: Deployment Management,17710,17710
 ITIL,ITIL-026,ITIL 4 Practitioner: Continual Improvement,17710,17710
 ITIL,ITIL-027,ITIL 4 Practitioner: Change Enablement,17710,17710
 ITIL,ITIL-028,ITIL 4 Foundation,41800,41800
-CompTIA,CTA-001,CompTIA Cloud Essentials+,11730,11730
-CompTIA,CTA-002,CompTIA Project+,31365,31365
-CompTIA,CTA-003,CompTIA DataSys+,31365,31365
-CompTIA,CTA-004,CompTIA Data+,21505,21505
-CompTIA,CTA-005,CompTIA PenTest+,34340,34340
-CompTIA,CTA-006,CompTIA Advanced Security Practitioner,43265,43265
-CompTIA,CTA-007,CompTIA CySA+,34340,34340
-CompTIA,CTA-008,CompTIA Server+,31365,31365
-CompTIA,CTA-009,CompTIA Linux+,31365,31365
-CompTIA,CTA-010,CompTIA Cloud+,31365,31365
-CompTIA,CTA-011,CompTIA Security+,34340,34340
-CompTIA,CTA-012,CompTIA Network+,31365,31365
-CompTIA,CTA-013,CompTIA A+,21505,21505
-CompTIA,CTA-014,CompTIA IT Fundamentals,11730,11730
 Oracle,ORA-001,Oracle Cloud Infrastructure 2023 Certified Multicloud Architect Associate,10419,10419
 Oracle,ORA-002,Oracle Utilities Customer Cloud Service 2022 Certified Implementation Professional,20421,20421
 Oracle,ORA-003,Oracle Utilities Work and Asset Cloud Service 2022 Certified Implementation Professional,20421,20421
@@ -725,3 +711,152 @@ linux foundation,LF-LFCA-JP,Linux Foundation (LFCA-JP),21125,19012
 linux foundation,LF-LFD461-JP,Yocto Project Super Practical Online Course (LFD461-JP),232375,209138
 linux foundation,LF-LFWS307-JP,Linux(LFWS307-JP),185900,167310
 linux foundation,LF-LFD210-CN,RISC-V  (LFD210-CN),8366,7529
+comptia,CT-AN,a+ Network,46402,41762
+comptia,CT-AC,a+ Cyber,46402,41762
+comptia,CT-AAFV,Adobe AI for Video  Adobe AI for Video,55329,49796
+comptia,CT-AE,AI Essentials,9206,8285
+comptia,CT-AFME,AI for Marketing Essentials,9206,8285
+comptia,CT-AFSE,AI for Sales Essentials,9206,8285
+comptia,CT-AHDE,AI Help Desk Essentials,9206,8285
+comptia,CT-APE,AI Prompting Essentials  AI Prompting Essentials,9206,8285
+comptia,CT-BE,Business Essentials,9206,8285
+comptia,CT-CK,Certification Kit  Certification Kit,930,837
+comptia,CT-C,Cloud+  Cloud+ Voucher,36266,32639
+comptia,CT-C-01,Cloud+  Cloud+ Voucher Plus Retake Assurance,40823,36741
+comptia,CT-C-02,Cloud+  Certification Kit,930,837
+comptia,CT-C-03,Cloud+,65000,58500
+comptia,CT-C-04,Cloud+  Cloud+ Complete Learning Bundle,76159,68543
+comptia,CT-C-05,Cloud+  Cloud+ Complete Learning Bundle with Voucher Plus Retake Assurance,108798,97918
+comptia,CT-C-06,Cloud+  Continuing Education Token 25,2325,2092
+comptia,CT-C-07,Cloud+  Continuing Education Token 50,4650,4185
+comptia,CT-CE,Cloud Essentials,9206,8285
+comptia,CT-C-08,CloudNetX  CloudNetX Voucher,49192,44273
+comptia,CT-C-09,CloudNetX  CloudNetX Voucher Plus Retake Assurance,53748,48373
+comptia,CT-C-10,CloudNetX  Certification Kit,930,837
+comptia,CT-C-11,CloudNetX,88805,79924
+comptia,CT-C-12,CloudNetX  CloudNetX Complete Learning Bundle with Voucher Plus Retake Assurance,124142,111728
+comptia,CT-C-13,CloudNetX  Continuing Education Token 25,2325,2092
+comptia,CT-C-14,CloudNetX  Continuing Education Token 50,4650,4185
+comptia,CT-CE-01,Continuing Education  A+ CertMaster CE,12926,11633
+comptia,CT-CE-02,Continuing Education  Network+ CertMaster CE,17668,15901
+comptia,CT-CE-03,Continuing Education  Security+ CertMaster CE,18598,16738
+comptia,CT-CE-04,Continuing Education  Continuing Education Token 25,2325,2092
+comptia,CT-CE-05,Continuing Education  Continuing Education Token 50,4650,4185
+comptia,CT-CP,CyberDefense Pro,25572,23015
+comptia,CT-C-15,CySA+  CySA+ Voucher,39521,35569
+comptia,CT-C-16,CySA+  CySA+ Voucher Plus Retake Assurance,44077,39669
+comptia,CT-C-17,CySA+  Certification Kit,930,837
+comptia,CT-C-18,CySA+,56724,51052
+comptia,CT-C-19,CySA+  CySA+ CertMaster Labs ,15715,14144
+comptia,CT-C-20,CySA+  CySA+ Complete Learning Bundle,73369,66032
+comptia,CT-C-21,CySA+  CySA+ Complete Learning Bundle with Voucher Plus Retake Assurance,108891,98002
+comptia,CT-C-22,CySA+  Continuing Education Token 25,2325,2092
+comptia,CT-C-23,CySA+  Continuing Education Token 50,4650,4185
+comptia,CT-D,DataAI  DataAI Voucher,49192,44273
+comptia,CT-D-01,DataAI  DataAI Voucher Plus Retake Assurance,53748,48373
+comptia,CT-D-02,DataAI  Certification Kit,930,837
+comptia,CT-D-03,DataAI,84621,76159
+comptia,CT-D-04,DataAI  DataAI Complete Learning Bundle with Voucher Plus Retake Assurance,120422,108380
+comptia,CT-D-05,DataAI  Continuing Education Token 25,2325,2092
+comptia,CT-D-06,DataAI  Continuing Education Token 50,4650,4185
+comptia,CT-DAE,Data Analysis Essentials  Data Analysis Essentials,9206,8285
+comptia,CT-D-07,DataSys+  DataSys+ Voucher,36266,32639
+comptia,CT-D-08,DataSys+  DataSys+ Voucher Plus Retake Assurance,40823,36741
+comptia,CT-D-09,DataSys+  Certification Kit,930,837
+comptia,CT-D-10,DataSys+,60908,54817
+comptia,CT-D-11,DataSys+  DataSys+ CertMaster Labs ,16645,14980
+comptia,CT-D-12,DataSys+  DataSys+ Complete Learning Bundle,77647,69882
+comptia,CT-D-13,DataSys+  DataSys+ Complete Learning Bundle with Voucher Plus Retake Assurance,110193,99174
+comptia,CT-D-14,DataSys+  Continuing Education Token 25,2325,2092
+comptia,CT-D-15,DataSys+  Continuing Education Token 50,4650,4185
+comptia,CT-DLP,Digital Literacy Pro,9206,8285
+comptia,CT-EHP,Ethical Hacker Pro,28362,25526
+comptia,CT-HSPIC,Hybrid Server Pro I: Core,21388,19249
+comptia,CT-HSPIA,Hybrid Server Pro II: Advanced,21388,19249
+comptia,CT-IFP,IT Fundamentals Pro,9764,8788
+comptia,CT-LS,Library Suite  Library Suite Annual Subscription,37196,33476
+comptia,CT-LP,Linux Pro,25572,23015
+comptia,CT-MEP,Microsoft Excel Pro,9206,8285
+comptia,CT-MWP,Microsoft Word Pro,9206,8285
+comptia,CT-N,Network+  Network+ Voucher,36266,32639
+comptia,CT-N-01,Network+  Network+ Voucher Plus Retake Assurance,40823,36741
+comptia,CT-N-02,Network+  Certification Kit,930,837
+comptia,CT-N-03,Network+,59049,53144
+comptia,CT-N-04,Network+  Network+ CertMaster Labs ,16645,14980
+comptia,CT-N-05,Network+  Network+ Complete Learning Bundle,70672,63605
+comptia,CT-N-06,Network+  Network+ Complete Learning Bundle with Voucher Plus Retake Assurance,113169,101852
+comptia,CT-N-07,Network+  Network+ CertMaster CE,17668,15901
+comptia,CT-N-08,Network+  Continuing Education Token 25,2325,2092
+comptia,CT-N-09,Network+  Continuing Education Token 50,4650,4185
+comptia,CT-MOP,Microsoft Office Pro,15715,14144
+comptia,CT-PP,PC Pro,21388,19249
+comptia,CT-P,PenTest+  PenTest+ Voucher,39521,35569
+comptia,CT-P-01,PenTest+  PenTest+ Voucher Plus Retake Assurance,44077,39669
+comptia,CT-P-02,PenTest+  Certification Kit,930,837
+comptia,CT-P-03,PenTest+,64070,57663
+comptia,CT-P-04,PenTest+  PenTest+ CertMaster Study,11624,10462
+comptia,CT-P-05,PenTest+  PenTest+ Complete Learning Bundle with Voucher Plus Retake Assurance,111588,100429
+comptia,CT-P-06,PenTest+  Continuing Education Token 25,2325,2092
+comptia,CT-P-07,PenTest+  Continuing Education Token 50,4650,4185
+comptia,CT-P-08,Project+  Project+ Voucher,36266,32639
+comptia,CT-P-09,Project+  Project+ Voucher Plus Retake Assurance,40823,36741
+comptia,CT-P-10,Project+  Certification Kit,930,837
+comptia,CT-P-11,Project+,48820,43938
+comptia,CT-P-12,Project+  Project+ Complete Learning Bundle,65558,59002
+comptia,CT-P-13,Project+  Project+ Complete Learning Bundle with Voucher Plus Retake Assurance,98104,88294
+comptia,CT-P-14,Project+  Continuing Education Token 25,2325,2092
+comptia,CT-P-15,Project+  Continuing Education Token 50,4650,4185
+comptia,CT-PME,Project Management Essentials,9206,8285
+comptia,CT-S,SecAI+  SecAI+ Voucher,33383,30045
+comptia,CT-S-01,SecAI+  SecAI+ Voucher Plus Retake Assurance,37940,34146
+comptia,CT-S-02,SecAI+,54399,48959
+comptia,CT-S-03,SecAI+  SecAI+ Complete Learning Bundle with Voucher Plus Retake Assurance,83133,74820
+comptia,CT-S-04,Security+  Security+ Voucher,39521,35569
+comptia,CT-S-05,Security+  Security+ Voucher Plus Retake Assurance,44077,39669
+comptia,CT-S-06,Security+  Certification Kit,930,837
+comptia,CT-S-07,Security+,67418,60676
+comptia,CT-S-08,Security+  Security+ Complete Learning Bundle,83691,75322
+comptia,CT-S-09,Security+  Security+ Complete Learning Bundle with Voucher Plus Retake Assurance,119771,107794
+comptia,CT-S-10,Security+  Security+ CertMaster CE,18598,16738
+comptia,CT-S-11,Security+  Continuing Education Token 25,2325,2092
+comptia,CT-S-12,Security+  Continuing Education Token 50,4650,4185
+comptia,CT-SP,Security Pro,21853,19668
+comptia,CT-S-13,SecurityX  SecurityX Voucher,49192,44273
+comptia,CT-S-14,SecurityX  SecurityX Voucher Plus Retake Assurance,53748,48373
+comptia,CT-S-15,SecurityX  Certification Kit,930,837
+comptia,CT-S-16,SecurityX,18505,16654
+comptia,CT-S-17,SecurityX  SecurityX Complete Learning Bundle,114378,102940
+comptia,CT-S-18,SecurityX  SecurityX Complete Learning Bundle with Voucher Plus Retake Assurance,147110,132399
+comptia,CT-S-19,SecurityX  Continuing Education Token 25,2325,2092
+comptia,CT-S-20,SecurityX  Continuing Education Token 50,4650,4185
+comptia,CT-S-21,Server+  Server+ Voucher,36266,32639
+comptia,CT-S-22,Server+  Server+ Voucher Plus Retake Assurance,40823,36741
+comptia,CT-S-23,Server+  Certification Kit,930,837
+comptia,CT-S-24,Server+,60908,54817
+comptia,CT-S-25,Server+  Server+ Complete Learning Bundle,77647,69882
+comptia,CT-S-26,Server+  Server+ Complete Learning Bundle with Voucher Plus Retake Assurance,110565,99508
+comptia,CT-S-27,Server+  Continuing Education Token 25,2325,2092
+comptia,CT-S-28,Server+  Continuing Education Token 50,4650,4185
+comptia,CT-SSE,Soft Skills Essentials,9206,8285
+comptia,CT-T,Tech+  Tech+ Voucher,11624,10462
+comptia,CT-T-01,Tech+  Tech+ Voucher Plus Retake Assurance,16180,14562
+comptia,CT-T-02,Tech+  Certification Kit,930,837
+comptia,CT-T-03,Tech+,15715,14144
+comptia,CT-T-04,Tech+  Tech+ Complete Learning Bundle,19528,17575
+comptia,CT-T-05,Tech+  Tech+ Complete Learning Bundle with Voucher Plus Retake Assurance,31059,27953
+comptia,CT-T-06,Tech+  Tech+ Site License,464950,418455
+comptia,CT-WCP,Windows Client Pro,21388,19249
+comptia,CTA-001,CompTIA Cloud Essentials+,11730,10557
+comptia,CTA-002,CompTIA Project+,31365,28228
+comptia,CTA-003,CompTIA DataSys+,31365,28228
+comptia,CTA-004,CompTIA Data+,21505,19354
+comptia,CTA-005,CompTIA PenTest+,34340,30906
+comptia,CTA-006,CompTIA Advanced Security Practitioner,43265,38938
+comptia,CTA-007,CompTIA CySA+,34340,30906
+comptia,CTA-008,CompTIA Server+,31365,28228
+comptia,CTA-009,CompTIA Linux+,31365,28228
+comptia,CTA-010,CompTIA Cloud+,31365,28228
+comptia,CTA-011,CompTIA Security+,34340,30906
+comptia,CTA-012,CompTIA Network+,31365,28228
+comptia,CTA-013,CompTIA A+,21505,19354
+comptia,CTA-014,CompTIA IT Fundamentals,11730,10557
