@@ -1669,7 +1669,7 @@
         }
 
         let examPage = 0;
-        const EXAM_PAGE_SIZE = 10;
+        const EXAM_PAGE_SIZE = 12;
 
         function setExamPage(p) { examPage = p; renderLabs(); }
 
@@ -1699,34 +1699,35 @@
                     <span style="font-size:12px;">Contact <strong>itops@synergificsoftware.com</strong> for pricing.</span>
                 </div>`;
             } else {
-                cardsHtml = '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px;">' +
+                cardsHtml = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px;">' +
                     pageExams.map((e, i) => {
                         const realIdx = safePage * EXAM_PAGE_SIZE + i;
                         const hasDiscount = e.originalPrice && e.originalPrice > e.price;
                         const savePct = hasDiscount ? Math.round((1 - e.price / e.originalPrice) * 100) : 0;
-                        return `<div class="lab-card" style="padding:16px;display:flex;flex-direction:column;">
-                            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px;">
-                                <span class="az-tag" style="background:${vendor.color}12;color:${vendor.color};border-color:${vendor.color}33;flex-shrink:0;">${e.code}</span>
-                                ${hasDiscount ? `<span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;flex-shrink:0;white-space:nowrap;">${savePct}% OFF</span>` : ''}
+                        return `<div class="lab-card" style="padding:16px;" id="exam-card-${realIdx}">
+                            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                                <span class="az-tag" style="background:${vendor.color}12;color:${vendor.color};border-color:${vendor.color}33;">${e.code}</span>
+                                ${hasDiscount ? `<span class="az-tag-green">${savePct}% OFF</span>` : ''}
                             </div>
-                            <div style="font-size:13px;font-weight:700;color:var(--az-text);line-height:1.45;flex:1;margin-bottom:14px;">${e.name}</div>
-                            <div style="border-top:1px solid var(--az-border);padding-top:12px;margin-bottom:12px;display:flex;flex-direction:column;gap:6px;">
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.04em;">Original Price</span>
-                                    <span style="font-size:13px;color:var(--az-text-muted);${hasDiscount ? 'text-decoration:line-through;' : ''}">
-                                        ${hasDiscount ? `&#8377;${e.originalPrice.toLocaleString('en-IN')}` : '—'}
-                                    </span>
+                            <div style="font-size:15px;font-weight:600;color:var(--az-text);margin-bottom:10px;min-height:44px;line-height:1.4;">${e.name}</div>
+                            <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:10px 12px;margin-bottom:12px;">
+                                <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Voucher Price</div>
+                                <div style="display:flex;align-items:baseline;gap:8px;">
+                                    <div style="font-size:20px;font-weight:600;color:var(--az-blue);">&#8377;${e.price.toLocaleString('en-IN')}</div>
+                                    ${hasDiscount ? `<div style="font-size:13px;color:var(--az-text-muted);text-decoration:line-through;">&#8377;${e.originalPrice.toLocaleString('en-IN')}</div>` : ''}
                                 </div>
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.04em;">Discount Price</span>
-                                    <span style="font-size:16px;font-weight:700;color:var(--az-blue);">&#8377;${e.price.toLocaleString('en-IN')}</span>
-                                </div>
-                                ${hasDiscount ? `<div style="display:flex;justify-content:flex-end;"><span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:600;padding:2px 8px;border-radius:2px;">You save &#8377;${(e.originalPrice - e.price).toLocaleString('en-IN')}</span></div>` : ''}
+                                <div style="font-size:11px;color:var(--az-text-muted);margin-top:2px;">Per candidate · digital delivery within 24hrs</div>
                             </div>
-                            <button onclick="openExamCheckout('${vendor.key}', ${realIdx})"
-                                class="btn-primary" style="font-size:12px;padding:8px 14px;justify-content:center;width:100%;margin-top:auto;">
-                                <i class="fas fa-ticket-alt" style="font-size:10px;"></i> Buy Voucher
-                            </button>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto;">
+                                <button onclick="openExamCheckout('${vendor.key}', ${realIdx})"
+                                    class="btn-secondary" style="font-size:12px;padding:6px 10px;justify-content:center;">
+                                    <i class="fas fa-cart-plus" style="font-size:11px;"></i> Add to Cart
+                                </button>
+                                <button onclick="openExamCheckout('${vendor.key}', ${realIdx})"
+                                    class="btn-primary" style="font-size:12px;padding:6px 10px;justify-content:center;">
+                                    <i class="fas fa-bolt" style="font-size:11px;"></i> Buy Now
+                                </button>
+                            </div>
                         </div>`;
                     }).join('') + '</div>';
             }
