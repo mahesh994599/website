@@ -580,3 +580,148 @@ hashicorp,HC-002,Terraform Associate (004),6556,6556
 hashicorp,HC-003,Terraform Authoring and Operations Professional,27432,27432
 hashicorp,HC-004,Vault Operations Professional,27432,27432
 hashicorp,HC-005,Consul Associate (003),6556,6556
+linux foundation,LF-CETSB,CKA Exam + THRIVE Subscription Bundle,52812,47531
+linux foundation,LF-CETSB-01,CKAD Exam + THRIVE Subscription Bundle,52812,47531
+linux foundation,LF-CETSB-02,CKS Exam + THRIVE Subscription Bundle,52812,47531
+linux foundation,LF-CKS,Certified Kubernetes Administrator (CKA)+ Certified Kubernetes Security Specialist (CKS) Exam Bundle,69712,62741
+linux foundation,LF-LFS260,Kubernetes Security Essentials (LFS260) + CKS-JP 試験バンドル,54502,49052
+linux foundation,LF-LFCA,Linux Foundation Certified IT Associate (LFCA) + Kubernetes and Cloud Native Associate (KCNA) Exam Bundle,35912,32321
+linux foundation,LF-KCNA,Kubernetes and Cloud Native Essentials (LFS250)+ Kubernetes and Cloud Native Associate (KCNA) Exam Bundle,25266,22739
+linux foundation,LF-CKA,Certified Kubernetes Administrator (CKA) + Certified Kubernetes Application Developer (CKAD) + Certified Kubernetes Security Specialist (CKS) Exam Bundle,105202,94682
+linux foundation,LF-KCNA-01,Kubernetes and Cloud Native Associate (KCNA) + Certified Kubernetes Administrator (CKA) Exam Bundle,54502,49052
+linux foundation,LF-LFS256,DevOps and Workflow Management with Argo (LFS256) + Certified Argo Project Associate (CAPA) Exam Bundle,25266,22739
+linux foundation,LF-KCSA,Kubernetes and Cloud Native Security Associate (KCSA) + Certified Kubernetes Security Specialist (CKS) Exam Bundle,54502,49052
+linux foundation,LF-KCNA-02,Kubernetes and Cloud Native Associate (KCNA) Exam + Kubernetes and Cloud Native Security Associate (KCSA) Exam Bundle,35912,32321
+linux foundation,LF-KB,Kubestronaut Bundle,139002,125102
+linux foundation,LF-CKA-01,Certified Kubernetes Administrator (CKA) + Certified Kubernetes Application Developer (CKAD) Exam Bundle,69712,62741
+linux foundation,LF-LFS245,Istio Service Mesh Essentials (LFS245) + Istio Certified Associate (ICA) Exam Bundle,25266,22739
+linux foundation,LF-LFS241,Monitoring Systems and Services with Prometheus (LFS241) + Prometheus Certified Associate (PCA) Exam Bundle,25266,22739
+linux foundation,LF-GKB,Golden Kubestronaut Bundle,357350,321615
+linux foundation,LF-KGKUB,Kubestronaut to Golden Kubestronaut Upgrade Bundle,225530,202977
+linux foundation,LF-CKUB,CKA to Kubestronaut Upgrade Bundle,104358,93922
+linux foundation,LF-CKUB-01,CKAD to Kubestronaut Upgrade Bundle,104358,93922
+linux foundation,LF-LFCA-01,Fundamentals of Open Source IT and Cloud Computing (LFS200)+ Linux Foundation Certified IT Associate (LFCA) Exam Bundle,25266,22739
+linux foundation,LF-LFD210,RISC-V Fundamentals (LFD210) + RISC-V Foundational Associate (RVFA) Exam Bundle,25266,22739
+linux foundation,LF-LETSB,LFCS Exam + THRIVE Subscription Bundle,52812,47531
+linux foundation,LF-LFS270,"Hyperledger Fabric: Design, Develop, and Deploy (LFS270) + Hyperledger Fabric Certified Practitioner (HFCP) Exam Bundle",25266,22739
+linux foundation,LF-LFD221,Open Source Essentials for Developers (LFD221) + Certified Open Source Developer for Enterprise (CODE) Exam Bundle,25266,22739
+linux foundation,LF-CEIPP,Cloud Engineer IT Professional Program,109850,98865
+linux foundation,LF-ACEIP,Advanced Cloud Engineer IT Professional Program,105625,95062
+linux foundation,LF-CNDIP,Cloud Native Developer IT Professional Program,84500,76050
+linux foundation,LF-DGIPP,DevOps & GitOps IT Professional Program,80275,72248
+linux foundation,LF-LFS258,Kubernetes Fundamentals (LFS258),25266,22739
+linux foundation,LF-LFD259,Kubernetes for Developers (LFD259),25266,22739
+linux foundation,LF-LFS261,DevOps and SRE Fundamentals: Implementing Continuous Delivery (LFS261),25266,22739
+linux foundation,LF-LFS260-01,Kubernetes Security Essentials (LFS260),25266,22739
+linux foundation,LF-LFS269,GitOps: Continuous Delivery on Kubernetes with Flux (LFS269),25266,22739
+linux foundation,LF-LFS262,Implementing DevSecOps (LFS262),25266,22739
+linux foundation,LF-LFS250,Kubernetes and Cloud Native Essentials (LFS250),8366,7529
+linux foundation,LF-LFD201,"Introduction to Open Source Development, Git and Linux (LFD201)",25266,22739
+linux foundation,LF-LFS200,Fundamentals of Open Source IT and Cloud Computing (LFS200),8366,7529
+linux foundation,LF-LFS207,Linux System Administration Essentials (LFS207),25266,22739
+linux foundation,LF-LFS203,Linux for Cloud Technicians Essentials (LFS203),25266,22739
+linux foundation,LF-SKF200,"Mastering Infrastructure Security: Strategies, Tools, and Practices (SKF200)",25266,22739
+linux foundation,LF-LFS207-DE,Grundlagen der Linux System Administration (LFS207-DE),25266,22739
+linux foundation,LF-SKF201,Threat Modeling: The Essentials Toolkit (SKF201),25266,22739
+linux foundation,LF-LFS268,CI/CD with Jenkins X (LFS268),25266,22739
+linux foundation,LF-LFS242,Cloud Native Logging with Fluentd and Fluent Bit (LFS242),25266,22739
+linux foundation,LF-LFS253,Containers Fundamentals (LFS253),25266,22739
+linux foundation,LF-LFS244,Managing Kubernetes Applications with Helm (LFS244),25266,22739
+linux foundation,LF-LFS241-01,Monitoring Systems and Services with Prometheus (LFS241),8366,7529
+linux foundation,LF-LFS243,Service Mesh Fundamentals (LFS243),25266,22739
+linux foundation,LF-LFD254,Containers for Developers and Quality Assurance (LFD254),25266,22739
+linux foundation,LF-LFS267,Jenkins Essentials (LFS267),25266,22739
+linux foundation,LF-OSMS,Open Source Management & Strategy,42166,37949
+linux foundation,LF-LFD210-01,RISC-V Fundamentals (LFD210),8366,7529
+linux foundation,LF-LFD273,PyTorch Essentials: An Applications-First Approach (LFD273),25266,22739
+linux foundation,LF-LFD237,Developing Solutions with FDC3 (LFD237),25266,22739
+linux foundation,LF-LFS255,Mastering Kubernetes Security with Kyverno (LFS255),25266,22739
+linux foundation,LF-LFS257,Mastering Kubernetes Event-Driven Autoscaling with KEDA (LFS257),25266,22739
+linux foundation,LF-LFS256-01,DevOps and Workflow Management with Argo (LFS256),8366,7529
+linux foundation,LF-LFS245-01,Istio Service Mesh Essentials (LFS245),8366,7529
+linux foundation,LF-LFC202,Open Source Introduction (LFC202),6676,6008
+linux foundation,LF-LFC203,Open Source Business Strategy (LFC203),6676,6008
+linux foundation,LF-LFC204,Effective Open Source Program Management (LFC204),6676,6008
+linux foundation,LF-LFC205,Open Source Development Practices (LFC205),6676,6008
+linux foundation,LF-LFC206,Open Source Compliance Programs (LFC206),6676,6008
+linux foundation,LF-LFC207,Collaborating Effectively with Open Source Projects (LFC207),6676,6008
+linux foundation,LF-LFC208,Creating Open Source Projects (LFC208),6676,6008
+linux foundation,LF-LFS246,Serverless and Event-Driven Applications with Knative (LFS246),25266,22739
+linux foundation,LF-LFS270-01,"Hyperledger Fabric: Design, Develop and Deploy (LFS270)",8366,7529
+linux foundation,LF-LFS248,Cloud Cost Monitoring for FinOps with OpenCost (LFS248),25266,22739
+linux foundation,LF-LFD221-01,Open Source Essentials for Developers (LFD221),8366,7529
+linux foundation,LF-CKAD,Certified Kubernetes Application Developer (CKAD),37602,33842
+linux foundation,LF-CKA-02,Certified Kubernetes Administrator (CKA),37602,33842
+linux foundation,LF-CKS-01,Certified Kubernetes Security Specialist (CKS),37602,33842
+linux foundation,LF-KCNA-03,Kubernetes and Cloud Native Associate (KCNA),21125,19012
+linux foundation,LF-KCSA-01,Kubernetes and Cloud Native Security Associate (KCSA),21125,19012
+linux foundation,LF-LFCA-02,Linux Foundation Certified IT Associate (LFCA),21125,19012
+linux foundation,LF-LFCS,Linux Foundation Certified System Administrator (LFCS),37602,33842
+linux foundation,LF-RVFA,RISC-V Foundational Associate (RVFA),21125,19012
+linux foundation,LF-PCA,Prometheus Certified Associate (PCA),21125,19012
+linux foundation,LF-HFCP,Hyperledger Fabric Certified Practitioner (HFCP),21125,19012
+linux foundation,LF-CGOA,Certified GitOps Associate (CGOA),21125,19012
+linux foundation,LF-FCFP,FINOS Certified FDC3 Practitioner (FCFP),21125,19012
+linux foundation,LF-ICA,Istio Certified Associate (ICA),21125,19012
+linux foundation,LF-FSOSD,FINOS Financial Services Certified Open Source Developer (FSOSD),21125,19012
+linux foundation,LF-CAPA,Certified Argo Project Associate (CAPA),21125,19012
+linux foundation,LF-CCA,Cilium Certified Associate (CCA),21125,19012
+linux foundation,LF-BCP,Besu Certified Professional (BCP),21125,19012
+linux foundation,LF-CBA,Certified Backstage Associate (CBA),21125,19012
+linux foundation,LF-KCA,Kyverno Certified Associate (KCA),21125,19012
+linux foundation,LF-OTCA,OpenTelemetry Certified Associate (OTCA),21125,19012
+linux foundation,LF-CODE,Certified Open Source Developer for Enterprise (CODE),21125,19012
+linux foundation,LF-CNPA,Certified Cloud Native Platform Engineering Associate (CNPA),21125,19012
+linux foundation,LF-CNPE,Certified Cloud Native Platform Engineer (CNPE),37602,33842
+linux foundation,LF-LFD459,Kubernetes for App Developers (LFD459),295328,265795
+linux foundation,LF-LFS458,Kubernetes Administration (LFS458),295328,265795
+linux foundation,LF-LFS460,Kubernetes Security Fundamentals (LFS460),295328,265795
+linux foundation,LF-LFD401,Developing Applications for Linux (LFD401),295328,265795
+linux foundation,LF-LFD420,Linux Kernel Internals and Development (LFD420),295328,265795
+linux foundation,LF-LFD430,Developing Linux Device Drivers (LFD430),295328,265795
+linux foundation,LF-LFD435,Developing Embedded Linux Device Drivers (LFD435),295328,265795
+linux foundation,LF-LFD450,Embedded Linux Development (LFD450),295328,265795
+linux foundation,LF-LFD460,Embedded Linux Platform Development with Yocto Project (LFD460),295328,265795
+linux foundation,LF-LFD301,"Introduction to Linux, Open Source Development, and GIT (LFD301)",295328,265795
+linux foundation,LF-LFS307,Linux System Administration (LFS307),295328,265795
+linux foundation,LF-LFS303,Linux for Cloud Technicians (LFS303),295328,265795
+linux foundation,LF-LFD441,Security and the Linux Kernel (LFD441),295328,265795
+linux foundation,LF-LFD445,Linux Kernel Debugging (LFD445),295328,265795
+linux foundation,LF-SC100,Text Editing with Vim (SC100),6676,6008
+linux foundation,LF-SC101,Open Data Formats: YAML (SC101),6676,6008
+linux foundation,LF-SC102,Source Control Management with Git (SC102),6676,6008
+linux foundation,LF-SC103,Shell Scripting Using Bash (SC103),6676,6008
+linux foundation,LF-SC104,Developing Helm Charts (SC104),6676,6008
+linux foundation,LF-LFD473,PyTorch in Practice: An Applications-First Approach (LFD473),295328,265795
+linux foundation,LF-SC105,Open Data Formats: JSON (SC105),6676,6008
+linux foundation,LF-LFD480,Programming in Rust (LFD480),295328,265795
+linux foundation,LF-SC106,Pipelines with Tekton (SC106),6676,6008
+linux foundation,LF-LFS482,Zero Trust Security with SPIFFE and SPIRE (LFS482),295328,265795
+linux foundation,LF-SC107,Pattern Matching with Regular Expressions (SC107),6676,6008
+linux foundation,LF-WSKF601,Securing Coding Fundamentals (WSKF601),274625,247162
+linux foundation,LF-WSKF603,Understanding Vulnerabilities and Security Threats (WSKF603),84078,75670
+linux foundation,LF-RXM401,Generative AI Prompt Engineering (RXM401),58728,52855
+linux foundation,LF-RXM402,Machine Learning & AI Introduction (RXM402),58728,52855
+linux foundation,LF-RAG,Retrieval Augmented Generation (RAG) Introduction (RXM403),58728,52855
+linux foundation,LF-LFD334,"WebAssembly in Action: Develop, Deploy, and Debug (LFD334)",168578,151720
+linux foundation,LF-LFWS313,Kubernetes Troubleshooting (LFWS313),84078,75670
+linux foundation,LF-LFWS315,Cilium in Action: Kubernetes Security & Insight (LFWS315),84078,75670
+linux foundation,LF-AC6401,Zephyr RTOS Programming (AC6401),295750,266175
+linux foundation,LF-LFE7010,Cybersecurity Strategy & Risk Management for Executives (LFE7010),380250,342225
+linux foundation,LF-LFWS302,SBOMs in Action: Security & Compliance (LFWS302),84078,75670
+linux foundation,LF-SKF401,Threat Modeling Essentials: Identifying and Managing Risk Effectively (SKF401),168578,151720
+linux foundation,LF-LFWS304,eBPF Essentials: Security and Observability (LFWS304),84078,75670
+linux foundation,LF-LFWS305,Designing Secure Microservices with Keycloak (LFWS305),84078,75670
+linux foundation,LF-LFWS306,Rust for Machine Learning Operations (LFWS306),84078,75670
+linux foundation,LF-LFWS309,Rust for Interfacing with Language Models (LFWS309),84078,75670
+linux foundation,LF-LFWS307,Deploying Small Language Models (LFWS307),274625,247162
+linux foundation,LF-LFS258-JP,Kubernetes Fundamentals (LFS258-JP) + CKA-JP Exam Bundle,54502,49052
+linux foundation,LF-KLJCJ,Kubernetes (LFD259-JP)+ CKAD-JP,54502,49052
+linux foundation,LF-LFS258-JP-01,Kubernetes (LFS258-JP),25266,22739
+linux foundation,LF-LFD259-JP,Kubernetes (LFD259-JP),25266,22739
+linux foundation,LF-CKA-JP,Kubernetes (CKA-JP),37602,33842
+linux foundation,LF-LFCS-JP,Linux Foundation (LFCS-JP),37602,33842
+linux foundation,LF-LFCA-JP,Linux Foundation (LFCA-JP),21125,19012
+linux foundation,LF-LFD461-JP,Yocto Project Super Practical Online Course (LFD461-JP),232375,209138
+linux foundation,LF-LFWS307-JP,Linux(LFWS307-JP),185900,167310
+linux foundation,LF-LFD210-CN,RISC-V  (LFD210-CN),8366,7529
