@@ -1,54 +1,559 @@
 category,code,name,original price,discount price
-CompTIA,CV0-004,CompTIA Cloud+,25000,18500
-CompTIA,SY0-701,CompTIA Security+,22000,16000
-CompTIA,CS0-003,CompTIA CySA+,24000,17500
-CompTIA,PT0-003,CompTIA PenTest+,26000,19000
-CompTIA,N10-009,CompTIA Network+,20000,14500
-Linux Foundation,CKA,Certified Kubernetes Administrator,35000,28000
-Linux Foundation,CKAD,Certified Kubernetes Application Developer,35000,28000
-Linux Foundation,CKS,Certified Kubernetes Security Specialist,38000,30000
-Linux Foundation,LFCS,Linux Foundation Certified SysAdmin,28000,22000
-AWS,CLF-C02,AWS Certified Cloud Practitioner,18000,13500
-AWS,SAA-C03,AWS Solutions Architect Associate,28000,21000
-AWS,SOA-C02,AWS SysOps Administrator Associate,28000,21000
-AWS,DVA-C02,AWS Developer Associate,28000,21000
-AWS,SAP-C02,AWS Solutions Architect Professional,38000,30000
-Microsoft,AZ-900,Microsoft Azure Fundamentals,14000,10500
-Microsoft,AZ-104,Microsoft Azure Administrator,28000,21000
-Microsoft,AZ-204,Microsoft Azure Developer,28000,21000
-Microsoft,AZ-305,Microsoft Azure Solutions Architect,35000,27000
-Microsoft,MS-900,Microsoft 365 Fundamentals,14000,10500
-Google,ACE,Google Associate Cloud Engineer,30000,23000
-Google,PCA,Google Professional Cloud Architect,38000,30000
-Google,PCDE,Google Professional Cloud Data Engineer,38000,30000
-Red Hat,EX200,RHCSA - Red Hat Certified System Administrator,35000,28000
-Red Hat,EX294,RHCE - Red Hat Certified Engineer,42000,34000
-Red Hat,EX280,Red Hat OpenShift Administration,45000,36000
-Cisco,200-301,CCNA,28000,21000
-Cisco,350-401,ENCOR - CCNP Enterprise Core,38000,30000
-Cisco,350-701,SCOR - CCNP Security Core,38000,30000
-Oracle,1Z0-1085,Oracle Cloud Infrastructure Foundations,18000,13500
-Oracle,1Z0-1072,Oracle Cloud Infrastructure Architect Associate,28000,21000
-Oracle,1Z0-071,Oracle Database SQL,22000,16500
-Palo Alto,PCNSA,Palo Alto Networks Certified Network Security Administrator,32000,25000
-Palo Alto,PCNSE,Palo Alto Networks Certified Network Security Engineer,42000,34000
-Salesforce,ADM-201,Salesforce Certified Administrator,28000,21000
-Salesforce,PD1,Salesforce Platform Developer I,32000,25000
-Salesforce,SA,Salesforce Certified Solution Architect,42000,34000
-Citrix,1Y0-204,Citrix Virtual Apps and Desktops,30000,23000
-Citrix,1Y0-312,Citrix Virtual Apps and Desktops Advanced,38000,30000
-HashiCorp,TA-003-P,HashiCorp Certified Terraform Associate,22000,16500
-HashiCorp,VA-002-P,HashiCorp Certified Vault Associate,22000,16500
-SUSE,050-736,SUSE Certified Administrator - SLES 15,28000,21000
-SUSE,050-748,SUSE Certified Engineer - SLES 15,35000,27000
-NetSuite,SCA,NetSuite Certified Administrator,32000,25000
-NetSuite,SCFO,NetSuite Certified Financial User,28000,21000
-VMware,2V0-21.23,VMware vSphere 8.x Professional,35000,27000
-VMware,2V0-41.23,VMware NSX 4.x Professional,38000,30000
-VMware,2V0-33.22,VMware Cloud Professional,35000,27000
-ITIL,ITIL-4-F,ITIL 4 Foundation,18000,13500
-ITIL,ITIL-4-CDS,ITIL 4 Specialist - Create Deliver Support,28000,21000
-ITIL,ITIL-4-DSV,ITIL 4 Specialist - Drive Stakeholder Value,28000,21000
-ServiceNow,CSA,ServiceNow Certified System Administrator,32000,25000
-ServiceNow,CAD,ServiceNow Certified Application Developer,38000,30000
-ServiceNow,CIS-ITSM,ServiceNow CIS - IT Service Management,42000,34000
+AWS,AWS-001,AWS Certified Advanced Networking - Specialty test,25500,19125
+AWS,AWS-002,AWS Certified Data Engineer - Associate,12750,9562
+AWS,AWS-003,AWS Certified Database - Specialty,25500,19125
+AWS,AWS-004,AWS Certified Developer - Associate,12750,9562
+AWS,AWS-005,AWS Certified DevOps Engineer - Professional,25500,19125
+AWS,AWS-006,AWS Certified Machine Learning - Specialty,25500,19125
+AWS,AWS-007,AWS Certified Security - Specialty,25500,19125
+AWS,AWS-008,AWS Certified Solutions Architect,12750,9562
+AWS,AWS-009,AWS Certified Solutions Architect - Professional,25500,19125
+AWS,AWS-010,AWS Certified SysOps Administrator - Associate,12750,9562
+AWS,AWS-011,AWS Certified: SAP on AWS - Specialty,25500,19125
+NVIDIA,NV-001,NVIDIA-Certified Associate: AI Infrastructure and Operations (NCA-AIIO),11475,11475
+NVIDIA,NV-002,NVIDIA-Certified Professional: AI Infrastructure (NCP-AII),34000,34000
+NVIDIA,NV-003,NVIDIA-Certified Professional: AI Operations (NCP-AIO),34000,34000
+NVIDIA,NV-004,NVIDIA-Certified Professional: AI Networking (NCP-AIN),34000,34000
+NVIDIA,NV-005,NVIDIA-Certified Associate: Generative AI and LLMs (NCA-GENL),11475,11475
+NVIDIA,NV-006,NVIDIA-Certified Associate: Multimodal Generative AI (NCA-GENM),11475,11475
+NVIDIA,NV-007,NVIDIA-Certified Professional: Accelerated Data Science (NCP-ADS),17000,17000
+NVIDIA,NV-008,NVIDIA-Certified Professional: OpenUSD Development,17000,17000
+NVIDIA,NV-009,NVIDIA-Certified Professional: Generative AI LLMs (NCP-GENL),17000,17000
+NVIDIA,NV-010,NVIDIA-Certified Professional: Agentic AI (NCP-AAI),17000,17000
+Microsoft,MS-001,Microsoft 365 Certified: Administrator Expert,4800,4080
+Microsoft,MS-002,Microsoft 365 Certified: Collaboration Communications Systems Engineer Associate,4800,4080
+Microsoft,MS-003,Microsoft 365 Certified: Endpoint Administrator Associate,4800,4080
+Microsoft,MS-004,Microsoft 365 Certified: Fundamentals,3696,3142
+Microsoft,MS-005,Microsoft 365 Certified: Teams Administrator Associate,4800,4080
+Microsoft,MS-006,Microsoft Certified Educator,3696,3142
+Microsoft,MS-007,Microsoft Certified: Azure Administrator Associate,4800,4080
+Microsoft,MS-008,Microsoft Certified: Azure AI Engineer Associate,4800,4080
+Microsoft,MS-009,Microsoft Certified: Azure AI Fundamentals,3696,3142
+Microsoft,MS-010,Microsoft Certified: Azure Cosmos DB Developer Specialty,4800,4080
+Microsoft,MS-011,Microsoft Certified: Azure Data Engineer Associate,4800,4080
+Microsoft,MS-012,Microsoft Certified: Azure Data Fundamentals,3696,3142
+Microsoft,MS-013,Microsoft Certified: Azure Data Scientist Associate,4800,4080
+Microsoft,MS-014,Microsoft Certified: Azure Database Administrator Associate,4800,4080
+Microsoft,MS-015,Microsoft Certified: Azure Developer Associate,4800,4080
+Microsoft,MS-016,Microsoft Certified: Azure for SAP Workloads Specialty,4800,4080
+Microsoft,MS-017,Microsoft Certified: Azure Fundamentals,3696,3142
+Microsoft,MS-018,Microsoft Certified: Azure Network Engineer Associate,4800,4080
+Microsoft,MS-019,Microsoft Certified: Azure Security Engineer Associate,4800,4080
+Microsoft,MS-020,Microsoft Certified: Azure Solutions Architect Expert,4800,4080
+Microsoft,MS-021,Microsoft Certified: Azure Virtual Desktop Specialty,4800,4080
+Microsoft,MS-022,Microsoft Certified: Cybersecurity Architect Expert,4800,4080
+Microsoft,MS-023,Microsoft Certified: DevOps Engineer Expert,4800,4080
+Microsoft,MS-024,Microsoft Certified: Dynamics 365 Business Central Developer Associate,4800,4080
+Microsoft,MS-025,Microsoft Certified: Dynamics 365 Business Central Functional Consultant Associate,4800,4080
+Microsoft,MS-026,Microsoft Certified: Dynamics 365 Customer Insights (Data) Specialty,4800,4080
+Microsoft,MS-027,Microsoft Certified: Dynamics 365 Customer Insights (Journeys) Functional Consultant Associate,4800,4080
+Microsoft,MS-028,Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate,4800,4080
+Microsoft,MS-029,Microsoft Certified: Dynamics 365 Field Service Functional Consultant Associate,4800,4080
+Microsoft,MS-030,Microsoft Certified: Dynamics 365 Finance Functional Consultant Associate,4800,4080
+Microsoft,MS-031,Microsoft Certified: Dynamics 365 Fundamentals (CRM),8415,7153
+Microsoft,MS-032,Microsoft Certified: Dynamics 365 Fundamentals (ERP),8415,7153
+Microsoft,MS-033,Microsoft Certified: Dynamics 365 Sales Functional Consultant Associate,4800,4080
+Microsoft,MS-034,Microsoft Certified: Dynamics 365 Supply Chain Management Functional Consultant Associate,4800,4080
+Microsoft,MS-035,Microsoft Certified: Dynamics 365 Supply Chain Management Functional Consultant Expert,4800,4080
+Microsoft,MS-036,Microsoft Certified: Dynamics 365: Finance and Operations Apps Developer Associate,4800,4080
+Microsoft,MS-037,Microsoft Certified: Dynamics 365: Finance and Operations Apps Solution Architect Expert,4800,4080
+Microsoft,MS-038,Microsoft Certified: Fabric Analytics Engineer Associate,4800,4080
+Microsoft,MS-039,Microsoft Certified: Identity and Access Administrator Associate,4800,4080
+Microsoft,MS-040,Microsoft Certified: Information Protection and Compliance Administrator Associate,4800,4080
+Microsoft,MS-041,Microsoft Certified: Power Automate RPA Developer Associate,4800,4080
+Microsoft,MS-042,Microsoft Certified: Power BI Data Analyst Associate,4800,4080
+Microsoft,MS-043,Microsoft Certified: Power Platform App Maker Associate,4800,4080
+Microsoft,MS-044,Microsoft Certified: Power Platform Developer Associate,4800,4080
+Microsoft,MS-045,Microsoft Certified: Power Platform Functional Consultant Associate,4800,4080
+Microsoft,MS-046,Microsoft Certified: Power Platform Fundamentals,3696,3142
+Microsoft,MS-047,Microsoft Certified: Power Platform Solution Architect Expert,4800,4080
+Microsoft,MS-048,Microsoft Certified: Security Operations Analyst Associate,4800,4080
+Microsoft,MS-049,Microsoft Certified: Security Compliance and Identity Fundamentals,3696,3142
+Microsoft,MS-050,Microsoft Certified: Windows Server Hybrid Administrator Associate,4800,4080
+Microsoft,MS-051,Microsoft Office Specialist: 2016 Master,8500,7225
+Microsoft,MS-052,Microsoft Office Specialist: Access (Office 2016),8500,7225
+Microsoft,MS-053,Microsoft Office Specialist: Associate (Microsoft 365 Apps),8500,7225
+Microsoft,MS-054,Microsoft Office Specialist: Associate (Office 2019),8500,7225
+Microsoft,MS-055,Microsoft Office Specialist: Excel (Office 2016),8500,7225
+Microsoft,MS-056,Microsoft Office Specialist: Excel Associate (Microsoft 365 Apps),8500,7225
+Microsoft,MS-057,Microsoft Office Specialist: Excel Associate (Office 2019),8500,7225
+Microsoft,MS-058,Microsoft Office Specialist: Excel Expert (Microsoft 365 Apps),8500,7225
+Microsoft,MS-059,Microsoft Office Specialist: Excel Expert (Office 2016),8500,7225
+Microsoft,MS-060,Microsoft Office Specialist: Expert (Microsoft 365 Apps),8500,7225
+Microsoft,MS-061,Microsoft Office Specialist: Expert (Office 2019),8500,7225
+Microsoft,MS-062,Microsoft Office Specialist: Microsoft Access Expert (Office 2019),8500,7225
+Microsoft,MS-063,Microsoft Office Specialist: Microsoft Excel Expert (Office 2019),8500,7225
+Microsoft,MS-064,Microsoft Office Specialist: Microsoft Word Expert (Office 2019),8500,7225
+Microsoft,MS-065,Microsoft Office Specialist: Outlook (Office 2016),8500,7225
+Microsoft,MS-066,Microsoft Office Specialist: Outlook Associate (Office 2019),8500,7225
+Microsoft,MS-067,Microsoft Office Specialist: PowerPoint (Office 2016),8500,7225
+Microsoft,MS-068,Microsoft Office Specialist: PowerPoint Associate (Microsoft 365 Apps),8500,7225
+Microsoft,MS-069,Microsoft Office Specialist: PowerPoint Associate (Office 2019),8500,7225
+Microsoft,MS-070,Microsoft Office Specialist: Word (Office 2016),8500,7225
+Microsoft,MS-071,Microsoft Office Specialist: Word Associate (Microsoft 365 Apps),8500,7225
+Microsoft,MS-072,Microsoft Office Specialist: Word Associate (Office 2019),8500,7225
+Microsoft,MS-073,Microsoft Office Specialist: Word Expert (Microsoft 365 Apps),8500,7225
+Microsoft,MS-074,Microsoft Office Specialist: Word Expert (Office 2016),8500,7225
+Google,GCP-001,Professional Machine Learning Engineer,17000,13940
+Google,GCP-002,Professional Google Workspace Administrator,17000,13940
+Google,GCP-003,Professional Cloud Network Engineer,17000,13940
+Google,GCP-004,Professional Cloud Security Engineer,17000,13940
+Google,GCP-005,Professional Cloud DevOps Engineer,17000,13940
+Google,GCP-006,Professional Cloud Developer,17000,13940
+Google,GCP-007,Professional Cloud Database Engineer,17000,13940
+Google,GCP-008,Professional Cloud Architect,17000,13940
+Google,GCP-009,Associate Cloud Engineer,10625,8712
+Cisco,CSC-001,CCNP Enterprise 300-415 ENSDWI,25500,25500
+Cisco,CSC-002,Cisco Certified Support Technician (CCST) Cybersecurity,10625,10625
+Cisco,CSC-003,Cisco Certified DevNet Expert,34000,34000
+Cisco,CSC-004,CCDE,38250,38250
+Cisco,CSC-005,CCIE Service Provider,34000,34000
+Cisco,CSC-006,CCIE Security,34000,34000
+Cisco,CSC-007,CCIE Data Center,34000,34000
+Cisco,CSC-008,CCIE Collaboration,34000,34000
+Cisco,CSC-009,CCIE Enterprise Wireless,34000,34000
+Cisco,CSC-010,CCIE Enterprise Infrastructure,34000,34000
+Cisco,CSC-011,Cisco Certified DevNet Professional 300-535 SPAUTO,25500,25500
+Cisco,CSC-012,Cisco Certified DevNet Professional 300-735 SAUTO,25500,25500
+Cisco,CSC-013,Cisco Certified DevNet Professional 300-635 DCAUTO,25500,25500
+Cisco,CSC-014,Cisco Certified DevNet Professional 300-835 CLAUTO,25500,25500
+Cisco,CSC-015,Cisco Certified DevNet Professional 300-435 ENAUTO,25500,25500
+Cisco,CSC-016,Cisco Certified DevNet Professional 300-910 DEVOPS,25500,25500
+Cisco,CSC-017,Cisco Certified DevNet Professional 350-901 DEVCOR,34000,34000
+Cisco,CSC-018,Cisco Certified CyberOps Professional 300-220 CBRTHD,25500,25500
+Cisco,CSC-019,Cisco Certified CyberOps Professional 300-215 CBRFIR,25500,25500
+Cisco,CSC-020,Cisco Certified CyberOps Professional 350-201 CBRCOR,34000,34000
+Cisco,CSC-021,CCNP Collaboration 300-835 CLAUTO,25500,25500
+Cisco,CSC-022,CCNP Collaboration 300-820 CLCEI,25500,25500
+Cisco,CSC-023,CCNP Collaboration 300-815 CLACCM,25500,25500
+Cisco,CSC-024,CCNP Collaboration 300-810 CLICA,25500,25500
+Cisco,CSC-025,CCNP Collaboration 350-801 CLCOR,34000,34000
+Cisco,CSC-026,CCNP Service Provider 300-540 SPCNI,25500,25500
+Cisco,CSC-027,CCNP Service Provider 300-535 SPAUTO,25500,25500
+Cisco,CSC-028,CCNP Service Provider 300-515 SPVI,25500,25500
+Cisco,CSC-029,CCNP Service Provider 300-510 SPRI,25500,25500
+Cisco,CSC-030,CCNP Service Provider 350-501 SPCOR,34000,34000
+Cisco,CSC-031,CCNP Security 300-740 SCAZT,25500,25500
+Cisco,CSC-032,CCNP Security 300-735 SAUTO,25500,25500
+Cisco,CSC-033,CCNP Security 300-730 SVPN,25500,25500
+Cisco,CSC-034,CCNP Security 300-725 SWSA,25500,25500
+Cisco,CSC-035,CCNP Security 300-720 SESA,25500,25500
+Cisco,CSC-036,CCNP Security 300-715 SISE,25500,25500
+Cisco,CSC-037,CCNP Security 300-710 SNCF,25500,25500
+Cisco,CSC-038,CCNP Security 350-701 SCOR,34000,34000
+Cisco,CSC-039,CCNP Data Center 300-635 DCAUTO,25500,25500
+Cisco,CSC-040,CCNP Data Center 300-620 DCACI,25500,25500
+Cisco,CSC-041,CCNP Data Center 300-615 DCIT,25500,25500
+Cisco,CSC-042,CCNP Data Center 300-610 DCID,25500,25500
+Cisco,CSC-043,CCNP Data Center 350-601 DCCOR,34000,34000
+Cisco,CSC-044,CCNP Enterprise 300-435 ENAUTO,25500,25500
+Cisco,CSC-045,CCNP Enterprise 300-430 ENWLSI,25500,25500
+Cisco,CSC-046,CCNP Enterprise 300-425 ENWLSD,25500,25500
+Cisco,CSC-047,CCNP Enterprise 300-420 ENSLD,25500,25500
+Cisco,CSC-048,CCNP Enterprise 300-410 ENARSI,25500,25500
+Cisco,CSC-049,CCNP Enterprise 350-401 ENCOR,34000,34000
+Cisco,CSC-050,Cisco Certified CyberOps Associate,25500,25500
+Cisco,CSC-051,Cisco Certified DevNet Associate,25500,25500
+Cisco,CSC-052,Cisco Certified Network Associate (CCNA),25500,25500
+Cisco,CSC-053,Cisco Certified Support Technician (CCST) Networking,10625,10625
+Red Hat,RH-001,Red Hat Certified Specialist in MultiCluster Management,20000,20000
+Red Hat,RH-002,Red Hat Certified Specialist in Cloud-native Integration,20000,20000
+Red Hat,RH-003,Red Hat Certified Specialist in OpenShift Virtualization,20000,20000
+Red Hat,RH-004,Red Hat Certified Specialist in OpenShift Data Foundation,20000,20000
+Red Hat,RH-005,Red Hat Certified Specialist in OpenShift Automation and Integration,20000,20000
+Red Hat,RH-006,Red Hat Certified Specialist in Building Resilient Microservices,20000,20000
+Red Hat,RH-007,Red Hat Certified Specialist in Developing Automation with Ansible Automation Platform,20000,20000
+Red Hat,RH-008,Red Hat Certified Specialist in Ansible Network Automation,20000,20000
+Red Hat,RH-009,Red Hat Certified Specialist in Ceph Cloud Storage,20000,20000
+Red Hat,RH-010,Red Hat Certified Cloud-Native Developer,20000,20000
+Red Hat,RH-011,Red Hat Certified Specialist in API management,20000,20000
+Red Hat,RH-012,Red Hat Certified Specialist in Security: Linux,20000,20000
+Red Hat,RH-013,Red Hat Certified Specialist in Identity Management,20000,20000
+Red Hat,RH-014,Red Hat Certified Specialist in Linux Diagnostics and Troubleshooting,20000,20000
+Red Hat,RH-015,Red Hat Certified Specialist in Linux Performance Tuning,20000,20000
+Red Hat,RH-016,Red Hat Certified OpenShift Application Developer,20000,20000
+Red Hat,RH-017,Red Hat Certified OpenShift Administrator,20000,20000
+Red Hat,RH-018,Red Hat Certified Specialist in High Availability Clustering,20000,20000
+Red Hat,RH-019,Red Hat Certified Specialist in Deployment and Systems Management,20000,20000
+Red Hat,RH-020,Red Hat Certified Specialist in Enterprise Application Server Administration,20000,20000
+Red Hat,RH-021,Red Hat Certified Specialist in Virtualization,20000,20000
+Red Hat,RH-022,Red Hat Certified Enterprise Application Developer,20000,20000
+Red Hat,RH-023,Red Hat Certified Engineer (RHCE),20000,20000
+Red Hat,RH-024,Red Hat Certified System Administrator (RHCSA),20000,20000
+Red Hat,RH-025,Red Hat Certified Specialist in Services Management and Automation,20000,20000
+Red Hat,RH-026,Red Hat Certified Specialist in Event-Driven Development with Kafka,38250,38250
+HPE Aruba,HPE-001,HPE ATP - Hybrid Cloud,17000,17000
+HPE Aruba,HPE-002,HPE ASE - Storage Solutions,21250,21250
+HPE Aruba,HPE-003,HPE Master ASE - Storage Solutions,21250,21250
+HPE Aruba,HPE-004,HPE Product Certified - OneView,17000,17000
+HPE Aruba,HPE-005,HPE Product Certified - HPE OpsRamp,2550,2550
+HPE Aruba,HPE-006,HPE Product Certified - HPE Ezmeral Data Fabric,2550,2550
+HPE Aruba,HPE-007,HPE Product Certified - Containers,17000,17000
+HPE Aruba,HPE-008,Aruba Certified Switching Associate (ACSA),10625,10625
+HPE Aruba,HPE-009,HPE Aruba Certified Network Architect - Data Center,34000,34000
+HPE Aruba,HPE-010,HPE Aruba Certified Network Architect - Campus Access,14025,14025
+HPE Aruba,HPE-011,Aruba Certified Switching Professional (ACSP),19550,19550
+HPE Aruba,HPE-012,Aruba Certified Switching Expert (ACSX),65025,65025
+HPE Aruba,HPE-013,HPE Solution Certified - Virtual Desktop Infrastructure,17000,17000
+VMware,VMW-001,HPE Solution Certified - VMware,17000,17000
+HPE Aruba,HPE-014,HPE Solution Certified - SAP HANA,22100,22100
+Microsoft,MS-075,HPE Solution Certified - Microsoft,17000,14450
+HPE Aruba,HPE-015,HPE Solution Certified - Data Protection,17000,17000
+HPE Aruba,HPE-016,HPE Solution Certified - Containers,17000,17000
+HPE Aruba,HPE-017,HPE ASE - Edge-to-Cloud Architect,17000,17000
+HPE Aruba,HPE-018,HPE Master ASE - Edge-to-Cloud Architect,17000,17000
+HPE Aruba,HPE-019,HPE Product Certified - AI and Machine Learning,12325,12325
+HPE Aruba,HPE-020,HPE Solution Certified - HPE GreenLake,17000,17000
+HPE Aruba,HPE-021,HPE ATP - HPE GreenLake Administrator Foundations,17000,17000
+HPE Aruba,HPE-022,HPE ASE - HPE GreenLake Administrator,17000,17000
+HPE Aruba,HPE-023,HPE ASE - Compute Solutions,17000,17000
+HPE Aruba,HPE-024,HPE Master ASE - Compute Solutions,17000,17000
+HPE Aruba,HPE-025,HPE Sales Certified - Solution Foundations [2024],11050,11050
+HPE Aruba,HPE-026,HPE Sales Certified - Hybrid by Design [2024],11050,11050
+HPE Aruba,HPE-027,HPE Sales Certified - Aruba Networking Solutions,11050,11050
+Intel,INT-001,Intel® Certified Pro: Cloud Solutions Architect (CSA),16915,16915
+Intel,INT-002,Intel® Certified Pro: Cloud Business Professional,16915,16915
+Intel,INT-003,Intel® Certified Pro: Cloud Technical Professional,16915,16915
+Intel,INT-004,Intel® Certified Pro: Cloud Fundamentals,8415,8415
+Veritas,VER-001,Administration of Veritas InfoScale Availability 7.3 for UNIX/Linux,19125,19125
+Veritas,VER-002,Administration of Veritas InfoScale Storage 7.3 for UNIX/Linux,19125,19125
+Veritas,VER-003,Administration of Veritas Backup Exec 20.1,19125,19125
+Veritas,VER-004,Administration of Veritas Backup Exec 21,17000,17000
+Veritas,VER-005,Veritas NetBackup 10.x Administrator,17000,17000
+Veritas,VER-006,Veritas NetBackup 10.x and NetBackup Appliance 5.x Administrator,17000,17000
+Veritas,VER-007,Administration of Veritas eDiscovery Platform 8.2 for Administrators,19125,19125
+Veritas,VER-008,Administration of Veritas Enterprise Vault 12.3,19125,19125
+NetApp,NA-001,NetApp Certified Implementation Engineer - SAN Specialist E-Series,5596,5596
+NetApp,NA-002,NetApp Certified Storage Installation Engineer ONTAP,5596,5596
+Cisco,CSC-054,Cisco and NetApp Certified FlexPod Implementation and Administration Specialist,11192,11192
+Cisco,CSC-055,Cisco and NetApp Certified FlexPod Design Specialist,11192,11192
+NetApp,NA-003,NetApp Certified Support Engineer ONTAP Specialist,5596,5596
+NetApp,NA-004,NetApp Certified Support Engineer ONTAP Professional,5596,5596
+NetApp,NA-005,NetApp Certified Implementation Engineer Data Protection Specialist,5596,5596
+NetApp,NA-006,NetApp Certified Implementation Engineer—SAN Specialist ONTAP,5596,5596
+NetApp,NA-007,NetApp Certified Hybrid Cloud Architect,5596,5596
+NetApp,NA-008,NetApp Certified Hybrid Cloud Implementation Engineer,5596,5596
+NetApp,NA-009,NetApp Certified Hybrid Cloud Administrator,5596,5596
+NetApp,NA-010,NetApp Certified Data Administrator ONTAP,5596,5596
+NetApp,NA-011,NetApp Certified Technology Solutions Professional,5596,5596
+VMware,VMW-002,VMware Tanzu Mission Control Specialist,21250,21250
+VMware,VMW-003,VMware Certified Professional - Tanzu for Kubernetes Operations 2024 (VCP-TKO 2024) certification,21250,21250
+VMware,VMW-004,VMware Certified Technical Associate - Application Modernization 2024 (VCTA-AM 2024),10625,10625
+VMware,VMW-005,VMware Carbon Black Cloud Endpoint Standard Skills 2024,21250,21250
+VMware,VMW-006,VMware Carbon Black Cloud Enterprise EDR Skills 2024,21250,21250
+VMware,VMW-007,VMware Carbon Black Cloud Audit and Remediation Skills 2024,21250,21250
+VMware,VMW-008,VMware Certified Professional - Endpoint and Workload Security 2024 (VCP-EWS 2024),21250,21250
+VMware,VMW-009,VMware Certified Technical Associate - Security 2024 (VCTA-SEC 2024),10625,10625
+VMware,VMW-010,VMware Workspace ONE for macOS Skills 2024,21250,21250
+VMware,VMW-011,VMware Certified Specialist - Workspace ONE 21.X UEM Troubleshooting 2024,21250,21250
+VMware,VMW-012,VMware Workspace ONE 21.X Advanced Integration Specialist,21250,21250
+VMware,VMW-013,VMware Certified Professional - Digital Workspace 2024 (VCP-DW 2024),21250,21250
+VMware,VMW-014,VMware Certified Design Expert - End-User Computing 2024 (VCDX-EUC 2024),38250,38250
+VMware,VMW-015,VMware Certified Advanced Professional - Desktop Management Deploy 2024 (VCAP-DTM Deploy 2024),38250,38250
+VMware,VMW-016,VMware Certified Advanced Professional – End-User Computing Design 2024 (VCAP-EUC Design 2024),38250,38250
+VMware,VMW-017,VMware Certified Advanced Professional - Desktop Management Design 2024 (VCAP-DTM 2024),38250,38250
+VMware,VMW-018,VMware Certified Professional - Desktop Management 2024 (VCP-DTM 2024),21250,21250
+VMware,VMW-019,VMware Certified Technical Associate - End-User Computing 2024 (VCTA-EUC 2024),10625,10625
+Microsoft,MS-076,VMware Aria Cost powered by CloudHealth Platform (Azure) Skills 2024,21250,18062
+VMware,VMW-020,VMware Telco Cloud Platform Specialist Skills 2024,21250,21250
+VMware,VMW-021,VMware Telco Cloud Automation Skills 2024,21250,21250
+VMware,VMW-022,VMware Telco Cloud NFV Skills 2024,21250,21250
+VMware,VMW-023,VMware Certified Professional - Tanzu for Kubernetes Operations 2024 (VCP-TKO 2024),21250,21250
+VMware,VMW-024,VMware Certified Design Expert - Cloud Management and Automation 2024 (VCDX-CMA 2024),38250,38250
+VMware,VMW-025,VMware Certified Advanced Professional - Cloud Management and Automation Design 2024 (VCAP-CMA Design 2024),38250,38250
+VMware,VMW-026,VMware Certified Advanced Professional - Cloud Management and Automation Deployment 2024 (VCAP-CMA Deploy 2024),38250,38250
+VMware,VMW-027,VMware Certified Professional - Cloud Operations 2024 (VCP-CO 2024),21250,21250
+VMware,VMW-028,VMware Certified Professional - VMware Cloud 2024 (VCP-VMC 2024),21250,21250
+VMware,VMW-029,VMware Certified Professional - Cloud Management and Automation 2024 (VCP-CMA 2024),21250,21250
+VMware,VMW-030,VMware Certified Technical Associate - Cloud Management and Automation 2024 (VCTA-CMA 2024),10625,10625
+VMware,VMW-031,VMware SD-WAN Troubleshoot Skills 2024,21250,21250
+VMware,VMW-032,VMware NSX Advanced Load Balancer(Avi) for Operators Skills 2024,21250,21250
+VMware,VMW-033,VMware SD-WAN Foundations Skills 2024,10625,10625
+VMware,VMW-034,VMware SD-WAN Design and Deploy Skills 2024,21250,21250
+VMware,VMW-035,VMware Certified Advanced Professional - Network Virtualization Deploy 2024 (VCAP-NV Deploy 2024),38250,38250
+VMware,VMW-036,VMware Certified Professional - Network Virtualization 2024 (VCP-NV 2024),21250,21250
+VMware,VMW-037,VMware Certified Technical Associate - Network Virtualization 2024 (VCTA-NV 2024),10625,10625
+VMware,VMW-038,VMware Certified Advanced Professional - Data Center Virtualization Deploy 2024 (VCAP-DCV Deploy 2024),38250,38250
+VMware,VMW-039,VMware Certified Advanced Professional - Data Center Virtualization Design 2024 (VCAP-DCV Design 2024),38250,38250
+VMware,VMW-040,VMware Certified Professional - Data Center Virtualization 2024 (VCP-DCV 2024),21250,21250
+VMware,VMW-041,VMware Certified Technical Associate - Data Center Virtualization 2024 (VCTA-DCV 2024),10625,10625
+VMware,VMW-042,VMware Certified Master Specialist – HCI 2024,21250,21250
+VMware,VMW-043,VMware Certified Specialist - vSphere with Tanzu 2024,21250,21250
+VMware,VMW-044,VMware Certified Specialist - vRealize Operations 2024,21250,21250
+VMware,VMW-045,VMware Certified Master Specialist - VMware Cloud on AWS 2024,21250,21250
+VMware,VMW-046,VMware vRealize Operations - Cloud Management Automation 2024,21250,21250
+VMware,VMW-047,VMware Certified Specialist - vSAN 2024,21250,21250
+VMware,VMW-048,VMware Certified Specialist - Cloud Provider 2024,21250,21250
+Palo Alto,PA-001,Palo Alto Networks Certified Software Firewall Engineer,14875,14875
+Palo Alto,PA-002,Palo Alto Networks Certified Detection and Remediation Analyst,13175,13175
+Palo Alto,PA-003,Palo Alto Networks Certified Security Automation Engineer,14875,14875
+Palo Alto,PA-004,Prisma Certified Cloud Security Engineer,14875,14875
+Palo Alto,PA-005,Palo Alto Networks Certified Network Security Engineer,14875,14875
+Palo Alto,PA-006,Palo Alto Networks Certified Network Security Administrator,13175,13175
+Palo Alto,PA-007,Palo Alto Networks Certified Cybersecurity Entry-level Technician,9350,9350
+Palo Alto,PA-008,Palo Alto Networks Certified Cybersecurity practitioner,12750,12750
+Palo Alto,PA-009,Palo Alto Networks Certified Cybersecurity Apprentice,12750,12750
+Intel,INT-005,Certified Artificial Intelligence & Investigations Expert (CAIIE) - In Person Training,339745,339745
+Intel,INT-006,Certified Artificial Intelligence & Investigations Expert (CAIIE),84745,84745
+Intel,INT-007,Certified All Source Intelligence Professional (CASIP),84745,84745
+Intel,INT-008,Certified Counterintelligence Threat Analyst (CCTA),76245,76245
+Intel,INT-009,Certified Social Media Intelligence Analyst (SMIA),42245,42245
+Intel,INT-010,Certified Cyber Intelligence Professional (CCIP),46495,46495
+Intel,INT-011,Certified Social Media Intelligence Expert (CSMIE),84745,84745
+Intel,INT-012,Certified Cyber Intelligence Investigator (CCII),46495,46495
+Intel,INT-013,Certified in Open Source Intelligence (C|OSINT),84745,84745
+Check Point,CP-001,Check Point Certified PenTesting Associate – DevSecOps (CCPA-D),21250,21250
+Check Point,CP-002,Check Point Certified PenTesting Expert-Cloud Security (CCPE-C),21250,21250
+Check Point,CP-003,Check Point Certified PenTesting Expert-AppSec for Developers (CCPE-A),21250,21250
+Check Point,CP-004,Check Point Certified PenTesting Expert – Hacking IoT (CCPE-IoT),21250,21250
+Check Point,CP-005,Check Point Certified PenTesting Expert-Web Hacking (CCPE-W),21250,21250
+Check Point,CP-006,Check Point Certified PenTesting Expert-Infrastructure Hacking (CCPE-I),21250,21250
+Check Point,CP-007,Check Point Certified PenTesting Associate,21250,21250
+Check Point,CP-008,Checkpoint Certified Troubleshooting Expert,21250,21250
+Check Point,CP-009,Checkpoint Certified Troubleshooting Administrator (CCTA),17000,17000
+Check Point,CP-010,Checkpoint Certified Virtual System Extension Specialist,17000,17000
+Check Point,CP-011,Checkpoint Certified Multi - Domain Security Management Specialist,17000,17000
+Check Point,CP-012,Checkpoint Certified Harmony Endpoint Specialist (CCES),17000,17000
+Microsoft,MS-077,Checkpoint Certified Cloud Network Security Expert for Azure,17000,14450
+Check Point,CP-013,Checkpoint Certified Cloud Network Security Expert for AWS,17000,17000
+Check Point,CP-014,Checkpoint Certified Cloud Specialist,17000,17000
+Check Point,CP-015,Checkpoint Certified Maestro Expert (CCME),21250,21250
+Check Point,CP-016,Checkpoint Certified Automation Specialist (CCAS),17000,17000
+Check Point,CP-017,Check Point Certified Security Expert,21250,21250
+Check Point,CP-018,Check Point Certified Security Administrator,21250,21250
+Citrix,CTX-001,Citrix Certified Expert - Virtualization (CCE-V),25500,25500
+Citrix,CTX-002,Citrix Certified Professional - App Delivery and Security (CCP-AppDS),25500,25500
+Citrix,CTX-003,Citrix Certified Professional - Virtualization (CCP-V),25500,25500
+Citrix,CTX-004,Citrix Certified Associate - App Delivery and Security (CCA-AppDS),17000,17000
+Citrix,CTX-005,Citrix Certified Associate - Virtualization (CCA-V),17000,17000
+PMI,PMI-001,PMI Professional in Business Analysis (PMI-PBA),23288,23288
+PMI,PMI-002,PMI Agile Certified Practitioner (PMI-ACP),25010,25010
+PMI,PMI-003,PMI Risk Management Professional (PMI-RMP),29848,29848
+PMI,PMI-004,PMI Construction Professional (PMI-CP),28618,28618
+PeopleCert,PC-001,PeopleCert Lean - IASSC Certified Lean Expert Re-certification,18700,18700
+PeopleCert,PC-002,PeopleCert Lean - IASSC Certified Lean Leader Re-certification,13750,13750
+PeopleCert,PC-003,PeopleCert Lean - IASSC Certified Lean Practitioner - Re-certification,8800,8800
+PeopleCert,PC-004,PeopleCert Lean - IASSC Certified Lean Expert,27500,27500
+PeopleCert,PC-005,PeopleCert Lean - IASSC Certified Lean Leader,19800,19800
+PeopleCert,PC-006,PeopleCert Lean - IASSC Certified Lean Practitioner,12100,12100
+PeopleCert,PC-007,RESILIA Practitioner,39050,39050
+PeopleCert,PC-008,RESILIA Foundation,35750,35750
+PeopleCert,PC-009,PeopleCert SCRUM Product Owner II,26950,26950
+PeopleCert,PC-010,PeopleCert SCRUM Product Owner I,23650,23650
+PeopleCert,PC-011,PeopleCert SCRUM Master II,26950,26950
+PeopleCert,PC-012,PeopleCert Scrum Master I,20350,20350
+PeopleCert,PC-013,PeopleCert Scrum Developer,23650,23650
+PeopleCert,PC-014,M_o_R Re-registration (3rd edition),39050,39050
+PeopleCert,PC-015,M_o_R Practitioner (3rd edition),39050,39050
+PeopleCert,PC-016,M_o_R Foundation (3rd edition),35750,35750
+PeopleCert,PC-017,M_o_R 4 Practitioner,48950,48950
+PeopleCert,PC-018,PeopleCert Data Science: Data Analyst,26950,26950
+PeopleCert,PC-019,PeopleCert Data Science: Foundation,20350,20350
+PeopleCert,PC-020,P3O Practitioner Re-registration,39050,39050
+PeopleCert,PC-021,P3O Practitioner,39050,39050
+PeopleCert,PC-022,P3O Foundation,35750,35750
+PeopleCert,PC-023,MSP Practitioner Re-registration,39050,39050
+PeopleCert,PC-024,MSP Practitioner 4th edition,39050,39050
+PeopleCert,PC-025,MSP Foundation 4th edition,35750,35750
+PeopleCert,PC-026,MSP Practitioner 5th edition,45100,45100
+PeopleCert,PC-027,MSP Foundation 5th edition,41800,41800
+PeopleCert,PC-028,MoV Practitioner,39050,39050
+PeopleCert,PC-029,MoV Foundation,35750,35750
+PeopleCert,PC-030,MoP Practitioner,39050,39050
+PeopleCert,PC-031,MoP Foundation (IB),35750,35750
+PeopleCert,PC-032,PRINCE2 Agile Practitioner,45100,45100
+PeopleCert,PC-033,PRINCE2 Agile Foundation,41800,41800
+PeopleCert,PC-034,PRINCE2 Re-registration 5th edition,39050,39050
+PeopleCert,PC-035,PRINCE2 Practitioner 5th edition,39050,39050
+PeopleCert,PC-036,PRINCE2 Foundation 5th edition,35750,35750
+PeopleCert,PC-037,PRINCE2 Practitioner 6th edition,45100,45100
+PeopleCert,PC-038,PRINCE2 Foundation 6th edition,41800,41800
+PeopleCert,PC-039,PRINCE2 7 Practitioner,45100,45100
+PeopleCert,PC-040,PRINCE2 7 Foundation,41800,41800
+PeopleCert,PC-041,PeopleCert Lean IT Leadership,24750,24750
+PeopleCert,PC-042,PeopleCert Lean IT Kaizen,24750,24750
+PeopleCert,PC-043,PeopleCert Lean IT Foundation,24750,24750
+PeopleCert,PC-044,COBIT 5 Implementation,41800,41800
+PeopleCert,PC-045,COBIT 5 Assessor for Security,41800,41800
+PeopleCert,PC-046,COBIT 5 Assessor,41800,41800
+PeopleCert,PC-047,Implementing the NIST Standards using COBIT 5,41800,41800
+PeopleCert,PC-048,COBIT 5 Foundation,26950,26950
+ITIL,ITIL-001,ITIL 4 Specialist: High-Velocity IT,47850,47850
+ITIL,ITIL-002,ITIL 4 Specialist: Drive Stakeholder Value,47850,47850
+ITIL,ITIL-003,ITIL 4 Strategist: Direct Plan and Improve,47850,47850
+ITIL,ITIL-004,ITIL 4 Specialist: Create Deliver and Support,53900,53900
+ITIL,ITIL-005,ITIL 4 Leader: Digital & IT Strategy,47850,47850
+ITIL,ITIL-006,ITIL 4 Specialist: Sustainability in Digital and IT,47850,47850
+ITIL,ITIL-007,ITIL 4 Specialist: Plan Implement and Control,53900,53900
+ITIL,ITIL-008,ITIL 4 Specialist: Monitor Support and Fulfil,53900,53900
+ITIL,ITIL-009,ITIL 4 Specialist: IT Asset Management,53900,53900
+ITIL,ITIL-010,ITIL 4 Specialist: Collaborate Assure and Improve,53900,53900
+ITIL,ITIL-011,ITIL 4 Specialist: Business Relationship Management,53900,53900
+ITIL,ITIL-012,ITIL 4 Specialist: Acquiring & Managing Cloud Services,47850,47850
+ITIL,ITIL-013,ITIL 4 Practitioner: Supplier Management,17710,17710
+ITIL,ITIL-014,ITIL 4 Practitioner: Service Request Management,17710,17710
+ITIL,ITIL-015,ITIL 4 Practitioner: Service level Management,17710,17710
+ITIL,ITIL-016,ITIL 4 Practitioner: Service Desk,17710,17710
+ITIL,ITIL-017,ITIL 4 Practitioner: Service Configuration Management,17710,17710
+ITIL,ITIL-018,ITIL 4 Practitioner: Release Management,17710,17710
+ITIL,ITIL-019,ITIL 4 Practitioner: Relationship Management,17710,17710
+ITIL,ITIL-020,ITIL 4 Practitioner: Problem Management,17710,17710
+ITIL,ITIL-021,ITIL 4 Practitioner: Monitoring and Event Management,17710,17710
+ITIL,ITIL-022,ITIL 4 Practitioner: IT Asset Management,17710,17710
+ITIL,ITIL-023,ITIL 4 Practitioner: Information Security Management,17710,17710
+ITIL,ITIL-024,ITIL 4 Practitioner: Incident Management,17710,17710
+ITIL,ITIL-025,ITIL 4 Practitioner: Deployment Management,17710,17710
+ITIL,ITIL-026,ITIL 4 Practitioner: Continual Improvement,17710,17710
+ITIL,ITIL-027,ITIL 4 Practitioner: Change Enablement,17710,17710
+ITIL,ITIL-028,ITIL 4 Foundation,41800,41800
+CompTIA,CTA-001,CompTIA Cloud Essentials+,11730,11730
+CompTIA,CTA-002,CompTIA Project+,31365,31365
+CompTIA,CTA-003,CompTIA DataSys+,31365,31365
+CompTIA,CTA-004,CompTIA Data+,21505,21505
+CompTIA,CTA-005,CompTIA PenTest+,34340,34340
+CompTIA,CTA-006,CompTIA Advanced Security Practitioner,43265,43265
+CompTIA,CTA-007,CompTIA CySA+,34340,34340
+CompTIA,CTA-008,CompTIA Server+,31365,31365
+CompTIA,CTA-009,CompTIA Linux+,31365,31365
+CompTIA,CTA-010,CompTIA Cloud+,31365,31365
+CompTIA,CTA-011,CompTIA Security+,34340,34340
+CompTIA,CTA-012,CompTIA Network+,31365,31365
+CompTIA,CTA-013,CompTIA A+,21505,21505
+CompTIA,CTA-014,CompTIA IT Fundamentals,11730,11730
+Oracle,ORA-001,Oracle Cloud Infrastructure 2023 Certified Multicloud Architect Associate,10419,10419
+Oracle,ORA-002,Oracle Utilities Customer Cloud Service 2022 Certified Implementation Professional,20421,20421
+Oracle,ORA-003,Oracle Utilities Work and Asset Cloud Service 2022 Certified Implementation Professional,20421,20421
+Oracle,ORA-004,Oracle Utilities Meter Solution Cloud Service 2022 Certified Implementation Professional,20421,20421
+Oracle,ORA-005,Oracle Fusion Cloud Procurement 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-006,Oracle Fusion Cloud Procurement 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-007,Oracle Maintenance Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-008,Oracle Product Lifecycle Management 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-009,Oracle Product Lifecycle Management 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-010,Oracle Fusion Transportation and Global Trade Management Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-011,Oracle Fusion Transportation and Global Trade Management Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-012,Oracle Warehouse Management Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-013,Oracle Warehouse Management Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-014,Oracle Planning and Collaboration Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-015,Oracle Planning and Collaboration Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-016,Oracle Manufacturing Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-017,Oracle Manufacturing Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-018,Oracle Order Management Cloud Order to Cash 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-019,Oracle Order Management Cloud Order to Cash 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-020,Oracle Inventory Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-021,Oracle Inventory Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-022,Oracle Cost Management Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-023,Oracle Cost Management Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-024,Oracle Enterprise Data Management Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-025,Oracle Enterprise Data Management Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-026,Oracle Account Reconciliation 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-027,Oracle Account Reconciliation 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-028,Oracle Profitability and Cost Management 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-029,Oracle Profitability and Cost Management 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-030,Oracle Planning 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-031,Oracle Planning 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-032,Oracle Narrative Reporting 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-033,Oracle Narrative Reporting 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-034,Oracle Financial Consolidation and Close 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-035,Oracle Financial Consolidation and Close 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-036,Oracle Time and Labor Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-037,Oracle Time and Labor Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-038,Oracle Absence Management Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-039,Oracle Absence Management Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-040,Oracle Payroll Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-041,Oracle Payroll Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-042,Oracle Compensation Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-043,Oracle Compensation Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-044,Oracle Benefits Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-045,Oracle Benefits Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-046,Oracle Recruiting Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-047,Oracle Recruiting Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-048,Oracle Learning Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-049,Oracle Learning Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-050,Oracle Talent Management Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-051,Oracle Talent Management Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-052,Oracle Global Human Resources Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-053,Oracle Risk Management Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-054,Oracle Risk Management Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-055,Oracle Project Management Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-056,Oracle Project Management Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-057,Oracle Revenue Management Cloud Service 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-058,Oracle Revenue Management Cloud Service 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-059,Oracle Financials Cloud: Receivables 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-060,Oracle Financials Cloud: Receivables 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-061,Oracle Financials Cloud: Payables 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-062,Oracle Financials Cloud: Payables 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-063,Oracle Financials Cloud: General Ledger 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-064,Oracle Financials Cloud: General Ledger 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-065,Oracle Accounting Hub Cloud 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-066,Oracle Accounting Hub Cloud 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-067,Oracle Fusion Service 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-068,Oracle Fusion Service 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-069,Oracle Intelligent Advisor 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-070,Oracle Intelligent Advisor 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-071,Oracle Field Service 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-072,Oracle Field Service 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-073,Oracle B2C Service Integration and Development 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-074,Oracle Service Center 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-075,Oracle B2C Service Integration and Development 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-076,Oracle Responsys Marketing Platform 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-077,Oracle Responsys Marketing Platform 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-078,Oracle Eloqua Marketing 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-079,Oracle Eloqua Marketing 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-080,Oracle CPQ 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-081,Oracle CPQ 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-082,Oracle CX Sales 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-083,Oracle CX Sales 2023 Certified Implementation Professional - Delta,10419,10419
+Oracle,ORA-084,Oracle Cloud Fusion Analytics Warehouse 2023 Certified Implementation Professional,20421,20421
+Oracle,ORA-085,Oracle Cloud Infrastructure 2023 Certified Enterprise Analytics Professional,20421,20421
+Oracle,ORA-086,Oracle Cloud Infrastructure 2023 Certified Application Integration Professional,20421,20421
+Oracle,ORA-087,Oracle Database Cloud Administrator 2023 Certified Professional,20421,20421
+Oracle,ORA-088,Oracle Base Database Services 2023 Certified Professional,20421,20421
+Oracle,ORA-089,Oracle Cloud Database 2023 Migration and Integration Certified Professional,20421,20421
+Oracle,ORA-090,Oracle Autonomous Database Cloud 2023 Certified Professional,20421,20421
+Oracle,ORA-091,Oracle Cloud Infrastructure 2023 Certified Digital Assistant Professional,20421,20421
+Oracle,ORA-092,Oracle Cloud Infrastructure 2023 Certified Observability Professional,20421,20421
+Oracle,ORA-093,Oracle Cloud Infrastructure 2023 Certified DevOps Professional,20421,20421
+Oracle,ORA-094,Oracle Cloud Infrastructure 2023 Certified Data Science Professional,20421,20421
+Oracle,ORA-095,Oracle Cloud Infrastructure 2024 Certified Networking Professional,20421,20421
+Oracle,ORA-096,Oracle Redwood Application 2023 Certified Developer Associate,20421,20421
+Oracle,ORA-097,Oracle Cloud Infrastructure 2023 Certified Architect Associate,20421,20421
+Oracle,ORA-098,Oracle Machine Learning using Autonomous Database 2023 Certified Associate,20421,20421
+Salesforce,SF-001,Salesforce Certified Omnistudio Developer,17000,17000
+Salesforce,SF-002,Salesforce Certified Industries CPQ Developer,17000,17000
+Salesforce,SF-003,Salesforce Certified Javascript Developer,22420,22420
+Salesforce,SF-004,Salesforce Certified Platform Developer II,17000,17000
+Salesforce,SF-005,Salesforce Certified Platform Developer I,17000,17000
+Salesforce,SF-006,Salesforce Certified Marketing Cloud Account Engagement Consultant,17000,17000
+Salesforce,SF-007,Salesforce Certified Marketing Cloud Account Engagement Specialist,17000,17000
+Salesforce,SF-008,Salesforce Certified Marketing Cloud Email Specialist,17000,17000
+Salesforce,SF-009,Salesforce Certified Marketing Cloud Consultant,17000,17000
+Salesforce,SF-010,Salesforce Certified Marketing Cloud Developer,17000,17000
+Salesforce,SF-011,Salesforce Certified Marketing Cloud Administrator,17000,17000
+Salesforce,SF-012,Salesforce Certified Technical Architect,510,510
+Salesforce,SF-013,Salesforce Certified B2B Solution Architect,34000,34000
+Salesforce,SF-014,Salesforce Certified B2C Solution Architect,34000,34000
+Salesforce,SF-015,Salesforce Certified Data Architect,34000,34000
+Salesforce,SF-016,Salesforce Certified Integration Architect,34000,34000
+Salesforce,SF-017,Salesforce Certified Heroku Architect,34000,34000
+Salesforce,SF-018,Salesforce Certified Development Lifecycle and Deployment Architect,34000,34000
+Salesforce,SF-019,Salesforce Certified Sharing and Visibility Architect,34000,34000
+Salesforce,SF-020,Salesforce Certified Identity and Access Management Architect,34000,34000
+Salesforce,SF-021,Salesforce Certified Slack Consultant,8500,8500
+Salesforce,SF-022,Salesforce Certified Business Analyst,17000,17000
+Salesforce,SF-023,Salesforce Certified Data Cloud Consultant,17000,17000
+Salesforce,SF-024,Salesforce Certified Education Cloud Consultant,17000,17000
+Salesforce,SF-025,Salesforce Certified Nonprofit Cloud Consultant,17000,17000
+Salesforce,SF-026,Salesforce Certified Experience Cloud Consultant,17000,17000
+Salesforce,SF-027,Salesforce Certified Field Service Consultant,17000,17000
+Salesforce,SF-028,Salesforce Certified Sales Cloud Consultant,17000,17000
+Salesforce,SF-029,Salesforce Certified CPQ Specialist,17000,17000
+Salesforce,SF-030,Salesforce Certified Service Cloud Consultant,17000,17000
+Salesforce,SF-031,Salesforce Certified Strategy Designer,17000,17000
+Salesforce,SF-032,Salesforce Certified User Experience (UX) Designer,17000,17000
+Salesforce,SF-033,Salesforce Certified Slack Administrator,12750,12750
+Salesforce,SF-034,Salesforce Certified Platform App Builder,17000,17000
+Salesforce,SF-035,Salesforce Certified Advanced Administrator,17000,17000
+Salesforce,SF-036,Salesforce Certified Administrator,17000,17000
+Salesforce,SF-037,Salesforce Certified AI Associate,6375,6375
+Salesforce,SF-038,Salesforce Certified Associate,6375,6375
+Salesforce,SF-039,Salesforce Certified Tableau CRM and Einstein Discovery Consultant,17000,17000
