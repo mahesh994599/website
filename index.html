@@ -1699,7 +1699,7 @@
                     <span style="font-size:12px;">Contact <strong>itops@synergificsoftware.com</strong> for pricing.</span>
                 </div>`;
             } else {
-                cardsHtml = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;padding:16px;">' +
+                cardsHtml = '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px;">' +
                     pageExams.map((e, i) => {
                         const realIdx = safePage * EXAM_PAGE_SIZE + i;
                         const hasDiscount = e.originalPrice && e.originalPrice > e.price;
