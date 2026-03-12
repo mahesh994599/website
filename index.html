@@ -1075,9 +1075,9 @@
             { key: 'paloalto', name: 'Palo Alto', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Palo_Alto_Networks_logo.svg', color: '#fa5820', exams: [] },
             { key: 'salesforce', name: 'Salesforce', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg', color: '#00a1e0', exams: [] },
             { key: 'citrix', name: 'Citrix', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Citrix-logo.svg', color: '#452170', exams: [] },
-            { key: 'hashicorp', name: 'HashiCorp', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/HashiCorp_official_logo.svg', color: '#000000', exams: [] },
-            { key: 'suse', name: 'SUSE', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/SUSE_logo.svg', color: '#30ba78', exams: [] },
-            { key: 'netsuite', name: 'NetSuite', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/NetSuite_2021_logo.svg', color: '#0055a5', exams: [] },
+            { key: 'hashicorp', name: 'HashiCorp', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/83/HashiCorp_Logo.png', color: '#000000', exams: [] },
+            { key: 'suse', name: 'SUSE', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/50/SUSE_Logo.png', color: '#30ba78', exams: [] },
+            { key: 'netsuite', name: 'NetSuite', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Oracle_NetSuite_2021.png', color: '#0055a5', exams: [] },
             { key: 'vmware', name: 'VMware', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Vmware.svg', color: '#607078', exams: [] },
             { key: 'itil', name: 'ITIL', logo: '', color: '#6b21a8', exams: [] },
             { key: 'servicenow', name: 'ServiceNow', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/57/ServiceNow_logo_2024.svg', color: '#62d84e', exams: [] },
@@ -1677,7 +1677,7 @@
             const vendor = EXAM_VENDORS.find(v => v.key === activeVendor);
 
             const TEXT_ONLY_VENDORS = ['itil'];
-            const SHOW_NAME_VENDORS = ['microsoft', 'paloalto', 'hashicorp', 'suse', 'netsuite', 'vmware', 'itil', 'servicenow'];
+            const SHOW_NAME_VENDORS = ['microsoft', 'paloalto', 'itil', 'servicenow'];
             const vendorTabs = EXAM_VENDORS.map(v => `
                 <button onclick="setExamVendor('${v.key}')" title="${v.name}" style="display:flex;align-items:center;gap:6px;padding:10px 14px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${activeVendor === v.key ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${activeVendor === v.key ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;white-space:nowrap;">
                     ${!TEXT_ONLY_VENDORS.includes(v.key) && v.logo ? `<img src="${v.logo}" alt="${v.name}" style="height:20px;object-fit:contain;max-width:80px;" onerror="this.style.display='none'">` : ''}
