@@ -389,6 +389,7 @@
             border-color: #9fd89f;
         }
 
+
         /* ── Help & Support Styles ── */
         .support-channel-card {
             background: var(--az-surface);
@@ -1004,26 +1005,25 @@
         };
 
         // ─── BAREMETAL DATA ──────────────────────────────────────────
-        const BAREMETAL_LINUX = [
-            { vcpu: 1, ram: 4, hourly: '₹2.46', monthly: '₹1,439', m6: '₹7,768', m12: '₹13,810' },
-            { vcpu: 2, ram: 8, hourly: '₹4.92', monthly: '₹2,872', m6: '₹15,511', m12: '₹27,574' },
-            { vcpu: 4, ram: 16, hourly: '₹9.84', monthly: '₹5,745', m6: '₹31,021', m12: '₹55,149' },
-            { vcpu: 8, ram: 32, hourly: '₹19.68', monthly: '₹11,493', m6: '₹62,065', m12: '₹110,337' },
-            { vcpu: 16, ram: 64, hourly: '₹39.36', monthly: '₹22,987', m6: '₹124,129', m12: '₹220,674' },
-            { vcpu: 32, ram: 128, hourly: '₹78.71', monthly: '₹45,969', m6: '₹248,233', m12: '₹441,303' },
-            { vcpu: 48, ram: 192, hourly: '₹93.01', monthly: '₹54,315', m6: '₹293,302', m12: '₹521,425' },
-            { vcpu: 56, ram: 224, hourly: '₹108.46', monthly: '₹63,341', m6: '₹342,040', m12: '₹608,072' },
-        ];
+        // hr = hourly rate (number), dy = daily rate (number)
+        // weekly = hr * 7 * 24, monthly = hr * 720
+        function bmFmt(n) { return '\u20b9' + n.toLocaleString('en-IN'); }
         const BAREMETAL_WINDOWS = [
-            { vcpu: 1, ram: 4, hourly: '₹2.75', monthly: '₹1,609', m6: '₹8,788', m12: '₹15,850' },
-            { vcpu: 2, ram: 8, hourly: '₹5.50', monthly: '₹3,212', m6: '₹17,551', m12: '₹31,654' },
-            { vcpu: 4, ram: 16, hourly: '₹11.00', monthly: '₹6,425', m6: '₹35,101', m12: '₹63,309' },
-            { vcpu: 8, ram: 32, hourly: '₹22.01', monthly: '₹12,853', m6: '₹70,225', m12: '₹126,657' },
-            { vcpu: 16, ram: 64, hourly: '₹44.02', monthly: '₹25,707', m6: '₹140,449', m12: '₹253,314' },
-            { vcpu: 32, ram: 128, hourly: '₹88.03', monthly: '₹51,409', m6: '₹280,873', m12: '₹506,583' },
-            { vcpu: 48, ram: 192, hourly: '₹106.98', monthly: '₹62,475', m6: '₹342,262', m12: '₹619,345' },
-            { vcpu: 56, ram: 224, hourly: '₹124.76', monthly: '₹72,861', m6: '₹399,160', m12: '₹722,312' },
-        ];
+            { vcpu: 1, ram: 4, hr: 7, dy: 100 },
+            { vcpu: 2, ram: 8, hr: 12, dy: 150 },
+            { vcpu: 4, ram: 16, hr: 20, dy: 250 },
+            { vcpu: 8, ram: 32, hr: 35, dy: 375 },
+            { vcpu: 16, ram: 64, hr: 55, dy: 600 },
+            { vcpu: 32, ram: 128, hr: 100, dy: 950 },
+            { vcpu: 48, ram: 192, hr: 185, dy: 1450 },
+            { vcpu: 56, ram: 224, hr: 300, dy: 1950 },
+        ].map(r => ({ ...r, hourly: bmFmt(r.hr) + '/hr', daily: bmFmt(r.dy) + '/day', weekly: bmFmt(r.hr * 168) + '/wk', monthly: bmFmt(r.hr * 720) + '/mo' }));
+        const BAREMETAL_LINUX = BAREMETAL_WINDOWS.map(r => ({
+            ...r,
+            hr: r.hr - 2, dy: r.dy - 25,
+            hourly: bmFmt(r.hr - 2) + '/hr', daily: bmFmt(r.dy - 25) + '/day',
+            weekly: bmFmt((r.hr - 2) * 168) + '/wk', monthly: bmFmt((r.hr - 2) * 720) + '/mo'
+        }));
         let bmOS = 'linux';
 
         // ─── CLOUD PORTAL SUBSCRIPTION DATA ─────────────────────────
@@ -1033,32 +1033,48 @@
                 name: 'Azure Sandbox',
                 logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg',
                 desc: 'Full Azure environment for hands-on cloud training and development.',
-                monthly: 2500,
-                halfMonthly: 1500,
+                monthly: 2500, monthlyLabel: '30 Days',
+                halfMonthly: 1500, halfMonthlyLabel: '15 Days',
             },
             {
                 id: 'AZ-AI',
                 name: 'Azure AI Sandbox',
                 logo: 'https://upload.wikimedia.org/wikipedia/commons/6/66/OpenAI_logo_2025_%28symbol%29.svg',
                 desc: 'Pre-configured Azure environment with AI/ML services and tools.',
-                monthly: 3000,
-                halfMonthly: 2200,
+                monthly: 3000, monthlyLabel: '30 Days',
+                halfMonthly: 2200, halfMonthlyLabel: '15 Days',
             },
             {
                 id: 'AZ-DB',
                 name: 'Azure Databricks',
                 logo: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Databricks-c40eaf44.png',
                 desc: 'Managed Databricks workspace on Azure for big data and analytics.',
-                monthly: 4500,
-                halfMonthly: 3000,
+                monthly: 5000, monthlyLabel: '10 Days',
+                halfMonthly: 3000, halfMonthlyLabel: '5 Days',
+            },
+            {
+                id: 'AZ-FA',
+                name: 'Azure Fabrics',
+                logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg',
+                desc: 'Microsoft Fabric unified analytics platform on Azure for data and AI workloads.',
+                monthly: 8000, monthlyLabel: '45 Days',
+                halfMonthly: 6000, halfMonthlyLabel: '30 Days',
+            },
+            {
+                id: 'AWS-SB',
+                name: 'AWS Sandbox',
+                logo: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg',
+                desc: 'Isolated AWS environment for hands-on cloud training and experimentation.',
+                monthly: 2500, monthlyLabel: '30 Days',
+                halfMonthly: 1500, halfMonthlyLabel: '15 Days',
             },
             {
                 id: 'GCP-SB',
                 name: 'GCP Sandbox',
                 logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg',
                 desc: 'Isolated Google Cloud environment for learning and development.',
-                monthly: 3000,
-                halfMonthly: 2200,
+                monthly: 3000, monthlyLabel: '30 Days',
+                halfMonthly: 2200, halfMonthlyLabel: '15 Days',
             },
         ];
 
@@ -1579,59 +1595,46 @@
         function renderBaremetal() {
             const rows = bmOS === 'linux' ? BAREMETAL_LINUX : BAREMETAL_WINDOWS;
             const osLabel = bmOS === 'linux' ? 'Linux' : 'Windows';
-            const tableRows = rows.map((r, i) => `
-                <tr style="border-bottom:1px solid var(--az-border);${i % 2 === 0 ? 'background:var(--az-bg);' : 'background:white;'}">
-                    <td style="padding:10px 16px;font-weight:600;color:var(--az-blue);">${r.vcpu} vCPU</td>
-                    <td style="padding:10px 16px;color:var(--az-text-sub);">${r.ram} GB</td>
-                    <td style="padding:10px 16px;font-weight:600;color:var(--az-text);">${r.hourly}</td>
-                    <td style="padding:10px 16px;color:var(--az-text);">${r.monthly}</td>
-                    <td style="padding:10px 16px;">
-                        <span style="color:var(--az-text);">${r.m6}</span>
-                        <span style="display:inline-block;margin-left:6px;background:var(--az-green-light);color:var(--az-green);font-size:10px;font-weight:600;padding:1px 6px;border-radius:2px;">10% OFF</span>
-                    </td>
-                    <td style="padding:10px 16px;">
-                        <span style="color:var(--az-text);">${r.m12}</span>
-                        <span style="display:inline-block;margin-left:6px;background:var(--az-blue-xlight);color:var(--az-blue);font-size:10px;font-weight:600;padding:1px 6px;border-radius:2px;">20% OFF</span>
-                    </td>
-                    <td style="padding:10px 16px;">
-                        <button onclick="openBaremetalCheckout(${i}, '${bmOS}')"
-                            class="btn-primary" style="font-size:12px;padding:5px 14px;white-space:nowrap;">
-                            <i class="fas fa-bolt" style="font-size:10px;"></i> Buy Now
-                        </button>
-                    </td>
-                </tr>`).join('');
+            const thStyle = 'padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;';
+            const tdBase = 'padding:10px 16px;';
+            let tableRows = '';
+            rows.forEach(function (r, i) {
+                var bg = i % 2 === 0 ? 'background:var(--az-bg);' : 'background:white;';
+                tableRows +=
+                    '<tr style="border-bottom:1px solid var(--az-border);' + bg + '">' +
+                    '<td style="' + tdBase + 'font-weight:600;color:var(--az-blue);">' + r.vcpu + ' vCPU</td>' +
+                    '<td style="' + tdBase + 'color:var(--az-text-sub);">' + r.ram + ' GB</td>' +
+                    '<td style="' + tdBase + 'font-weight:600;color:var(--az-text);">' + r.hourly + '</td>' +
+                    '<td style="' + tdBase + 'color:var(--az-text);">' + r.daily + '</td>' +
+                    '<td style="' + tdBase + 'color:var(--az-text);">' + r.weekly + '</td>' +
+                    '<td style="' + tdBase + 'color:var(--az-text);">' + r.monthly + '</td>' +
+                    '<td style="' + tdBase + '">' +
+                    '<button onclick="openBaremetalCheckout(' + i + ', \'' + bmOS + '\')" class="btn-primary" style="font-size:12px;padding:5px 14px;white-space:nowrap;">' +
+                    '<i class="fas fa-bolt" style="font-size:10px;"></i> Buy Now</button></td>' +
+                    '</tr>';
+            });
 
-            return `
-            <div style="background:var(--az-surface);border:1px solid var(--az-border);">
-                <div style="display:flex;border-bottom:1px solid var(--az-border);padding:0 16px;gap:0;">
-                    <button onclick="setBmOS('linux')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${bmOS === 'linux' ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${bmOS === 'linux' ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
-                        <i class="fab fa-linux" style="margin-right:6px;"></i>Linux
-                    </button>
-                    <button onclick="setBmOS('windows')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:${bmOS === 'windows' ? '2px solid var(--az-blue)' : '2px solid transparent'};color:${bmOS === 'windows' ? 'var(--az-blue)' : 'var(--az-text-sub)'};background:transparent;margin-bottom:-1px;">
-                        <i class="fab fa-windows" style="margin-right:6px;"></i>Windows
-                    </button>
-                </div>
-                <div style="padding:8px 16px;background:var(--az-blue-xlight);border-bottom:1px solid var(--az-blue-light);font-size:12px;color:var(--az-blue);display:flex;align-items:center;gap:8px;">
-                    <i class="fas fa-info-circle"></i>
-                    Prices shown for <strong>${osLabel}</strong> instances. 6-month billing saves 10%, 12-month saves 20%.
-                </div>
-                <div style="overflow-x:auto;">
-                    <table style="width:100%;border-collapse:collapse;font-size:13px;">
-                        <thead>
-                            <tr style="background:var(--az-surface);border-bottom:2px solid var(--az-border);">
-                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">vCPUs</th>
-                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">RAM</th>
-                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Hourly</th>
-                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">Monthly</th>
-                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">6 Monthly</th>
-                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;">12 Monthly</th>
-                                <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;"></th>
-                            </tr>
-                        </thead>
-                        <tbody>${tableRows}</tbody>
-                    </table>
-                </div>
-            </div>`;
+            return '<div style="background:var(--az-surface);border:1px solid var(--az-border);">' +
+                '<div style="display:flex;border-bottom:1px solid var(--az-border);padding:0 16px;">' +
+                '<button onclick="setBmOS(\'linux\')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:' + (bmOS === 'linux' ? '2px solid var(--az-blue)' : '2px solid transparent') + ';color:' + (bmOS === 'linux' ? 'var(--az-blue)' : 'var(--az-text-sub)') + ';background:transparent;margin-bottom:-1px;"><i class="fab fa-linux" style="margin-right:6px;"></i>Linux</button>' +
+                '<button onclick="setBmOS(\'windows\')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:' + (bmOS === 'windows' ? '2px solid var(--az-blue)' : '2px solid transparent') + ';color:' + (bmOS === 'windows' ? 'var(--az-blue)' : 'var(--az-text-sub)') + ';background:transparent;margin-bottom:-1px;"><i class="fab fa-windows" style="margin-right:6px;"></i>Windows</button>' +
+                '</div>' +
+                '<div style="padding:8px 16px;background:var(--az-blue-xlight);border-bottom:1px solid var(--az-blue-light);font-size:12px;color:var(--az-blue);display:flex;align-items:center;gap:8px;">' +
+                '<i class="fas fa-info-circle"></i> Prices for <strong>' + osLabel + '</strong> instances. Weekly = hourly × 168 hrs &nbsp;|&nbsp; Monthly = hourly × 720 hrs.' +
+                '</div>' +
+                '<div style="overflow-x:auto;">' +
+                '<table style="width:100%;border-collapse:collapse;font-size:13px;">' +
+                '<thead><tr style="background:var(--az-surface);border-bottom:2px solid var(--az-border);">' +
+                '<th style="' + thStyle + '">vCPUs</th>' +
+                '<th style="' + thStyle + '">RAM</th>' +
+                '<th style="' + thStyle + '">Hourly</th>' +
+                '<th style="' + thStyle + '">Daily</th>' +
+                '<th style="' + thStyle + '">Weekly</th>' +
+                '<th style="' + thStyle + '">Monthly</th>' +
+                '<th style="' + thStyle + '"></th>' +
+                '</tr></thead>' +
+                '<tbody>' + tableRows + '</tbody>' +
+                '</table></div></div>';
         }
 
         function setBmOS(os) { bmOS = os; renderLabs(); }
@@ -1649,11 +1652,11 @@
                 <div style="font-size:12px;color:var(--az-text-muted);margin-bottom:14px;line-height:1.5;">${plan.desc}</div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:14px;padding:4px;background:var(--az-bg);border:1px solid var(--az-border);" id="cp-toggle-${plan.id}">
                     <div class="price-option active" style="padding:8px 10px;" onclick="selectCloudPlan(this, '${plan.id}', 'monthly')">
-                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">Monthly</div>
+                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">${plan.monthlyLabel || '30 Days'}</div>
                         <div style="font-size:14px;font-weight:600;color:var(--az-text);">&#8377;${plan.monthly.toLocaleString('en-IN')}</div>
                     </div>
                     <div class="price-option" style="padding:8px 10px;" onclick="selectCloudPlan(this, '${plan.id}', 'halfmonthly')">
-                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">15 Days</div>
+                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">${plan.halfMonthlyLabel || '15 Days'}</div>
                         <div style="font-size:14px;font-weight:600;color:var(--az-text);">&#8377;${plan.halfMonthly.toLocaleString('en-IN')}</div>
                     </div>
                 </div>
@@ -1848,10 +1851,10 @@
             const r = checkoutLab.bmData;
             checkoutPlan = val;
             checkoutPrices.selectedAmt =
-                val === '8hr' ? parseFloat(r.hourly.replace(/[₹,]/g, '')) * 8
-                    : val === 'monthly' ? parseFloat(r.monthly.replace(/[₹,]/g, ''))
-                        : val === 'm6' ? parseFloat(r.m6.replace(/[₹,]/g, ''))
-                            : parseFloat(r.m12.replace(/[₹,]/g, ''));
+                val === '8hr' ? r.hr * 8
+                    : val === 'daily' ? r.dy
+                        : val === 'weekly' ? r.hr * 168
+                            : r.hr * 720;
             updateSummary();
         }
 
@@ -1859,16 +1862,21 @@
             const rows = os === 'linux' ? BAREMETAL_LINUX : BAREMETAL_WINDOWS;
             const r = rows[idx];
             const osLabel = os === 'linux' ? 'Linux' : 'Windows';
-            checkoutLab = { id: r.vcpu + 'vCPU-' + r.ram + 'GB', name: osLabel + ' Baremetal · ' + r.vcpu + ' vCPU · ' + r.ram + ' GB RAM', infra: parseFloat(r.monthly.replace(/[₹,]/g, '')), isBaremetal: true, bmData: r };
+            checkoutLab = { id: r.vcpu + 'vCPU-' + r.ram + 'GB', name: osLabel + ' Baremetal \u00b7 ' + r.vcpu + ' vCPU \u00b7 ' + r.ram + ' GB RAM', infra: r.hr * 720, isBaremetal: true, bmData: r };
             checkoutPlan = 'monthly';
-            checkoutPrices = { daily: parseFloat(r.hourly.replace(/[₹,]/g, '')), monthly: parseFloat(r.monthly.replace(/[₹,]/g, '')), m6: parseFloat(r.m6.replace(/[₹,]/g, '')), m12: parseFloat(r.m12.replace(/[₹,]/g, '')), dailyFmt: r.hourly + '/hr', weeklyFmt: r.monthly + '/mo' };
+            checkoutPrices = { selectedAmt: r.hr * 720 };
             couponDiscount = 0;
             document.getElementById('form-lab-name').value = checkoutLab.name;
-            document.getElementById('form-lab-id').value = r.vcpu + ' vCPU · ' + r.ram + ' GB RAM';
+            document.getElementById('form-lab-id').value = r.vcpu + ' vCPU \u00b7 ' + r.ram + ' GB RAM';
             document.getElementById('form-plan').style.display = 'none';
             document.getElementById('form-plan-select').style.display = 'block';
-            document.getElementById('form-plan-select').value = 'monthly';
-            checkoutPrices.selectedAmt = parseFloat(r.monthly.replace(/[₹,]/g, ''));
+            const sel = document.getElementById('form-plan-select');
+            sel.innerHTML =
+                '<option value="8hr">8 Hours \u2014 ' + r.hourly + ' \u00d7 8 = \u20b9' + (r.hr * 8).toLocaleString('en-IN') + '</option>' +
+                '<option value="daily">Daily \u2014 ' + r.daily + '</option>' +
+                '<option value="weekly">Weekly \u2014 ' + r.weekly + '</option>' +
+                '<option value="monthly" selected>Monthly \u2014 ' + r.monthly + '</option>';
+            sel.onchange = function () { onBaremetalPlanChange(this.value); };
             document.getElementById('form-qty').value = 1;
             document.getElementById('form-name').value = '';
             document.getElementById('form-email').value = '';
@@ -2058,7 +2066,7 @@
             const gst = afterDisc * GST_RATE;
             const total = afterDisc + gst;
             const planLabel = checkoutLab && checkoutLab.isBaremetal
-                ? ({ '8hr': '8 Hours', 'monthly': 'Monthly', 'm6': '6 Months (10% off)', 'm12': '12 Months (20% off)' }[checkoutPlan] || 'Monthly')
+                ? ({ '8hr': '8 Hours', 'daily': 'Daily', 'weekly': 'Weekly', 'monthly': 'Monthly' }[checkoutPlan] || 'Monthly')
                 : checkoutLab && checkoutLab.isCloudPortal ? (checkoutPlan === 'halfmonthly' ? '15 Days' : 'Monthly')
                     : checkoutLab && checkoutLab.isExam ? 'Exam Voucher'
                         : checkoutPlan === 'daily' ? 'Daily' : checkoutPlan === 'fixed' ? 'Fixed' : 'Weekly (-10%)';
