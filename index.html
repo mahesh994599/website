@@ -746,9 +746,6 @@
                             style="color:var(--az-green);">Discount</span><span style="color:var(--az-green);"
                             id="summary-discount">-₹0.00</span></div>
                     <div class="summary-row"><span>GST (18%)</span><span id="summary-gst">₹0.00</span></div>
-                    <div class="summary-row" id="txn-row" style="display:none;"><span
-                            style="color:var(--az-text-muted);">Transaction Charges (4%)</span><span id="summary-txn"
-                            style="color:var(--az-text-muted);">₹0.00</span></div>
                     <div class="summary-row total"><span>Total (incl. GST)</span><span style="color:var(--az-blue);"
                             id="summary-total">₹0.00</span></div>
                 </div>
@@ -1039,9 +1036,8 @@
                 rzpEl.style.background = 'var(--az-surface)';
                 strCheck.style.display = '';
                 rzpCheck.style.display = 'none';
-                btnLabel.textContent = 'Pay Securely with Stripe (USD)';
+                btnLabel.textContent = 'Pay Securely with Stripe';
             }
-            updateSummary();
         }
 
         // Valid coupons (demo)
@@ -1226,11 +1222,6 @@
         function fmtINR(n) {
             return n.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
         }
-        const USD_RATE = 92.99;
-        function fmtUSD(inr) {
-            return '$' + (inr / USD_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-        function fmt(inr) { return selectedGateway === 'stripe' ? fmtUSD(inr) : fmtINR(inr); }
 
         // ─── FAQ TOGGLE ──────────────────────────────────────────────
         function toggleFaq(id) {
@@ -2081,7 +2072,7 @@
             const list = labData[activeCategory] || [];
             const lab = list.find(l => l.id === labId);
             if (!lab) return;
-            checkoutLab = { ...lab, csvCategory: activeCategory };
+            checkoutLab = lab;
             checkoutPlan = lab.isCSV ? 'fixed' : (cardPlan[labId] || 'daily');
             checkoutPrices = calculatePrices(lab.infra);
             couponDiscount = 0;
@@ -2148,12 +2139,6 @@
         }
 
         const GST_RATE = 0.18;
-        const TXN_RATE = 0.04;
-
-        function hasTxnCharge() {
-            if (!checkoutLab) return false;
-            return checkoutLab.isExam || CSV_CATEGORIES.includes(checkoutLab.csvCategory);
-        }
 
         function updateSummary() {
             if (!checkoutLab) return;
@@ -2167,28 +2152,13 @@
             const discount = subtotal * couponDiscount;
             const afterDisc = subtotal - discount;
             const gst = afterDisc * GST_RATE;
-            const txnApplies = hasTxnCharge();
-            const txn = txnApplies ? afterDisc * TXN_RATE : 0;
-            const total = afterDisc + gst + txn;
+            const total = afterDisc + gst;
             document.getElementById('summary-lab').textContent = checkoutLab.name;
-            document.getElementById('summary-unit-price').textContent = fmt(unitAmt);
+            document.getElementById('summary-unit-price').textContent = fmtINR(unitAmt);
             document.getElementById('summary-qty').textContent = '×' + qty;
-            document.getElementById('summary-discount').textContent = '-' + fmt(discount);
-            document.getElementById('summary-gst').textContent = fmt(gst);
-            document.getElementById('txn-row').style.display = txnApplies ? '' : 'none';
-            document.getElementById('summary-txn').textContent = fmt(txn);
-            document.getElementById('summary-total').textContent = fmt(total);
-            // Show currency note
-            let noteEl = document.getElementById('summary-currency-note');
-            if (!noteEl) {
-                noteEl = document.createElement('div');
-                noteEl.id = 'summary-currency-note';
-                noteEl.style.cssText = 'font-size:11px;color:var(--az-text-muted);text-align:right;margin-top:2px;';
-                document.getElementById('summary-total').parentElement.parentElement.appendChild(noteEl);
-            }
-            noteEl.textContent = selectedGateway === 'stripe'
-                ? 'Prices in USD (1 USD = ₹' + USD_RATE + '). Charged in USD via Stripe.'
-                : 'Prices in INR. Charged in ₹ via Razorpay.';
+            document.getElementById('summary-discount').textContent = '-' + fmtINR(discount);
+            document.getElementById('summary-gst').textContent = fmtINR(gst);
+            document.getElementById('summary-total').textContent = fmtINR(total);
         }
 
         function proceedToPayment() {
@@ -2208,9 +2178,7 @@
             const discount = subtotal * couponDiscount;
             const afterDisc = subtotal - discount;
             const gst = afterDisc * GST_RATE;
-            const txnApplies = hasTxnCharge();
-            const txn = txnApplies ? afterDisc * TXN_RATE : 0;
-            const total = afterDisc + gst + txn;
+            const total = afterDisc + gst;
             const planLabel = checkoutLab && checkoutLab.isBaremetal
                 ? ({ '8hr': '8 Hours', 'daily': 'Daily', 'weekly': 'Weekly', 'monthly': 'Monthly' }[checkoutPlan] || 'Monthly')
                 : checkoutLab && checkoutLab.isCloudPortal ? (checkoutPlan === 'halfmonthly' ? '15 Days' : 'Monthly')
@@ -2220,16 +2188,14 @@
                 labName: checkoutLab.name, labId: checkoutLab.id, plan: planLabel,
                 qty, name, email, phone,
                 company: document.getElementById('form-company').value.trim(),
-                subtotalFmt: fmt(subtotal),
-                discountFmt: couponDiscount > 0 ? '-' + fmt(discount) : '—',
-                gstFmt: fmt(gst), totalFmt: fmt(total),
-                totalINR: total,
+                subtotalFmt: fmtINR(subtotal),
+                discountFmt: couponDiscount > 0 ? '-' + fmtINR(discount) : '—',
+                gstFmt: fmtINR(gst), totalFmt: fmtINR(total),
             };
             const amountPaise = Math.round(total * 100);
-            const amountCents = Math.round((total / USD_RATE) * 100);
 
             if (selectedGateway === 'stripe') {
-                proceedWithStripe(amountCents, orderDetails);
+                proceedWithStripe(total, orderDetails);
             } else {
                 proceedWithRazorpay(amountPaise, qty, orderDetails);
             }
@@ -2256,138 +2222,35 @@
             }
         }
 
-        function proceedWithStripe(amountCents, orderDetails) {
-            const usdAmt = (amountCents / 100).toFixed(2);
-            // Build or reuse the modal
-            let modal = document.getElementById('stripe-modal');
-            if (!modal) {
-                modal = document.createElement('div');
-                modal.id = 'stripe-modal';
-                modal.style.cssText = 'position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);';
-                modal.innerHTML =
-                    '<div style="background:white;border-radius:6px;width:100%;max-width:440px;margin:16px;box-shadow:0 12px 40px rgba(0,0,0,0.25);position:relative;">' +
-                    // Header
-                    '<div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #e8e8e8;">' +
-                    '<div style="display:flex;align-items:center;gap:10px;">' +
-                    '<div style="width:34px;height:34px;background:#635bff;border-radius:6px;display:flex;align-items:center;justify-content:center;"><i class="fas fa-credit-card" style="color:white;font-size:14px;"></i></div>' +
-                    '<div><div style="font-size:14px;font-weight:700;color:#1a1a2e;">Pay with Stripe</div><div id="stripe-amt-label" style="font-size:12px;color:#635bff;font-weight:600;"></div></div></div>' +
-                    '<button onclick="document.getElementById(\'stripe-modal\').style.display=\'none\'" style="background:none;border:none;font-size:20px;cursor:pointer;color:#999;line-height:1;">&times;</button>' +
-                    '</div>' +
-                    // Body
-                    '<div style="padding:20px;">' +
-                    '<div id="stripe-payment-element" style="margin-bottom:16px;"></div>' +
-                    '<div id="stripe-error" style="background:#fff5f5;border:1px solid #fed7d7;color:#c53030;font-size:12px;padding:10px 12px;border-radius:4px;margin-bottom:12px;display:none;"></div>' +
-                    '<button id="stripe-pay-submit" onclick="submitStripePayment()" style="width:100%;background:#635bff;color:white;border:none;border-radius:4px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">' +
-                    '<i class="fas fa-lock" style="font-size:12px;"></i><span id="stripe-btn-label">Pay $0.00</span></button>' +
-                    '<div style="text-align:center;margin-top:12px;font-size:11px;color:#aaa;">' +
-                    '<i class="fas fa-shield-alt" style="margin-right:4px;color:#635bff;"></i>Secured by Stripe · PCI DSS Compliant · SSL Encrypted</div>' +
-                    '</div></div>';
-                document.body.appendChild(modal);
-            }
-            modal.style.display = 'flex';
-            document.getElementById('stripe-amt-label').textContent = '$' + usdAmt + ' USD';
-            document.getElementById('stripe-btn-label').textContent = 'Pay $' + usdAmt;
-            document.getElementById('stripe-error').style.display = 'none';
-            document.getElementById('stripe-payment-element').innerHTML = '<div style="text-align:center;padding:20px;color:#888;font-size:13px;"><i class="fas fa-spinner fa-spin"></i> Initialising secure payment...</div>';
-
-            window._stripePayData = { amountCents, orderDetails };
-
-            // Step 1: Create PaymentIntent via Stripe API directly
-            const SK = _k(_c.ssk);
-            const body = new URLSearchParams({
-                amount: amountCents,
-                currency: 'usd',
-                'payment_method_types[]': 'card',
-                'metadata[lab]': orderDetails.labName,
-                'metadata[plan]': orderDetails.plan,
-                'metadata[customer]': orderDetails.name,
-                'metadata[email]': orderDetails.email,
-            });
-
-            fetch('https://api.stripe.com/v1/payment_intents', {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + SK,
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: body.toString()
-            })
-                .then(function (r) { return r.json(); })
-                .then(function (intent) {
-                    if (intent.error) {
-                        document.getElementById('stripe-payment-element').innerHTML = '';
-                        const errEl = document.getElementById('stripe-error');
-                        errEl.textContent = intent.error.message || 'Failed to initialise payment.';
-                        errEl.style.display = 'block';
-                        return;
-                    }
-                    // Step 2: Mount Payment Element with client_secret
-                    const PK = _k(_c.spk);
-                    const stripe = Stripe(PK);
-                    window._stripeInstance = stripe;
-                    window._stripeClientSecret = intent.client_secret;
-
-                    const elements = stripe.elements({ clientSecret: intent.client_secret, appearance: { theme: 'stripe', variables: { colorPrimary: '#635bff' } } });
-                    const paymentEl = elements.create('payment');
-                    window._stripeElements = elements;
-                    document.getElementById('stripe-payment-element').innerHTML = '';
-                    paymentEl.mount('#stripe-payment-element');
-                })
-                .catch(function (e) {
-                    document.getElementById('stripe-payment-element').innerHTML = '';
-                    const errEl = document.getElementById('stripe-error');
-                    errEl.textContent = 'Network error. Please check your connection and try again.';
-                    errEl.style.display = 'block';
-                });
-        }
-
-        async function submitStripePayment() {
-            const btn = document.getElementById('stripe-pay-submit');
-            const errEl = document.getElementById('stripe-error');
-            const label = document.getElementById('stripe-btn-label');
-            const origText = label.textContent;
-            btn.disabled = true;
-            label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            errEl.style.display = 'none';
-
+        function proceedWithStripe(totalINR, orderDetails) {
             try {
-                const { orderDetails } = window._stripePayData;
-                const stripe = window._stripeInstance;
-                const elements = window._stripeElements;
-
-                const { error, paymentIntent } = await stripe.confirmPayment({
-                    elements,
-                    confirmParams: {
-                        return_url: window.location.origin + window.location.pathname + '?payment=success&gateway=stripe',
-                        payment_method_data: {
-                            billing_details: {
-                                name: orderDetails.name,
-                                email: orderDetails.email,
-                                phone: orderDetails.phone,
-                            }
-                        }
-                    },
-                    redirect: 'if_required'
+                const STRIPE_PK = _k(_c.spk);
+                const stripe = Stripe(STRIPE_PK);
+                // Convert INR to paise (Stripe uses smallest currency unit)
+                const amountPaise = Math.round(totalINR * 100);
+                stripe.redirectToCheckout({
+                    lineItems: [{
+                        price_data: {
+                            currency: 'inr',
+                            product_data: {
+                                name: orderDetails.labName + ' [' + orderDetails.labId + ']',
+                                description: orderDetails.plan + ' × ' + orderDetails.qty,
+                            },
+                            unit_amount: amountPaise,
+                        },
+                        quantity: 1,
+                    }],
+                    mode: 'payment',
+                    customerEmail: orderDetails.email,
+                    successUrl: window.location.origin + window.location.pathname + '?payment=success&gateway=stripe&name=' + encodeURIComponent(orderDetails.name) + '&email=' + encodeURIComponent(orderDetails.email) + '&total=' + encodeURIComponent(orderDetails.totalFmt),
+                    cancelUrl: window.location.href,
+                }).then(function (result) {
+                    if (result.error) {
+                        alert('Stripe error: ' + result.error.message);
+                    }
                 });
-
-                if (error) {
-                    errEl.textContent = error.message;
-                    errEl.style.display = 'block';
-                    btn.disabled = false;
-                    label.textContent = origText;
-                    return;
-                }
-
-                if (paymentIntent && paymentIntent.status === 'succeeded') {
-                    document.getElementById('stripe-modal').style.display = 'none';
-                    const resp = { razorpay_payment_id: paymentIntent.id, razorpay_order_id: paymentIntent.id };
-                    showPaymentSuccess(resp, orderDetails);
-                }
             } catch (e) {
-                errEl.textContent = 'An unexpected error occurred. Please try again.';
-                errEl.style.display = 'block';
-                btn.disabled = false;
-                label.textContent = origText;
+                alert('Stripe payment unavailable. Please try Razorpay or contact support.');
             }
         }
 
