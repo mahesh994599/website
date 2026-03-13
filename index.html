@@ -1039,8 +1039,9 @@
                 rzpEl.style.background = 'var(--az-surface)';
                 strCheck.style.display = '';
                 rzpCheck.style.display = 'none';
-                btnLabel.textContent = 'Pay Securely with Stripe';
+                btnLabel.textContent = 'Pay Securely with Stripe (USD)';
             }
+            updateSummary();
         }
 
         // Valid coupons (demo)
@@ -1225,6 +1226,11 @@
         function fmtINR(n) {
             return n.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
         }
+        const USD_RATE = 92.99;
+        function fmtUSD(inr) {
+            return '$' + (inr / USD_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        function fmt(inr) { return selectedGateway === 'stripe' ? fmtUSD(inr) : fmtINR(inr); }
 
         // ─── FAQ TOGGLE ──────────────────────────────────────────────
         function toggleFaq(id) {
@@ -2165,13 +2171,24 @@
             const txn = txnApplies ? afterDisc * TXN_RATE : 0;
             const total = afterDisc + gst + txn;
             document.getElementById('summary-lab').textContent = checkoutLab.name;
-            document.getElementById('summary-unit-price').textContent = fmtINR(unitAmt);
+            document.getElementById('summary-unit-price').textContent = fmt(unitAmt);
             document.getElementById('summary-qty').textContent = '×' + qty;
-            document.getElementById('summary-discount').textContent = '-' + fmtINR(discount);
-            document.getElementById('summary-gst').textContent = fmtINR(gst);
+            document.getElementById('summary-discount').textContent = '-' + fmt(discount);
+            document.getElementById('summary-gst').textContent = fmt(gst);
             document.getElementById('txn-row').style.display = txnApplies ? '' : 'none';
-            document.getElementById('summary-txn').textContent = fmtINR(txn);
-            document.getElementById('summary-total').textContent = fmtINR(total);
+            document.getElementById('summary-txn').textContent = fmt(txn);
+            document.getElementById('summary-total').textContent = fmt(total);
+            // Show currency note
+            let noteEl = document.getElementById('summary-currency-note');
+            if (!noteEl) {
+                noteEl = document.createElement('div');
+                noteEl.id = 'summary-currency-note';
+                noteEl.style.cssText = 'font-size:11px;color:var(--az-text-muted);text-align:right;margin-top:2px;';
+                document.getElementById('summary-total').parentElement.parentElement.appendChild(noteEl);
+            }
+            noteEl.textContent = selectedGateway === 'stripe'
+                ? 'Prices in USD (1 USD = ₹' + USD_RATE + '). Charged in USD via Stripe.'
+                : 'Prices in INR. Charged in ₹ via Razorpay.';
         }
 
         function proceedToPayment() {
@@ -2203,14 +2220,16 @@
                 labName: checkoutLab.name, labId: checkoutLab.id, plan: planLabel,
                 qty, name, email, phone,
                 company: document.getElementById('form-company').value.trim(),
-                subtotalFmt: fmtINR(subtotal),
-                discountFmt: couponDiscount > 0 ? '-' + fmtINR(discount) : '—',
-                gstFmt: fmtINR(gst), totalFmt: fmtINR(total),
+                subtotalFmt: fmt(subtotal),
+                discountFmt: couponDiscount > 0 ? '-' + fmt(discount) : '—',
+                gstFmt: fmt(gst), totalFmt: fmt(total),
+                totalINR: total,
             };
             const amountPaise = Math.round(total * 100);
+            const amountCents = Math.round((total / USD_RATE) * 100);
 
             if (selectedGateway === 'stripe') {
-                proceedWithStripe(total, orderDetails);
+                proceedWithStripe(amountCents, orderDetails);
             } else {
                 proceedWithRazorpay(amountPaise, qty, orderDetails);
             }
@@ -2237,21 +2256,19 @@
             }
         }
 
-        function proceedWithStripe(totalINR, orderDetails) {
+        function proceedWithStripe(amountCents, orderDetails) {
             try {
                 const STRIPE_PK = _k(_c.spk);
                 const stripe = Stripe(STRIPE_PK);
-                // Convert INR to paise (Stripe uses smallest currency unit)
-                const amountPaise = Math.round(totalINR * 100);
                 stripe.redirectToCheckout({
                     lineItems: [{
                         price_data: {
-                            currency: 'inr',
+                            currency: 'usd',
                             product_data: {
                                 name: orderDetails.labName + ' [' + orderDetails.labId + ']',
-                                description: orderDetails.plan + ' × ' + orderDetails.qty,
+                                description: orderDetails.plan + ' \u00d7 ' + orderDetails.qty + ' | ' + orderDetails.totalFmt,
                             },
-                            unit_amount: amountPaise,
+                            unit_amount: amountCents,
                         },
                         quantity: 1,
                     }],
