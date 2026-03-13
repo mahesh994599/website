@@ -2102,7 +2102,7 @@
 
         function openCheckoutModal() {
             selectGateway('razorpay');
-            openCheckoutModal();
+            document.getElementById('checkout-modal').style.display = 'flex';
         }
 
         document.getElementById('checkout-modal').addEventListener('click', function (e) {
