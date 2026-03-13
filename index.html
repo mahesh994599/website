@@ -7,6 +7,7 @@
     <title>Synergific Lab Store</title>
     <!-- Tailwind removed — pure Azure CSS -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -749,8 +750,41 @@
                             id="summary-total">₹0.00</span></div>
                 </div>
 
+                <!-- Payment Gateway Selector -->
+                <div>
+                    <label class="form-label" style="margin-bottom:8px;">Select Payment Method</label>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="gateway-toggle">
+                        <div id="gw-razorpay" onclick="selectGateway('razorpay')"
+                            style="border:2px solid var(--az-blue);background:var(--az-blue-xlight);border-radius:2px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .1s;">
+                            <div
+                                style="width:28px;height:28px;background:#072654;border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <i class="fas fa-bolt" style="color:#fff;font-size:12px;"></i>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:700;color:var(--az-text);">Razorpay</div>
+                                <div style="font-size:10px;color:var(--az-text-muted);">UPI · Cards · NetBanking</div>
+                            </div>
+                            <i class="fas fa-check-circle" id="gw-rzp-check"
+                                style="margin-left:auto;color:var(--az-blue);font-size:14px;"></i>
+                        </div>
+                        <div id="gw-stripe" onclick="selectGateway('stripe')"
+                            style="border:1px solid var(--az-border);background:var(--az-surface);border-radius:2px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .1s;">
+                            <div
+                                style="width:28px;height:28px;background:#635bff;border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <i class="fas fa-credit-card" style="color:#fff;font-size:12px;"></i>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:700;color:var(--az-text);">Stripe</div>
+                                <div style="font-size:10px;color:var(--az-text-muted);">Cards · International</div>
+                            </div>
+                            <i class="fas fa-check-circle" id="gw-str-check"
+                                style="margin-left:auto;color:var(--az-blue);font-size:14px;display:none;"></i>
+                        </div>
+                    </div>
+                </div>
+
                 <button id="pay-btn" class="pay-btn" onclick="proceedToPayment()">
-                    <i class="fas fa-lock"></i> Pay Securely with Razorpay
+                    <i class="fas fa-lock"></i> <span id="pay-btn-label">Pay Securely with Razorpay</span>
                 </button>
 
                 <!-- ISO Trust Strip -->
@@ -769,8 +803,8 @@
                 </div>
                 <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
                     <span class="badge-razorpay"><i class="fas fa-shield-alt" style="color:var(--az-blue);"></i> Secured
-                        by Razorpay</span>
-                    <span class="badge-razorpay"><i class="fas fa-credit-card"></i> UPI · Cards · NetBanking</span>
+                        by Razorpay &amp; Stripe</span>
+                    <span class="badge-razorpay"><i class="fas fa-credit-card"></i> UPI · Cards · International</span>
                 </div>
             </div>
         </div>
@@ -962,6 +996,8 @@
             stid: ['dGVtcGxhdGVfZ3dxcTgzcw=='],
             epk: ['X2JycjVC', 'c3ZFUzVI', 'bXkwQW4='],
             rsec: ['d1RSVWp1Z2c=', 'cHZwR3dyaUo=', 'OVpFSFdpWU0='],
+            spk: ['cGtfbGl2ZV81MVQ2UXE4NDhyM3l5eA==', 'RERYajgwajhrUEUwbkQ5WVVZdXpqdQ==', 'VmJyU0FZTGhDUEhiZjgwY091cFhRYQ==', 'SFN2OU45YmRqejYwV21lWXB3NVpkYQ==', 'c0VRVWlBWk9kMDBzaW5aOTJHUg=='],
+            ssk: ['c2tfbGl2ZV81MVQ2UXE4NDhyM3l5eA==', 'RERYM293MFJ6enBHVWMwUmhOdVFhRg==', 'S056aDhleldOY3l0YW1SR09vQXRldQ==', 'ck1iQ25DVXk5VXpLRlY5Y2l4eldQcw==', 'T0M2WUFwdFNyMDB6dWFyeFlYYQ=='],
         };
         let RAZORPAY_KEY_ID = null;
 
@@ -976,6 +1012,33 @@
         let checkoutPlan = 'daily';
         let checkoutPrices = {};
         let couponDiscount = 0;
+        let selectedGateway = 'razorpay';
+
+        function selectGateway(gw) {
+            selectedGateway = gw;
+            const rzpEl = document.getElementById('gw-razorpay');
+            const strEl = document.getElementById('gw-stripe');
+            const rzpCheck = document.getElementById('gw-rzp-check');
+            const strCheck = document.getElementById('gw-str-check');
+            const btnLabel = document.getElementById('pay-btn-label');
+            if (gw === 'razorpay') {
+                rzpEl.style.border = '2px solid var(--az-blue)';
+                rzpEl.style.background = 'var(--az-blue-xlight)';
+                strEl.style.border = '1px solid var(--az-border)';
+                strEl.style.background = 'var(--az-surface)';
+                rzpCheck.style.display = '';
+                strCheck.style.display = 'none';
+                btnLabel.textContent = 'Pay Securely with Razorpay';
+            } else {
+                strEl.style.border = '2px solid #635bff';
+                strEl.style.background = '#f0f0ff';
+                rzpEl.style.border = '1px solid var(--az-border)';
+                rzpEl.style.background = 'var(--az-surface)';
+                strCheck.style.display = '';
+                rzpCheck.style.display = 'none';
+                btnLabel.textContent = 'Pay Securely with Stripe';
+            }
+        }
 
         // Valid coupons (demo)
         const COUPONS = { 'SYNLAB10': 0.10, 'INFRA20': 0.20 };
@@ -1836,7 +1899,7 @@
             document.getElementById('coupon-msg').style.display = 'none';
             document.getElementById('discount-row').style.display = 'none';
             updateSummary();
-            document.getElementById('checkout-modal').style.display = 'flex';
+            openCheckoutModal();
         }
 
         const cloudPlanSelection = {};
@@ -1881,7 +1944,7 @@
             document.getElementById('coupon-msg').style.display = 'none';
             document.getElementById('discount-row').style.display = 'none';
             updateSummary();
-            document.getElementById('checkout-modal').style.display = 'flex';
+            openCheckoutModal();
         }
 
         function onCloudPlanChange(val, plan) {
@@ -1932,7 +1995,7 @@
             document.getElementById('coupon-msg').style.display = 'none';
             document.getElementById('discount-row').style.display = 'none';
             updateSummary();
-            document.getElementById('checkout-modal').style.display = 'flex';
+            openCheckoutModal();
         }
 
         function renderCard(lab) {
@@ -2030,11 +2093,16 @@
             document.getElementById('coupon-msg').style.display = 'none';
             document.getElementById('discount-row').style.display = 'none';
             updateSummary();
-            document.getElementById('checkout-modal').style.display = 'flex';
+            openCheckoutModal();
         }
 
         function closeCheckoutModal() {
             document.getElementById('checkout-modal').style.display = 'none';
+        }
+
+        function openCheckoutModal() {
+            selectGateway('razorpay');
+            openCheckoutModal();
         }
 
         document.getElementById('checkout-modal').addEventListener('click', function (e) {
@@ -2125,12 +2193,21 @@
                 gstFmt: fmtINR(gst), totalFmt: fmtINR(total),
             };
             const amountPaise = Math.round(total * 100);
+
+            if (selectedGateway === 'stripe') {
+                proceedWithStripe(total, orderDetails);
+            } else {
+                proceedWithRazorpay(amountPaise, qty, orderDetails);
+            }
+        }
+
+        function proceedWithRazorpay(amountPaise, qty, orderDetails) {
             const options = {
                 key: RAZORPAY_KEY_ID, amount: amountPaise, currency: 'INR',
                 name: 'Synergific Lab Store',
                 description: checkoutLab.name + ' [' + checkoutLab.id + '] — ' + orderDetails.plan + ' × ' + qty,
                 image: '',
-                prefill: { name, email, contact: phone },
+                prefill: { name: orderDetails.name, email: orderDetails.email, contact: orderDetails.phone },
                 notes: { lab_id: checkoutLab.id, lab_name: checkoutLab.name, plan: checkoutPlan, qty, company: orderDetails.company },
                 theme: { color: '#22c55e' },
                 handler: function (response) { showPaymentSuccess(response, orderDetails); },
@@ -2142,6 +2219,38 @@
                 rzp.open();
             } catch (e) {
                 alert('Payment gateway unavailable. Please contact support.');
+            }
+        }
+
+        function proceedWithStripe(totalINR, orderDetails) {
+            try {
+                const STRIPE_PK = _k(_c.spk);
+                const stripe = Stripe(STRIPE_PK);
+                // Convert INR to paise (Stripe uses smallest currency unit)
+                const amountPaise = Math.round(totalINR * 100);
+                stripe.redirectToCheckout({
+                    lineItems: [{
+                        price_data: {
+                            currency: 'inr',
+                            product_data: {
+                                name: orderDetails.labName + ' [' + orderDetails.labId + ']',
+                                description: orderDetails.plan + ' × ' + orderDetails.qty,
+                            },
+                            unit_amount: amountPaise,
+                        },
+                        quantity: 1,
+                    }],
+                    mode: 'payment',
+                    customerEmail: orderDetails.email,
+                    successUrl: window.location.origin + window.location.pathname + '?payment=success&gateway=stripe&name=' + encodeURIComponent(orderDetails.name) + '&email=' + encodeURIComponent(orderDetails.email) + '&total=' + encodeURIComponent(orderDetails.totalFmt),
+                    cancelUrl: window.location.href,
+                }).then(function (result) {
+                    if (result.error) {
+                        alert('Stripe error: ' + result.error.message);
+                    }
+                });
+            } catch (e) {
+                alert('Stripe payment unavailable. Please try Razorpay or contact support.');
             }
         }
 
