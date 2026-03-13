@@ -1678,8 +1678,11 @@
         function setBmOS(os) { bmOS = os; renderLabs(); }
 
         function renderCloudCard(plan) {
+            const mOrig = Math.round(plan.monthly / 0.75);
+            const hOrig = Math.round(plan.halfMonthly / 0.75);
             return `
-            <div class="lab-card" style="padding:16px;" id="card-${plan.id}">
+            <div class="lab-card" style="padding:16px;position:relative;" id="card-${plan.id}">
+                <div style="position:absolute;top:0;right:0;background:var(--az-green);color:white;font-size:10px;font-weight:700;padding:3px 10px;letter-spacing:.04em;">25% OFF</div>
                 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
                     <span class="az-tag">${plan.id}</span>
                     <div style="width:40px;height:40px;border-radius:2px;background:white;border:1px solid var(--az-border);display:flex;align-items:center;justify-content:center;padding:4px;">
@@ -1691,11 +1694,13 @@
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:14px;padding:4px;background:var(--az-bg);border:1px solid var(--az-border);" id="cp-toggle-${plan.id}">
                     <div class="price-option active" style="padding:8px 10px;" onclick="selectCloudPlan(this, '${plan.id}', 'monthly')">
                         <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">${plan.monthlyLabel || '30 Days'}</div>
-                        <div style="font-size:14px;font-weight:600;color:var(--az-text);">&#8377;${plan.monthly.toLocaleString('en-IN')}</div>
+                        <div style="font-size:13px;color:var(--az-text-muted);text-decoration:line-through;line-height:1.2;">&#8377;${mOrig.toLocaleString('en-IN')}</div>
+                        <div style="font-size:14px;font-weight:700;color:var(--az-blue);">&#8377;${plan.monthly.toLocaleString('en-IN')}</div>
                     </div>
                     <div class="price-option" style="padding:8px 10px;" onclick="selectCloudPlan(this, '${plan.id}', 'halfmonthly')">
                         <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">${plan.halfMonthlyLabel || '15 Days'}</div>
-                        <div style="font-size:14px;font-weight:600;color:var(--az-text);">&#8377;${plan.halfMonthly.toLocaleString('en-IN')}</div>
+                        <div style="font-size:13px;color:var(--az-text-muted);text-decoration:line-through;line-height:1.2;">&#8377;${hOrig.toLocaleString('en-IN')}</div>
+                        <div style="font-size:14px;font-weight:700;color:var(--az-blue);">&#8377;${plan.halfMonthly.toLocaleString('en-IN')}</div>
                     </div>
                 </div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto;">
