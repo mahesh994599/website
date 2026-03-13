@@ -1498,6 +1498,7 @@
 
         function setCategory(cat) {
             activeCategory = cat;
+            labPage = 0;
             document.getElementById('breadcrumb-active').innerText = cat;
             document.getElementById('category-title').innerText = cat === 'SSL Labs' ? 'SSL Labs Store' : cat;
             renderMenu();
@@ -1588,6 +1589,43 @@
             if (filtered.length === 0) {
                 grid.style.display = 'none'; empty.style.display = 'flex'; return;
             }
+
+            // Pagination for CSV-based categories
+            const isCSVCat = CSV_CATEGORIES.includes(activeCategory);
+            const LAB_PAGE_SIZE = 10;
+            if (isCSVCat) {
+                const totalPages = Math.ceil(filtered.length / LAB_PAGE_SIZE);
+                const safePage = Math.min(labPage, Math.max(0, totalPages - 1));
+                const pageItems = filtered.slice(safePage * LAB_PAGE_SIZE, (safePage + 1) * LAB_PAGE_SIZE);
+
+                grid.style.display = 'block';
+                grid.style.gridTemplateColumns = '';
+
+                let paginationHtml = '';
+                if (totalPages > 1) {
+                    const pages = Array.from({ length: totalPages }, (_, i) => i);
+                    paginationHtml =
+                        '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--az-border);background:var(--az-surface);margin-top:12px;">' +
+                        '<span style="font-size:12px;color:var(--az-text-muted);">Showing ' + (safePage * LAB_PAGE_SIZE + 1) + '\u2013' + Math.min((safePage + 1) * LAB_PAGE_SIZE, filtered.length) + ' of ' + filtered.length + ' labs</span>' +
+                        '<div style="display:flex;gap:4px;align-items:center;">' +
+                        '<button onclick="setLabPage(' + (safePage - 1) + ')" ' + (safePage === 0 ? 'disabled' : '') + ' style="padding:4px 10px;border:1px solid var(--az-border);background:white;cursor:pointer;border-radius:2px;font-size:12px;color:var(--az-text-sub);' + (safePage === 0 ? 'opacity:.4;cursor:default;' : '') + '">&#8249;</button>' +
+                        pages.map(function (p) {
+                            return '<button onclick="setLabPage(' + p + ')" style="padding:4px 10px;border:1px solid ' + (p === safePage ? 'var(--az-blue)' : 'var(--az-border)') + ';background:' + (p === safePage ? 'var(--az-blue)' : 'white') + ';color:' + (p === safePage ? 'white' : 'var(--az-text-sub)') + ';cursor:pointer;border-radius:2px;font-size:12px;font-weight:' + (p === safePage ? '700' : '400') + ';">' + (p + 1) + '</button>';
+                        }).join('') +
+                        '<button onclick="setLabPage(' + (safePage + 1) + ')" ' + (safePage === totalPages - 1 ? 'disabled' : '') + ' style="padding:4px 10px;border:1px solid var(--az-border);background:white;cursor:pointer;border-radius:2px;font-size:12px;color:var(--az-text-sub);' + (safePage === totalPages - 1 ? 'opacity:.4;cursor:default;' : '') + '">&#8250;</button>' +
+                        '</div></div>';
+                }
+
+                grid.innerHTML =
+                    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;">' +
+                    pageItems.map(function (lab) { return renderCard(lab); }).join('') +
+                    '</div>' +
+                    paginationHtml;
+
+                empty.style.display = 'none';
+                return;
+            }
+
             grid.style.display = 'grid'; empty.style.display = 'none';
             grid.innerHTML = filtered.map(lab => renderCard(lab)).join('');
         }
@@ -1672,9 +1710,11 @@
         }
 
         let examPage = 0;
+        let labPage = 0;
         const EXAM_PAGE_SIZE = 12;
 
         function setExamPage(p) { examPage = p; renderLabs(); }
+        function setLabPage(p) { labPage = p; renderLabs(); }
 
         function renderExamVouchers() {
             const vendor = EXAM_VENDORS.find(v => v.key === activeVendor);
