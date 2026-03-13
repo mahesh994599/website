@@ -746,6 +746,9 @@
                             style="color:var(--az-green);">Discount</span><span style="color:var(--az-green);"
                             id="summary-discount">-₹0.00</span></div>
                     <div class="summary-row"><span>GST (18%)</span><span id="summary-gst">₹0.00</span></div>
+                    <div class="summary-row" id="txn-row" style="display:none;"><span
+                            style="color:var(--az-text-muted);">Transaction Charges (4%)</span><span id="summary-txn"
+                            style="color:var(--az-text-muted);">₹0.00</span></div>
                     <div class="summary-row total"><span>Total (incl. GST)</span><span style="color:var(--az-blue);"
                             id="summary-total">₹0.00</span></div>
                 </div>
@@ -2072,7 +2075,7 @@
             const list = labData[activeCategory] || [];
             const lab = list.find(l => l.id === labId);
             if (!lab) return;
-            checkoutLab = lab;
+            checkoutLab = { ...lab, csvCategory: activeCategory };
             checkoutPlan = lab.isCSV ? 'fixed' : (cardPlan[labId] || 'daily');
             checkoutPrices = calculatePrices(lab.infra);
             couponDiscount = 0;
@@ -2139,6 +2142,12 @@
         }
 
         const GST_RATE = 0.18;
+        const TXN_RATE = 0.04;
+
+        function hasTxnCharge() {
+            if (!checkoutLab) return false;
+            return checkoutLab.isExam || CSV_CATEGORIES.includes(checkoutLab.csvCategory);
+        }
 
         function updateSummary() {
             if (!checkoutLab) return;
@@ -2152,12 +2161,16 @@
             const discount = subtotal * couponDiscount;
             const afterDisc = subtotal - discount;
             const gst = afterDisc * GST_RATE;
-            const total = afterDisc + gst;
+            const txnApplies = hasTxnCharge();
+            const txn = txnApplies ? afterDisc * TXN_RATE : 0;
+            const total = afterDisc + gst + txn;
             document.getElementById('summary-lab').textContent = checkoutLab.name;
             document.getElementById('summary-unit-price').textContent = fmtINR(unitAmt);
             document.getElementById('summary-qty').textContent = '×' + qty;
             document.getElementById('summary-discount').textContent = '-' + fmtINR(discount);
             document.getElementById('summary-gst').textContent = fmtINR(gst);
+            document.getElementById('txn-row').style.display = txnApplies ? '' : 'none';
+            document.getElementById('summary-txn').textContent = fmtINR(txn);
             document.getElementById('summary-total').textContent = fmtINR(total);
         }
 
@@ -2178,7 +2191,9 @@
             const discount = subtotal * couponDiscount;
             const afterDisc = subtotal - discount;
             const gst = afterDisc * GST_RATE;
-            const total = afterDisc + gst;
+            const txnApplies = hasTxnCharge();
+            const txn = txnApplies ? afterDisc * TXN_RATE : 0;
+            const total = afterDisc + gst + txn;
             const planLabel = checkoutLab && checkoutLab.isBaremetal
                 ? ({ '8hr': '8 Hours', 'daily': 'Daily', 'weekly': 'Weekly', 'monthly': 'Monthly' }[checkoutPlan] || 'Monthly')
                 : checkoutLab && checkoutLab.isCloudPortal ? (checkoutPlan === 'halfmonthly' ? '15 Days' : 'Monthly')
