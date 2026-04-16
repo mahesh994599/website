@@ -11,28 +11,42 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-        /* ── Azure Fluent Design System ── */
+        /* ── Modern Design System ── */
         :root {
-            --az-blue: #0078d4;
-            --az-blue-dark: #106ebe;
-            --az-blue-light: #deecf9;
-            --az-blue-xlight: #eff6fc;
-            --az-bg: #f3f2f1;
+            --az-blue: #6366f1;
+            --az-blue-dark: #4f46e5;
+            --az-blue-light: #e0e7ff;
+            --az-blue-xlight: #eef2ff;
+            --az-bg: #f8fafc;
             --az-surface: #ffffff;
-            --az-border: #edebe9;
-            --az-border-dark: #c8c6c4;
-            --az-text: #323130;
-            --az-text-sub: #605e5c;
-            --az-text-muted: #a19f9d;
-            --az-red: #d13438;
-            --az-green: #107c10;
-            --az-green-light: #dff6dd;
-            --az-sidebar: #faf9f8;
-            --az-hover: #f3f2f1;
-            --az-selected: #deecf9;
-            --az-nav-active: #0078d4;
+            --az-border: #e2e8f0;
+            --az-border-dark: #cbd5e1;
+            --az-text: #0f172a;
+            --az-text-sub: #475569;
+            --az-text-muted: #94a3b8;
+            --az-red: #ef4444;
+            --az-green: #10b981;
+            --az-green-light: #d1fae5;
+            --az-sidebar: #0f172a;
+            --az-hover: #f1f5f9;
+            --az-selected: rgba(99,102,241,0.12);
+            --az-nav-active: #6366f1;
+            --az-sidebar-text: #94a3b8;
+            --az-sidebar-hover: rgba(255,255,255,0.06);
+            --az-sidebar-active: rgba(99,102,241,0.2);
+            --az-accent: #06b6d4;
+            --az-amber: #f59e0b;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 20px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+            --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-card-hover: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.06);
         }
 
         * {
@@ -42,16 +56,17 @@
         }
 
         body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--az-bg);
             color: var(--az-text);
             font-size: 14px;
             line-height: 1.5;
-            letter-spacing: 0;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
         }
 
         .scrollbar-hide::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
 
         .scrollbar-hide::-webkit-scrollbar-track {
@@ -59,35 +74,41 @@
         }
 
         .scrollbar-hide::-webkit-scrollbar-thumb {
-            background: var(--az-border-dark);
-            border-radius: 3px;
+            background: rgba(148,163,184,0.3);
+            border-radius: 10px;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar-thumb:hover {
+            background: rgba(148,163,184,0.5);
         }
 
         .sidebar-transition {
-            transition: width 0.2s ease;
+            transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* ── Lab Cards ── */
         .lab-card {
             background: var(--az-surface);
             border: 1px solid var(--az-border);
-            border-radius: 2px;
+            border-radius: var(--radius-lg);
             display: flex;
             flex-direction: column;
-            transition: box-shadow 0.15s ease, border-color 0.15s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-card);
         }
 
         .lab-card:hover {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            box-shadow: var(--shadow-card-hover);
             border-color: var(--az-blue);
+            transform: translateY(-2px);
         }
 
         /* ── Price Toggle ── */
         .price-option {
             border: 1px solid var(--az-border);
             background: var(--az-hover);
-            border-radius: 2px;
-            transition: all 0.1s ease;
+            border-radius: var(--radius-sm);
+            transition: all 0.15s ease;
             cursor: pointer;
         }
 
@@ -99,73 +120,78 @@
         .price-option.active {
             background: var(--az-blue-xlight);
             border-color: var(--az-blue);
-            box-shadow: inset 0 0 0 1px var(--az-blue);
+            box-shadow: inset 0 0 0 1.5px var(--az-blue);
         }
 
         /* ── Buttons ── */
         .btn-primary {
             background: var(--az-blue);
             color: white;
-            border: 1px solid var(--az-blue);
-            border-radius: 2px;
-            padding: 6px 16px;
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 14px;
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 8px 18px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.1s;
+            transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            letter-spacing: -0.01em;
         }
 
         .btn-primary:hover {
             background: var(--az-blue-dark);
-            border-color: var(--az-blue-dark);
+            box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+            transform: translateY(-1px);
         }
 
         .btn-primary:active {
-            background: #005a9e;
+            transform: translateY(0);
+            box-shadow: none;
         }
 
         .btn-secondary {
             background: var(--az-surface);
             color: var(--az-text);
-            border: 1px solid var(--az-border-dark);
-            border-radius: 2px;
-            padding: 6px 16px;
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 14px;
-            font-weight: 400;
+            border: 1px solid var(--az-border);
+            border-radius: var(--radius-sm);
+            padding: 8px 18px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
             cursor: pointer;
-            transition: background 0.1s, border-color 0.1s;
+            transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            letter-spacing: -0.01em;
         }
 
         .btn-secondary:hover {
             background: var(--az-hover);
-            border-color: var(--az-text-sub);
+            border-color: var(--az-blue);
+            color: var(--az-blue);
         }
 
         /* ── Checkout Form ── */
         .checkout-input {
             width: 100%;
             background: var(--az-surface);
-            border: 1px solid var(--az-border-dark);
-            border-radius: 2px;
-            padding: 7px 10px;
+            border: 1.5px solid var(--az-border);
+            border-radius: var(--radius-sm);
+            padding: 9px 12px;
             font-size: 14px;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
             color: var(--az-text);
             outline: none;
-            transition: border-color 0.1s, box-shadow 0.1s;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .checkout-input:focus {
             border-color: var(--az-blue);
-            box-shadow: 0 0 0 1px var(--az-blue);
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
         }
 
         .checkout-input[readonly] {
@@ -178,19 +204,19 @@
         }
 
         .qty-btn {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 2px;
+            border-radius: var(--radius-sm);
             background: var(--az-surface);
-            border: 1px solid var(--az-border-dark);
+            border: 1.5px solid var(--az-border);
             font-size: 16px;
             font-weight: 600;
             color: var(--az-text);
             cursor: pointer;
-            transition: all 0.1s;
+            transition: all 0.15s;
         }
 
         .qty-btn:hover {
@@ -200,42 +226,47 @@
         }
 
         .pay-btn {
-            background: var(--az-blue);
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
             color: white;
-            border: 1px solid var(--az-blue);
-            border-radius: 2px;
-            padding: 10px 0;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 12px 0;
             font-size: 14px;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: background 0.1s;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            letter-spacing: -0.01em;
         }
 
         .pay-btn:hover {
-            background: var(--az-blue-dark);
+            box-shadow: 0 6px 20px rgba(99,102,241,0.35);
+            transform: translateY(-1px);
         }
 
         .pay-btn:active {
-            background: #005a9e;
+            transform: translateY(0);
         }
 
         .pay-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .form-label {
             font-size: 12px;
             font-weight: 600;
             color: var(--az-text);
-            margin-bottom: 4px;
+            margin-bottom: 5px;
             display: block;
+            letter-spacing: 0.01em;
         }
 
         .summary-row {
@@ -243,16 +274,16 @@
             justify-content: space-between;
             font-size: 13px;
             color: var(--az-text-sub);
-            padding: 5px 0;
+            padding: 6px 0;
         }
 
         .summary-row.total {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--az-text);
-            border-top: 1px solid var(--az-border);
-            margin-top: 6px;
-            padding-top: 10px;
+            border-top: 2px solid var(--az-border);
+            margin-top: 8px;
+            padding-top: 12px;
         }
 
         select.checkout-input {
@@ -268,95 +299,106 @@
             color: var(--az-text-sub);
             background: var(--az-hover);
             border: 1px solid var(--az-border);
-            border-radius: 2px;
-            padding: 3px 8px;
+            border-radius: 100px;
+            padding: 4px 10px;
         }
 
         /* ── Modal ── */
         .modal-enter {
-            animation: modalFadeIn 0.15s ease-out forwards;
+            animation: modalFadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         @keyframes modalFadeIn {
             from {
                 opacity: 0;
-                transform: translateY(8px);
+                transform: translateY(12px) scale(0.98);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
-        /* ── Azure nav item ── */
+        /* ── Nav item ── */
         .az-nav-item {
             width: 100%;
             display: flex;
             align-items: center;
-            padding: 8px 12px;
-            border-radius: 0;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
             border: none;
             background: transparent;
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 14px;
-            color: var(--az-text);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--az-sidebar-text);
             cursor: pointer;
             text-align: left;
-            transition: background 0.1s;
+            transition: all 0.15s ease;
             white-space: nowrap;
             overflow: hidden;
+            margin: 1px 8px;
+            letter-spacing: -0.01em;
         }
 
         .az-nav-item:hover {
-            background: var(--az-hover);
+            background: var(--az-sidebar-hover);
+            color: #e2e8f0;
         }
 
         .az-nav-item.active {
-            background: var(--az-selected);
-            color: var(--az-blue);
+            background: var(--az-sidebar-active);
+            color: white;
             font-weight: 600;
-            border-left: 3px solid var(--az-blue);
-            padding-left: 9px;
+            border-left: none;
+            padding-left: 14px;
         }
 
         .az-nav-item .nav-icon {
             width: 20px;
             min-width: 20px;
             text-align: center;
-            font-size: 13px;
+            font-size: 14px;
             margin-right: 10px;
-            color: var(--az-blue);
+            color: #64748b;
+            transition: color 0.15s;
+        }
+
+        .az-nav-item:hover .nav-icon {
+            color: #a5b4fc;
         }
 
         .az-nav-item.active .nav-icon {
-            color: var(--az-blue);
+            color: #a5b4fc;
         }
 
-        /* ── Azure top bar ── */
+        /* ── Top bar ── */
         .az-topbar {
-            height: 48px;
-            background: #0078d4;
+            height: 56px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             display: flex;
             align-items: center;
-            padding: 0 16px;
+            padding: 0 20px;
             gap: 12px;
             position: sticky;
             top: 0;
             z-index: 50;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
         /* ── Breadcrumb ── */
         .az-breadcrumb {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 12px;
+            gap: 8px;
+            font-size: 13px;
             color: var(--az-text-muted);
         }
 
         .az-breadcrumb .sep {
-            color: var(--az-border-dark);
+            color: var(--az-border);
+            font-size: 11px;
         }
 
         .az-breadcrumb .active {
@@ -377,17 +419,18 @@
             align-items: center;
             font-size: 11px;
             font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 2px;
+            padding: 3px 10px;
+            border-radius: 100px;
             background: var(--az-blue-xlight);
             color: var(--az-blue);
             border: 1px solid var(--az-blue-light);
+            letter-spacing: 0.02em;
         }
 
         .az-tag-green {
             background: var(--az-green-light);
             color: var(--az-green);
-            border-color: #9fd89f;
+            border-color: #6ee7b7;
         }
 
 
@@ -395,33 +438,40 @@
         .support-channel-card {
             background: var(--az-surface);
             border: 1px solid var(--az-border);
-            border-radius: 2px;
-            padding: 16px;
+            border-radius: var(--radius-lg);
+            padding: 18px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            transition: box-shadow 0.15s, border-color 0.15s;
+            gap: 12px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: default;
         }
 
         .support-channel-card:hover {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+            box-shadow: var(--shadow-card-hover);
             border-color: var(--az-blue);
+            transform: translateY(-2px);
         }
 
         .support-status-dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #107c10;
+            background: var(--az-green);
             display: inline-block;
-            box-shadow: 0 0 0 2px #dff6dd;
+            box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
             flex-shrink: 0;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
+            50% { box-shadow: 0 0 0 6px rgba(16,185,129,0.1); }
         }
 
         .support-faq-item {
             border: 1px solid var(--az-border);
-            border-radius: 2px;
+            border-radius: var(--radius-md);
             overflow: hidden;
         }
 
@@ -429,9 +479,9 @@
             width: 100%;
             background: var(--az-surface);
             border: none;
-            padding: 12px 16px;
+            padding: 14px 18px;
             text-align: left;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 13px;
             font-weight: 600;
             color: var(--az-text);
@@ -439,7 +489,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background 0.1s;
+            transition: background 0.15s;
         }
 
         .support-faq-trigger:hover {
@@ -448,12 +498,12 @@
 
         .support-faq-body {
             display: none;
-            padding: 12px 16px;
+            padding: 14px 18px;
             font-size: 13px;
             color: var(--az-text-sub);
             background: var(--az-bg);
             border-top: 1px solid var(--az-border);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .support-faq-body.open {
@@ -464,41 +514,51 @@
 
 <body style="display:flex;flex-direction:column;min-height:100vh;">
 
-    <!-- Azure Top Bar -->
+    <!-- Top Bar -->
     <div class="az-topbar">
-        <img src="/public/logo.png" alt="Synergific" style="height:32px;object-fit:contain;">
+        <div style="display:flex;align-items:center;gap:10px;">
+            <img src="/logo.png" alt="Synergific" style="height:34px;object-fit:contain;">
+            <div style="line-height:1.15;">
+                <div style="font-size:15px;font-weight:700;color:white;letter-spacing:-0.02em;">Synergific</div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.5);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;">Lab Store</div>
+            </div>
+        </div>
         <div style="flex:1;"></div>
         <!-- Search -->
-        <div style="position:relative;width:280px;">
+        <div style="position:relative;width:320px;">
             <i class="fas fa-search"
-                style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.7);font-size:12px;"></i>
-            <input id="search-input" type="text" placeholder="Search labs, IDs..." oninput="handleSearch(this.value)"
-                style="width:100%;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:2px;padding:6px 10px 6px 30px;font-size:13px;color:white;outline:none;font-family:Segoe UI,sans-serif;"
-                onfocus="this.style.background='rgba(255,255,255,0.25)'"
-                onblur="this.style.background='rgba(255,255,255,0.15)'">
+                style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.4);font-size:13px;"></i>
+            <input id="search-input" type="text" placeholder="Search workspaces, labs, IDs..." oninput="handleSearch(this.value)"
+                style="width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:8px 14px 8px 36px;font-size:13px;color:white;outline:none;font-family:Inter,sans-serif;transition:all .2s;"
+                onfocus="this.style.background='rgba(255,255,255,0.14)';this.style.borderColor='rgba(99,102,241,0.5)';this.style.boxShadow='0 0 0 3px rgba(99,102,241,0.15)'"
+                onblur="this.style.background='rgba(255,255,255,0.08)';this.style.borderColor='rgba(255,255,255,0.12)';this.style.boxShadow='none'">
         </div>
-        <div style="width:1px;height:24px;background:rgba(255,255,255,0.3);margin:0 8px;"></div>
-        <button onclick="toggleLearnMore()"
-            style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:5px 14px;font-size:13px;border-radius:2px;cursor:pointer;font-family:Segoe UI,sans-serif;">
-            <i class="fas fa-info-circle" style="margin-right:5px;"></i>Learn More
-        </button>
-        <button onclick="togglePolicyModal()"
-            style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:5px 14px;font-size:13px;border-radius:2px;cursor:pointer;font-family:Segoe UI,sans-serif;">
-            <i class="fas fa-shield-alt" style="margin-right:5px;"></i>Governance
-        </button>
-        <div style="width:1px;height:24px;background:rgba(255,255,255,0.3);margin:0 4px;"></div>
+        <div style="display:flex;align-items:center;gap:6px;margin-left:8px;">
+            <button onclick="toggleLearnMore()"
+                style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);padding:7px 14px;font-size:12px;font-weight:500;border-radius:8px;cursor:pointer;font-family:Inter,sans-serif;transition:all .15s;display:flex;align-items:center;gap:6px;"
+                onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='white'"
+                onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.75)'">
+                <i class="fas fa-sparkles" style="font-size:11px;"></i>Learn More
+            </button>
+            <button onclick="togglePolicyModal()"
+                style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);padding:7px 14px;font-size:12px;font-weight:500;border-radius:8px;cursor:pointer;font-family:Inter,sans-serif;transition:all .15s;display:flex;align-items:center;gap:6px;"
+                onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='white'"
+                onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.75)'">
+                <i class="fas fa-shield-halved" style="font-size:11px;"></i>Governance
+            </button>
+        </div>
+        <div style="width:1px;height:28px;background:rgba(255,255,255,0.08);margin:0 6px;"></div>
         <!-- ISO 27001 Badge -->
         <div onclick="toggleISOModal()" title="ISO/IEC 27001:2022 Certified"
-            style="display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);border-radius:2px;padding:4px 12px;cursor:pointer;transition:background 0.15s;"
-            onmouseover="this.style.background='rgba(255,255,255,0.25)'"
-            onmouseout="this.style.background='rgba(255,255,255,0.15)'">
-            <div
-                style="width:22px;height:22px;background:white;border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <i class="fas fa-certificate" style="color:#0078d4;font-size:11px;"></i>
+            style="display:flex;align-items:center;gap:8px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:8px;padding:6px 14px;cursor:pointer;transition:all 0.2s;"
+            onmouseover="this.style.background='rgba(16,185,129,0.18)'"
+            onmouseout="this.style.background='rgba(16,185,129,0.1)'">
+            <div style="width:22px;height:22px;background:linear-gradient(135deg,#10b981,#059669);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="fas fa-shield-check" style="color:white;font-size:10px;"></i>
             </div>
             <div style="line-height:1.2;">
-                <div style="font-size:10px;font-weight:700;color:white;letter-spacing:.04em;">ISO/IEC 27001:2022</div>
-                <div style="font-size:9px;color:rgba(255,255,255,0.75);font-weight:400;">Certified · TSNUK05009</div>
+                <div style="font-size:10px;font-weight:700;color:#6ee7b7;letter-spacing:.02em;">ISO 27001:2022</div>
+                <div style="font-size:9px;color:rgba(255,255,255,0.45);font-weight:400;">Certified</div>
             </div>
         </div>
     </div>
@@ -506,157 +566,130 @@
     <div style="display:flex;flex:1;">
         <!-- Sidebar Navigation -->
         <aside id="sidebar" class="sidebar-transition"
-            style="width:220px;min-width:220px;background:var(--az-sidebar);border-right:1px solid var(--az-border);display:flex;flex-direction:column;z-index:20;position:sticky;top:48px;height:calc(100vh - 48px);overflow-y:auto;">
+            style="width:240px;min-width:240px;background:var(--az-sidebar);display:flex;flex-direction:column;z-index:20;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;border-right:1px solid rgba(255,255,255,0.06);">
             <!-- Sidebar header -->
-            <div style="padding:12px 16px 8px;border-bottom:1px solid var(--az-border);">
-                <div
-                    style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.08em;">
-                    Navigation</div>
+            <div style="padding:16px 18px 12px;">
+                <div style="font-size:10px;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:.12em;">
+                    Menu</div>
             </div>
-            <nav id="nav-menu" style="flex:1;overflow-y:auto;padding:4px 0;" class="scrollbar-hide"></nav>
-            <div style="border-top:1px solid var(--az-border);padding:8px;">
+            <nav id="nav-menu" style="flex:1;overflow-y:auto;padding:0 4px;" class="scrollbar-hide"></nav>
+            <!-- Sidebar footer -->
+            <div style="border-top:1px solid rgba(255,255,255,0.06);padding:10px 12px;">
                 <button onclick="toggleSidebar()"
-                    style="width:100%;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--az-border);border-radius:2px;cursor:pointer;color:var(--az-text-sub);transition:background .1s;"
-                    onmouseover="this.style.background='var(--az-hover)'"
-                    onmouseout="this.style.background='transparent'">
+                    style="width:100%;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;cursor:pointer;color:#64748b;transition:all .15s;"
+                    onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='#94a3b8'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.color='#64748b'">
                     <i id="toggle-icon" class="fas fa-chevron-left" style="font-size:11px;"></i>
                 </button>
             </div>
         </aside>
 
         <!-- Main Content -->
-        <main style="flex:1;display:flex;flex-direction:column;background:var(--az-bg);">
+        <main style="flex:1;display:flex;flex-direction:column;background:var(--az-bg);min-width:0;">
 
             <!-- Section header with breadcrumb -->
-            <div style="background:var(--az-surface);border-bottom:1px solid var(--az-border);padding:12px 24px;">
+            <div style="background:var(--az-surface);border-bottom:1px solid var(--az-border);padding:16px 28px;">
                 <div class="az-breadcrumb">
-                    <span>Synergific Infrastructure</span>
-                    <span class="sep">›</span>
-                    <span id="breadcrumb-active" class="active">SSL Labs</span>
+                    <i class="fas fa-home" style="font-size:11px;color:var(--az-text-muted);"></i>
+                    <span>Synergific</span>
+                    <span class="sep"><i class="fas fa-chevron-right" style="font-size:8px;"></i></span>
+                    <span id="breadcrumb-active" class="active">Workspaces</span>
                 </div>
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
-                    <h2 id="category-title" style="font-size:20px;font-weight:600;color:var(--az-text);">SSL Labs Store
-                    </h2>
-                    <p style="font-size:12px;color:var(--az-text-muted);">Deploy verified, isolated sandbox environments
-                    </p>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
+                    <h2 id="category-title" style="font-size:22px;font-weight:700;color:var(--az-text);letter-spacing:-0.03em;">Workspaces</h2>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:12px;color:var(--az-text-muted);font-weight:500;">Enterprise-grade sandbox environments</span>
+                        <span style="display:inline-flex;align-items:center;gap:4px;background:var(--az-green-light);color:var(--az-green);font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;"><i class="fas fa-circle" style="font-size:5px;"></i>Live</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Labs Grid -->
-            <div style="flex:1;padding:20px 24px;" class="scrollbar-hide">
+            <div style="flex:1;padding:20px 28px;" class="scrollbar-hide">
                 <div id="labs-grid"
-                    style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;"></div>
+                    style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;"></div>
                 <div id="empty-state"
                     style="display:none;flex-direction:column;align-items:center;justify-content:center;padding:80px 0;text-align:center;">
-                    <i class="fas fa-search" style="font-size:32px;color:var(--az-text-muted);margin-bottom:16px;"></i>
-                    <div style="font-size:16px;font-weight:600;color:var(--az-text);margin-bottom:6px;">No environments
-                        found</div>
-                    <div style="font-size:13px;color:var(--az-text-muted);">Adjust your search to find the right stack.
+                    <div style="width:64px;height:64px;background:var(--az-blue-xlight);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+                        <i class="fas fa-search" style="font-size:24px;color:var(--az-blue);"></i>
                     </div>
-                    <button onclick="clearSearch()" class="btn-primary" style="margin-top:16px;">Clear Search</button>
+                    <div style="font-size:17px;font-weight:700;color:var(--az-text);margin-bottom:6px;letter-spacing:-0.02em;">No environments found</div>
+                    <div style="font-size:13px;color:var(--az-text-muted);margin-bottom:20px;">Adjust your search to find the right stack.</div>
+                    <button onclick="clearSearch()" class="btn-primary" style="padding:10px 24px;">Clear Search</button>
                 </div>
             </div>
 
             <!-- Cart Toast -->
             <div id="cart-toast"
-                style="display:none;position:fixed;bottom:24px;right:24px;background:var(--az-text);color:white;padding:12px 16px;border-radius:2px;box-shadow:0 4px 16px rgba(0,0,0,0.2);align-items:center;gap:16px;z-index:50;">
+                style="display:none;position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,#0f172a,#1e293b);color:white;padding:14px 20px;border-radius:var(--radius-lg);box-shadow:0 8px 30px rgba(0,0,0,0.25);align-items:center;gap:16px;z-index:50;border:1px solid rgba(255,255,255,0.08);">
                 <div>
-                    <div
-                        style="font-size:11px;color:#a19f9d;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;">
-                        Queue status</div>
+                    <div style="font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;">Cart</div>
                     <div id="toast-text" style="font-size:14px;font-weight:600;">0 Labs Added</div>
                 </div>
-                <button class="btn-primary" style="font-size:12px;padding:5px 12px;">Checkout Now</button>
+                <button class="btn-primary" style="font-size:12px;padding:8px 16px;border-radius:8px;">Checkout Now</button>
             </div>
         </main>
     </div>
 
-    <!-- ISO/Security Footer -->
-    <footer
-        style="background:#1b1a19;color:rgba(255,255,255,0.85);font-family:Segoe UI,sans-serif;font-size:12px;padding:0;position:relative;z-index:10;flex-shrink:0;">
+    <!-- Footer -->
+    <footer style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:rgba(255,255,255,0.85);font-family:Inter,sans-serif;font-size:12px;padding:0;position:relative;z-index:10;flex-shrink:0;">
         <div style="display:flex;align-items:stretch;flex-wrap:wrap;">
             <!-- ISO Badge Block -->
-            <div style="background:#0078d4;padding:14px 24px;display:flex;align-items:center;gap:14px;min-width:280px;">
-                <div
-                    style="width:44px;height:44px;background:white;border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                    <i class="fas fa-certificate" style="color:#0078d4;font-size:20px;"></i>
+            <div style="background:linear-gradient(135deg,#6366f1,#4f46e5);padding:16px 24px;display:flex;align-items:center;gap:14px;min-width:280px;">
+                <div style="width:44px;height:44px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;backdrop-filter:blur(10px);">
+                    <i class="fas fa-shield-check" style="color:white;font-size:18px;"></i>
                 </div>
                 <div>
-                    <div style="font-size:13px;font-weight:700;color:white;letter-spacing:.03em;">ISO/IEC 27001:2022
-                    </div>
-                    <div style="font-size:10px;color:rgba(255,255,255,0.8);margin-top:1px;">Information Security
-                        Management System</div>
-                    <div style="font-size:10px;color:rgba(255,255,255,0.65);margin-top:2px;">Cert No: TSNUK05009 · Valid
-                        until 29-03-2027</div>
+                    <div style="font-size:13px;font-weight:700;color:white;letter-spacing:-.01em;">ISO/IEC 27001:2022</div>
+                    <div style="font-size:10px;color:rgba(255,255,255,0.7);margin-top:2px;">Information Security Management System</div>
+                    <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px;">Cert No: TSNUK05009 · Valid until 29-03-2027</div>
                 </div>
             </div>
             <!-- Scope list -->
-            <div
-                style="padding:14px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;border-left:1px solid rgba(255,255,255,0.1);">
+            <div style="padding:16px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;border-left:1px solid rgba(255,255,255,0.06);">
                 <div>
-                    <div
-                        style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;">
-                        Certified Scope</div>
+                    <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Certified Scope</div>
                     <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                        <span
-                            style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);padding:2px 8px;border-radius:2px;font-size:11px;color:rgba(255,255,255,0.8);">Corporate
-                            Trainings</span>
-                        <span
-                            style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);padding:2px 8px;border-radius:2px;font-size:11px;color:rgba(255,255,255,0.8);">Cloud
-                            Labs (PaaS/SaaS)</span>
-                        <span
-                            style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);padding:2px 8px;border-radius:2px;font-size:11px;color:rgba(255,255,255,0.8);">Cloud
-                            Servers &amp; Licences</span>
-                        <span
-                            style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);padding:2px 8px;border-radius:2px;font-size:11px;color:rgba(255,255,255,0.8);">IT
-                            Infrastructure (IaaS)</span>
-                        <span
-                            style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);padding:2px 8px;border-radius:2px;font-size:11px;color:rgba(255,255,255,0.8);">LMS
-                            (SaaS)</span>
-                        <span
-                            style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);padding:2px 8px;border-radius:2px;font-size:11px;color:rgba(255,255,255,0.8);">ERP
-                            Solutions</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:3px 10px;border-radius:100px;font-size:11px;color:rgba(255,255,255,0.65);">Corporate Trainings</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:3px 10px;border-radius:100px;font-size:11px;color:rgba(255,255,255,0.65);">Cloud Labs (PaaS/SaaS)</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:3px 10px;border-radius:100px;font-size:11px;color:rgba(255,255,255,0.65);">Cloud Servers &amp; Licences</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:3px 10px;border-radius:100px;font-size:11px;color:rgba(255,255,255,0.65);">IT Infrastructure (IaaS)</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:3px 10px;border-radius:100px;font-size:11px;color:rgba(255,255,255,0.65);">LMS (SaaS)</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:3px 10px;border-radius:100px;font-size:11px;color:rgba(255,255,255,0.65);">ERP Solutions</span>
                     </div>
                 </div>
             </div>
             <!-- Accredited by + copyright -->
-            <div
-                style="margin-left:auto;padding:14px 24px;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;gap:4px;border-left:1px solid rgba(255,255,255,0.1);">
-                <div style="font-size:10px;color:rgba(255,255,255,0.45);text-align:right;">Accredited by EUAS · Euro
-                    Universal Accreditation Systems</div>
-                <div style="font-size:10px;color:rgba(255,255,255,0.35);">© 2024 Synergific Software Private Limited ·
-                    Bengaluru, Karnataka</div>
-                <div style="font-size:10px;color:rgba(255,255,255,0.3);">Verified at <span
-                        style="color:rgba(255,255,255,0.5);">www.tsncertification.com</span></div>
+            <div style="margin-left:auto;padding:16px 24px;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;gap:4px;border-left:1px solid rgba(255,255,255,0.06);">
+                <div style="font-size:10px;color:rgba(255,255,255,0.35);text-align:right;">Accredited by EUAS · Euro Universal Accreditation Systems</div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.25);">© 2024 Synergific Software Private Limited · Bengaluru, Karnataka</div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.2);">Verified at <span style="color:rgba(255,255,255,0.4);">www.tsncertification.com</span></div>
             </div>
         </div>
     </footer>
 
     <!-- CHECKOUT MODAL -->
     <div id="checkout-modal"
-        style="display:none;position:fixed;inset:0;z-index:110;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.5);">
+        style="display:none;position:fixed;inset:0;z-index:110;align-items:center;justify-content:center;padding:16px;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);">
         <div class="modal-enter"
-            style="background:var(--az-surface);width:100%;max-width:520px;border-radius:0;box-shadow:0 8px 32px rgba(0,0,0,0.2);overflow:hidden;border:1px solid var(--az-border);">
+            style="background:var(--az-surface);width:100%;max-width:520px;border-radius:var(--radius-xl);box-shadow:0 25px 60px rgba(0,0,0,0.25);overflow:hidden;border:1px solid var(--az-border);">
 
-            <!-- Modal Header — Azure panel header style -->
-            <div
-                style="background:var(--az-surface);padding:16px 20px;border-bottom:1px solid var(--az-border);display:flex;justify-content:space-between;align-items:center;">
+            <!-- Modal Header -->
+            <div style="background:linear-gradient(135deg,#0f172a,#1e293b);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;">
                 <div>
-                    <div
-                        style="font-size:11px;color:var(--az-blue);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;">
+                    <div style="font-size:10px;color:#a5b4fc;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">
                         Secure Checkout</div>
-                    <div style="font-size:18px;font-weight:600;color:var(--az-text);" id="modal-title">Confirm Your
-                        Order</div>
+                    <div style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em;" id="modal-title">Confirm Your Order</div>
                 </div>
                 <button onclick="closeCheckoutModal()"
-                    style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;color:var(--az-text-muted);font-size:16px;"
-                    onmouseover="this.style.background='var(--az-hover)'"
-                    onmouseout="this.style.background='transparent'">
+                    style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);border-radius:8px;cursor:pointer;color:rgba(255,255,255,0.6);font-size:14px;transition:all .15s;"
+                    onmouseover="this.style.background='rgba(255,255,255,0.15)';this.style.color='white'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.6)'">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
 
-            <div style="padding:16px 20px;display:flex;flex-direction:column;gap:12px;max-height:72vh;overflow-y:auto;"
+            <div style="padding:20px 24px;display:flex;flex-direction:column;gap:14px;max-height:72vh;overflow-y:auto;"
                 class="scrollbar-hide">
 
                 <!-- Lab info row -->
@@ -734,8 +767,8 @@
                     <p id="coupon-msg" style="font-size:12px;margin-top:4px;display:none;"></p>
                 </div>
 
-                <!-- Order Summary — Azure info box style -->
-                <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:12px 16px;">
+                <!-- Order Summary -->
+                <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:14px 18px;border-radius:var(--radius-md);">
                     <div
                         style="font-size:11px;font-weight:600;color:var(--az-text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">
                         Order Summary</div>
@@ -758,9 +791,8 @@
                     <label class="form-label" style="margin-bottom:8px;">Select Payment Method</label>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="gateway-toggle">
                         <div id="gw-razorpay" onclick="selectGateway('razorpay')"
-                            style="border:2px solid var(--az-blue);background:var(--az-blue-xlight);border-radius:2px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .1s;">
-                            <div
-                                style="width:28px;height:28px;background:#072654;border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            style="border:2px solid var(--az-blue);background:var(--az-blue-xlight);border-radius:var(--radius-md);padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .15s;">
+                            <div style="width:30px;height:30px;background:linear-gradient(135deg,#072654,#1a3a6b);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                                 <i class="fas fa-bolt" style="color:#fff;font-size:12px;"></i>
                             </div>
                             <div>
@@ -771,9 +803,8 @@
                                 style="margin-left:auto;color:var(--az-blue);font-size:14px;"></i>
                         </div>
                         <div id="gw-stripe" onclick="selectGateway('stripe')"
-                            style="border:1px solid var(--az-border);background:var(--az-surface);border-radius:2px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .1s;">
-                            <div
-                                style="width:28px;height:28px;background:#635bff;border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            style="border:1.5px solid var(--az-border);background:var(--az-surface);border-radius:var(--radius-md);padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .15s;">
+                            <div style="width:30px;height:30px;background:linear-gradient(135deg,#635bff,#7c3aed);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                                 <i class="fas fa-credit-card" style="color:#fff;font-size:12px;"></i>
                             </div>
                             <div>
@@ -791,23 +822,18 @@
                 </button>
 
                 <!-- ISO Trust Strip -->
-                <div
-                    style="display:flex;align-items:center;justify-content:center;gap:6px;background:var(--az-bg);border:1px solid var(--az-border);padding:7px 12px;border-radius:2px;">
-                    <div
-                        style="width:18px;height:18px;background:var(--az-blue);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                        <i class="fas fa-certificate" style="color:white;font-size:9px;"></i>
+                <div style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--az-green-light);border:1px solid #6ee7b7;padding:10px 14px;border-radius:var(--radius-md);">
+                    <div style="width:20px;height:20px;background:var(--az-green);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <i class="fas fa-shield-check" style="color:white;font-size:10px;"></i>
                     </div>
-                    <div style="font-size:11px;color:var(--az-text-sub);line-height:1.3;">
-                        <strong style="color:var(--az-text);">ISO/IEC 27001:2022 Certified</strong> · Your data is
-                        protected under ISMS standards
+                    <div style="font-size:11px;color:#065f46;line-height:1.3;">
+                        <strong>ISO 27001:2022 Certified</strong> · Protected under ISMS standards
                     </div>
-                    <span style="margin-left:auto;font-size:10px;color:var(--az-text-muted);white-space:nowrap;">Cert
-                        #TSNUK05009</span>
+                    <span style="margin-left:auto;font-size:10px;color:#059669;white-space:nowrap;font-weight:600;">#TSNUK05009</span>
                 </div>
-                <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
-                    <span class="badge-razorpay"><i class="fas fa-shield-alt" style="color:var(--az-blue);"></i> Secured
-                        by Razorpay &amp; Stripe</span>
-                    <span class="badge-razorpay"><i class="fas fa-credit-card"></i> UPI · Cards · International</span>
+                <div style="display:flex;align-items:center;justify-content:center;gap:8px;">
+                    <span class="badge-razorpay"><i class="fas fa-lock" style="color:var(--az-blue);font-size:10px;"></i> Secured by Razorpay &amp; Stripe</span>
+                    <span class="badge-razorpay"><i class="fas fa-credit-card" style="font-size:10px;"></i> UPI · Cards · International</span>
                 </div>
             </div>
         </div>
@@ -815,12 +841,11 @@
 
     <!-- Governance Modal -->
     <div id="policy-modal"
-        style="display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,0.4);">
+        style="display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:24px;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);">
         <div class="modal-enter"
-            style="background:var(--az-surface);width:100%;max-width:560px;border:1px solid var(--az-border);box-shadow:0 8px 32px rgba(0,0,0,0.2);">
-            <div
-                style="padding:16px 20px;border-bottom:1px solid var(--az-border);display:flex;justify-content:space-between;align-items:center;">
-                <div style="font-size:18px;font-weight:600;color:var(--az-text);">Governance & Policies</div>
+            style="background:var(--az-surface);width:100%;max-width:560px;border:1px solid var(--az-border);box-shadow:0 25px 60px rgba(0,0,0,0.25);border-radius:var(--radius-xl);">
+            <div style="padding:20px 24px;border-bottom:1px solid var(--az-border);display:flex;justify-content:space-between;align-items:center;">
+                <div style="font-size:18px;font-weight:700;color:var(--az-text);letter-spacing:-0.02em;">Governance & Policies</div>
                 <button onclick="togglePolicyModal()"
                     style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;color:var(--az-text-muted);"
                     onmouseover="this.style.background='var(--az-hover)'"
@@ -865,15 +890,13 @@
 
     <!-- Learn More Modal -->
     <div id="learn-more-modal"
-        style="display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,0.5);">
+        style="display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:24px;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);">
         <div class="modal-enter"
-            style="background:var(--az-surface);width:100%;max-width:760px;border:1px solid var(--az-border);box-shadow:0 8px 32px rgba(0,0,0,0.2);max-height:90vh;display:flex;flex-direction:column;">
-            <div
-                style="padding:16px 20px;border-bottom:1px solid var(--az-border);display:flex;justify-content:space-between;align-items:center;background:var(--az-surface);">
+            style="background:var(--az-surface);width:100%;max-width:760px;border:1px solid var(--az-border);box-shadow:0 25px 60px rgba(0,0,0,0.25);max-height:90vh;display:flex;flex-direction:column;border-radius:var(--radius-xl);">
+            <div style="padding:20px 24px;border-bottom:1px solid var(--az-border);display:flex;justify-content:space-between;align-items:center;background:var(--az-surface);border-radius:var(--radius-xl) var(--radius-xl) 0 0;">
                 <div>
-                    <div style="font-size:18px;font-weight:600;color:var(--az-text);">Why Choose Synergific</div>
-                    <div style="font-size:12px;color:var(--az-text-muted);margin-top:2px;">Unmatched enterprise
-                        standards for laboratory environments.</div>
+                    <div style="font-size:18px;font-weight:700;color:var(--az-text);letter-spacing:-0.02em;">Why Choose Synergific</div>
+                    <div style="font-size:12px;color:var(--az-text-muted);margin-top:3px;">Unmatched enterprise standards for laboratory environments.</div>
                 </div>
                 <button onclick="toggleLearnMore()"
                     style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;color:var(--az-text-muted);"
@@ -883,17 +906,13 @@
             <div style="flex:1;overflow-y:auto;padding:20px;" class="scrollbar-hide">
                 <div id="learn-more-features"
                     style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px;"></div>
-                <div
-                    style="background:var(--az-blue);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;">
+                <div style="background:linear-gradient(135deg,#6366f1,#4f46e5);padding:24px;display:flex;align-items:center;justify-content:space-between;border-radius:var(--radius-lg);">
                     <div>
-                        <div style="font-size:15px;font-weight:600;color:white;">Expert-led Infrastructure Design</div>
-                        <div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:3px;">Need a custom security
-                            architecture? Our engineers are ready.</div>
+                        <div style="font-size:15px;font-weight:700;color:white;letter-spacing:-0.01em;">Expert-led Infrastructure Design</div>
+                        <div style="font-size:12px;color:rgba(255,255,255,0.75);margin-top:4px;">Need a custom security architecture? Our engineers are ready.</div>
                     </div>
-                    <button
-                        style="background:white;color:var(--az-blue);border:none;padding:8px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:Segoe UI,sans-serif;border-radius:2px;"
-                        onmouseover="this.style.background='#deecf9'" onmouseout="this.style.background='white'">Consult
-                        an Expert</button>
+                    <button style="background:white;color:#4f46e5;border:none;padding:10px 24px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;border-radius:8px;transition:all .2s;"
+                        onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseout="this.style.boxShadow='none'">Consult an Expert</button>
                 </div>
             </div>
         </div>
@@ -901,26 +920,23 @@
 
     <!-- ISO 27001 Info Modal -->
     <div id="iso-modal"
-        style="display:none;position:fixed;inset:0;z-index:150;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,0.5);">
+        style="display:none;position:fixed;inset:0;z-index:150;align-items:center;justify-content:center;padding:24px;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);">
         <div class="modal-enter"
-            style="background:var(--az-surface);width:100%;max-width:520px;border:1px solid var(--az-border);box-shadow:0 8px 32px rgba(0,0,0,0.2);">
-            <div
-                style="background:#0078d4;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;">
+            style="background:var(--az-surface);width:100%;max-width:520px;border:1px solid var(--az-border);box-shadow:0 25px 60px rgba(0,0,0,0.25);border-radius:var(--radius-xl);overflow:hidden;">
+            <div style="background:linear-gradient(135deg,#10b981,#059669);padding:24px;display:flex;justify-content:space-between;align-items:center;">
                 <div style="display:flex;align-items:center;gap:14px;">
-                    <div
-                        style="width:42px;height:42px;background:white;border-radius:2px;display:flex;align-items:center;justify-content:center;">
-                        <i class="fas fa-certificate" style="color:#0078d4;font-size:20px;"></i>
+                    <div style="width:44px;height:44px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);">
+                        <i class="fas fa-shield-check" style="color:white;font-size:20px;"></i>
                     </div>
                     <div>
-                        <div style="font-size:16px;font-weight:700;color:white;">ISO/IEC 27001:2022</div>
-                        <div style="font-size:11px;color:rgba(255,255,255,0.8);">Information Security Management
-                            Certified</div>
+                        <div style="font-size:17px;font-weight:700;color:white;letter-spacing:-0.01em;">ISO/IEC 27001:2022</div>
+                        <div style="font-size:12px;color:rgba(255,255,255,0.8);">Information Security Management Certified</div>
                     </div>
                 </div>
                 <button onclick="toggleISOModal()"
-                    style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.15);border:none;cursor:pointer;color:white;border-radius:2px;"
+                    style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.12);border:none;cursor:pointer;color:white;border-radius:8px;transition:all .15s;"
                     onmouseover="this.style.background='rgba(255,255,255,0.25)'"
-                    onmouseout="this.style.background='rgba(255,255,255,0.15)'"><i class="fas fa-times"></i></button>
+                    onmouseout="this.style.background='rgba(255,255,255,0.12)'"><i class="fas fa-times"></i></button>
             </div>
             <div style="padding:20px 24px;display:flex;flex-direction:column;gap:14px;">
                 <div
@@ -1005,7 +1021,7 @@
         let RAZORPAY_KEY_ID = null;
 
         // ─── STATE ───────────────────────────────────────────────────
-        let activeCategory = 'SSL Labs';
+        let activeCategory = 'Workspaces';
         let searchQuery = '';
         let cart = [];
         let isSidebarOpen = true;
@@ -1027,15 +1043,15 @@
             if (gw === 'razorpay') {
                 rzpEl.style.border = '2px solid var(--az-blue)';
                 rzpEl.style.background = 'var(--az-blue-xlight)';
-                strEl.style.border = '1px solid var(--az-border)';
+                strEl.style.border = '1.5px solid var(--az-border)';
                 strEl.style.background = 'var(--az-surface)';
                 rzpCheck.style.display = '';
                 strCheck.style.display = 'none';
                 btnLabel.textContent = 'Pay Securely with Razorpay';
             } else {
                 strEl.style.border = '2px solid #635bff';
-                strEl.style.background = '#f0f0ff';
-                rzpEl.style.border = '1px solid var(--az-border)';
+                strEl.style.background = '#f5f3ff';
+                rzpEl.style.border = '1.5px solid var(--az-border)';
                 rzpEl.style.background = 'var(--az-surface)';
                 strCheck.style.display = '';
                 rzpCheck.style.display = 'none';
@@ -1047,8 +1063,142 @@
         // Valid coupons (demo)
         const COUPONS = { 'SYNLAB10': 0.10, 'INFRA20': 0.20 };
 
+        // ─── WORKSPACE SECTIONS ─────────────────────────────────────
+        const WS_SECTIONS = [
+            { key: 'all', name: 'All Workspaces', icon: 'fa-th-large' },
+            { key: 'desktop', name: 'Desktop Environments', icon: 'fa-desktop' },
+            { key: 'dev', name: 'Development', icon: 'fa-code' },
+            { key: 'devops', name: 'DevOps & Infrastructure', icon: 'fa-cogs' },
+            { key: 'security', name: 'Security & Pentesting', icon: 'fa-user-shield' },
+            { key: 'database', name: 'Databases', icon: 'fa-database' },
+            { key: 'data', name: 'Data Engineering', icon: 'fa-project-diagram' },
+            { key: 'aiml', name: 'AI/ML & Data Science', icon: 'fa-brain' },
+            { key: 'sysadmin', name: 'Networking & SysAdmin', icon: 'fa-network-wired' },
+            { key: 'cert', name: 'Certification Prep', icon: 'fa-award' },
+        ];
+        let wsSection = 'all';
+
+        function setWsSection(key) { wsSection = key; labPage = 0; renderLabs(); }
+
+        // ─── WORKSPACE DATA (GetLabs Catalog) ───────────────────────
+        const WORKSPACE_LABS = [
+            // ── Desktop Environments ──
+            { id: 'GL-001', name: 'Ubuntu Desktop (XFCE)', desc: 'Ubuntu 22.04 LTS with XFCE desktop environment', resources: '2C/4G', infra: 1200, section: 'desktop', isWorkspace: true },
+            { id: 'GL-002', name: 'Red Hat / Rocky Linux 9', desc: 'Enterprise Linux with GNOME desktop', resources: '2C/4G', infra: 1200, section: 'desktop', isWorkspace: true },
+            { id: 'GL-003', name: 'CentOS / Rocky Linux', desc: 'Community Enterprise OS with desktop', resources: '2C/4G', infra: 1200, section: 'desktop', isWorkspace: true },
+            { id: 'GL-004', name: 'Kali Linux Desktop', desc: 'Penetration testing & security auditing OS', resources: '2C/4G', infra: 1500, section: 'desktop', isWorkspace: true },
+            { id: 'GL-005', name: 'Oracle Linux 8 Desktop', desc: 'Oracle-optimized enterprise Linux', resources: '2C/4G', infra: 1200, section: 'desktop', isWorkspace: true },
+            { id: 'GL-006', name: 'AlmaLinux 9 Desktop', desc: 'RHEL-compatible community Linux', resources: '2C/4G', infra: 1200, section: 'desktop', isWorkspace: true },
+            { id: 'GL-007', name: 'Windows 11 Desktop', desc: 'Chrome + VS Code pre-installed', resources: '4C/8G', infra: 2500, section: 'desktop', isWorkspace: true },
+            { id: 'GL-008', name: 'Ubuntu KDE Desktop', desc: 'Ubuntu with KDE Plasma desktop', resources: '2C/4G', infra: 1200, section: 'desktop', isWorkspace: true },
+            { id: 'GL-009', name: 'Fedora Desktop', desc: 'Latest Fedora with GNOME desktop', resources: '2C/4G', infra: 1200, section: 'desktop', isWorkspace: true },
+            { id: 'GL-010', name: 'openSUSE Desktop', desc: 'openSUSE Leap with KDE desktop', resources: '2C/4G', infra: 1200, section: 'desktop', isWorkspace: true },
+            { id: 'GL-011', name: 'Debian Desktop', desc: 'Debian stable with GNOME desktop', resources: '2C/4G', infra: 1200, section: 'desktop', isWorkspace: true },
+            { id: 'GL-012', name: 'Arch Linux Desktop', desc: 'Rolling release with customizable desktop', resources: '2C/4G', infra: 1200, section: 'desktop', isWorkspace: true },
+            { id: 'GL-013', name: 'Parrot Security OS', desc: 'Security-focused Debian-based OS', resources: '2C/4G', infra: 1500, section: 'desktop', isWorkspace: true },
+            // ── Development ──
+            { id: 'GL-014', name: 'VS Code Server', desc: 'code-server — browser-based VS Code', resources: '1C/2G', infra: 800, section: 'dev', isWorkspace: true },
+            { id: 'GL-015', name: 'VS Code + Claude Code CLI', desc: 'VS Code with AI-powered Claude Code CLI', resources: '2C/4G', infra: 1200, section: 'dev', isWorkspace: true },
+            { id: 'GL-016', name: 'Full-Stack Web Dev Lab', desc: 'Node.js, React, Angular, MongoDB, Redis', resources: '2C/4G', infra: 1200, section: 'dev', isWorkspace: true },
+            { id: 'GL-017', name: 'Jupyter Notebook (Python/Science)', desc: 'JupyterLab with Python scientific stack', resources: '2C/4G', infra: 1000, section: 'dev', isWorkspace: true },
+            { id: 'GL-018', name: 'Jupyter + TensorFlow', desc: 'JupyterLab with TensorFlow & Keras', resources: '2C/8G', infra: 1500, section: 'dev', isWorkspace: true },
+            { id: 'GL-019', name: 'Jupyter + PySpark', desc: 'JupyterLab with Apache Spark & PySpark', resources: '2C/4G', infra: 1200, section: 'dev', isWorkspace: true },
+            { id: 'GL-020', name: 'Jupyter + R Studio', desc: 'JupyterLab with R kernel & RStudio', resources: '2C/4G', infra: 1000, section: 'dev', isWorkspace: true },
+            { id: 'GL-021', name: 'Eclipse Theia IDE', desc: 'Cloud IDE with VS Code extension support', resources: '2C/4G', infra: 1000, section: 'dev', isWorkspace: true },
+            { id: 'GL-022', name: 'RStudio Server', desc: 'RStudio Server for statistical computing', resources: '2C/4G', infra: 1000, section: 'dev', isWorkspace: true },
+            { id: 'GL-023', name: 'Gitpod Workspace', desc: 'Cloud development environment', resources: '2C/4G', infra: 1200, section: 'dev', isWorkspace: true },
+            { id: 'GL-024', name: 'Go Development Lab', desc: 'Go toolchain, Delve debugger, VS Code', resources: '1C/2G', infra: 800, section: 'dev', isWorkspace: true },
+            { id: 'GL-025', name: 'Rust Development Lab', desc: 'Rust toolchain, Cargo, rust-analyzer', resources: '2C/4G', infra: 1000, section: 'dev', isWorkspace: true },
+            { id: 'GL-026', name: 'Java/Spring Boot Lab', desc: 'JDK 17+, Maven, Spring Boot, IntelliJ', resources: '2C/4G', infra: 1200, section: 'dev', isWorkspace: true },
+            { id: 'GL-027', name: '.NET / C# Lab', desc: '.NET 8 SDK, C#, Visual Studio Code', resources: '2C/4G', infra: 1200, section: 'dev', isWorkspace: true },
+            { id: 'GL-028', name: 'PHP / Laravel Lab', desc: 'PHP 8, Composer, Laravel, MySQL', resources: '1C/2G', infra: 800, section: 'dev', isWorkspace: true },
+            // ── DevOps & Infrastructure ──
+            { id: 'GL-029', name: 'DevOps CI/CD Lab', desc: 'Jenkins, GitLab Runner, ArgoCD, Docker, K8s', resources: '2C/4G', infra: 1500, section: 'devops', isWorkspace: true },
+            { id: 'GL-030', name: 'Docker + Kubernetes Lab', desc: 'Nested containers with K8s cluster', resources: '2C/4G', infra: 1500, section: 'devops', isWorkspace: true },
+            { id: 'GL-031', name: 'Docker Lab (Lightweight)', desc: 'Pre-built Sysbox image for containers', resources: '1C/2G', infra: 800, section: 'devops', isWorkspace: true },
+            { id: 'GL-032', name: 'Terraform / IaC Lab', desc: 'Terraform + AWS/Azure/GCP CLIs', resources: '1C/2G', infra: 1000, section: 'devops', isWorkspace: true },
+            { id: 'GL-033', name: 'Ansible Lab', desc: 'Controller + 3 managed nodes (RHCE/EX294)', resources: '2C/4G', infra: 1500, section: 'devops', isWorkspace: true },
+            { id: 'GL-034', name: 'Monitoring Lab', desc: 'Prometheus, Grafana, Alertmanager', resources: '2C/4G', infra: 1200, section: 'devops', isWorkspace: true },
+            { id: 'GL-035', name: 'ELK Stack Lab', desc: 'Elasticsearch, Logstash, Kibana, Filebeat', resources: '2C/4G', infra: 1500, section: 'devops', isWorkspace: true },
+            { id: 'GL-036', name: 'Big Data Lab', desc: 'Kafka, Spark, MySQL, JDK 17, Python 3.10', resources: '4C/8G', infra: 2000, section: 'devops', isWorkspace: true },
+            { id: 'GL-037', name: 'GitLab CE Lab', desc: 'Self-hosted GitLab with CI/CD runners', resources: '4C/8G', infra: 2000, section: 'devops', isWorkspace: true },
+            { id: 'GL-038', name: 'Jenkins Pipeline Lab', desc: 'Jenkins with pipeline & Blue Ocean', resources: '2C/4G', infra: 1200, section: 'devops', isWorkspace: true },
+            { id: 'GL-039', name: 'ArgoCD + GitOps Lab', desc: 'ArgoCD with Kubernetes GitOps workflow', resources: '2C/4G', infra: 1500, section: 'devops', isWorkspace: true },
+            { id: 'GL-040', name: 'Helm + Kustomize Lab', desc: 'Kubernetes package management tools', resources: '2C/4G', infra: 1500, section: 'devops', isWorkspace: true },
+            { id: 'GL-041', name: 'Istio Service Mesh Lab', desc: 'Istio with Envoy proxy on K8s', resources: '4C/8G', infra: 2000, section: 'devops', isWorkspace: true },
+            { id: 'GL-042', name: 'Puppet / Chef Lab', desc: 'Configuration management automation', resources: '2C/4G', infra: 1200, section: 'devops', isWorkspace: true },
+            { id: 'GL-043', name: 'Vagrant + Packer Lab', desc: 'VM provisioning & image building', resources: '2C/4G', infra: 1200, section: 'devops', isWorkspace: true },
+            { id: 'GL-044', name: 'Nginx / HAProxy Lab', desc: 'Load balancing & reverse proxy setup', resources: '1C/2G', infra: 800, section: 'devops', isWorkspace: true },
+            // ── Security & Pentesting ──
+            { id: 'GL-045', name: 'Kali Pentesting Lab', desc: 'Full Kali toolkit for penetration testing', resources: '2C/4G', infra: 2000, section: 'security', isWorkspace: true },
+            { id: 'GL-046', name: 'OWASP Juice Shop', desc: 'Intentionally vulnerable web application', resources: '1C/2G', infra: 800, section: 'security', isWorkspace: true },
+            { id: 'GL-047', name: 'DVWA (Damn Vulnerable Web App)', desc: 'Web vulnerability practice environment', resources: '1C/1G', infra: 600, section: 'security', isWorkspace: true },
+            { id: 'GL-048', name: 'Metasploitable Lab', desc: 'Metasploit framework with target VMs', resources: '2C/4G', infra: 1500, section: 'security', isWorkspace: true },
+            { id: 'GL-049', name: 'OSINT Lab (Trace Labs)', desc: 'Open-source intelligence gathering tools', resources: '2C/4G', infra: 1500, section: 'security', isWorkspace: true },
+            { id: 'GL-050', name: 'Wireshark / Network Analysis', desc: 'Network protocol analyzer & packet capture', resources: '2C/4G', infra: 1200, section: 'security', isWorkspace: true },
+            { id: 'GL-051', name: 'SOC Analyst Lab', desc: 'Security Operations Center simulation', resources: '4C/8G', infra: 2500, section: 'security', isWorkspace: true },
+            { id: 'GL-052', name: 'Splunk SIEM Lab', desc: 'Splunk Enterprise for log analysis & SIEM', resources: '4C/8G', infra: 2500, section: 'security', isWorkspace: true },
+            { id: 'GL-053', name: 'Nessus / Vulnerability Scanner', desc: 'Vulnerability assessment & scanning', resources: '2C/4G', infra: 1500, section: 'security', isWorkspace: true },
+            { id: 'GL-054', name: 'Burp Suite Lab', desc: 'Web application security testing', resources: '2C/4G', infra: 1500, section: 'security', isWorkspace: true },
+            { id: 'GL-055', name: 'REMnux (Malware Analysis)', desc: 'Reverse engineering & malware analysis', resources: '2C/4G', infra: 2000, section: 'security', isWorkspace: true },
+            { id: 'GL-056', name: 'CTF Practice Lab', desc: 'Capture the Flag challenges & tools', resources: '2C/4G', infra: 1500, section: 'security', isWorkspace: true },
+            { id: 'GL-057', name: 'Forensics Lab (Autopsy)', desc: 'Digital forensics with Autopsy toolkit', resources: '2C/4G', infra: 1500, section: 'security', isWorkspace: true },
+            { id: 'GL-058', name: 'Firewall / pfSense Lab', desc: 'Network firewall configuration & rules', resources: '2C/4G', infra: 1500, section: 'security', isWorkspace: true },
+            { id: 'GL-059', name: 'Cryptography Lab', desc: 'Encryption, hashing & PKI tools', resources: '1C/2G', infra: 800, section: 'security', isWorkspace: true },
+            // ── Databases ──
+            { id: 'GL-060', name: 'MySQL + phpMyAdmin Lab', desc: 'MySQL 8 with phpMyAdmin web interface', resources: '2C/4G', infra: 1000, section: 'database', isWorkspace: true },
+            { id: 'GL-061', name: 'PostgreSQL + pgAdmin Lab', desc: 'PostgreSQL 15 with pgAdmin 4', resources: '2C/4G', infra: 1000, section: 'database', isWorkspace: true },
+            { id: 'GL-062', name: 'MongoDB + Mongo Express Lab', desc: 'MongoDB 7 with Mongo Express UI', resources: '2C/4G', infra: 1000, section: 'database', isWorkspace: true },
+            { id: 'GL-063', name: 'Redis Lab', desc: 'Redis server with RedisInsight', resources: '1C/2G', infra: 800, section: 'database', isWorkspace: true },
+            { id: 'GL-064', name: 'Oracle XE Database Lab', desc: 'Oracle Database Express Edition', resources: '2C/4G', infra: 1500, section: 'database', isWorkspace: true },
+            { id: 'GL-065', name: 'SQL Server Lab', desc: 'Microsoft SQL Server with SSMS', resources: '2C/4G', infra: 1500, section: 'database', isWorkspace: true },
+            { id: 'GL-066', name: 'Cassandra Lab', desc: 'Apache Cassandra distributed NoSQL', resources: '2C/4G', infra: 1200, section: 'database', isWorkspace: true },
+            { id: 'GL-067', name: 'Neo4j Graph Database Lab', desc: 'Neo4j graph database with browser UI', resources: '2C/4G', infra: 1200, section: 'database', isWorkspace: true },
+            // ── Data Engineering ──
+            { id: 'GL-068', name: 'Apache Airflow Lab', desc: 'Workflow orchestration & DAG management', resources: '2C/4G', infra: 1500, section: 'data', isWorkspace: true },
+            { id: 'GL-069', name: 'dbt + Snowflake Practice Lab', desc: 'Data transformation with dbt & Snowflake', resources: '2C/4G', infra: 1500, section: 'data', isWorkspace: true },
+            { id: 'GL-070', name: 'Apache NiFi Lab', desc: 'Data flow automation & routing', resources: '2C/4G', infra: 1500, section: 'data', isWorkspace: true },
+            { id: 'GL-071', name: 'SQL Practice Lab (pre-loaded)', desc: 'Pre-loaded datasets for SQL practice', resources: '1C/2G', infra: 600, section: 'data', isWorkspace: true },
+            // ── AI/ML & Data Science ──
+            { id: 'GL-072', name: 'AI/ML Lab (TF + PyTorch)', desc: 'TensorFlow, PyTorch, HuggingFace, JupyterLab', resources: '2C/8G', infra: 1500, section: 'aiml', isWorkspace: true },
+            { id: 'GL-073', name: 'Jupyter + TensorFlow', desc: 'JupyterLab optimized for TensorFlow', resources: '2C/8G', infra: 1500, section: 'aiml', isWorkspace: true },
+            { id: 'GL-074', name: 'Jupyter + PyTorch', desc: 'JupyterLab optimized for PyTorch', resources: '2C/8G', infra: 1500, section: 'aiml', isWorkspace: true },
+            { id: 'GL-075', name: 'MLflow + Experiment Tracking', desc: 'MLflow for ML experiment management', resources: '2C/4G', infra: 1200, section: 'aiml', isWorkspace: true },
+            { id: 'GL-076', name: 'Hugging Face NLP Lab', desc: 'Transformers, Datasets & NLP pipelines', resources: '2C/8G', infra: 2000, section: 'aiml', isWorkspace: true },
+            { id: 'GL-077', name: 'OpenCV Computer Vision Lab', desc: 'Computer vision with OpenCV & Python', resources: '2C/4G', infra: 1200, section: 'aiml', isWorkspace: true },
+            { id: 'GL-078', name: 'LangChain / RAG Lab', desc: 'LangChain, RAG & vector databases', resources: '2C/4G', infra: 1500, section: 'aiml', isWorkspace: true },
+            { id: 'GL-079', name: 'Ollama + Local LLM Lab', desc: 'Run local LLMs with Ollama', resources: '4C/16G', infra: 3000, section: 'aiml', isWorkspace: true },
+            { id: 'GL-080', name: 'Apache Spark ML Lab', desc: 'Spark MLlib for distributed ML', resources: '4C/8G', infra: 2000, section: 'aiml', isWorkspace: true },
+            { id: 'GL-081', name: 'Power BI / Metabase Lab', desc: 'Business intelligence & dashboards', resources: '2C/4G', infra: 1000, section: 'aiml', isWorkspace: true },
+            { id: 'GL-082', name: 'Streamlit / Gradio App Lab', desc: 'ML app deployment frameworks', resources: '1C/2G', infra: 800, section: 'aiml', isWorkspace: true },
+            { id: 'GL-083', name: 'Kaggle-style Data Science Lab', desc: 'Full data science stack with datasets', resources: '2C/4G', infra: 1200, section: 'aiml', isWorkspace: true },
+            // ── Networking & SysAdmin ──
+            { id: 'GL-084', name: 'Linux Admin Lab (RHCSA prep)', desc: 'System administration practice', resources: '2C/4G', infra: 1200, section: 'sysadmin', isWorkspace: true },
+            { id: 'GL-085', name: 'DNS / BIND Lab', desc: 'DNS server configuration & management', resources: '1C/2G', infra: 800, section: 'sysadmin', isWorkspace: true },
+            { id: 'GL-086', name: 'Apache / Nginx Web Server Lab', desc: 'Web server setup & virtual hosts', resources: '1C/2G', infra: 800, section: 'sysadmin', isWorkspace: true },
+            { id: 'GL-087', name: 'DHCP + Network Config Lab', desc: 'Network services configuration', resources: '1C/2G', infra: 800, section: 'sysadmin', isWorkspace: true },
+            { id: 'GL-088', name: 'Mail Server Lab (Postfix + Dovecot)', desc: 'Email server with SMTP & IMAP', resources: '2C/4G', infra: 1200, section: 'sysadmin', isWorkspace: true },
+            { id: 'GL-089', name: 'LDAP / Active Directory Lab', desc: 'Directory services & authentication', resources: '2C/4G', infra: 1200, section: 'sysadmin', isWorkspace: true },
+            { id: 'GL-090', name: 'GNS3 Networking Lab', desc: 'Network simulation & emulation', resources: '4C/8G', infra: 2000, section: 'sysadmin', isWorkspace: true },
+            { id: 'GL-091', name: 'Shell Scripting Lab (Bash/Zsh)', desc: 'Bash & Zsh scripting practice', resources: '1C/1G', infra: 600, section: 'sysadmin', isWorkspace: true },
+            // ── Certification Prep ──
+            { id: 'GL-092', name: 'CKA / CKAD Prep Lab', desc: 'Kubernetes admin & developer exam prep', resources: '2C/4G', infra: 2000, section: 'cert', isWorkspace: true },
+            { id: 'GL-093', name: 'CKS (K8s Security) Prep Lab', desc: 'Kubernetes security specialist prep', resources: '2C/4G', infra: 2000, section: 'cert', isWorkspace: true },
+            { id: 'GL-094', name: 'RHCSA Prep Lab', desc: 'Red Hat Certified Sys Admin practice', resources: '2C/4G', infra: 1500, section: 'cert', isWorkspace: true },
+            { id: 'GL-095', name: 'RHCE Prep Lab (Ansible)', desc: 'Red Hat Certified Engineer practice', resources: '2C/4G', infra: 1500, section: 'cert', isWorkspace: true },
+            { id: 'GL-096', name: 'AWS SAA Practice Lab', desc: 'Solutions Architect Associate prep', resources: '2C/4G', infra: 1500, section: 'cert', isWorkspace: true },
+            { id: 'GL-097', name: 'CompTIA Security+ Lab', desc: 'Security+ certification practice', resources: '2C/4G', infra: 1500, section: 'cert', isWorkspace: true },
+            { id: 'GL-098', name: 'CompTIA Linux+ Lab', desc: 'Linux+ certification practice', resources: '2C/4G', infra: 1200, section: 'cert', isWorkspace: true },
+            { id: 'GL-099', name: 'CompTIA Network+ Lab', desc: 'Network+ certification practice', resources: '2C/4G', infra: 1200, section: 'cert', isWorkspace: true },
+            { id: 'GL-100', name: 'CEH Practice Lab', desc: 'Certified Ethical Hacker practice', resources: '4C/8G', infra: 2500, section: 'cert', isWorkspace: true },
+            { id: 'GL-101', name: 'HashiCorp Vault Cert Lab', desc: 'Vault Associate certification prep', resources: '2C/4G', infra: 1500, section: 'cert', isWorkspace: true },
+            { id: 'GL-102', name: 'Terraform Associate Lab', desc: 'Terraform Associate certification prep', resources: '1C/2G', infra: 1000, section: 'cert', isWorkspace: true },
+            { id: 'GL-103', name: 'Docker DCA Prep Lab', desc: 'Docker Certified Associate prep', resources: '2C/4G', infra: 1500, section: 'cert', isWorkspace: true },
+        ];
+
         // ─── DATA ────────────────────────────────────────────────────
         const labData = {
+            'Workspaces': WORKSPACE_LABS,
             'SSL Labs': [
                 { id: 'DD-01', name: 'Datadog Observability Mastery', infra: 180.00 },
                 { id: 'AI-01', name: 'Agentic AI: Multi-Agent Systems', infra: 320.00 },
@@ -1233,6 +1383,7 @@
         ];
 
         const menuItems = [
+            { name: 'Workspaces', icon: 'fa-desktop' },
             { name: 'SSL Labs', icon: 'fa-shield-halved' },
             { name: 'Skillable Labs', icon: 'fa-server' },
             { name: 'Xtremelabs', icon: 'fa-microchip' },
@@ -1302,13 +1453,13 @@
 
             return `
             <div style="max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:20px;">
-                <div style="background:var(--az-blue);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;">
+                <div style="background:linear-gradient(135deg,#6366f1,#4f46e5);padding:28px 28px;border-radius:var(--radius-xl);display:flex;align-items:center;justify-content:space-between;">
                     <div>
-                        <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Support Center</div>
-                        <div style="font-size:22px;font-weight:600;color:white;">Help &amp; Support</div>
-                        <div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:4px;">Our L3 engineering team is available 24 × 7 for all your infrastructure needs.</div>
+                        <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px;">Support Center</div>
+                        <div style="font-size:24px;font-weight:700;color:white;letter-spacing:-0.03em;">Help &amp; Support</div>
+                        <div style="font-size:13px;color:rgba(255,255,255,0.7);margin-top:6px;">Our L3 engineering team is available 24 × 7 for all your infrastructure needs.</div>
                     </div>
-                    <div style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);padding:8px 16px;border-radius:2px;">
+                    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:100px;">
                         <span class="support-status-dot"></span>
                         <span style="font-size:12px;color:white;font-weight:600;">All Systems Operational</span>
                     </div>
@@ -1493,12 +1644,12 @@
             const container = document.getElementById('learn-more-features');
             if (!container) return;
             container.innerHTML = LEARN_MORE_FEATURES.map(f =>
-                '<div style="background:var(--az-bg);border:1px solid var(--az-border);padding:14px;">' +
-                '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
-                '<div style="width:28px;height:28px;background:var(--az-blue);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:2px;flex-shrink:0;"><i class="fas ' + f.icon + '"></i></div>' +
-                '<div style="font-size:13px;font-weight:600;color:var(--az-text);">' + f.title + '</div>' +
+                '<div style="background:var(--az-bg);border:1px solid var(--az-border);padding:16px;border-radius:var(--radius-md);">' +
+                '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">' +
+                '<div style="width:32px;height:32px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;border-radius:8px;flex-shrink:0;"><i class="fas ' + f.icon + '"></i></div>' +
+                '<div style="font-size:13px;font-weight:700;color:var(--az-text);letter-spacing:-0.01em;">' + f.title + '</div>' +
                 '</div>' +
-                '<div style="font-size:12px;color:var(--az-text-sub);line-height:1.5;">' + f.desc + '</div>' +
+                '<div style="font-size:12px;color:var(--az-text-sub);line-height:1.6;">' + f.desc + '</div>' +
                 '</div>'
             ).join('');
         }
@@ -1605,7 +1756,7 @@
             activeCategory = cat;
             labPage = 0;
             document.getElementById('breadcrumb-active').innerText = cat;
-            document.getElementById('category-title').innerText = cat === 'SSL Labs' ? 'SSL Labs Store' : cat;
+            document.getElementById('category-title').innerText = cat === 'SSL Labs' ? 'SSL Labs Store' : cat === 'Workspaces' ? 'Workspaces' : cat;
             renderMenu();
             renderLabs();
             // Re-trigger CSV fetch only if not already loaded or fetching
@@ -1623,8 +1774,10 @@
 
         function toggleSidebar() {
             isSidebarOpen = !isSidebarOpen;
-            document.getElementById('sidebar').style.width = isSidebarOpen ? '16rem' : '4.5rem';
-            document.getElementById('toggle-icon').className = isSidebarOpen ? 'fas fa-chevron-left text-sm' : 'fas fa-chevron-right text-sm';
+            const sb = document.getElementById('sidebar');
+            sb.style.width = isSidebarOpen ? '240px' : '64px';
+            sb.style.minWidth = isSidebarOpen ? '240px' : '64px';
+            document.getElementById('toggle-icon').className = isSidebarOpen ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
             renderMenu();
         }
 
@@ -1643,19 +1796,80 @@
 
         // ─── RENDER ──────────────────────────────────────────────────
         function renderMenu() {
-            document.getElementById('nav-menu').innerHTML = menuItems.map(item => `
+            document.getElementById('nav-menu').innerHTML = menuItems.map(item => {
+                const isActive = activeCategory === item.name;
+                return `
                 <button onclick="setCategory('${item.name}')"
-                    class="az-nav-item ${activeCategory === item.name ? 'active' : ''}">
+                    class="az-nav-item ${isActive ? 'active' : ''}">
                     <i class="fas ${item.icon} nav-icon"></i>
                     ${isSidebarOpen ? `<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.name}</span>` : ''}
-                </button>
-            `).join('');
+                    ${isSidebarOpen && isActive ? '<div style="margin-left:auto;width:6px;height:6px;background:#a5b4fc;border-radius:50%;flex-shrink:0;"></div>' : ''}
+                </button>`;
+            }).join('');
         }
 
         function renderLabs() {
             const grid = document.getElementById('labs-grid');
             const empty = document.getElementById('empty-state');
 
+            if (activeCategory === 'Workspaces') {
+                // Filter by section + search
+                const sectionFiltered = wsSection === 'all' ? WORKSPACE_LABS : WORKSPACE_LABS.filter(l => l.section === wsSection);
+                const filtered = sectionFiltered.filter(lab =>
+                    lab.name.toLowerCase().includes(searchQuery) ||
+                    lab.id.toLowerCase().includes(searchQuery) ||
+                    (lab.desc && lab.desc.toLowerCase().includes(searchQuery)) ||
+                    (lab.resources && lab.resources.toLowerCase().includes(searchQuery))
+                );
+
+                // Section tabs — pill style
+                const tabsHtml = '<div style="display:flex;gap:6px;overflow-x:auto;padding:4px;background:var(--az-surface);margin-bottom:20px;border-radius:var(--radius-lg);border:1px solid var(--az-border);box-shadow:var(--shadow-sm);" class="scrollbar-hide">' +
+                    WS_SECTIONS.map(function (s) {
+                        const count = s.key === 'all' ? WORKSPACE_LABS.length : WORKSPACE_LABS.filter(l => l.section === s.key).length;
+                        const isActive = wsSection === s.key;
+                        return '<button onclick="setWsSection(\'' + s.key + '\')" style="padding:8px 14px;font-size:12px;font-weight:' + (isActive ? '600' : '500') + ';font-family:Inter,sans-serif;border:none;cursor:pointer;border-radius:' + (isActive ? '10px' : '10px') + ';color:' + (isActive ? 'white' : 'var(--az-text-sub)') + ';background:' + (isActive ? 'var(--az-blue)' : 'transparent') + ';white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all .2s;letter-spacing:-0.01em;' + (isActive ? 'box-shadow:0 2px 8px rgba(99,102,241,0.25);' : '') + '" ' +
+                            (isActive ? '' : 'onmouseover="this.style.background=\'var(--az-hover)\'" onmouseout="this.style.background=\'transparent\'"') + '>' +
+                            '<i class="fas ' + s.icon + '" style="font-size:11px;"></i>' + s.name +
+                            '<span style="font-size:10px;font-weight:600;background:' + (isActive ? 'rgba(255,255,255,0.2)' : 'var(--az-hover)') + ';color:' + (isActive ? 'white' : 'var(--az-text-muted)') + ';padding:2px 7px;border-radius:100px;min-width:20px;text-align:center;">' + count + '</span>' +
+                            '</button>';
+                    }).join('') + '</div>';
+
+                if (filtered.length === 0) {
+                    grid.style.display = 'block'; grid.style.gridTemplateColumns = ''; empty.style.display = 'none';
+                    grid.innerHTML = tabsHtml + '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 0;text-align:center;"><div style="width:64px;height:64px;background:var(--az-blue-xlight);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;"><i class="fas fa-search" style="font-size:24px;color:var(--az-blue);"></i></div><div style="font-size:17px;font-weight:700;color:var(--az-text);margin-bottom:6px;letter-spacing:-0.02em;">No workspaces found</div><div style="font-size:13px;color:var(--az-text-muted);">Try a different category or search term.</div></div>';
+                    return;
+                }
+
+                // Pagination
+                const WS_PAGE_SIZE = 12;
+                const totalPages = Math.ceil(filtered.length / WS_PAGE_SIZE);
+                const safePage = Math.min(labPage, Math.max(0, totalPages - 1));
+                const pageItems = filtered.slice(safePage * WS_PAGE_SIZE, (safePage + 1) * WS_PAGE_SIZE);
+
+                let paginationHtml = '';
+                if (totalPages > 1) {
+                    const pages = Array.from({ length: totalPages }, (_, i) => i);
+                    paginationHtml =
+                        '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid var(--az-border);background:var(--az-surface);margin-top:20px;border-radius:var(--radius-lg);">' +
+                        '<span style="font-size:12px;color:var(--az-text-muted);font-weight:500;">Showing ' + (safePage * WS_PAGE_SIZE + 1) + '\u2013' + Math.min((safePage + 1) * WS_PAGE_SIZE, filtered.length) + ' of ' + filtered.length + ' workspaces</span>' +
+                        '<div style="display:flex;gap:4px;align-items:center;">' +
+                        '<button onclick="setLabPage(' + (safePage - 1) + ')" ' + (safePage === 0 ? 'disabled' : '') + ' style="padding:6px 12px;border:1px solid var(--az-border);background:white;cursor:pointer;border-radius:8px;font-size:12px;color:var(--az-text-sub);transition:all .15s;' + (safePage === 0 ? 'opacity:.4;cursor:default;' : '') + '">&#8249;</button>' +
+                        pages.map(function (p) {
+                            return '<button onclick="setLabPage(' + p + ')" style="padding:6px 12px;border:1px solid ' + (p === safePage ? 'var(--az-blue)' : 'var(--az-border)') + ';background:' + (p === safePage ? 'var(--az-blue)' : 'white') + ';color:' + (p === safePage ? 'white' : 'var(--az-text-sub)') + ';cursor:pointer;border-radius:8px;font-size:12px;font-weight:' + (p === safePage ? '700' : '400') + ';transition:all .15s;' + (p === safePage ? 'box-shadow:0 2px 6px rgba(99,102,241,0.3);' : '') + '">' + (p + 1) + '</button>';
+                        }).join('') +
+                        '<button onclick="setLabPage(' + (safePage + 1) + ')" ' + (safePage === totalPages - 1 ? 'disabled' : '') + ' style="padding:6px 12px;border:1px solid var(--az-border);background:white;cursor:pointer;border-radius:8px;font-size:12px;color:var(--az-text-sub);transition:all .15s;' + (safePage === totalPages - 1 ? 'opacity:.4;cursor:default;' : '') + '">&#8250;</button>' +
+                        '</div></div>';
+                }
+
+                grid.style.display = 'block';
+                grid.style.gridTemplateColumns = '';
+                empty.style.display = 'none';
+                grid.innerHTML = tabsHtml +
+                    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;">' +
+                    pageItems.map(renderWorkspaceCard).join('') +
+                    '</div>' + paginationHtml;
+                return;
+            }
             if (activeCategory === 'Baremetal Servers') {
                 grid.style.display = 'block'; empty.style.display = 'none';
                 grid.style.gridTemplateColumns = '';
@@ -1710,19 +1924,19 @@
                 if (totalPages > 1) {
                     const pages = Array.from({ length: totalPages }, (_, i) => i);
                     paginationHtml =
-                        '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--az-border);background:var(--az-surface);margin-top:12px;">' +
-                        '<span style="font-size:12px;color:var(--az-text-muted);">Showing ' + (safePage * LAB_PAGE_SIZE + 1) + '\u2013' + Math.min((safePage + 1) * LAB_PAGE_SIZE, filtered.length) + ' of ' + filtered.length + ' labs</span>' +
+                        '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid var(--az-border);background:var(--az-surface);margin-top:16px;border-radius:var(--radius-lg);">' +
+                        '<span style="font-size:12px;color:var(--az-text-muted);font-weight:500;">Showing ' + (safePage * LAB_PAGE_SIZE + 1) + '\u2013' + Math.min((safePage + 1) * LAB_PAGE_SIZE, filtered.length) + ' of ' + filtered.length + ' labs</span>' +
                         '<div style="display:flex;gap:4px;align-items:center;">' +
-                        '<button onclick="setLabPage(' + (safePage - 1) + ')" ' + (safePage === 0 ? 'disabled' : '') + ' style="padding:4px 10px;border:1px solid var(--az-border);background:white;cursor:pointer;border-radius:2px;font-size:12px;color:var(--az-text-sub);' + (safePage === 0 ? 'opacity:.4;cursor:default;' : '') + '">&#8249;</button>' +
+                        '<button onclick="setLabPage(' + (safePage - 1) + ')" ' + (safePage === 0 ? 'disabled' : '') + ' style="padding:6px 12px;border:1px solid var(--az-border);background:white;cursor:pointer;border-radius:8px;font-size:12px;color:var(--az-text-sub);transition:all .15s;' + (safePage === 0 ? 'opacity:.4;cursor:default;' : '') + '">&#8249;</button>' +
                         pages.map(function (p) {
-                            return '<button onclick="setLabPage(' + p + ')" style="padding:4px 10px;border:1px solid ' + (p === safePage ? 'var(--az-blue)' : 'var(--az-border)') + ';background:' + (p === safePage ? 'var(--az-blue)' : 'white') + ';color:' + (p === safePage ? 'white' : 'var(--az-text-sub)') + ';cursor:pointer;border-radius:2px;font-size:12px;font-weight:' + (p === safePage ? '700' : '400') + ';">' + (p + 1) + '</button>';
+                            return '<button onclick="setLabPage(' + p + ')" style="padding:6px 12px;border:1px solid ' + (p === safePage ? 'var(--az-blue)' : 'var(--az-border)') + ';background:' + (p === safePage ? 'var(--az-blue)' : 'white') + ';color:' + (p === safePage ? 'white' : 'var(--az-text-sub)') + ';cursor:pointer;border-radius:8px;font-size:12px;font-weight:' + (p === safePage ? '700' : '400') + ';transition:all .15s;' + (p === safePage ? 'box-shadow:0 2px 6px rgba(99,102,241,0.3);' : '') + '">' + (p + 1) + '</button>';
                         }).join('') +
-                        '<button onclick="setLabPage(' + (safePage + 1) + ')" ' + (safePage === totalPages - 1 ? 'disabled' : '') + ' style="padding:4px 10px;border:1px solid var(--az-border);background:white;cursor:pointer;border-radius:2px;font-size:12px;color:var(--az-text-sub);' + (safePage === totalPages - 1 ? 'opacity:.4;cursor:default;' : '') + '">&#8250;</button>' +
+                        '<button onclick="setLabPage(' + (safePage + 1) + ')" ' + (safePage === totalPages - 1 ? 'disabled' : '') + ' style="padding:6px 12px;border:1px solid var(--az-border);background:white;cursor:pointer;border-radius:8px;font-size:12px;color:var(--az-text-sub);transition:all .15s;' + (safePage === totalPages - 1 ? 'opacity:.4;cursor:default;' : '') + '">&#8250;</button>' +
                         '</div></div>';
                 }
 
                 grid.innerHTML =
-                    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;">' +
+                    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;">' +
                     pageItems.map(function (lab) { return renderCard(lab); }).join('') +
                     '</div>' +
                     paginationHtml;
@@ -1733,6 +1947,102 @@
 
             grid.style.display = 'grid'; empty.style.display = 'none';
             grid.innerHTML = filtered.map(lab => renderCard(lab)).join('');
+        }
+
+        function renderWorkspaceCard(lab) {
+            const res = lab.resources || '';
+            const cpuMatch = res.match(/(\d+)C/);
+            const ramMatch = res.match(/(\d+)G/);
+            const cpuLabel = cpuMatch ? cpuMatch[1] + ' vCPU' : '';
+            const ramLabel = ramMatch ? ramMatch[1] + ' GB' : '';
+            const sectionObj = WS_SECTIONS.find(s => s.key === lab.section);
+            const sectionName = sectionObj ? sectionObj.name : '';
+            const sectionIcon = sectionObj ? sectionObj.icon : 'fa-cube';
+
+            // Color per section
+            const sColors = {desktop:'99,102,241',dev:'6,182,212',devops:'245,158,11',security:'239,68,68',database:'16,185,129',data:'139,92,246',aiml:'236,72,153',sysadmin:'20,184,166',cert:'249,115,22'};
+            const sc = sColors[lab.section] || '99,102,241';
+
+            return `
+            <div class="lab-card" style="padding:0;overflow:hidden;position:relative;" id="card-${lab.id}">
+                <div style="height:3px;background:linear-gradient(90deg,rgba(${sc},0.8),rgba(${sc},0.3));"></div>
+                <div style="padding:18px 18px 0;">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:32px;height:32px;background:rgba(${sc},0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <i class="fas ${sectionIcon}" style="font-size:13px;color:rgba(${sc},1);"></i>
+                            </div>
+                            <span class="az-tag">${lab.id}</span>
+                        </div>
+                        <div style="display:flex;gap:4px;">
+                            ${cpuLabel ? `<span style="font-size:10px;font-weight:600;color:var(--az-text-sub);background:var(--az-hover);border:1px solid var(--az-border);padding:3px 8px;border-radius:100px;display:inline-flex;align-items:center;gap:3px;"><i class="fas fa-microchip" style="font-size:8px;color:var(--az-blue);"></i>${cpuLabel}</span>` : ''}
+                            ${ramLabel ? `<span style="font-size:10px;font-weight:600;color:var(--az-text-sub);background:var(--az-hover);border:1px solid var(--az-border);padding:3px 8px;border-radius:100px;display:inline-flex;align-items:center;gap:3px;"><i class="fas fa-memory" style="font-size:8px;color:var(--az-blue);"></i>${ramLabel}</span>` : ''}
+                        </div>
+                    </div>
+                    <div style="font-size:14px;font-weight:700;color:var(--az-text);margin-bottom:5px;line-height:1.4;letter-spacing:-0.01em;">${lab.name}</div>
+                    <div style="font-size:12px;color:var(--az-text-muted);margin-bottom:14px;line-height:1.6;min-height:18px;">${lab.desc || ''}</div>
+                </div>
+                <div style="padding:0 18px;display:flex;gap:12px;margin-bottom:14px;">
+                    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--az-text-muted);"><i class="fas fa-shield-check" style="color:var(--az-green);font-size:10px;"></i>Isolated</div>
+                    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--az-text-muted);"><i class="fas fa-headset" style="color:var(--az-blue);font-size:10px;"></i>24/7 L3</div>
+                    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--az-text-muted);"><i class="fas fa-certificate" style="color:var(--az-amber);font-size:10px;"></i>SOC</div>
+                </div>
+                <div style="margin:0 18px 14px;background:linear-gradient(135deg,rgba(${sc},0.04),rgba(${sc},0.08));border:1px solid rgba(${sc},0.12);padding:12px 14px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:space-between;">
+                    <div>
+                        <div style="font-size:22px;font-weight:800;color:var(--az-text);line-height:1;letter-spacing:-0.02em;">&#8377;${lab.infra.toLocaleString('en-IN')}</div>
+                        <div style="font-size:10px;color:var(--az-text-muted);margin-top:4px;font-weight:500;">per user / month</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div style="font-size:10px;font-weight:600;color:rgba(${sc},1);background:rgba(${sc},0.1);padding:3px 10px;border-radius:100px;display:inline-block;">${sectionName}</div>
+                    </div>
+                </div>
+                <div style="padding:0 18px 18px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                    <button onclick="addWorkspaceToCart('${lab.id}')" class="btn-secondary" style="font-size:12px;padding:8px 10px;justify-content:center;border-radius:8px;">
+                        <i class="fas fa-cart-plus" style="font-size:10px;"></i> Add to Cart
+                    </button>
+                    <button onclick="openWorkspaceCheckout('${lab.id}')" class="btn-primary" style="font-size:12px;padding:8px 10px;justify-content:center;border-radius:8px;">
+                        <i class="fas fa-bolt" style="font-size:10px;"></i> Buy Now
+                    </button>
+                </div>
+            </div>`;
+        }
+
+        function addWorkspaceToCart(id) {
+            const lab = WORKSPACE_LABS.find(l => l.id === id);
+            if (lab) { cart.push(lab); updateCartUI(); }
+        }
+
+        function openWorkspaceCheckout(labId) {
+            const lab = WORKSPACE_LABS.find(l => l.id === labId);
+            if (!lab) return;
+
+            checkoutLab = lab;
+            checkoutPlan = 'fixed';
+            checkoutPrices = {
+                daily: lab.infra,
+                weekly: lab.infra,
+                dailyFmt: fmtINR(lab.infra),
+                weeklyFmt: fmtINR(lab.infra)
+            };
+            couponDiscount = 0;
+
+            document.getElementById('form-lab-name').value = lab.name;
+            document.getElementById('form-lab-id').value = lab.id + ' \u00B7 ' + lab.resources;
+            document.getElementById('form-plan').style.display = 'block';
+            document.getElementById('form-plan-select').style.display = 'none';
+            document.getElementById('form-plan').value = 'Monthly \u2014 ' + fmtINR(lab.infra) + '/user/mo';
+
+            document.getElementById('form-qty').value = 1;
+            document.getElementById('form-name').value = '';
+            document.getElementById('form-email').value = '';
+            document.getElementById('form-phone').value = '';
+            document.getElementById('form-company').value = '';
+            document.getElementById('form-coupon').value = '';
+            document.getElementById('coupon-msg').style.display = 'none';
+            document.getElementById('discount-row').style.display = 'none';
+
+            updateSummary();
+            document.getElementById('checkout-modal').style.display = 'flex';
         }
 
         function renderBaremetal() {
@@ -1757,7 +2067,7 @@
                     '</tr>';
             });
 
-            return '<div style="background:var(--az-surface);border:1px solid var(--az-border);">' +
+            return '<div style="background:var(--az-surface);border:1px solid var(--az-border);border-radius:var(--radius-lg);overflow:hidden;">' +
                 '<div style="display:flex;border-bottom:1px solid var(--az-border);padding:0 16px;">' +
                 '<button onclick="setBmOS(\'linux\')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:' + (bmOS === 'linux' ? '2px solid var(--az-blue)' : '2px solid transparent') + ';color:' + (bmOS === 'linux' ? 'var(--az-blue)' : 'var(--az-text-sub)') + ';background:transparent;margin-bottom:-1px;"><i class="fab fa-linux" style="margin-right:6px;"></i>Linux</button>' +
                 '<button onclick="setBmOS(\'windows\')" style="padding:10px 20px;font-size:13px;font-weight:600;font-family:Segoe UI,sans-serif;border:none;cursor:pointer;border-bottom:' + (bmOS === 'windows' ? '2px solid var(--az-blue)' : '2px solid transparent') + ';color:' + (bmOS === 'windows' ? 'var(--az-blue)' : 'var(--az-text-sub)') + ';background:transparent;margin-bottom:-1px;"><i class="fab fa-windows" style="margin-right:6px;"></i>Windows</button>' +
@@ -1786,8 +2096,8 @@
             const mOrig = Math.round(plan.monthly / 0.75);
             const hOrig = Math.round(plan.halfMonthly / 0.75);
             return `
-            <div class="lab-card" style="padding:16px;position:relative;" id="card-${plan.id}">
-                <div style="position:absolute;top:0;right:0;background:var(--az-green);color:white;font-size:10px;font-weight:700;padding:3px 10px;letter-spacing:.04em;">25% OFF</div>
+            <div class="lab-card" style="padding:18px;position:relative;overflow:hidden;" id="card-${plan.id}">
+                <div style="position:absolute;top:12px;right:-28px;background:linear-gradient(135deg,#10b981,#059669);color:white;font-size:10px;font-weight:700;padding:3px 32px;letter-spacing:.04em;transform:rotate(45deg);">25% OFF</div>
                 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
                     <span class="az-tag">${plan.id}</span>
                     <div style="width:40px;height:40px;border-radius:2px;background:white;border:1px solid var(--az-border);display:flex;align-items:center;justify-content:center;padding:4px;">
@@ -1905,7 +2215,7 @@
             }
 
             return `
-            <div style="background:var(--az-surface);border:1px solid var(--az-border);">
+            <div style="background:var(--az-surface);border:1px solid var(--az-border);border-radius:var(--radius-lg);overflow:hidden;">
                 ${vendorDropdown}
                 <div style="padding:8px 16px;background:var(--az-blue-xlight);border-bottom:1px solid var(--az-blue-light);font-size:12px;color:var(--az-blue);display:flex;align-items:center;gap:8px;">
                     <i class="fas fa-info-circle"></i>
@@ -2059,38 +2369,38 @@
                 </div>` : '';
 
             const priceSection = isCSV ? `
-                <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:10px 12px;margin-bottom:12px;">
-                    <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Lab Price</div>
-                    <div style="font-size:20px;font-weight:600;color:var(--az-blue);">${prices.dailyFmt}</div>
-                    <div style="font-size:11px;color:var(--az-text-muted);margin-top:2px;">Per participant · incl. platform access</div>
+                <div style="background:var(--az-bg);border:1px solid var(--az-border);padding:12px 14px;margin-bottom:14px;border-radius:var(--radius-md);">
+                    <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;">Lab Price</div>
+                    <div style="font-size:22px;font-weight:800;color:var(--az-text);letter-spacing:-0.02em;">${prices.dailyFmt}</div>
+                    <div style="font-size:11px;color:var(--az-text-muted);margin-top:3px;">Per participant · incl. platform access</div>
                 </div>` : `
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:12px;padding:4px;background:var(--az-bg);border:1px solid var(--az-border);" id="price-toggle-${lab.id}">
-                    <div class="price-option active" style="padding:8px 10px;" onclick="selectPrice(this, '${lab.id}', 'daily')">
-                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">Daily</div>
-                        <div style="font-size:14px;font-weight:600;color:var(--az-text);">${prices.dailyFmt}</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:14px;padding:4px;background:var(--az-bg);border:1px solid var(--az-border);border-radius:var(--radius-md);" id="price-toggle-${lab.id}">
+                    <div class="price-option active" style="padding:10px 12px;" onclick="selectPrice(this, '${lab.id}', 'daily')">
+                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:3px;">Daily</div>
+                        <div style="font-size:15px;font-weight:700;color:var(--az-text);">${prices.dailyFmt}</div>
                     </div>
-                    <div class="price-option" style="padding:8px 10px;" onclick="selectPrice(this, '${lab.id}', 'weekly')">
-                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;">Weekly −10%</div>
-                        <div style="font-size:14px;font-weight:600;color:var(--az-text);">${prices.weeklyFmt}</div>
+                    <div class="price-option" style="padding:10px 12px;" onclick="selectPrice(this, '${lab.id}', 'weekly')">
+                        <div style="font-size:10px;color:var(--az-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:3px;">Weekly −10%</div>
+                        <div style="font-size:15px;font-weight:700;color:var(--az-text);">${prices.weeklyFmt}</div>
                     </div>
                 </div>`;
 
             return `
-            <div class="lab-card" style="padding:16px;" id="card-${lab.id}">
-                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+            <div class="lab-card" style="padding:18px;" id="card-${lab.id}">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
                     <span class="az-tag">${lab.id}</span>
                     ${isCSV ? `<span class="az-tag-green">${lab.category}</span>` : ''}
                 </div>
-                <div style="font-size:15px;font-weight:600;color:var(--az-text);margin-bottom:10px;min-height:44px;line-height:1.4;">${lab.name}</div>
-                <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px;">${featureHtml}</div>
+                <div style="font-size:15px;font-weight:700;color:var(--az-text);margin-bottom:10px;min-height:44px;line-height:1.4;letter-spacing:-0.01em;">${lab.name}</div>
+                <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:12px;">${featureHtml}</div>
                 ${licenseHtml}
                 ${priceSection}
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto;">
-                    <button onclick="addToCart('${lab.id}')" class="btn-secondary" style="font-size:12px;padding:6px 10px;justify-content:center;">
-                        <i class="fas fa-cart-plus" style="font-size:11px;"></i> Add to Cart
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto;">
+                    <button onclick="addToCart('${lab.id}')" class="btn-secondary" style="font-size:12px;padding:8px 10px;justify-content:center;border-radius:8px;">
+                        <i class="fas fa-cart-plus" style="font-size:10px;"></i> Add to Cart
                     </button>
-                    <button onclick="openCheckout('${lab.id}')" class="btn-primary" style="font-size:12px;padding:6px 10px;justify-content:center;">
-                        <i class="fas fa-bolt" style="font-size:11px;"></i> Buy Now
+                    <button onclick="openCheckout('${lab.id}')" class="btn-primary" style="font-size:12px;padding:8px 10px;justify-content:center;border-radius:8px;">
+                        <i class="fas fa-bolt" style="font-size:10px;"></i> Buy Now
                     </button>
                 </div>
             </div>`;
