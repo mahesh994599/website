@@ -1,6 +1,6 @@
 module.exports = (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Cache-Control', 's-maxage=300');
+    res.setHeader('Cache-Control', 'no-cache, no-store');
     res.json({
         razorpayKeyId: process.env.RAZORPAY_KEY_ID,
         stripePublicKey: process.env.STRIPE_PUBLIC_KEY,
