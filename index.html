@@ -1075,6 +1075,22 @@
 
         function setWsSection(key) { wsSection = key; labPage = 0; renderLabs(); }
 
+        function toggleWsDropdown() {
+            const menu = document.getElementById('ws-dropdown-menu');
+            if (menu) menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+        function closeWsDropdown() {
+            const menu = document.getElementById('ws-dropdown-menu');
+            if (menu) menu.style.display = 'none';
+        }
+        document.addEventListener('click', function(e) {
+            const btn = document.getElementById('ws-dropdown-btn');
+            const menu = document.getElementById('ws-dropdown-menu');
+            if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.style.display = 'none';
+            }
+        });
+
         // ─── WORKSPACE DATA (GetLabs Catalog) ───────────────────────
         const WORKSPACE_LABS = [
             // ── Desktop Environments ──
@@ -1823,17 +1839,25 @@
                     (lab.resources && lab.resources.toLowerCase().includes(searchQuery))
                 );
 
-                // Section tabs — pill style
-                const tabsHtml = '<div style="display:flex;gap:6px;overflow-x:auto;padding:4px;background:var(--az-surface);margin-bottom:20px;border-radius:var(--radius-lg);border:1px solid var(--az-border);box-shadow:var(--shadow-sm);" class="scrollbar-hide">' +
+                // Section dropdown
+                const activeSection = WS_SECTIONS.find(s => s.key === wsSection) || WS_SECTIONS[0];
+                const activeCount = wsSection === 'all' ? WORKSPACE_LABS.length : WORKSPACE_LABS.filter(l => l.section === wsSection).length;
+                const tabsHtml = '<div style="position:relative;margin-bottom:20px;">' +
+                    '<button id="ws-dropdown-btn" onclick="toggleWsDropdown()" style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:340px;padding:10px 16px;font-size:13px;font-weight:600;font-family:Inter,sans-serif;border:1px solid var(--az-border);cursor:pointer;border-radius:var(--radius-lg);color:var(--az-text);background:var(--az-surface);box-shadow:var(--shadow-sm);transition:all .2s;letter-spacing:-0.01em;" onmouseover="this.style.borderColor=\'var(--az-blue)\'" onmouseout="this.style.borderColor=\'var(--az-border)\'">' +
+                        '<span style="display:flex;align-items:center;gap:8px;"><i class="fas ' + activeSection.icon + '" style="font-size:12px;color:var(--az-blue);"></i>' + activeSection.name +
+                        '<span style="font-size:10px;font-weight:600;background:var(--az-blue);color:white;padding:2px 7px;border-radius:100px;min-width:20px;text-align:center;">' + activeCount + '</span></span>' +
+                        '<i class="fas fa-chevron-down" style="font-size:10px;color:var(--az-text-muted);transition:transform .2s;"></i>' +
+                    '</button>' +
+                    '<div id="ws-dropdown-menu" style="display:none;position:absolute;top:calc(100% + 4px);left:0;width:100%;max-width:340px;background:var(--az-surface);border:1px solid var(--az-border);border-radius:var(--radius-lg);box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:50;padding:4px;max-height:320px;overflow-y:auto;" class="scrollbar-hide">' +
                     WS_SECTIONS.map(function (s) {
                         const count = s.key === 'all' ? WORKSPACE_LABS.length : WORKSPACE_LABS.filter(l => l.section === s.key).length;
                         const isActive = wsSection === s.key;
-                        return '<button onclick="setWsSection(\'' + s.key + '\')" style="padding:8px 14px;font-size:12px;font-weight:' + (isActive ? '600' : '500') + ';font-family:Inter,sans-serif;border:none;cursor:pointer;border-radius:' + (isActive ? '10px' : '10px') + ';color:' + (isActive ? 'white' : 'var(--az-text-sub)') + ';background:' + (isActive ? 'var(--az-blue)' : 'transparent') + ';white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all .2s;letter-spacing:-0.01em;' + (isActive ? 'box-shadow:0 2px 8px rgba(99,102,241,0.25);' : '') + '" ' +
-                            (isActive ? '' : 'onmouseover="this.style.background=\'var(--az-hover)\'" onmouseout="this.style.background=\'transparent\'"') + '>' +
-                            '<i class="fas ' + s.icon + '" style="font-size:11px;"></i>' + s.name +
-                            '<span style="font-size:10px;font-weight:600;background:' + (isActive ? 'rgba(255,255,255,0.2)' : 'var(--az-hover)') + ';color:' + (isActive ? 'white' : 'var(--az-text-muted)') + ';padding:2px 7px;border-radius:100px;min-width:20px;text-align:center;">' + count + '</span>' +
+                        return '<button onclick="setWsSection(\'' + s.key + '\');closeWsDropdown()" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:9px 12px;font-size:12px;font-weight:' + (isActive ? '600' : '500') + ';font-family:Inter,sans-serif;border:none;cursor:pointer;border-radius:8px;color:' + (isActive ? 'var(--az-blue)' : 'var(--az-text-sub)') + ';background:' + (isActive ? 'var(--az-blue-xlight)' : 'transparent') + ';transition:all .15s;letter-spacing:-0.01em;text-align:left;" ' +
+                            'onmouseover="this.style.background=\'' + (isActive ? 'var(--az-blue-xlight)' : 'var(--az-hover)') + '\'" onmouseout="this.style.background=\'' + (isActive ? 'var(--az-blue-xlight)' : 'transparent') + '\'">' +
+                            '<span style="display:flex;align-items:center;gap:8px;"><i class="fas ' + s.icon + '" style="font-size:11px;width:16px;text-align:center;"></i>' + s.name + '</span>' +
+                            '<span style="font-size:10px;font-weight:600;background:' + (isActive ? 'var(--az-blue)' : 'var(--az-hover)') + ';color:' + (isActive ? 'white' : 'var(--az-text-muted)') + ';padding:2px 7px;border-radius:100px;min-width:20px;text-align:center;">' + count + '</span>' +
                             '</button>';
-                    }).join('') + '</div>';
+                    }).join('') + '</div></div>';
 
                 if (filtered.length === 0) {
                     grid.style.display = 'block'; grid.style.gridTemplateColumns = ''; empty.style.display = 'none';
